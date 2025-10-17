@@ -53,15 +53,37 @@ CREATE TABLE clients (
 -- Trades table
 CREATE TABLE trades (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    binary_user_id VARCHAR(20) NOT NULL,
-    date_time DATETIME NOT NULL,
-    commission DECIMAL(15,2) DEFAULT 0.00,
-    volume DECIMAL(15,2) DEFAULT 0.00,
+    date DATE,
+    binary_user_id VARCHAR(50),
+    loginid VARCHAR(50),
+    platform VARCHAR(100),
+    app_name VARCHAR(100),
+    account_type VARCHAR(50),
+    contract_type VARCHAR(100),
+    asset_type VARCHAR(100),
+    asset VARCHAR(255),
+    number_of_trades INT,
+    closed_pnl_usd DECIMAL(15,2),
+    closed_pnl_usd_abook DECIMAL(15,2),
+    closed_pnl_usd_bbook DECIMAL(15,2),
+    floating_pnl_usd DECIMAL(15,2),
+    floating_pnl DECIMAL(15,2),
+    expected_revenue_usd DECIMAL(15,2),
+    closed_pnl DECIMAL(15,2),
+    swaps_usd DECIMAL(15,2),
+    volume_usd DECIMAL(15,2),
+    is_synthetic BOOLEAN,
+    is_financial BOOLEAN,
+    app_markup_usd DECIMAL(15,2),
+    affiliated_partner_id VARCHAR(20),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (binary_user_id) REFERENCES clients(binary_user_id) ON DELETE CASCADE,
+    INDEX idx_date (date),
     INDEX idx_binary_user_id (binary_user_id),
-    INDEX idx_date_time (date_time),
-    INDEX idx_commission (commission)
+    INDEX idx_affiliated_partner_id (affiliated_partner_id),
+    INDEX idx_platform (platform),
+    INDEX idx_contract_type (contract_type)
 );
 
 -- Deposits table
