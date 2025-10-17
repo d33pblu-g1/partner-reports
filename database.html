@@ -7,9 +7,10 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="data:,">
   <meta name="color-scheme" content="dark light">
-  <meta name="description" content="JSON database viewer">
+  <meta name="description" content="Database viewer with CRUD operations">
   <!-- Theme toggle (load first to prevent flash) -->
   <script src="theme-toggle.js"></script>
+  <script src="database-crud.js"></script>
   <script defer src="script.js"></script>
   <style>
     table { width: 100%; border-collapse: collapse; }
@@ -180,7 +181,15 @@
           var s = document.createElement('section');
           s.className = 'section';
           var h3 = document.createElement('h3'); h3.textContent = section.title; s.appendChild(h3);
-          s.appendChild(createTableFromArray(db[section.key] || []));
+          
+          // Use CRUD-enabled table for editable tables, regular for others
+          var editableTables = ['partners', 'clients', 'trades', 'deposits'];
+          if (editableTables.indexOf(section.key) !== -1 && window.DatabaseCRUD) {
+            s.appendChild(window.DatabaseCRUD.createTable(db[section.key] || [], section.key));
+          } else {
+            s.appendChild(createTableFromArray(db[section.key] || []));
+          }
+          
           tabContent.appendChild(s);
           content.appendChild(tabContent);
         });
