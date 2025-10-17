@@ -1,0 +1,4130 @@
+{
+  "clients": [
+    {
+      "customerId": "C-100000",
+      "name": "Alice Lopez",
+      "joinDate": "2023-07-18",
+      "accountType": "Standard",
+      "accountNumber": "ACC-276804",
+      "country": "United Kingdom",
+      "lifetimeDeposits": 9460.15,
+      "commissionPlan": "RevShare 30%",
+      "trackingLinkUsed": "social-716",
+      "tier": "Bronze",
+      "sub-partner": true,
+      "partnerId": "P-0001",
+      "email": "wen.silva@example.com",
+      "preferredLanguage": "Norwegian"
+    },
+    {
+      "customerId": "C-100001",
+      "name": "Hana Zhang",
+      "joinDate": "2025-04-21",
+      "accountType": "VIP",
+      "accountNumber": "ACC-808631",
+      "country": "Romania",
+      "lifetimeDeposits": 10310.81,
+      "commissionPlan": "CPA",
+      "trackingLinkUsed": "spring-467",
+      "tier": "Gold",
+      "sub-partner": false,
+      "partnerId": "P-0002",
+      "email": "zane.bennett@example.com",
+      "preferredLanguage": "Swedish"
+    },
+    {
+      "customerId": "C-100002",
+      "name": "Marco Mendes",
+      "joinDate": "2025-02-04",
+      "accountType": "VIP",
+      "accountNumber": "ACC-868570",
+      "country": "Poland",
+      "lifetimeDeposits": 77329.53,
+      "commissionPlan": "RevShare 30%",
+      "trackingLinkUsed": "email-338",
+      "tier": "Bronze",
+      "sub-partner": false,
+      "partnerId": "P-0001",
+      "email": "ivan.zhang@example.com",
+      "preferredLanguage": "Portuguese"
+    },
+    {
+      "customerId": "C-100003",
+      "name": "Lina Costa",
+      "joinDate": "2023-03-06",
+      "accountType": "VIP",
+      "accountNumber": "ACC-760652",
+      "country": "Sweden",
+      "lifetimeDeposits": 38007.6,
+      "commissionPlan": "Hybrid",
+      "trackingLinkUsed": "display-670",
+      "tier": "Silver",
+      "sub-partner": false,
+      "partnerId": "P-0001",
+      "email": "yara.rossi@example.com",
+      "preferredLanguage": "English"
+    },
+    {
+      "customerId": "C-100004",
+      "name": "Bob Rossi",
+      "joinDate": "2023-10-09",
+      "accountType": "VIP",
+      "accountNumber": "ACC-229836",
+      "country": "Belgium",
+      "lifetimeDeposits": 88479.85,
+      "commissionPlan": "Hybrid",
+      "trackingLinkUsed": "affiliate-246",
+      "tier": "Gold",
+      "sub-partner": true,
+      "partnerId": "P-0001",
+      "email": "hana.lopez@example.com",
+      "preferredLanguage": "Norwegian"
+    },
+    {
+      "customerId": "C-100005",
+      "name": "Ximena Garcia",
+      "joinDate": "2024-05-27",
+      "accountType": "VIP",
+      "accountNumber": "ACC-391478",
+      "country": "France",
+      "lifetimeDeposits": 62781.86,
+      "commissionPlan": "Hybrid",
+      "trackingLinkUsed": "affiliate-710",
+      "tier": "Bronze",
+      "sub-partner": false,
+      "partnerId": "P-0002",
+      "email": "marco.garcia@example.com",
+      "preferredLanguage": "Swedish"
+    },
+    {
+      "customerId": "C-100006",
+      "name": "Ravi Novak",
+      "joinDate": "2022-01-24",
+      "accountType": "Standard",
+      "accountNumber": "ACC-652614",
+      "country": "Sweden",
+      "lifetimeDeposits": 424.21,
+      "commissionPlan": "Hybrid",
+      "trackingLinkUsed": "display-369",
+      "tier": "Silver",
+      "sub-partner": true,
+      "partnerId": "P-0002",
+      "email": "uma.khan@example.com",
+      "preferredLanguage": "Norwegian"
+    },
+    {
+      "customerId": "C-100007",
+      "name": "Ethan Costa",
+      "joinDate": "2022-11-27",
+      "accountType": "Standard",
+      "accountNumber": "ACC-541398",
+      "country": "Poland",
+      "lifetimeDeposits": 5886.72,
+      "commissionPlan": "Hybrid",
+      "trackingLinkUsed": "spring-187",
+      "tier": "Platinum",
+      "sub-partner": true,
+      "partnerId": "P-0001",
+      "email": "yara.kumar@example.com",
+      "preferredLanguage": "French"
+    },
+    {
+      "customerId": "C-100008",
+      "name": "Viktor Zhang",
+      "joinDate": "2025-01-30",
+      "accountType": "Standard",
+      "accountNumber": "ACC-284257",
+      "country": "Italy",
+      "lifetimeDeposits": 71323.6,
+      "commissionPlan": "CPA",
+      "trackingLinkUsed": "display-765",
+      "tier": "Gold",
+      "sub-partner": false,
+      "partnerId": "P-0001",
+      "email": "quinn.zhang@example.com",
+      "preferredLanguage": "Spanish"
+    },
+    {
+      "customerId": "C-100009",
+      "name": "Hana Mendes",
+      "joinDate": "2023-11-24",
+      "accountType": "Standard",
+      "accountNumber": "ACC-522062",
+      "country": "Portugal",
+      "lifetimeDeposits": 85977.58,
+      "commissionPlan": "RevShare 30%",
+      "trackingLinkUsed": "social-343",
+      "tier": "Gold",
+      "sub-partner": false,
+      "partnerId": "P-0001",
+      "email": "george.kumar@example.com",
+      "preferredLanguage": "French"
+    },
+    {
+      "customerId": "C-100010",
+      "name": "Hana Rossi",
+      "joinDate": "2024-08-26",
+      "accountType": "VIP",
+      "accountNumber": "ACC-104447",
+      "country": "Germany",
+      "lifetimeDeposits": 6155.21,
+      "commissionPlan": "Hybrid",
+      "trackingLinkUsed": "fall-919",
+      "tier": "Bronze",
+      "sub-partner": true,
+      "partnerId": "P-0002",
+      "email": "george.singh@example.com",
+      "preferredLanguage": "Norwegian"
+    },
+    {
+      "customerId": "C-100011",
+      "name": "Ethan Ibrahim",
+      "joinDate": "2023-01-11",
+      "accountType": "VIP",
+      "accountNumber": "ACC-480880",
+      "country": "Denmark",
+      "lifetimeDeposits": 83619.16,
+      "commissionPlan": "RevShare 30%",
+      "trackingLinkUsed": "email-969",
+      "tier": "Silver",
+      "sub-partner": true,
+      "partnerId": "P-0002",
+      "email": "nora.zhang@example.com",
+      "preferredLanguage": "Swedish"
+    },
+    {
+      "customerId": "C-100012",
+      "name": "Marco Smirnov",
+      "joinDate": "2022-05-01",
+      "accountType": "Standard",
+      "accountNumber": "ACC-392744",
+      "country": "Denmark",
+      "lifetimeDeposits": 66220.94,
+      "commissionPlan": "CPA",
+      "trackingLinkUsed": "summer-294",
+      "tier": "Gold",
+      "sub-partner": true,
+      "partnerId": "P-0001",
+      "email": "bob.garcia@example.com",
+      "preferredLanguage": "Norwegian"
+    },
+    {
+      "customerId": "C-100013",
+      "name": "Ximena Costa",
+      "joinDate": "2022-04-28",
+      "accountType": "Standard",
+      "accountNumber": "ACC-558190",
+      "country": "Spain",
+      "lifetimeDeposits": 6945.28,
+      "commissionPlan": "RevShare 30%",
+      "trackingLinkUsed": "display-982",
+      "tier": "Silver",
+      "sub-partner": false,
+      "partnerId": "P-0001",
+      "email": "diana.smirnov@example.com",
+      "preferredLanguage": "Danish"
+    },
+    {
+      "customerId": "C-100014",
+      "name": "Sara Garcia",
+      "joinDate": "2022-03-23",
+      "accountType": "Standard",
+      "accountNumber": "ACC-455927",
+      "country": "Poland",
+      "lifetimeDeposits": 26634.89,
+      "commissionPlan": "RevShare 30%",
+      "trackingLinkUsed": "display-760",
+      "tier": "Gold",
+      "sub-partner": false,
+      "partnerId": "P-0001",
+      "email": "kai.smirnov@example.com",
+      "preferredLanguage": "Spanish"
+    },
+    {
+      "customerId": "C-100015",
+      "name": "Omar Garcia",
+      "joinDate": "2025-02-27",
+      "accountType": "Standard",
+      "accountNumber": "ACC-022988",
+      "country": "Netherlands",
+      "lifetimeDeposits": 28570.24,
+      "commissionPlan": "CPA",
+      "trackingLinkUsed": "email-656",
+      "tier": "Gold",
+      "sub-partner": true,
+      "partnerId": "P-0001",
+      "email": "viktor.novak@example.com",
+      "preferredLanguage": "Norwegian"
+    },
+    {
+      "customerId": "C-100016",
+      "name": "Viktor Mendes",
+      "joinDate": "2022-10-03",
+      "accountType": "VIP",
+      "accountNumber": "ACC-115267",
+      "country": "Italy",
+      "lifetimeDeposits": 68780.96,
+      "commissionPlan": "CPA",
+      "trackingLinkUsed": "social-600",
+      "tier": "Gold",
+      "sub-partner": true,
+      "partnerId": "P-0002",
+      "email": "carlos.silva@example.com",
+      "preferredLanguage": "Dutch"
+    },
+    {
+      "customerId": "C-100017",
+      "name": "Bob Bennett",
+      "joinDate": "2023-11-15",
+      "accountType": "Standard",
+      "accountNumber": "ACC-627540",
+      "country": "India",
+      "lifetimeDeposits": 94510.59,
+      "commissionPlan": "Hybrid",
+      "trackingLinkUsed": "summer-658",
+      "tier": "Bronze",
+      "sub-partner": false,
+      "partnerId": "P-0002",
+      "email": "sara.kumar@example.com",
+      "preferredLanguage": "French"
+    },
+    {
+      "customerId": "C-100018",
+      "name": "Ethan Bennett",
+      "joinDate": "2023-09-24",
+      "accountType": "VIP",
+      "accountNumber": "ACC-878822",
+      "country": "Germany",
+      "lifetimeDeposits": 35432.5,
+      "commissionPlan": "Hybrid",
+      "trackingLinkUsed": "email-516",
+      "tier": "Silver",
+      "sub-partner": true,
+      "partnerId": "P-0002",
+      "email": "fiona.rossi@example.com",
+      "preferredLanguage": "French"
+    },
+    {
+      "customerId": "C-100019",
+      "name": "Alice Nair",
+      "joinDate": "2023-11-12",
+      "accountType": "VIP",
+      "accountNumber": "ACC-888271",
+      "country": "Portugal",
+      "lifetimeDeposits": 85873.47,
+      "commissionPlan": "RevShare 30%",
+      "trackingLinkUsed": "summer-936",
+      "tier": "Platinum",
+      "sub-partner": false,
+      "partnerId": "P-0002",
+      "email": "julia.novak@example.com",
+      "preferredLanguage": "German"
+    },
+    {
+      "customerId": "C-100020",
+      "name": "Alice Silva",
+      "joinDate": "2023-01-31",
+      "accountType": "VIP",
+      "accountNumber": "ACC-389263",
+      "country": "Denmark",
+      "lifetimeDeposits": 33181.87,
+      "commissionPlan": "RevShare 30%",
+      "trackingLinkUsed": "spring-998",
+      "tier": "Gold",
+      "sub-partner": true,
+      "partnerId": "P-0001",
+      "email": "sara.khan@example.com",
+      "preferredLanguage": "English"
+    },
+    {
+      "customerId": "C-100021",
+      "name": "Tomas Ibrahim",
+      "joinDate": "2023-12-09",
+      "accountType": "VIP",
+      "accountNumber": "ACC-491810",
+      "country": "Ireland",
+      "lifetimeDeposits": 268.96,
+      "commissionPlan": "Hybrid",
+      "trackingLinkUsed": "display-836",
+      "tier": "Silver",
+      "sub-partner": false,
+      "partnerId": "P-0001",
+      "email": "nora.mendes@example.com",
+      "preferredLanguage": "Portuguese"
+    },
+    {
+      "customerId": "C-100022",
+      "name": "Viktor Novak",
+      "joinDate": "2022-09-13",
+      "accountType": "VIP",
+      "accountNumber": "ACC-563651",
+      "country": "Belgium",
+      "lifetimeDeposits": 67764.06,
+      "commissionPlan": "RevShare 30%",
+      "trackingLinkUsed": "social-682",
+      "tier": "Gold",
+      "sub-partner": false,
+      "partnerId": "P-0002",
+      "email": "ravi.novak@example.com",
+      "preferredLanguage": "English"
+    },
+    {
+      "customerId": "C-100023",
+      "name": "Julia Singh",
+      "joinDate": "2024-05-30",
+      "accountType": "VIP",
+      "accountNumber": "ACC-442497",
+      "country": "Spain",
+      "lifetimeDeposits": 65919.19,
+      "commissionPlan": "CPA",
+      "trackingLinkUsed": "social-779",
+      "tier": "Gold",
+      "sub-partner": true,
+      "partnerId": "P-0002",
+      "email": "yara.singh@example.com",
+      "preferredLanguage": "Italian"
+    },
+    {
+      "customerId": "C-100024",
+      "name": "Zane Singh",
+      "joinDate": "2022-10-29",
+      "accountType": "Standard",
+      "accountNumber": "ACC-096748",
+      "country": "Switzerland",
+      "lifetimeDeposits": 19524.08,
+      "commissionPlan": "Hybrid",
+      "trackingLinkUsed": "affiliate-606",
+      "tier": "Platinum",
+      "sub-partner": true,
+      "partnerId": "P-0001",
+      "email": "ethan.silva@example.com",
+      "preferredLanguage": "English"
+    },
+    {
+      "customerId": "C-100025",
+      "name": "Yara Ibrahim",
+      "joinDate": "2023-03-25",
+      "accountType": "Standard",
+      "accountNumber": "ACC-864591",
+      "country": "France",
+      "lifetimeDeposits": 80161.52,
+      "commissionPlan": "Hybrid",
+      "trackingLinkUsed": "social-672",
+      "tier": "Gold",
+      "sub-partner": false,
+      "partnerId": "P-0001",
+      "email": "tomas.novak@example.com",
+      "preferredLanguage": "Norwegian"
+    },
+    {
+      "customerId": "C-100026",
+      "name": "Ravi Zhang",
+      "joinDate": "2022-11-22",
+      "accountType": "VIP",
+      "accountNumber": "ACC-478274",
+      "country": "Poland",
+      "lifetimeDeposits": 27532.28,
+      "commissionPlan": "RevShare 30%",
+      "trackingLinkUsed": "display-392",
+      "tier": "Silver",
+      "sub-partner": false,
+      "partnerId": "P-0002",
+      "email": "kai.costa@example.com",
+      "preferredLanguage": "Norwegian"
+    },
+    {
+      "customerId": "C-100027",
+      "name": "Ethan Nair",
+      "joinDate": "2023-04-19",
+      "accountType": "VIP",
+      "accountNumber": "ACC-670454",
+      "country": "Italy",
+      "lifetimeDeposits": 83305.83,
+      "commissionPlan": "CPA",
+      "trackingLinkUsed": "email-698",
+      "tier": "Bronze",
+      "sub-partner": false,
+      "partnerId": "P-0001",
+      "email": "priya.bennett@example.com",
+      "preferredLanguage": "Portuguese"
+    },
+    {
+      "customerId": "C-100028",
+      "name": "Yara Ibrahim",
+      "joinDate": "2024-05-08",
+      "accountType": "Standard",
+      "accountNumber": "ACC-424367",
+      "country": "Spain",
+      "lifetimeDeposits": 84066.52,
+      "commissionPlan": "RevShare 30%",
+      "trackingLinkUsed": "social-646",
+      "tier": "Bronze",
+      "sub-partner": false,
+      "partnerId": "P-0002",
+      "email": "sara.garcia@example.com",
+      "preferredLanguage": "English"
+    },
+    {
+      "customerId": "C-100029",
+      "name": "Uma Ibrahim",
+      "joinDate": "2022-10-05",
+      "accountType": "VIP",
+      "accountNumber": "ACC-123438",
+      "country": "Greece",
+      "lifetimeDeposits": 75225.78,
+      "commissionPlan": "CPA",
+      "trackingLinkUsed": "fall-954",
+      "tier": "Bronze",
+      "sub-partner": false,
+      "partnerId": "P-0001",
+      "email": "alice.lopez@example.com",
+      "preferredLanguage": "Norwegian"
+    },
+    {
+      "customerId": "C-100030",
+      "name": "Lina Singh",
+      "joinDate": "2025-08-24",
+      "accountType": "Standard",
+      "accountNumber": "ACC-767910",
+      "country": "France",
+      "lifetimeDeposits": 23930.64,
+      "commissionPlan": "CPA",
+      "trackingLinkUsed": "display-217",
+      "tier": "Silver",
+      "sub-partner": false,
+      "partnerId": "P-0001",
+      "email": "wen.khan@example.com",
+      "preferredLanguage": "Portuguese"
+    },
+    {
+      "customerId": "C-100031",
+      "name": "Tomas Garcia",
+      "joinDate": "2022-08-23",
+      "accountType": "Standard",
+      "accountNumber": "ACC-910369",
+      "country": "Belgium",
+      "lifetimeDeposits": 94152.91,
+      "commissionPlan": "RevShare 30%",
+      "trackingLinkUsed": "spring-706",
+      "tier": "Silver",
+      "sub-partner": true,
+      "partnerId": "P-0001",
+      "email": "wen.rossi@example.com",
+      "preferredLanguage": "Italian"
+    },
+    {
+      "customerId": "C-100032",
+      "name": "Zane Garcia",
+      "joinDate": "2022-03-26",
+      "accountType": "VIP",
+      "accountNumber": "ACC-560604",
+      "country": "Norway",
+      "lifetimeDeposits": 10643.33,
+      "commissionPlan": "CPA",
+      "trackingLinkUsed": "display-948",
+      "tier": "Platinum",
+      "sub-partner": true,
+      "partnerId": "P-0001",
+      "email": "nora.nair@example.com",
+      "preferredLanguage": "Norwegian"
+    },
+    {
+      "customerId": "C-100033",
+      "name": "Tomas Rossi",
+      "joinDate": "2025-01-07",
+      "accountType": "VIP",
+      "accountNumber": "ACC-485329",
+      "country": "Greece",
+      "lifetimeDeposits": 88174.96,
+      "commissionPlan": "RevShare 30%",
+      "trackingLinkUsed": "email-575",
+      "tier": "Platinum",
+      "sub-partner": false,
+      "partnerId": "P-0002",
+      "email": "alice.zhang@example.com",
+      "preferredLanguage": "Portuguese"
+    },
+    {
+      "customerId": "C-100034",
+      "name": "Priya Singh",
+      "joinDate": "2023-12-28",
+      "accountType": "VIP",
+      "accountNumber": "ACC-387209",
+      "country": "India",
+      "lifetimeDeposits": 24211.47,
+      "commissionPlan": "CPA",
+      "trackingLinkUsed": "affiliate-668",
+      "tier": "Silver",
+      "sub-partner": false,
+      "partnerId": "P-0001",
+      "email": "uma.lopez@example.com",
+      "preferredLanguage": "Swedish"
+    },
+    {
+      "customerId": "C-100035",
+      "name": "Zane Bennett",
+      "joinDate": "2022-07-10",
+      "accountType": "VIP",
+      "accountNumber": "ACC-263545",
+      "country": "Ireland",
+      "lifetimeDeposits": 99663.48,
+      "commissionPlan": "Hybrid",
+      "trackingLinkUsed": "fall-460",
+      "tier": "Platinum",
+      "sub-partner": false,
+      "partnerId": "P-0002",
+      "email": "julia.khan@example.com",
+      "preferredLanguage": "German"
+    },
+    {
+      "customerId": "C-100036",
+      "name": "Ximena Singh",
+      "joinDate": "2023-10-09",
+      "accountType": "Standard",
+      "accountNumber": "ACC-796172",
+      "country": "Switzerland",
+      "lifetimeDeposits": 97663.04,
+      "commissionPlan": "Hybrid",
+      "trackingLinkUsed": "social-389",
+      "tier": "Bronze",
+      "sub-partner": true,
+      "partnerId": "P-0001",
+      "email": "julia.singh@example.com",
+      "preferredLanguage": "Portuguese"
+    },
+    {
+      "customerId": "C-100037",
+      "name": "Julia Bennett",
+      "joinDate": "2024-12-29",
+      "accountType": "Standard",
+      "accountNumber": "ACC-295618",
+      "country": "Norway",
+      "lifetimeDeposits": 10348.51,
+      "commissionPlan": "RevShare 30%",
+      "trackingLinkUsed": "social-391",
+      "tier": "Platinum",
+      "sub-partner": false,
+      "partnerId": "P-0001",
+      "email": "omar.costa@example.com",
+      "preferredLanguage": "French"
+    },
+    {
+      "customerId": "C-100038",
+      "name": "Ivan Novak",
+      "joinDate": "2024-09-05",
+      "accountType": "Standard",
+      "accountNumber": "ACC-840601",
+      "country": "Switzerland",
+      "lifetimeDeposits": 94917.65,
+      "commissionPlan": "RevShare 30%",
+      "trackingLinkUsed": "summer-221",
+      "tier": "Platinum",
+      "sub-partner": true,
+      "partnerId": "P-0001",
+      "email": "yara.kumar@example.com",
+      "preferredLanguage": "Dutch"
+    },
+    {
+      "customerId": "C-100039",
+      "name": "Omar Khan",
+      "joinDate": "2025-04-20",
+      "accountType": "VIP",
+      "accountNumber": "ACC-366792",
+      "country": "Italy",
+      "lifetimeDeposits": 26538.15,
+      "commissionPlan": "RevShare 30%",
+      "trackingLinkUsed": "summer-345",
+      "tier": "Silver",
+      "sub-partner": true,
+      "partnerId": "P-0002",
+      "email": "fiona.bennett@example.com",
+      "preferredLanguage": "Dutch"
+    },
+    {
+      "customerId": "C-100040",
+      "name": "Wen Garcia",
+      "joinDate": "2024-08-20",
+      "accountType": "VIP",
+      "accountNumber": "ACC-022802",
+      "country": "Greece",
+      "lifetimeDeposits": 78804.02,
+      "commissionPlan": "Hybrid",
+      "trackingLinkUsed": "social-777",
+      "tier": "Silver",
+      "sub-partner": false,
+      "partnerId": "P-0002",
+      "email": "diana.kumar@example.com",
+      "preferredLanguage": "German"
+    },
+    {
+      "customerId": "C-100041",
+      "name": "Ivan Novak",
+      "joinDate": "2022-10-19",
+      "accountType": "Standard",
+      "accountNumber": "ACC-075894",
+      "country": "Sweden",
+      "lifetimeDeposits": 68898.93,
+      "commissionPlan": "Hybrid",
+      "trackingLinkUsed": "affiliate-378",
+      "tier": "Platinum",
+      "sub-partner": false,
+      "partnerId": "P-0001",
+      "email": "carlos.garcia@example.com",
+      "preferredLanguage": "English"
+    },
+    {
+      "customerId": "C-100042",
+      "name": "Ximena Costa",
+      "joinDate": "2025-05-21",
+      "accountType": "VIP",
+      "accountNumber": "ACC-026850",
+      "country": "Greece",
+      "lifetimeDeposits": 57667.07,
+      "commissionPlan": "RevShare 30%",
+      "trackingLinkUsed": "affiliate-631",
+      "tier": "Platinum",
+      "sub-partner": false,
+      "partnerId": "P-0002",
+      "email": "fiona.garcia@example.com",
+      "preferredLanguage": "Dutch"
+    },
+    {
+      "customerId": "C-100043",
+      "name": "Carlos Zhang",
+      "joinDate": "2023-12-14",
+      "accountType": "VIP",
+      "accountNumber": "ACC-368362",
+      "country": "Belgium",
+      "lifetimeDeposits": 81375.25,
+      "commissionPlan": "Hybrid",
+      "trackingLinkUsed": "spring-565",
+      "tier": "Bronze",
+      "sub-partner": false,
+      "partnerId": "P-0002",
+      "email": "ivan.costa@example.com",
+      "preferredLanguage": "Spanish"
+    },
+    {
+      "customerId": "C-100044",
+      "name": "Quinn Novak",
+      "joinDate": "2022-01-03",
+      "accountType": "VIP",
+      "accountNumber": "ACC-413767",
+      "country": "Italy",
+      "lifetimeDeposits": 26778.92,
+      "commissionPlan": "RevShare 30%",
+      "trackingLinkUsed": "fall-548",
+      "tier": "Platinum",
+      "sub-partner": true,
+      "partnerId": "P-0002",
+      "email": "alice.silva@example.com",
+      "preferredLanguage": "Danish"
+    },
+    {
+      "customerId": "C-100045",
+      "name": "Wen Nair",
+      "joinDate": "2023-09-29",
+      "accountType": "Standard",
+      "accountNumber": "ACC-509941",
+      "country": "France",
+      "lifetimeDeposits": 49887.71,
+      "commissionPlan": "Hybrid",
+      "trackingLinkUsed": "fall-621",
+      "tier": "Gold",
+      "sub-partner": false,
+      "partnerId": "P-0001",
+      "email": "priya.zhang@example.com",
+      "preferredLanguage": "German"
+    },
+    {
+      "customerId": "C-100046",
+      "name": "Ravi Nair",
+      "joinDate": "2024-02-25",
+      "accountType": "Standard",
+      "accountNumber": "ACC-958827",
+      "country": "Ireland",
+      "lifetimeDeposits": 34053.54,
+      "commissionPlan": "Hybrid",
+      "trackingLinkUsed": "fall-940",
+      "tier": "Bronze",
+      "sub-partner": false,
+      "partnerId": "P-0002",
+      "email": "ximena.khan@example.com",
+      "preferredLanguage": "Danish"
+    },
+    {
+      "customerId": "C-100047",
+      "name": "Ethan Zhang",
+      "joinDate": "2025-01-08",
+      "accountType": "VIP",
+      "accountNumber": "ACC-355431",
+      "country": "Poland",
+      "lifetimeDeposits": 57222.58,
+      "commissionPlan": "RevShare 30%",
+      "trackingLinkUsed": "email-894",
+      "tier": "Platinum",
+      "sub-partner": true,
+      "partnerId": "P-0002",
+      "email": "kai.lopez@example.com",
+      "preferredLanguage": "Swedish"
+    },
+    {
+      "customerId": "C-100048",
+      "name": "Marco Silva",
+      "joinDate": "2025-08-28",
+      "accountType": "Standard",
+      "accountNumber": "ACC-405588",
+      "country": "Sweden",
+      "lifetimeDeposits": 10061.2,
+      "commissionPlan": "CPA",
+      "trackingLinkUsed": "spring-839",
+      "tier": "Silver",
+      "sub-partner": false,
+      "partnerId": "P-0002",
+      "email": "uma.nair@example.com",
+      "preferredLanguage": "Spanish"
+    },
+    {
+      "customerId": "C-100049",
+      "name": "Zane Khan",
+      "joinDate": "2023-11-25",
+      "accountType": "VIP",
+      "accountNumber": "ACC-688833",
+      "country": "Norway",
+      "lifetimeDeposits": 87251.06,
+      "commissionPlan": "RevShare 30%",
+      "trackingLinkUsed": "social-170",
+      "tier": "Silver",
+      "sub-partner": false,
+      "partnerId": "P-0002",
+      "email": "hana.lopez@example.com",
+      "preferredLanguage": "Spanish"
+    },
+    {
+      "customerId": "C-100050",
+      "name": "Diana Rossi",
+      "joinDate": "2025-07-21",
+      "accountType": "Standard",
+      "accountNumber": "ACC-469072",
+      "country": "Netherlands",
+      "lifetimeDeposits": 43125.61,
+      "commissionPlan": "RevShare 30%",
+      "trackingLinkUsed": "social-521",
+      "tier": "Silver",
+      "sub-partner": true,
+      "partnerId": "P-0002",
+      "email": "fiona.mendes@example.com",
+      "preferredLanguage": "Danish"
+    },
+    {
+      "customerId": "C-100051",
+      "name": "Tomas Silva",
+      "joinDate": "2023-05-09",
+      "accountType": "VIP",
+      "accountNumber": "ACC-914220",
+      "country": "Sweden",
+      "lifetimeDeposits": 90130.82,
+      "commissionPlan": "Hybrid",
+      "trackingLinkUsed": "social-261",
+      "tier": "Bronze",
+      "sub-partner": false,
+      "partnerId": "P-0002",
+      "email": "lina.garcia@example.com",
+      "preferredLanguage": "Italian"
+    },
+    {
+      "customerId": "C-100052",
+      "name": "Wen Khan",
+      "joinDate": "2024-07-24",
+      "accountType": "VIP",
+      "accountNumber": "ACC-134255",
+      "country": "Cyprus",
+      "lifetimeDeposits": 2291.77,
+      "commissionPlan": "Hybrid",
+      "trackingLinkUsed": "affiliate-381",
+      "tier": "Bronze",
+      "sub-partner": true,
+      "partnerId": "P-0002",
+      "email": "tomas.lopez@example.com",
+      "preferredLanguage": "Swedish"
+    },
+    {
+      "customerId": "C-100053",
+      "name": "Yara Rossi",
+      "joinDate": "2023-04-17",
+      "accountType": "VIP",
+      "accountNumber": "ACC-212776",
+      "country": "France",
+      "lifetimeDeposits": 62861.99,
+      "commissionPlan": "Hybrid",
+      "trackingLinkUsed": "display-140",
+      "tier": "Gold",
+      "sub-partner": false,
+      "partnerId": "P-0002",
+      "email": "bob.garcia@example.com",
+      "preferredLanguage": "Portuguese"
+    },
+    {
+      "customerId": "C-100054",
+      "name": "Carlos Smirnov",
+      "joinDate": "2023-08-28",
+      "accountType": "VIP",
+      "accountNumber": "ACC-711595",
+      "country": "Greece",
+      "lifetimeDeposits": 83064.21,
+      "commissionPlan": "CPA",
+      "trackingLinkUsed": "email-593",
+      "tier": "Gold",
+      "sub-partner": false,
+      "partnerId": "P-0001",
+      "email": "zane.mendes@example.com",
+      "preferredLanguage": "Swedish"
+    },
+    {
+      "customerId": "C-100055",
+      "name": "Ethan Rossi",
+      "joinDate": "2023-04-08",
+      "accountType": "VIP",
+      "accountNumber": "ACC-983705",
+      "country": "Sweden",
+      "lifetimeDeposits": 36921.71,
+      "commissionPlan": "Hybrid",
+      "trackingLinkUsed": "display-368",
+      "tier": "Platinum",
+      "sub-partner": false,
+      "partnerId": "P-0001",
+      "email": "diana.silva@example.com",
+      "preferredLanguage": "German"
+    },
+    {
+      "customerId": "C-100056",
+      "name": "Alice Garcia",
+      "joinDate": "2025-02-23",
+      "accountType": "VIP",
+      "accountNumber": "ACC-920893",
+      "country": "Ireland",
+      "lifetimeDeposits": 11755.93,
+      "commissionPlan": "RevShare 30%",
+      "trackingLinkUsed": "spring-411",
+      "tier": "Platinum",
+      "sub-partner": true,
+      "partnerId": "P-0002",
+      "email": "diana.singh@example.com",
+      "preferredLanguage": "Norwegian"
+    },
+    {
+      "customerId": "C-100057",
+      "name": "Marco Zhang",
+      "joinDate": "2024-01-30",
+      "accountType": "VIP",
+      "accountNumber": "ACC-578686",
+      "country": "Greece",
+      "lifetimeDeposits": 3368.36,
+      "commissionPlan": "CPA",
+      "trackingLinkUsed": "summer-554",
+      "tier": "Platinum",
+      "sub-partner": true,
+      "partnerId": "P-0001",
+      "email": "lina.mendes@example.com",
+      "preferredLanguage": "Portuguese"
+    },
+    {
+      "customerId": "C-100058",
+      "name": "Bob Ibrahim",
+      "joinDate": "2023-07-20",
+      "accountType": "Standard",
+      "accountNumber": "ACC-998026",
+      "country": "United Kingdom",
+      "lifetimeDeposits": 5152.79,
+      "commissionPlan": "CPA",
+      "trackingLinkUsed": "summer-228",
+      "tier": "Silver",
+      "sub-partner": true,
+      "partnerId": "P-0002",
+      "email": "yara.kumar@example.com",
+      "preferredLanguage": "German"
+    },
+    {
+      "customerId": "C-100059",
+      "name": "Hana Costa",
+      "joinDate": "2022-10-30",
+      "accountType": "Standard",
+      "accountNumber": "ACC-299571",
+      "country": "United Kingdom",
+      "lifetimeDeposits": 13267.14,
+      "commissionPlan": "CPA",
+      "trackingLinkUsed": "email-907",
+      "tier": "Silver",
+      "sub-partner": false,
+      "partnerId": "P-0001",
+      "email": "alice.nair@example.com",
+      "preferredLanguage": "Italian"
+    },
+    {
+      "customerId": "C-100060",
+      "name": "Ethan Lopez",
+      "joinDate": "2024-05-12",
+      "accountType": "Standard",
+      "accountNumber": "ACC-747515",
+      "country": "Austria",
+      "lifetimeDeposits": 4432.17,
+      "commissionPlan": "Hybrid",
+      "trackingLinkUsed": "social-408",
+      "tier": "Platinum",
+      "sub-partner": true,
+      "partnerId": "P-0001",
+      "email": "bob.zhang@example.com",
+      "preferredLanguage": "Dutch"
+    },
+    {
+      "customerId": "C-100061",
+      "name": "Viktor Mendes",
+      "joinDate": "2024-10-01",
+      "accountType": "VIP",
+      "accountNumber": "ACC-006026",
+      "country": "Denmark",
+      "lifetimeDeposits": 71244.06,
+      "commissionPlan": "CPA",
+      "trackingLinkUsed": "social-643",
+      "tier": "Gold",
+      "sub-partner": false,
+      "partnerId": "P-0002",
+      "email": "quinn.garcia@example.com",
+      "preferredLanguage": "Dutch"
+    },
+    {
+      "customerId": "C-100062",
+      "name": "Zane Lopez",
+      "joinDate": "2022-08-23",
+      "accountType": "Standard",
+      "accountNumber": "ACC-484837",
+      "country": "Romania",
+      "lifetimeDeposits": 42733.72,
+      "commissionPlan": "Hybrid",
+      "trackingLinkUsed": "fall-483",
+      "tier": "Silver",
+      "sub-partner": false,
+      "partnerId": "P-0001",
+      "email": "carlos.mendes@example.com",
+      "preferredLanguage": "Spanish"
+    },
+    {
+      "customerId": "C-100063",
+      "name": "Nora Mendes",
+      "joinDate": "2024-02-03",
+      "accountType": "Standard",
+      "accountNumber": "ACC-555313",
+      "country": "Ireland",
+      "lifetimeDeposits": 86822.41,
+      "commissionPlan": "Hybrid",
+      "trackingLinkUsed": "spring-394",
+      "tier": "Gold",
+      "sub-partner": false,
+      "partnerId": "P-0001",
+      "email": "diana.garcia@example.com",
+      "preferredLanguage": "Norwegian"
+    },
+    {
+      "customerId": "C-100064",
+      "name": "Ethan Silva",
+      "joinDate": "2024-09-14",
+      "accountType": "Standard",
+      "accountNumber": "ACC-835122",
+      "country": "Ireland",
+      "lifetimeDeposits": 84531.0,
+      "commissionPlan": "Hybrid",
+      "trackingLinkUsed": "social-791",
+      "tier": "Bronze",
+      "sub-partner": false,
+      "partnerId": "P-0001",
+      "email": "alice.nair@example.com",
+      "preferredLanguage": "Italian"
+    },
+    {
+      "customerId": "C-100065",
+      "name": "Kai Costa",
+      "joinDate": "2022-01-13",
+      "accountType": "Standard",
+      "accountNumber": "ACC-854160",
+      "country": "Finland",
+      "lifetimeDeposits": 21591.77,
+      "commissionPlan": "CPA",
+      "trackingLinkUsed": "affiliate-449",
+      "tier": "Silver",
+      "sub-partner": false,
+      "partnerId": "P-0002",
+      "email": "julia.lopez@example.com",
+      "preferredLanguage": "Portuguese"
+    },
+    {
+      "customerId": "C-100066",
+      "name": "Bob Nair",
+      "joinDate": "2022-11-19",
+      "accountType": "Standard",
+      "accountNumber": "ACC-626442",
+      "country": "Finland",
+      "lifetimeDeposits": 11470.37,
+      "commissionPlan": "CPA",
+      "trackingLinkUsed": "spring-390",
+      "tier": "Platinum",
+      "sub-partner": false,
+      "partnerId": "P-0001",
+      "email": "bob.singh@example.com",
+      "preferredLanguage": "Dutch"
+    },
+    {
+      "customerId": "C-100067",
+      "name": "Alice Singh",
+      "joinDate": "2023-09-10",
+      "accountType": "Standard",
+      "accountNumber": "ACC-772144",
+      "country": "France",
+      "lifetimeDeposits": 38082.72,
+      "commissionPlan": "Hybrid",
+      "trackingLinkUsed": "summer-612",
+      "tier": "Gold",
+      "sub-partner": true,
+      "partnerId": "P-0001",
+      "email": "marco.novak@example.com",
+      "preferredLanguage": "English"
+    },
+    {
+      "customerId": "C-100068",
+      "name": "Alice Zhang",
+      "joinDate": "2022-06-09",
+      "accountType": "VIP",
+      "accountNumber": "ACC-557410",
+      "country": "Romania",
+      "lifetimeDeposits": 17270.13,
+      "commissionPlan": "Hybrid",
+      "trackingLinkUsed": "affiliate-951",
+      "tier": "Gold",
+      "sub-partner": true,
+      "partnerId": "P-0002",
+      "email": "nora.novak@example.com",
+      "preferredLanguage": "Spanish"
+    },
+    {
+      "customerId": "C-100069",
+      "name": "Nora Garcia",
+      "joinDate": "2024-03-31",
+      "accountType": "Standard",
+      "accountNumber": "ACC-333315",
+      "country": "Germany",
+      "lifetimeDeposits": 53107.42,
+      "commissionPlan": "RevShare 30%",
+      "trackingLinkUsed": "email-457",
+      "tier": "Gold",
+      "sub-partner": true,
+      "partnerId": "P-0001",
+      "email": "hana.mendes@example.com",
+      "preferredLanguage": "French"
+    },
+    {
+      "customerId": "C-100070",
+      "name": "George Nair",
+      "joinDate": "2025-05-18",
+      "accountType": "Standard",
+      "accountNumber": "ACC-761747",
+      "country": "Switzerland",
+      "lifetimeDeposits": 44945.64,
+      "commissionPlan": "Hybrid",
+      "trackingLinkUsed": "display-750",
+      "tier": "Gold",
+      "sub-partner": false,
+      "partnerId": "P-0002",
+      "email": "ethan.zhang@example.com",
+      "preferredLanguage": "Spanish"
+    },
+    {
+      "customerId": "C-100071",
+      "name": "Omar Silva",
+      "joinDate": "2023-09-13",
+      "accountType": "VIP",
+      "accountNumber": "ACC-530403",
+      "country": "Cyprus",
+      "lifetimeDeposits": 7765.43,
+      "commissionPlan": "RevShare 30%",
+      "trackingLinkUsed": "social-708",
+      "tier": "Platinum",
+      "sub-partner": false,
+      "partnerId": "P-0002",
+      "email": "sara.kumar@example.com",
+      "preferredLanguage": "English"
+    },
+    {
+      "customerId": "C-100072",
+      "name": "Zane Garcia",
+      "joinDate": "2025-08-27",
+      "accountType": "Standard",
+      "accountNumber": "ACC-341018",
+      "country": "Romania",
+      "lifetimeDeposits": 98240.32,
+      "commissionPlan": "RevShare 30%",
+      "trackingLinkUsed": "social-761",
+      "tier": "Silver",
+      "sub-partner": true,
+      "partnerId": "P-0002",
+      "email": "hana.lopez@example.com",
+      "preferredLanguage": "Swedish"
+    },
+    {
+      "customerId": "C-100073",
+      "name": "Quinn Kumar",
+      "joinDate": "2025-06-02",
+      "accountType": "Standard",
+      "accountNumber": "ACC-393760",
+      "country": "Romania",
+      "lifetimeDeposits": 6684.59,
+      "commissionPlan": "RevShare 30%",
+      "trackingLinkUsed": "social-794",
+      "tier": "Platinum",
+      "sub-partner": false,
+      "partnerId": "P-0002",
+      "email": "ivan.lopez@example.com",
+      "preferredLanguage": "Danish"
+    },
+    {
+      "customerId": "C-100074",
+      "name": "Kai Mendes",
+      "joinDate": "2025-04-08",
+      "accountType": "Standard",
+      "accountNumber": "ACC-936617",
+      "country": "India",
+      "lifetimeDeposits": 31027.23,
+      "commissionPlan": "CPA",
+      "trackingLinkUsed": "display-910",
+      "tier": "Gold",
+      "sub-partner": true,
+      "partnerId": "P-0001",
+      "email": "viktor.lopez@example.com",
+      "preferredLanguage": "Norwegian"
+    },
+    {
+      "customerId": "C-100075",
+      "name": "Uma Silva",
+      "joinDate": "2024-05-17",
+      "accountType": "VIP",
+      "accountNumber": "ACC-039371",
+      "country": "France",
+      "lifetimeDeposits": 15579.02,
+      "commissionPlan": "CPA",
+      "trackingLinkUsed": "email-907",
+      "tier": "Bronze",
+      "sub-partner": true,
+      "partnerId": "P-0001",
+      "email": "viktor.costa@example.com",
+      "preferredLanguage": "Danish"
+    },
+    {
+      "customerId": "C-100076",
+      "name": "Tomas Ibrahim",
+      "joinDate": "2022-11-12",
+      "accountType": "Standard",
+      "accountNumber": "ACC-166970",
+      "country": "Netherlands",
+      "lifetimeDeposits": 67668.66,
+      "commissionPlan": "RevShare 30%",
+      "trackingLinkUsed": "affiliate-725",
+      "tier": "Gold",
+      "sub-partner": false,
+      "partnerId": "P-0001",
+      "email": "hana.kumar@example.com",
+      "preferredLanguage": "German"
+    },
+    {
+      "customerId": "C-100077",
+      "name": "Zane Rossi",
+      "joinDate": "2024-08-18",
+      "accountType": "Standard",
+      "accountNumber": "ACC-399423",
+      "country": "Finland",
+      "lifetimeDeposits": 41924.22,
+      "commissionPlan": "RevShare 30%",
+      "trackingLinkUsed": "email-304",
+      "tier": "Silver",
+      "sub-partner": false,
+      "partnerId": "P-0002",
+      "email": "bob.silva@example.com",
+      "preferredLanguage": "Swedish"
+    },
+    {
+      "customerId": "C-100078",
+      "name": "Ravi Smirnov",
+      "joinDate": "2022-07-30",
+      "accountType": "Standard",
+      "accountNumber": "ACC-272914",
+      "country": "Poland",
+      "lifetimeDeposits": 81688.66,
+      "commissionPlan": "CPA",
+      "trackingLinkUsed": "spring-524",
+      "tier": "Bronze",
+      "sub-partner": false,
+      "partnerId": "P-0002",
+      "email": "quinn.costa@example.com",
+      "preferredLanguage": "German"
+    },
+    {
+      "customerId": "C-100079",
+      "name": "Carlos Costa",
+      "joinDate": "2023-04-05",
+      "accountType": "Standard",
+      "accountNumber": "ACC-307310",
+      "country": "Norway",
+      "lifetimeDeposits": 69637.59,
+      "commissionPlan": "RevShare 30%",
+      "trackingLinkUsed": "email-822",
+      "tier": "Platinum",
+      "sub-partner": false,
+      "partnerId": "P-0002",
+      "email": "tomas.bennett@example.com",
+      "preferredLanguage": "Spanish"
+    },
+    {
+      "customerId": "C-100080",
+      "name": "Ivan Singh",
+      "joinDate": "2022-11-03",
+      "accountType": "VIP",
+      "accountNumber": "ACC-123047",
+      "country": "Sweden",
+      "lifetimeDeposits": 6374.43,
+      "commissionPlan": "CPA",
+      "trackingLinkUsed": "social-648",
+      "tier": "Bronze",
+      "sub-partner": true,
+      "partnerId": "P-0001",
+      "email": "wen.nair@example.com",
+      "preferredLanguage": "Italian"
+    },
+    {
+      "customerId": "C-100081",
+      "name": "Alice Garcia",
+      "joinDate": "2023-12-24",
+      "accountType": "Standard",
+      "accountNumber": "ACC-516539",
+      "country": "Denmark",
+      "lifetimeDeposits": 50782.04,
+      "commissionPlan": "Hybrid",
+      "trackingLinkUsed": "social-120",
+      "tier": "Platinum",
+      "sub-partner": false,
+      "partnerId": "P-0002",
+      "email": "bob.silva@example.com",
+      "preferredLanguage": "Dutch"
+    },
+    {
+      "customerId": "C-100082",
+      "name": "Ivan Lopez",
+      "joinDate": "2022-02-03",
+      "accountType": "VIP",
+      "accountNumber": "ACC-737677",
+      "country": "Romania",
+      "lifetimeDeposits": 13427.62,
+      "commissionPlan": "CPA",
+      "trackingLinkUsed": "social-446",
+      "tier": "Silver",
+      "sub-partner": false,
+      "partnerId": "P-0002",
+      "email": "wen.zhang@example.com",
+      "preferredLanguage": "French"
+    },
+    {
+      "customerId": "C-100083",
+      "name": "Carlos Lopez",
+      "joinDate": "2024-07-26",
+      "accountType": "Standard",
+      "accountNumber": "ACC-201095",
+      "country": "Denmark",
+      "lifetimeDeposits": 47392.64,
+      "commissionPlan": "RevShare 30%",
+      "trackingLinkUsed": "email-762",
+      "tier": "Silver",
+      "sub-partner": false,
+      "partnerId": "P-0001",
+      "email": "lina.novak@example.com",
+      "preferredLanguage": "English"
+    },
+    {
+      "customerId": "C-100084",
+      "name": "Ivan Mendes",
+      "joinDate": "2024-01-24",
+      "accountType": "VIP",
+      "accountNumber": "ACC-878394",
+      "country": "Norway",
+      "lifetimeDeposits": 36797.96,
+      "commissionPlan": "Hybrid",
+      "trackingLinkUsed": "fall-920",
+      "tier": "Bronze",
+      "sub-partner": false,
+      "partnerId": "P-0002",
+      "email": "carlos.ibrahim@example.com",
+      "preferredLanguage": "Danish"
+    },
+    {
+      "customerId": "C-100085",
+      "name": "Ravi Khan",
+      "joinDate": "2023-10-20",
+      "accountType": "Standard",
+      "accountNumber": "ACC-063646",
+      "country": "Netherlands",
+      "lifetimeDeposits": 44768.25,
+      "commissionPlan": "Hybrid",
+      "trackingLinkUsed": "email-461",
+      "tier": "Platinum",
+      "sub-partner": false,
+      "partnerId": "P-0001",
+      "email": "uma.rossi@example.com",
+      "preferredLanguage": "English"
+    },
+    {
+      "customerId": "C-100086",
+      "name": "Viktor Silva",
+      "joinDate": "2024-04-11",
+      "accountType": "VIP",
+      "accountNumber": "ACC-571086",
+      "country": "Sweden",
+      "lifetimeDeposits": 3576.42,
+      "commissionPlan": "RevShare 30%",
+      "trackingLinkUsed": "summer-897",
+      "tier": "Gold",
+      "sub-partner": false,
+      "partnerId": "P-0001",
+      "email": "marco.garcia@example.com",
+      "preferredLanguage": "English"
+    },
+    {
+      "customerId": "C-100087",
+      "name": "Viktor Zhang",
+      "joinDate": "2024-01-30",
+      "accountType": "VIP",
+      "accountNumber": "ACC-401332",
+      "country": "Germany",
+      "lifetimeDeposits": 2688.74,
+      "commissionPlan": "RevShare 30%",
+      "trackingLinkUsed": "affiliate-630",
+      "tier": "Platinum",
+      "sub-partner": true,
+      "partnerId": "P-0001",
+      "email": "ivan.rossi@example.com",
+      "preferredLanguage": "Italian"
+    },
+    {
+      "customerId": "C-100088",
+      "name": "George Garcia",
+      "joinDate": "2023-08-08",
+      "accountType": "VIP",
+      "accountNumber": "ACC-210179",
+      "country": "Romania",
+      "lifetimeDeposits": 66817.2,
+      "commissionPlan": "Hybrid",
+      "trackingLinkUsed": "spring-663",
+      "tier": "Gold",
+      "sub-partner": false,
+      "partnerId": "P-0002",
+      "email": "fiona.lopez@example.com",
+      "preferredLanguage": "French"
+    },
+    {
+      "customerId": "C-100089",
+      "name": "Quinn Singh",
+      "joinDate": "2022-09-06",
+      "accountType": "Standard",
+      "accountNumber": "ACC-724354",
+      "country": "Denmark",
+      "lifetimeDeposits": 13064.15,
+      "commissionPlan": "RevShare 30%",
+      "trackingLinkUsed": "spring-416",
+      "tier": "Platinum",
+      "sub-partner": false,
+      "partnerId": "P-0002",
+      "email": "quinn.ibrahim@example.com",
+      "preferredLanguage": "Dutch"
+    },
+    {
+      "customerId": "C-100090",
+      "name": "Ethan Costa",
+      "joinDate": "2025-08-08",
+      "accountType": "Standard",
+      "accountNumber": "ACC-463876",
+      "country": "Spain",
+      "lifetimeDeposits": 76801.39,
+      "commissionPlan": "RevShare 30%",
+      "trackingLinkUsed": "affiliate-614",
+      "tier": "Bronze",
+      "sub-partner": true,
+      "partnerId": "P-0001",
+      "email": "quinn.nair@example.com",
+      "preferredLanguage": "Italian"
+    },
+    {
+      "customerId": "C-100091",
+      "name": "Fiona Costa",
+      "joinDate": "2023-04-07",
+      "accountType": "VIP",
+      "accountNumber": "ACC-952019",
+      "country": "Greece",
+      "lifetimeDeposits": 12604.51,
+      "commissionPlan": "CPA",
+      "trackingLinkUsed": "social-646",
+      "tier": "Bronze",
+      "sub-partner": true,
+      "partnerId": "P-0001",
+      "email": "sara.garcia@example.com",
+      "preferredLanguage": "French"
+    },
+    {
+      "customerId": "C-100092",
+      "name": "Viktor Garcia",
+      "joinDate": "2025-05-24",
+      "accountType": "VIP",
+      "accountNumber": "ACC-858006",
+      "country": "Switzerland",
+      "lifetimeDeposits": 26539.13,
+      "commissionPlan": "RevShare 30%",
+      "trackingLinkUsed": "email-685",
+      "tier": "Platinum",
+      "sub-partner": true,
+      "partnerId": "P-0001",
+      "email": "priya.smirnov@example.com",
+      "preferredLanguage": "Norwegian"
+    },
+    {
+      "customerId": "C-100093",
+      "name": "Uma Khan",
+      "joinDate": "2024-09-16",
+      "accountType": "Standard",
+      "accountNumber": "ACC-862004",
+      "country": "Norway",
+      "lifetimeDeposits": 46497.77,
+      "commissionPlan": "CPA",
+      "trackingLinkUsed": "social-247",
+      "tier": "Gold",
+      "sub-partner": false,
+      "partnerId": "P-0002",
+      "email": "ximena.novak@example.com",
+      "preferredLanguage": "Portuguese"
+    },
+    {
+      "customerId": "C-100094",
+      "name": "Ethan Rossi",
+      "joinDate": "2024-01-29",
+      "accountType": "Standard",
+      "accountNumber": "ACC-342202",
+      "country": "Belgium",
+      "lifetimeDeposits": 86429.97,
+      "commissionPlan": "CPA",
+      "trackingLinkUsed": "summer-986",
+      "tier": "Silver",
+      "sub-partner": false,
+      "partnerId": "P-0002",
+      "email": "sara.lopez@example.com",
+      "preferredLanguage": "Portuguese"
+    },
+    {
+      "customerId": "C-100095",
+      "name": "Yara Nair",
+      "joinDate": "2024-10-17",
+      "accountType": "VIP",
+      "accountNumber": "ACC-430959",
+      "country": "Italy",
+      "lifetimeDeposits": 58376.08,
+      "commissionPlan": "RevShare 30%",
+      "trackingLinkUsed": "spring-388",
+      "tier": "Platinum",
+      "sub-partner": false,
+      "partnerId": "P-0001",
+      "email": "julia.kumar@example.com",
+      "preferredLanguage": "English"
+    },
+    {
+      "customerId": "C-100096",
+      "name": "Nora Nair",
+      "joinDate": "2023-06-26",
+      "accountType": "VIP",
+      "accountNumber": "ACC-734515",
+      "country": "India",
+      "lifetimeDeposits": 38696.25,
+      "commissionPlan": "CPA",
+      "trackingLinkUsed": "email-663",
+      "tier": "Gold",
+      "sub-partner": true,
+      "partnerId": "P-0001",
+      "email": "ethan.mendes@example.com",
+      "preferredLanguage": "Dutch"
+    },
+    {
+      "customerId": "C-100097",
+      "name": "Zane Costa",
+      "joinDate": "2025-02-16",
+      "accountType": "VIP",
+      "accountNumber": "ACC-715501",
+      "country": "Romania",
+      "lifetimeDeposits": 80416.19,
+      "commissionPlan": "Hybrid",
+      "trackingLinkUsed": "affiliate-252",
+      "tier": "Silver",
+      "sub-partner": false,
+      "partnerId": "P-0002",
+      "email": "tomas.costa@example.com",
+      "preferredLanguage": "French"
+    },
+    {
+      "customerId": "C-100098",
+      "name": "Tomas Lopez",
+      "joinDate": "2023-09-05",
+      "accountType": "VIP",
+      "accountNumber": "ACC-554540",
+      "country": "Romania",
+      "lifetimeDeposits": 67413.26,
+      "commissionPlan": "CPA",
+      "trackingLinkUsed": "social-415",
+      "tier": "Bronze",
+      "sub-partner": false,
+      "partnerId": "P-0002",
+      "email": "ivan.silva@example.com",
+      "preferredLanguage": "Danish"
+    },
+    {
+      "customerId": "C-100099",
+      "name": "Ximena Bennett",
+      "joinDate": "2025-04-10",
+      "accountType": "VIP",
+      "accountNumber": "ACC-166816",
+      "country": "Portugal",
+      "lifetimeDeposits": 57299.77,
+      "commissionPlan": "Hybrid",
+      "trackingLinkUsed": "spring-295",
+      "tier": "Bronze",
+      "sub-partner": false,
+      "partnerId": "P-0001",
+      "email": "kai.ibrahim@example.com",
+      "preferredLanguage": "French"
+    }
+  ],
+  "trades": [
+    {
+      "customerId": "C-100052",
+      "dateTime": "2025-06-09T08:59:40Z",
+      "platform": "dTrader",
+      "contractType": "Vanillas",
+      "asset": "ETH-USD",
+      "commission": 116.47
+    },
+    {
+      "customerId": "C-100060",
+      "dateTime": "2025-10-02T02:18:07Z",
+      "platform": "dTrader",
+      "contractType": "Accumulators",
+      "asset": "AAPL",
+      "commission": 78.28
+    },
+    {
+      "customerId": "C-100071",
+      "dateTime": "2025-09-15T04:24:04Z",
+      "platform": "MT5",
+      "contractType": "CFD",
+      "asset": "XAUUSD",
+      "commission": 79.3
+    },
+    {
+      "customerId": "C-100040",
+      "dateTime": "2025-07-27T01:06:15Z",
+      "platform": "Mobile",
+      "contractType": "Options",
+      "asset": "BTC-USD",
+      "commission": 82.39
+    },
+    {
+      "customerId": "C-100086",
+      "dateTime": "2025-08-25T22:19:33Z",
+      "platform": "dTrader",
+      "contractType": "Turbos",
+      "asset": "XAUUSD",
+      "commission": 29.65
+    },
+    {
+      "customerId": "C-100031",
+      "dateTime": "2025-08-05T17:44:40Z",
+      "platform": "MT5",
+      "contractType": "CFD",
+      "asset": "BTC-USD",
+      "commission": 34.51
+    },
+    {
+      "customerId": "C-100038",
+      "dateTime": "2025-10-01T18:09:10Z",
+      "platform": "MT5",
+      "contractType": "CFD",
+      "asset": "AAPL",
+      "commission": 103.85
+    },
+    {
+      "customerId": "C-100062",
+      "dateTime": "2025-07-06T08:05:31Z",
+      "platform": "MT5",
+      "contractType": "CFD",
+      "asset": "BTC-USD",
+      "commission": 84.51
+    },
+    {
+      "customerId": "C-100092",
+      "dateTime": "2025-04-22T18:23:29Z",
+      "platform": "MT5",
+      "contractType": "CFD",
+      "asset": "EUR/USD",
+      "commission": 86.45
+    },
+    {
+      "customerId": "C-100069",
+      "dateTime": "2025-06-03T05:18:32Z",
+      "platform": "cTrader",
+      "contractType": "CFD",
+      "asset": "BTC-USD",
+      "commission": 143.24
+    },
+    {
+      "customerId": "C-100018",
+      "dateTime": "2025-01-17T08:05:17Z",
+      "platform": "MT5",
+      "contractType": "CFD",
+      "asset": "BTC-USD",
+      "commission": 143.34
+    },
+    {
+      "customerId": "C-100010",
+      "dateTime": "2025-06-21T19:14:39Z",
+      "platform": "MT5",
+      "contractType": "CFD",
+      "asset": "TSLA",
+      "commission": 39.21
+    },
+    {
+      "customerId": "C-100061",
+      "dateTime": "2025-07-29T03:54:36Z",
+      "platform": "Mobile",
+      "contractType": "CFD",
+      "asset": "BTC-USD",
+      "commission": 140.02
+    },
+    {
+      "customerId": "C-100089",
+      "dateTime": "2025-02-23T07:28:36Z",
+      "platform": "MT5",
+      "contractType": "CFD",
+      "asset": "EUR/USD",
+      "commission": 92.74
+    },
+    {
+      "customerId": "C-100075",
+      "dateTime": "2025-01-20T17:10:05Z",
+      "platform": "Mobile",
+      "contractType": "CFD",
+      "asset": "TSLA",
+      "commission": 135.87
+    },
+    {
+      "customerId": "C-100028",
+      "dateTime": "2025-01-21T09:15:09Z",
+      "platform": "dTrader",
+      "contractType": "Vanillas",
+      "asset": "EUR/USD",
+      "commission": 62.58
+    },
+    {
+      "customerId": "C-100091",
+      "dateTime": "2025-02-09T01:08:47Z",
+      "platform": "cTrader",
+      "contractType": "CFD",
+      "asset": "TSLA",
+      "commission": 115.84
+    },
+    {
+      "customerId": "C-100000",
+      "dateTime": "2025-03-03T08:07:03Z",
+      "platform": "DerivX",
+      "contractType": "CFD",
+      "asset": "XAUUSD",
+      "commission": 98.28
+    },
+    {
+      "customerId": "C-100060",
+      "dateTime": "2025-09-10T15:27:36Z",
+      "platform": "cTrader",
+      "contractType": "CFD",
+      "asset": "AAPL",
+      "commission": 113.63
+    },
+    {
+      "customerId": "C-100036",
+      "dateTime": "2025-04-21T20:15:49Z",
+      "platform": "MT5",
+      "contractType": "CFD",
+      "asset": "TSLA",
+      "commission": 9.82
+    },
+    {
+      "customerId": "C-100098",
+      "dateTime": "2025-08-11T23:18:38Z",
+      "platform": "WebTrader",
+      "contractType": "Futures",
+      "asset": "AAPL",
+      "commission": 80.74
+    },
+    {
+      "customerId": "C-100092",
+      "dateTime": "2025-06-12T06:58:13Z",
+      "platform": "WebTrader",
+      "contractType": "CFD",
+      "asset": "AAPL",
+      "commission": 140.15
+    },
+    {
+      "customerId": "C-100004",
+      "dateTime": "2025-07-12T09:18:45Z",
+      "platform": "cTrader",
+      "contractType": "CFD",
+      "asset": "AAPL",
+      "commission": 140.55
+    },
+    {
+      "customerId": "C-100037",
+      "dateTime": "2025-04-26T21:13:01Z",
+      "platform": "WebTrader",
+      "contractType": "CFD",
+      "asset": "ETH-USD",
+      "commission": 90.81
+    },
+    {
+      "customerId": "C-100042",
+      "dateTime": "2025-06-26T10:50:25Z",
+      "platform": "MT5",
+      "contractType": "CFD",
+      "asset": "TSLA",
+      "commission": 81.95
+    },
+    {
+      "customerId": "C-100063",
+      "dateTime": "2025-07-01T18:16:11Z",
+      "platform": "Mobile",
+      "contractType": "Futures",
+      "asset": "BTC-USD",
+      "commission": 29.73
+    },
+    {
+      "customerId": "C-100014",
+      "dateTime": "2025-03-05T02:33:22Z",
+      "platform": "MT5",
+      "contractType": "CFD",
+      "asset": "TSLA",
+      "commission": 69.38
+    },
+    {
+      "customerId": "C-100032",
+      "dateTime": "2025-01-06T11:16:27Z",
+      "platform": "dTrader",
+      "contractType": "Vanillas",
+      "asset": "TSLA",
+      "commission": 51.23
+    },
+    {
+      "customerId": "C-100037",
+      "dateTime": "2025-09-19T21:52:27Z",
+      "platform": "DerivX",
+      "contractType": "CFD",
+      "asset": "AAPL",
+      "commission": 27.15
+    },
+    {
+      "customerId": "C-100081",
+      "dateTime": "2025-06-16T02:28:59Z",
+      "platform": "cTrader",
+      "contractType": "CFD",
+      "asset": "ETH-USD",
+      "commission": 49.86
+    },
+    {
+      "customerId": "C-100051",
+      "dateTime": "2025-03-13T18:17:08Z",
+      "platform": "dTrader",
+      "contractType": "Accumulators",
+      "asset": "AAPL",
+      "commission": 72.14
+    },
+    {
+      "customerId": "C-100031",
+      "dateTime": "2025-05-29T23:10:20Z",
+      "platform": "WebTrader",
+      "contractType": "Options",
+      "asset": "AAPL",
+      "commission": 67.56
+    },
+    {
+      "customerId": "C-100034",
+      "dateTime": "2025-04-28T06:20:21Z",
+      "platform": "MT5",
+      "contractType": "CFD",
+      "asset": "ETH-USD",
+      "commission": 108.71
+    },
+    {
+      "customerId": "C-100001",
+      "dateTime": "2025-09-11T20:46:14Z",
+      "platform": "MT5",
+      "contractType": "CFD",
+      "asset": "BTC-USD",
+      "commission": 104.22
+    },
+    {
+      "customerId": "C-100007",
+      "dateTime": "2025-06-30T17:47:44Z",
+      "platform": "dTrader",
+      "contractType": "Accumulators",
+      "asset": "BTC-USD",
+      "commission": 24.8
+    },
+    {
+      "customerId": "C-100087",
+      "dateTime": "2025-10-01T05:37:36Z",
+      "platform": "DerivX",
+      "contractType": "CFD",
+      "asset": "BTC-USD",
+      "commission": 103.85
+    },
+    {
+      "customerId": "C-100081",
+      "dateTime": "2025-05-23T17:45:26Z",
+      "platform": "MT5",
+      "contractType": "CFD",
+      "asset": "ETH-USD",
+      "commission": 33.91
+    },
+    {
+      "customerId": "C-100017",
+      "dateTime": "2025-03-01T11:47:34Z",
+      "platform": "cTrader",
+      "contractType": "CFD",
+      "asset": "XAUUSD",
+      "commission": 112.41
+    },
+    {
+      "customerId": "C-100077",
+      "dateTime": "2025-06-11T11:57:43Z",
+      "platform": "MT5",
+      "contractType": "CFD",
+      "asset": "TSLA",
+      "commission": 82.84
+    },
+    {
+      "customerId": "C-100060",
+      "dateTime": "2025-09-15T21:48:31Z",
+      "platform": "DerivX",
+      "contractType": "CFD",
+      "asset": "AAPL",
+      "commission": 114.52
+    },
+    {
+      "customerId": "C-100087",
+      "dateTime": "2025-02-01T19:05:11Z",
+      "platform": "DerivX",
+      "contractType": "CFD",
+      "asset": "ETH-USD",
+      "commission": 67.57
+    },
+    {
+      "customerId": "C-100090",
+      "dateTime": "2025-01-31T07:58:12Z",
+      "platform": "MT5",
+      "contractType": "CFD",
+      "asset": "ETH-USD",
+      "commission": 17.72
+    },
+    {
+      "customerId": "C-100070",
+      "dateTime": "2025-03-20T12:14:15Z",
+      "platform": "DerivX",
+      "contractType": "CFD",
+      "asset": "ETH-USD",
+      "commission": 80.96
+    },
+    {
+      "customerId": "C-100021",
+      "dateTime": "2025-07-22T01:56:04Z",
+      "platform": "MT5",
+      "contractType": "CFD",
+      "asset": "XAUUSD",
+      "commission": 18.32
+    },
+    {
+      "customerId": "C-100026",
+      "dateTime": "2025-02-05T07:38:15Z",
+      "platform": "dTrader",
+      "contractType": "Multipliers",
+      "asset": "ETH-USD",
+      "commission": 67.38
+    },
+    {
+      "customerId": "C-100007",
+      "dateTime": "2025-02-21T05:48:37Z",
+      "platform": "cTrader",
+      "contractType": "CFD",
+      "asset": "ETH-USD",
+      "commission": 62.9
+    },
+    {
+      "customerId": "C-100072",
+      "dateTime": "2025-06-29T13:40:41Z",
+      "platform": "WebTrader",
+      "contractType": "Futures",
+      "asset": "TSLA",
+      "commission": 121.23
+    },
+    {
+      "customerId": "C-100092",
+      "dateTime": "2025-04-09T19:42:47Z",
+      "platform": "WebTrader",
+      "contractType": "Options",
+      "asset": "EUR/USD",
+      "commission": 112.12
+    },
+    {
+      "customerId": "C-100074",
+      "dateTime": "2025-06-14T13:08:45Z",
+      "platform": "WebTrader",
+      "contractType": "CFD",
+      "asset": "BTC-USD",
+      "commission": 105.36
+    },
+    {
+      "customerId": "C-100069",
+      "dateTime": "2025-07-03T08:01:21Z",
+      "platform": "WebTrader",
+      "contractType": "CFD",
+      "asset": "EUR/USD",
+      "commission": 43.78
+    },
+    {
+      "customerId": "C-100023",
+      "dateTime": "2025-09-08T20:02:43Z",
+      "platform": "Mobile",
+      "contractType": "Futures",
+      "asset": "XAUUSD",
+      "commission": 56.79
+    },
+    {
+      "customerId": "C-100048",
+      "dateTime": "2025-05-27T14:31:15Z",
+      "platform": "cTrader",
+      "contractType": "CFD",
+      "asset": "XAUUSD",
+      "commission": 12.96
+    },
+    {
+      "customerId": "C-100084",
+      "dateTime": "2025-02-21T15:33:17Z",
+      "platform": "DerivX",
+      "contractType": "CFD",
+      "asset": "TSLA",
+      "commission": 129.18
+    },
+    {
+      "customerId": "C-100015",
+      "dateTime": "2025-06-02T15:34:19Z",
+      "platform": "Mobile",
+      "contractType": "Futures",
+      "asset": "ETH-USD",
+      "commission": 19.97
+    },
+    {
+      "customerId": "C-100028",
+      "dateTime": "2025-04-26T20:56:40Z",
+      "platform": "WebTrader",
+      "contractType": "CFD",
+      "asset": "XAUUSD",
+      "commission": 101.35
+    },
+    {
+      "customerId": "C-100069",
+      "dateTime": "2025-07-26T13:58:50Z",
+      "platform": "cTrader",
+      "contractType": "CFD",
+      "asset": "XAUUSD",
+      "commission": 123.68
+    },
+    {
+      "customerId": "C-100031",
+      "dateTime": "2025-05-15T10:26:33Z",
+      "platform": "cTrader",
+      "contractType": "CFD",
+      "asset": "AAPL",
+      "commission": 42.07
+    },
+    {
+      "customerId": "C-100092",
+      "dateTime": "2025-09-14T09:29:18Z",
+      "platform": "WebTrader",
+      "contractType": "CFD",
+      "asset": "XAUUSD",
+      "commission": 92.62
+    },
+    {
+      "customerId": "C-100002",
+      "dateTime": "2025-01-27T03:11:48Z",
+      "platform": "Mobile",
+      "contractType": "CFD",
+      "asset": "EUR/USD",
+      "commission": 89.5
+    },
+    {
+      "customerId": "C-100057",
+      "dateTime": "2025-09-18T23:42:51Z",
+      "platform": "DerivX",
+      "contractType": "CFD",
+      "asset": "TSLA",
+      "commission": 130.96
+    },
+    {
+      "customerId": "C-100031",
+      "dateTime": "2025-06-06T05:23:05Z",
+      "platform": "dTrader",
+      "contractType": "Accumulators",
+      "asset": "XAUUSD",
+      "commission": 35.92
+    },
+    {
+      "customerId": "C-100027",
+      "dateTime": "2025-07-15T16:38:58Z",
+      "platform": "WebTrader",
+      "contractType": "CFD",
+      "asset": "BTC-USD",
+      "commission": 35.89
+    },
+    {
+      "customerId": "C-100093",
+      "dateTime": "2025-05-04T20:23:52Z",
+      "platform": "DerivX",
+      "contractType": "CFD",
+      "asset": "ETH-USD",
+      "commission": 90.09
+    },
+    {
+      "customerId": "C-100086",
+      "dateTime": "2025-04-03T00:06:20Z",
+      "platform": "MT5",
+      "contractType": "CFD",
+      "asset": "BTC-USD",
+      "commission": 131.56
+    },
+    {
+      "customerId": "C-100084",
+      "dateTime": "2025-03-27T20:16:03Z",
+      "platform": "DerivX",
+      "contractType": "CFD",
+      "asset": "XAUUSD",
+      "commission": 45.77
+    },
+    {
+      "customerId": "C-100007",
+      "dateTime": "2025-08-18T18:44:14Z",
+      "platform": "DerivX",
+      "contractType": "CFD",
+      "asset": "TSLA",
+      "commission": 136.83
+    },
+    {
+      "customerId": "C-100080",
+      "dateTime": "2025-08-04T20:54:13Z",
+      "platform": "dTrader",
+      "contractType": "Multipliers",
+      "asset": "XAUUSD",
+      "commission": 7.99
+    },
+    {
+      "customerId": "C-100044",
+      "dateTime": "2025-07-23T16:21:00Z",
+      "platform": "dTrader",
+      "contractType": "Multipliers",
+      "asset": "BTC-USD",
+      "commission": 104.75
+    },
+    {
+      "customerId": "C-100052",
+      "dateTime": "2025-05-27T04:51:47Z",
+      "platform": "Mobile",
+      "contractType": "Options",
+      "asset": "AAPL",
+      "commission": 113.41
+    },
+    {
+      "customerId": "C-100060",
+      "dateTime": "2025-04-27T19:03:59Z",
+      "platform": "Mobile",
+      "contractType": "CFD",
+      "asset": "TSLA",
+      "commission": 22.51
+    },
+    {
+      "customerId": "C-100059",
+      "dateTime": "2025-06-10T06:25:58Z",
+      "platform": "WebTrader",
+      "contractType": "Futures",
+      "asset": "XAUUSD",
+      "commission": 84.04
+    },
+    {
+      "customerId": "C-100017",
+      "dateTime": "2025-04-05T07:36:19Z",
+      "platform": "cTrader",
+      "contractType": "CFD",
+      "asset": "BTC-USD",
+      "commission": 31.3
+    },
+    {
+      "customerId": "C-100082",
+      "dateTime": "2025-05-25T02:41:34Z",
+      "platform": "WebTrader",
+      "contractType": "Options",
+      "asset": "EUR/USD",
+      "commission": 80.81
+    },
+    {
+      "customerId": "C-100024",
+      "dateTime": "2025-05-27T11:27:37Z",
+      "platform": "WebTrader",
+      "contractType": "Options",
+      "asset": "TSLA",
+      "commission": 91.14
+    },
+    {
+      "customerId": "C-100005",
+      "dateTime": "2025-08-17T04:40:36Z",
+      "platform": "WebTrader",
+      "contractType": "CFD",
+      "asset": "TSLA",
+      "commission": 101.05
+    },
+    {
+      "customerId": "C-100027",
+      "dateTime": "2025-03-23T02:59:14Z",
+      "platform": "cTrader",
+      "contractType": "CFD",
+      "asset": "BTC-USD",
+      "commission": 46.18
+    },
+    {
+      "customerId": "C-100001",
+      "dateTime": "2025-02-15T13:27:58Z",
+      "platform": "Mobile",
+      "contractType": "CFD",
+      "asset": "TSLA",
+      "commission": 149.94
+    },
+    {
+      "customerId": "C-100061",
+      "dateTime": "2025-08-23T17:25:50Z",
+      "platform": "Mobile",
+      "contractType": "Futures",
+      "asset": "TSLA",
+      "commission": 31.47
+    },
+    {
+      "customerId": "C-100030",
+      "dateTime": "2025-05-05T21:40:08Z",
+      "platform": "DerivX",
+      "contractType": "CFD",
+      "asset": "BTC-USD",
+      "commission": 57.72
+    },
+    {
+      "customerId": "C-100068",
+      "dateTime": "2025-04-30T18:42:14Z",
+      "platform": "dTrader",
+      "contractType": "Turbos",
+      "asset": "BTC-USD",
+      "commission": 54.59
+    },
+    {
+      "customerId": "C-100063",
+      "dateTime": "2025-02-08T07:05:43Z",
+      "platform": "cTrader",
+      "contractType": "CFD",
+      "asset": "TSLA",
+      "commission": 70.95
+    },
+    {
+      "customerId": "C-100040",
+      "dateTime": "2025-05-02T12:38:40Z",
+      "platform": "Mobile",
+      "contractType": "Options",
+      "asset": "XAUUSD",
+      "commission": 7.81
+    },
+    {
+      "customerId": "C-100028",
+      "dateTime": "2025-01-07T07:10:49Z",
+      "platform": "dTrader",
+      "contractType": "Vanillas",
+      "asset": "BTC-USD",
+      "commission": 83.44
+    },
+    {
+      "customerId": "C-100074",
+      "dateTime": "2025-10-07T14:59:51Z",
+      "platform": "DerivX",
+      "contractType": "CFD",
+      "asset": "XAUUSD",
+      "commission": 44.98
+    },
+    {
+      "customerId": "C-100025",
+      "dateTime": "2025-03-31T07:55:44Z",
+      "platform": "MT5",
+      "contractType": "CFD",
+      "asset": "XAUUSD",
+      "commission": 85.9
+    },
+    {
+      "customerId": "C-100031",
+      "dateTime": "2025-08-02T20:21:37Z",
+      "platform": "cTrader",
+      "contractType": "CFD",
+      "asset": "TSLA",
+      "commission": 141.58
+    },
+    {
+      "customerId": "C-100043",
+      "dateTime": "2025-07-09T18:16:43Z",
+      "platform": "MT5",
+      "contractType": "CFD",
+      "asset": "TSLA",
+      "commission": 96.61
+    },
+    {
+      "customerId": "C-100062",
+      "dateTime": "2025-03-07T08:03:04Z",
+      "platform": "cTrader",
+      "contractType": "CFD",
+      "asset": "TSLA",
+      "commission": 119.45
+    },
+    {
+      "customerId": "C-100021",
+      "dateTime": "2025-08-01T06:10:51Z",
+      "platform": "Mobile",
+      "contractType": "Futures",
+      "asset": "XAUUSD",
+      "commission": 28.42
+    },
+    {
+      "customerId": "C-100069",
+      "dateTime": "2025-07-23T11:30:57Z",
+      "platform": "dTrader",
+      "contractType": "Accumulators",
+      "asset": "EUR/USD",
+      "commission": 126.02
+    },
+    {
+      "customerId": "C-100009",
+      "dateTime": "2025-01-03T11:30:05Z",
+      "platform": "dTrader",
+      "contractType": "Accumulators",
+      "asset": "XAUUSD",
+      "commission": 21.49
+    },
+    {
+      "customerId": "C-100080",
+      "dateTime": "2025-10-02T15:17:53Z",
+      "platform": "Mobile",
+      "contractType": "CFD",
+      "asset": "AAPL",
+      "commission": 2.36
+    },
+    {
+      "customerId": "C-100064",
+      "dateTime": "2025-05-25T22:28:57Z",
+      "platform": "cTrader",
+      "contractType": "CFD",
+      "asset": "EUR/USD",
+      "commission": 93.06
+    },
+    {
+      "customerId": "C-100085",
+      "dateTime": "2025-07-07T15:47:20Z",
+      "platform": "DerivX",
+      "contractType": "CFD",
+      "asset": "TSLA",
+      "commission": 73.69
+    },
+    {
+      "customerId": "C-100000",
+      "dateTime": "2025-08-03T05:41:26Z",
+      "platform": "DerivX",
+      "contractType": "CFD",
+      "asset": "XAUUSD",
+      "commission": 2.77
+    },
+    {
+      "customerId": "C-100067",
+      "dateTime": "2025-07-28T01:26:27Z",
+      "platform": "dTrader",
+      "contractType": "Turbos",
+      "asset": "BTC-USD",
+      "commission": 3.55
+    },
+    {
+      "customerId": "C-100089",
+      "dateTime": "2025-03-11T14:53:17Z",
+      "platform": "dTrader",
+      "contractType": "Multipliers",
+      "asset": "EUR/USD",
+      "commission": 137.79
+    },
+    {
+      "customerId": "C-100067",
+      "dateTime": "2025-03-16T12:56:11Z",
+      "platform": "Mobile",
+      "contractType": "CFD",
+      "asset": "ETH-USD",
+      "commission": 79.44
+    },
+    {
+      "customerId": "C-100045",
+      "dateTime": "2025-06-04T03:20:34Z",
+      "platform": "MT5",
+      "contractType": "CFD",
+      "asset": "EUR/USD",
+      "commission": 56.58
+    },
+    {
+      "customerId": "C-100051",
+      "dateTime": "2025-08-08T10:12:07Z",
+      "platform": "cTrader",
+      "contractType": "CFD",
+      "asset": "AAPL",
+      "commission": 148.54
+    }
+  ],
+  "countries": [
+    {
+      "country": "United Kingdom",
+      "iso2": "GB",
+      "numClients": 42,
+      "totalDeposits": 312000,
+      "avgCommissionPerClient": 92.5
+    },
+    {
+      "country": "Portugal",
+      "iso2": "PT",
+      "numClients": 18,
+      "totalDeposits": 154000,
+      "avgCommissionPerClient": 110.2
+    },
+    {
+      "country": "India",
+      "iso2": "IN",
+      "numClients": 65,
+      "totalDeposits": 205500,
+      "avgCommissionPerClient": 47.8
+    },
+    {
+      "country": "Algeria",
+      "iso2": "DZ",
+      "numClients": 12,
+      "totalDeposits": 85000,
+      "avgCommissionPerClient": 78.3
+    },
+    {
+      "country": "Angola",
+      "iso2": "AO",
+      "numClients": 8,
+      "totalDeposits": 45000,
+      "avgCommissionPerClient": 65.2
+    },
+    {
+      "country": "Argentina",
+      "iso2": "AR",
+      "numClients": 25,
+      "totalDeposits": 180000,
+      "avgCommissionPerClient": 95.7
+    },
+    {
+      "country": "Armenia",
+      "iso2": "AM",
+      "numClients": 5,
+      "totalDeposits": 25000,
+      "avgCommissionPerClient": 45.8
+    },
+    {
+      "country": "Azerbaijan",
+      "iso2": "AZ",
+      "numClients": 7,
+      "totalDeposits": 35000,
+      "avgCommissionPerClient": 52.1
+    },
+    {
+      "country": "Bahrain",
+      "iso2": "BH",
+      "numClients": 15,
+      "totalDeposits": 120000,
+      "avgCommissionPerClient": 88.9
+    },
+    {
+      "country": "Bangladesh",
+      "iso2": "BD",
+      "numClients": 35,
+      "totalDeposits": 125000,
+      "avgCommissionPerClient": 38.4
+    },
+    {
+      "country": "Benin",
+      "iso2": "BJ",
+      "numClients": 3,
+      "totalDeposits": 15000,
+      "avgCommissionPerClient": 42.6
+    },
+    {
+      "country": "Bolivia",
+      "iso2": "BO",
+      "numClients": 9,
+      "totalDeposits": 40000,
+      "avgCommissionPerClient": 58.7
+    },
+    {
+      "country": "Botswana",
+      "iso2": "BW",
+      "numClients": 6,
+      "totalDeposits": 30000,
+      "avgCommissionPerClient": 48.3
+    },
+    {
+      "country": "Brazil",
+      "iso2": "BR",
+      "numClients": 45,
+      "totalDeposits": 280000,
+      "avgCommissionPerClient": 72.5
+    },
+    {
+      "country": "Brunei",
+      "iso2": "BN",
+      "numClients": 4,
+      "totalDeposits": 20000,
+      "avgCommissionPerClient": 55.2
+    },
+    {
+      "country": "Burkina Faso",
+      "iso2": "BF",
+      "numClients": 2,
+      "totalDeposits": 8000,
+      "avgCommissionPerClient": 35.1
+    },
+    {
+      "country": "Burundi",
+      "iso2": "BI",
+      "numClients": 1,
+      "totalDeposits": 5000,
+      "avgCommissionPerClient": 28.9
+    },
+    {
+      "country": "Cambodia",
+      "iso2": "KH",
+      "numClients": 8,
+      "totalDeposits": 35000,
+      "avgCommissionPerClient": 41.7
+    },
+    {
+      "country": "Cameroon",
+      "iso2": "CM",
+      "numClients": 6,
+      "totalDeposits": 25000,
+      "avgCommissionPerClient": 39.8
+    },
+    {
+      "country": "Cape Verde",
+      "iso2": "CV",
+      "numClients": 2,
+      "totalDeposits": 10000,
+      "avgCommissionPerClient": 33.4
+    },
+    {
+      "country": "Chile",
+      "iso2": "CL",
+      "numClients": 18,
+      "totalDeposits": 95000,
+      "avgCommissionPerClient": 68.2
+    },
+    {
+      "country": "China",
+      "iso2": "CN",
+      "numClients": 85,
+      "totalDeposits": 450000,
+      "avgCommissionPerClient": 82.1
+    },
+    {
+      "country": "Colombia",
+      "iso2": "CO",
+      "numClients": 22,
+      "totalDeposits": 140000,
+      "avgCommissionPerClient": 75.6
+    },
+    {
+      "country": "Congo",
+      "iso2": "CG",
+      "numClients": 4,
+      "totalDeposits": 18000,
+      "avgCommissionPerClient": 44.2
+    },
+    {
+      "country": "Costa Rica",
+      "iso2": "CR",
+      "numClients": 12,
+      "totalDeposits": 65000,
+      "avgCommissionPerClient": 61.8
+    },
+    {
+      "country": "Cote D'Ivoire",
+      "iso2": "CI",
+      "numClients": 5,
+      "totalDeposits": 22000,
+      "avgCommissionPerClient": 37.5
+    },
+    {
+      "country": "Democratic Republic of Congo",
+      "iso2": "CD",
+      "numClients": 3,
+      "totalDeposits": 12000,
+      "avgCommissionPerClient": 31.2
+    },
+    {
+      "country": "Dominican Republic",
+      "iso2": "DO",
+      "numClients": 14,
+      "totalDeposits": 75000,
+      "avgCommissionPerClient": 59.4
+    },
+    {
+      "country": "Ecuador",
+      "iso2": "EC",
+      "numClients": 11,
+      "totalDeposits": 55000,
+      "avgCommissionPerClient": 53.7
+    },
+    {
+      "country": "Egypt",
+      "iso2": "EG",
+      "numClients": 28,
+      "totalDeposits": 165000,
+      "avgCommissionPerClient": 71.3
+    },
+    {
+      "country": "El Salvador",
+      "iso2": "SV",
+      "numClients": 7,
+      "totalDeposits": 32000,
+      "avgCommissionPerClient": 46.8
+    },
+    {
+      "country": "Eswatini",
+      "iso2": "SZ",
+      "numClients": 1,
+      "totalDeposits": 6000,
+      "avgCommissionPerClient": 29.5
+    },
+    {
+      "country": "Ethiopia",
+      "iso2": "ET",
+      "numClients": 9,
+      "totalDeposits": 38000,
+      "avgCommissionPerClient": 42.1
+    },
+    {
+      "country": "Gambia",
+      "iso2": "GM",
+      "numClients": 2,
+      "totalDeposits": 9000,
+      "avgCommissionPerClient": 34.7
+    },
+    {
+      "country": "Georgia",
+      "iso2": "GE",
+      "numClients": 6,
+      "totalDeposits": 28000,
+      "avgCommissionPerClient": 48.9
+    },
+    {
+      "country": "Ghana",
+      "iso2": "GH",
+      "numClients": 8,
+      "totalDeposits": 36000,
+      "avgCommissionPerClient": 45.3
+    },
+    {
+      "country": "Guatemala",
+      "iso2": "GT",
+      "numClients": 10,
+      "totalDeposits": 48000,
+      "avgCommissionPerClient": 51.6
+    },
+    {
+      "country": "Guinea",
+      "iso2": "GN",
+      "numClients": 3,
+      "totalDeposits": 14000,
+      "avgCommissionPerClient": 36.8
+    },
+    {
+      "country": "Honduras",
+      "iso2": "HN",
+      "numClients": 6,
+      "totalDeposits": 26000,
+      "avgCommissionPerClient": 43.2
+    },
+    {
+      "country": "Indonesia",
+      "iso2": "ID",
+      "numClients": 38,
+      "totalDeposits": 195000,
+      "avgCommissionPerClient": 58.7
+    },
+    {
+      "country": "Iran",
+      "iso2": "IR",
+      "numClients": 15,
+      "totalDeposits": 85000,
+      "avgCommissionPerClient": 62.4
+    },
+    {
+      "country": "Iraq",
+      "iso2": "IQ",
+      "numClients": 8,
+      "totalDeposits": 42000,
+      "avgCommissionPerClient": 49.1
+    },
+    {
+      "country": "Jamaica",
+      "iso2": "JM",
+      "numClients": 7,
+      "totalDeposits": 33000,
+      "avgCommissionPerClient": 47.5
+    },
+    {
+      "country": "Japan",
+      "iso2": "JP",
+      "numClients": 52,
+      "totalDeposits": 320000,
+      "avgCommissionPerClient": 89.3
+    },
+    {
+      "country": "Kazakhstan",
+      "iso2": "KZ",
+      "numClients": 12,
+      "totalDeposits": 68000,
+      "avgCommissionPerClient": 56.8
+    },
+    {
+      "country": "Kenya",
+      "iso2": "KE",
+      "numClients": 11,
+      "totalDeposits": 52000,
+      "avgCommissionPerClient": 48.7
+    },
+    {
+      "country": "Kuwait",
+      "iso2": "KW",
+      "numClients": 18,
+      "totalDeposits": 125000,
+      "avgCommissionPerClient": 85.2
+    },
+    {
+      "country": "Kyrgyzstan",
+      "iso2": "KG",
+      "numClients": 4,
+      "totalDeposits": 19000,
+      "avgCommissionPerClient": 41.3
+    },
+    {
+      "country": "Laos",
+      "iso2": "LA",
+      "numClients": 3,
+      "totalDeposits": 13000,
+      "avgCommissionPerClient": 38.6
+    },
+    {
+      "country": "Lesotho",
+      "iso2": "LS",
+      "numClients": 1,
+      "totalDeposits": 5000,
+      "avgCommissionPerClient": 27.8
+    },
+    {
+      "country": "Liberia",
+      "iso2": "LR",
+      "numClients": 2,
+      "totalDeposits": 8000,
+      "avgCommissionPerClient": 32.4
+    },
+    {
+      "country": "Madagascar",
+      "iso2": "MG",
+      "numClients": 4,
+      "totalDeposits": 16000,
+      "avgCommissionPerClient": 35.9
+    },
+    {
+      "country": "Malawi",
+      "iso2": "MW",
+      "numClients": 2,
+      "totalDeposits": 7000,
+      "avgCommissionPerClient": 30.1
+    },
+    {
+      "country": "Mali",
+      "iso2": "ML",
+      "numClients": 3,
+      "totalDeposits": 11000,
+      "avgCommissionPerClient": 33.7
+    },
+    {
+      "country": "Mexico",
+      "iso2": "MX",
+      "numClients": 32,
+      "totalDeposits": 185000,
+      "avgCommissionPerClient": 78.4
+    },
+    {
+      "country": "Moldova",
+      "iso2": "MD",
+      "numClients": 5,
+      "totalDeposits": 22000,
+      "avgCommissionPerClient": 44.8
+    },
+    {
+      "country": "Mongolia",
+      "iso2": "MN",
+      "numClients": 4,
+      "totalDeposits": 18000,
+      "avgCommissionPerClient": 40.2
+    },
+    {
+      "country": "Morocco",
+      "iso2": "MA",
+      "numClients": 16,
+      "totalDeposits": 88000,
+      "avgCommissionPerClient": 65.7
+    },
+    {
+      "country": "Mozambique",
+      "iso2": "MZ",
+      "numClients": 3,
+      "totalDeposits": 12000,
+      "avgCommissionPerClient": 36.4
+    },
+    {
+      "country": "Myanmar",
+      "iso2": "MM",
+      "numClients": 6,
+      "totalDeposits": 25000,
+      "avgCommissionPerClient": 39.8
+    },
+    {
+      "country": "Namibia",
+      "iso2": "NA",
+      "numClients": 3,
+      "totalDeposits": 14000,
+      "avgCommissionPerClient": 37.2
+    },
+    {
+      "country": "Nepal",
+      "iso2": "NP",
+      "numClients": 7,
+      "totalDeposits": 30000,
+      "avgCommissionPerClient": 42.6
+    },
+    {
+      "country": "Nicaragua",
+      "iso2": "NI",
+      "numClients": 5,
+      "totalDeposits": 20000,
+      "avgCommissionPerClient": 40.8
+    },
+    {
+      "country": "Nigeria",
+      "iso2": "NG",
+      "numClients": 25,
+      "totalDeposits": 135000,
+      "avgCommissionPerClient": 68.9
+    },
+    {
+      "country": "North Korea",
+      "iso2": "KP",
+      "numClients": 1,
+      "totalDeposits": 3000,
+      "avgCommissionPerClient": 25.0
+    },
+    {
+      "country": "Oman",
+      "iso2": "OM",
+      "numClients": 12,
+      "totalDeposits": 75000,
+      "avgCommissionPerClient": 72.4
+    },
+    {
+      "country": "Pakistan",
+      "iso2": "PK",
+      "numClients": 22,
+      "totalDeposits": 115000,
+      "avgCommissionPerClient": 58.3
+    },
+    {
+      "country": "Panama",
+      "iso2": "PA",
+      "numClients": 9,
+      "totalDeposits": 45000,
+      "avgCommissionPerClient": 54.7
+    },
+    {
+      "country": "Peru",
+      "iso2": "PE",
+      "numClients": 15,
+      "totalDeposits": 78000,
+      "avgCommissionPerClient": 61.2
+    },
+    {
+      "country": "Philippines",
+      "iso2": "PH",
+      "numClients": 28,
+      "totalDeposits": 145000,
+      "avgCommissionPerClient": 55.8
+    },
+    {
+      "country": "Qatar",
+      "iso2": "QA",
+      "numClients": 14,
+      "totalDeposits": 95000,
+      "avgCommissionPerClient": 88.6
+    },
+    {
+      "country": "Saudi Arabia",
+      "iso2": "SA",
+      "numClients": 35,
+      "totalDeposits": 220000,
+      "avgCommissionPerClient": 95.4
+    },
+    {
+      "country": "Sierra Leone",
+      "iso2": "SL",
+      "numClients": 2,
+      "totalDeposits": 8000,
+      "avgCommissionPerClient": 31.5
+    },
+    {
+      "country": "Singapore",
+      "iso2": "SG",
+      "numClients": 22,
+      "totalDeposits": 165000,
+      "avgCommissionPerClient": 92.8
+    },
+    {
+      "country": "Somalia",
+      "iso2": "SO",
+      "numClients": 1,
+      "totalDeposits": 4000,
+      "avgCommissionPerClient": 26.3
+    },
+    {
+      "country": "Somaliland",
+      "iso2": "SO",
+      "numClients": 1,
+      "totalDeposits": 3000,
+      "avgCommissionPerClient": 24.8
+    },
+    {
+      "country": "South Africa",
+      "iso2": "ZA",
+      "numClients": 18,
+      "totalDeposits": 105000,
+      "avgCommissionPerClient": 72.1
+    },
+    {
+      "country": "South Korea",
+      "iso2": "KR",
+      "numClients": 28,
+      "totalDeposits": 185000,
+      "avgCommissionPerClient": 85.7
+    },
+    {
+      "country": "South Sudan",
+      "iso2": "SS",
+      "numClients": 1,
+      "totalDeposits": 5000,
+      "avgCommissionPerClient": 28.2
+    },
+    {
+      "country": "Sri Lanka",
+      "iso2": "LK",
+      "numClients": 8,
+      "totalDeposits": 38000,
+      "avgCommissionPerClient": 46.4
+    },
+    {
+      "country": "Syria",
+      "iso2": "SY",
+      "numClients": 2,
+      "totalDeposits": 9000,
+      "avgCommissionPerClient": 29.7
+    },
+    {
+      "country": "Taiwan",
+      "iso2": "TW",
+      "numClients": 15,
+      "totalDeposits": 95000,
+      "avgCommissionPerClient": 78.9
+    },
+    {
+      "country": "Tanzania",
+      "iso2": "TZ",
+      "numClients": 6,
+      "totalDeposits": 28000,
+      "avgCommissionPerClient": 44.2
+    },
+    {
+      "country": "Thailand",
+      "iso2": "TH",
+      "numClients": 19,
+      "totalDeposits": 108000,
+      "avgCommissionPerClient": 68.5
+    },
+    {
+      "country": "Togo",
+      "iso2": "TG",
+      "numClients": 2,
+      "totalDeposits": 7000,
+      "avgCommissionPerClient": 32.1
+    },
+    {
+      "country": "Tunisia",
+      "iso2": "TN",
+      "numClients": 8,
+      "totalDeposits": 42000,
+      "avgCommissionPerClient": 52.8
+    },
+    {
+      "country": "Turkey",
+      "iso2": "TR",
+      "numClients": 25,
+      "totalDeposits": 145000,
+      "avgCommissionPerClient": 75.3
+    },
+    {
+      "country": "Uganda",
+      "iso2": "UG",
+      "numClients": 4,
+      "totalDeposits": 18000,
+      "avgCommissionPerClient": 38.7
+    },
+    {
+      "country": "Uruguay",
+      "iso2": "UY",
+      "numClients": 7,
+      "totalDeposits": 35000,
+      "avgCommissionPerClient": 51.4
+    },
+    {
+      "country": "Uzbekistan",
+      "iso2": "UZ",
+      "numClients": 5,
+      "totalDeposits": 22000,
+      "avgCommissionPerClient": 43.6
+    },
+    {
+      "country": "Vietnam",
+      "iso2": "VN",
+      "numClients": 16,
+      "totalDeposits": 85000,
+      "avgCommissionPerClient": 59.8
+    },
+    {
+      "country": "Zambia",
+      "iso2": "ZM",
+      "numClients": 3,
+      "totalDeposits": 13000,
+      "avgCommissionPerClient": 36.9
+    },
+    {
+      "country": "Zimbabwe",
+      "iso2": "ZW",
+      "numClients": 2,
+      "totalDeposits": 8000,
+      "avgCommissionPerClient": 33.2
+    }
+  ],
+  "partners": [
+    {
+      "partnerId": "P-0001",
+      "name": "Apex Affiliates",
+      "tier": "Gold",
+      "joinDate": "2022-07-10",
+      "website": "https://apex.example.com",
+      "contact": "ops@apex.example.com"
+    },
+    {
+      "partnerId": "P-0002",
+      "name": "BrightReach Media",
+      "tier": "Silver",
+      "joinDate": "2023-02-03",
+      "website": "https://brightreach.example.com",
+      "contact": "hello@brightreach.example.com"
+    }
+  ],
+  "platformContractTypes": [
+    {
+      "platform": "MT5",
+      "contractTypes": [
+        "CFD"
+      ]
+    },
+    {
+      "platform": "cTrader",
+      "contractTypes": [
+        "CFD"
+      ]
+    },
+    {
+      "platform": "DerivX",
+      "contractTypes": [
+        "CFD"
+      ]
+    },
+    {
+      "platform": "dTrader",
+      "contractTypes": [
+        "Accumulators",
+        "Vanillas",
+        "Turbos",
+        "Multipliers"
+      ]
+    }
+  ],
+  "deposits": [
+    {
+      "customerId": "C-100028",
+      "dateTime": "2025-04-27T11:57:58Z",
+      "value": 3423.37
+    },
+    {
+      "customerId": "C-100010",
+      "dateTime": "2025-09-11T21:15:30Z",
+      "value": 4958.46
+    },
+    {
+      "customerId": "C-100083",
+      "dateTime": "2025-01-13T07:19:15Z",
+      "value": 476.57
+    },
+    {
+      "customerId": "C-100048",
+      "dateTime": "2025-05-27T11:28:30Z",
+      "value": 2767.98
+    },
+    {
+      "customerId": "C-100007",
+      "dateTime": "2025-09-05T06:55:20Z",
+      "value": 57.16
+    },
+    {
+      "customerId": "C-100021",
+      "dateTime": "2025-02-02T02:41:25Z",
+      "value": 2504.29
+    },
+    {
+      "customerId": "C-100055",
+      "dateTime": "2025-09-08T10:58:16Z",
+      "value": 3924.04
+    },
+    {
+      "customerId": "C-100072",
+      "dateTime": "2025-02-07T00:50:12Z",
+      "value": 4475.01
+    },
+    {
+      "customerId": "C-100005",
+      "dateTime": "2025-03-31T05:34:44Z",
+      "value": 1064.97
+    },
+    {
+      "customerId": "C-100088",
+      "dateTime": "2025-08-09T02:48:40Z",
+      "value": 2382.75
+    },
+    {
+      "customerId": "C-100005",
+      "dateTime": "2025-01-29T20:58:26Z",
+      "value": 3425.3
+    },
+    {
+      "customerId": "C-100035",
+      "dateTime": "2025-07-30T21:24:46Z",
+      "value": 2821.91
+    },
+    {
+      "customerId": "C-100004",
+      "dateTime": "2025-03-11T15:42:18Z",
+      "value": 4644.54
+    },
+    {
+      "customerId": "C-100040",
+      "dateTime": "2025-01-07T01:56:38Z",
+      "value": 4807.73
+    },
+    {
+      "customerId": "C-100075",
+      "dateTime": "2025-02-25T23:57:45Z",
+      "value": 3763.75
+    },
+    {
+      "customerId": "C-100091",
+      "dateTime": "2025-06-04T16:23:16Z",
+      "value": 4645.09
+    },
+    {
+      "customerId": "C-100038",
+      "dateTime": "2025-03-05T02:08:45Z",
+      "value": 2824.15
+    },
+    {
+      "customerId": "C-100072",
+      "dateTime": "2025-06-01T03:12:08Z",
+      "value": 3388.4
+    },
+    {
+      "customerId": "C-100069",
+      "dateTime": "2025-05-09T19:56:46Z",
+      "value": 1925.39
+    },
+    {
+      "customerId": "C-100094",
+      "dateTime": "2025-02-24T08:26:02Z",
+      "value": 3954.59
+    },
+    {
+      "customerId": "C-100088",
+      "dateTime": "2025-10-09T05:41:37Z",
+      "value": 401.35
+    },
+    {
+      "customerId": "C-100095",
+      "dateTime": "2025-05-15T07:38:39Z",
+      "value": 277.95
+    },
+    {
+      "customerId": "C-100055",
+      "dateTime": "2025-04-01T03:44:20Z",
+      "value": 4194.99
+    },
+    {
+      "customerId": "C-100043",
+      "dateTime": "2025-08-24T00:34:53Z",
+      "value": 3847.34
+    },
+    {
+      "customerId": "C-100076",
+      "dateTime": "2025-06-04T01:32:25Z",
+      "value": 4844.91
+    },
+    {
+      "customerId": "C-100041",
+      "dateTime": "2025-01-12T12:07:52Z",
+      "value": 3174.27
+    },
+    {
+      "customerId": "C-100057",
+      "dateTime": "2025-07-10T12:45:20Z",
+      "value": 1148.41
+    },
+    {
+      "customerId": "C-100070",
+      "dateTime": "2025-05-26T19:13:59Z",
+      "value": 2164.92
+    },
+    {
+      "customerId": "C-100087",
+      "dateTime": "2025-08-16T12:45:06Z",
+      "value": 3306.75
+    },
+    {
+      "customerId": "C-100010",
+      "dateTime": "2025-08-29T05:55:04Z",
+      "value": 1483.94
+    },
+    {
+      "customerId": "C-100031",
+      "dateTime": "2025-10-04T22:39:11Z",
+      "value": 376.8
+    },
+    {
+      "customerId": "C-100034",
+      "dateTime": "2025-03-01T21:26:36Z",
+      "value": 1906.2
+    },
+    {
+      "customerId": "C-100081",
+      "dateTime": "2025-03-01T21:57:53Z",
+      "value": 3700.88
+    },
+    {
+      "customerId": "C-100040",
+      "dateTime": "2025-05-21T01:58:11Z",
+      "value": 541.69
+    },
+    {
+      "customerId": "C-100000",
+      "dateTime": "2025-04-30T17:15:39Z",
+      "value": 2229.23
+    },
+    {
+      "customerId": "C-100097",
+      "dateTime": "2025-04-15T18:24:19Z",
+      "value": 520.13
+    },
+    {
+      "customerId": "C-100011",
+      "dateTime": "2025-03-14T18:37:04Z",
+      "value": 2160.59
+    },
+    {
+      "customerId": "C-100071",
+      "dateTime": "2025-08-04T10:33:05Z",
+      "value": 2567.08
+    },
+    {
+      "customerId": "C-100013",
+      "dateTime": "2025-01-11T04:46:43Z",
+      "value": 457.2
+    },
+    {
+      "customerId": "C-100070",
+      "dateTime": "2025-02-06T03:25:18Z",
+      "value": 2988.65
+    },
+    {
+      "customerId": "C-100041",
+      "dateTime": "2025-05-30T14:40:39Z",
+      "value": 71.58
+    },
+    {
+      "customerId": "C-100052",
+      "dateTime": "2025-05-31T14:33:13Z",
+      "value": 3898.05
+    },
+    {
+      "customerId": "C-100092",
+      "dateTime": "2025-08-06T07:15:30Z",
+      "value": 4526.99
+    },
+    {
+      "customerId": "C-100031",
+      "dateTime": "2025-08-11T03:03:27Z",
+      "value": 2610.31
+    },
+    {
+      "customerId": "C-100087",
+      "dateTime": "2025-05-28T20:40:46Z",
+      "value": 855.81
+    },
+    {
+      "customerId": "C-100034",
+      "dateTime": "2025-04-27T22:44:48Z",
+      "value": 1349.35
+    },
+    {
+      "customerId": "C-100018",
+      "dateTime": "2025-01-25T13:41:33Z",
+      "value": 844.36
+    },
+    {
+      "customerId": "C-100035",
+      "dateTime": "2025-06-13T12:57:29Z",
+      "value": 1505.76
+    },
+    {
+      "customerId": "C-100009",
+      "dateTime": "2025-05-21T05:55:41Z",
+      "value": 1265.98
+    },
+    {
+      "customerId": "C-100031",
+      "dateTime": "2025-10-07T23:16:11Z",
+      "value": 3128.92
+    },
+    {
+      "customerId": "C-100076",
+      "dateTime": "2025-08-28T11:46:11Z",
+      "value": 985.79
+    },
+    {
+      "customerId": "C-100013",
+      "dateTime": "2025-02-22T14:51:14Z",
+      "value": 1530.24
+    },
+    {
+      "customerId": "C-100050",
+      "dateTime": "2025-05-10T00:29:19Z",
+      "value": 4209.65
+    },
+    {
+      "customerId": "C-100048",
+      "dateTime": "2025-05-08T23:33:05Z",
+      "value": 2206.71
+    },
+    {
+      "customerId": "C-100055",
+      "dateTime": "2025-09-10T20:06:11Z",
+      "value": 4871.38
+    },
+    {
+      "customerId": "C-100017",
+      "dateTime": "2025-04-27T16:15:35Z",
+      "value": 1610.12
+    },
+    {
+      "customerId": "C-100088",
+      "dateTime": "2025-03-20T00:04:17Z",
+      "value": 2400.26
+    },
+    {
+      "customerId": "C-100022",
+      "dateTime": "2025-06-04T15:51:42Z",
+      "value": 4843.94
+    },
+    {
+      "customerId": "C-100037",
+      "dateTime": "2025-09-27T21:28:33Z",
+      "value": 3168.18
+    },
+    {
+      "customerId": "C-100073",
+      "dateTime": "2025-04-05T03:33:29Z",
+      "value": 1636.17
+    },
+    {
+      "customerId": "C-100035",
+      "dateTime": "2025-06-02T14:25:15Z",
+      "value": 1831.43
+    },
+    {
+      "customerId": "C-100072",
+      "dateTime": "2025-03-19T14:16:17Z",
+      "value": 2965.21
+    },
+    {
+      "customerId": "C-100069",
+      "dateTime": "2025-03-11T21:02:35Z",
+      "value": 3411.75
+    },
+    {
+      "customerId": "C-100070",
+      "dateTime": "2025-01-11T10:52:34Z",
+      "value": 4765.49
+    },
+    {
+      "customerId": "C-100059",
+      "dateTime": "2025-10-03T02:27:34Z",
+      "value": 1056.15
+    },
+    {
+      "customerId": "C-100037",
+      "dateTime": "2025-09-27T01:41:34Z",
+      "value": 355.1
+    },
+    {
+      "customerId": "C-100052",
+      "dateTime": "2025-09-19T08:36:22Z",
+      "value": 2501.52
+    },
+    {
+      "customerId": "C-100081",
+      "dateTime": "2025-04-28T14:36:17Z",
+      "value": 1217.69
+    },
+    {
+      "customerId": "C-100084",
+      "dateTime": "2025-03-01T20:43:08Z",
+      "value": 3579.03
+    },
+    {
+      "customerId": "C-100048",
+      "dateTime": "2025-01-29T17:24:18Z",
+      "value": 2250.84
+    },
+    {
+      "customerId": "C-100076",
+      "dateTime": "2025-07-06T02:47:28Z",
+      "value": 2915.4
+    },
+    {
+      "customerId": "C-100068",
+      "dateTime": "2025-07-16T17:58:19Z",
+      "value": 4618.24
+    },
+    {
+      "customerId": "C-100088",
+      "dateTime": "2025-06-12T10:50:42Z",
+      "value": 2722.79
+    },
+    {
+      "customerId": "C-100046",
+      "dateTime": "2025-09-30T11:42:19Z",
+      "value": 4478.55
+    },
+    {
+      "customerId": "C-100068",
+      "dateTime": "2025-08-19T14:48:10Z",
+      "value": 3194.52
+    },
+    {
+      "customerId": "C-100010",
+      "dateTime": "2025-02-12T11:23:48Z",
+      "value": 3847.08
+    },
+    {
+      "customerId": "C-100084",
+      "dateTime": "2025-09-16T03:23:45Z",
+      "value": 1781.49
+    },
+    {
+      "customerId": "C-100082",
+      "dateTime": "2025-08-26T22:34:19Z",
+      "value": 231.04
+    },
+    {
+      "customerId": "C-100082",
+      "dateTime": "2025-09-21T02:29:44Z",
+      "value": 3237.25
+    },
+    {
+      "customerId": "C-100096",
+      "dateTime": "2025-05-09T18:42:18Z",
+      "value": 4828.93
+    },
+    {
+      "customerId": "C-100055",
+      "dateTime": "2025-02-11T03:28:29Z",
+      "value": 62.63
+    },
+    {
+      "customerId": "C-100033",
+      "dateTime": "2025-03-28T05:12:00Z",
+      "value": 2558.27
+    },
+    {
+      "customerId": "C-100066",
+      "dateTime": "2025-08-05T16:52:32Z",
+      "value": 2906.79
+    },
+    {
+      "customerId": "C-100073",
+      "dateTime": "2025-03-27T20:09:54Z",
+      "value": 2234.43
+    },
+    {
+      "customerId": "C-100050",
+      "dateTime": "2025-06-29T20:03:42Z",
+      "value": 3863.99
+    },
+    {
+      "customerId": "C-100075",
+      "dateTime": "2025-09-26T03:20:31Z",
+      "value": 2507.32
+    },
+    {
+      "customerId": "C-100044",
+      "dateTime": "2025-01-10T12:56:25Z",
+      "value": 2419.03
+    },
+    {
+      "customerId": "C-100037",
+      "dateTime": "2025-06-11T13:10:19Z",
+      "value": 4603.53
+    },
+    {
+      "customerId": "C-100010",
+      "dateTime": "2025-02-15T01:50:40Z",
+      "value": 4158.28
+    },
+    {
+      "customerId": "C-100093",
+      "dateTime": "2025-02-25T00:30:30Z",
+      "value": 1748.16
+    },
+    {
+      "customerId": "C-100043",
+      "dateTime": "2025-06-26T20:00:27Z",
+      "value": 3923.51
+    },
+    {
+      "customerId": "C-100066",
+      "dateTime": "2025-07-07T13:11:47Z",
+      "value": 1748.02
+    },
+    {
+      "customerId": "C-100012",
+      "dateTime": "2025-06-20T04:00:09Z",
+      "value": 3612.75
+    },
+    {
+      "customerId": "C-100057",
+      "dateTime": "2025-05-04T20:27:06Z",
+      "value": 345.2
+    },
+    {
+      "customerId": "C-100005",
+      "dateTime": "2025-10-04T00:56:25Z",
+      "value": 584.28
+    },
+    {
+      "customerId": "C-100043",
+      "dateTime": "2025-09-09T15:31:02Z",
+      "value": 555.72
+    },
+    {
+      "customerId": "C-100021",
+      "dateTime": "2025-04-05T17:26:00Z",
+      "value": 2584.81
+    },
+    {
+      "customerId": "C-100070",
+      "dateTime": "2025-03-04T04:34:22Z",
+      "value": 1661.64
+    },
+    {
+      "customerId": "C-100054",
+      "dateTime": "2025-06-29T10:39:24Z",
+      "value": 1166.96
+    },
+    {
+      "customerId": "C-100051",
+      "dateTime": "2025-09-02T13:47:29Z",
+      "value": 930.41
+    },
+    {
+      "customerId": "C-100081",
+      "dateTime": "2025-09-13T06:33:13Z",
+      "value": 2166.35
+    },
+    {
+      "customerId": "C-100003",
+      "dateTime": "2025-08-27T11:53:29Z",
+      "value": 4416.66
+    },
+    {
+      "customerId": "C-100057",
+      "dateTime": "2025-08-18T23:44:00Z",
+      "value": 2153.47
+    },
+    {
+      "customerId": "C-100000",
+      "dateTime": "2025-10-01T16:36:43Z",
+      "value": 1081.83
+    },
+    {
+      "customerId": "C-100035",
+      "dateTime": "2025-10-01T07:30:58Z",
+      "value": 4045.56
+    },
+    {
+      "customerId": "C-100008",
+      "dateTime": "2025-08-13T05:16:21Z",
+      "value": 517.74
+    },
+    {
+      "customerId": "C-100068",
+      "dateTime": "2025-03-14T14:35:31Z",
+      "value": 1835.31
+    },
+    {
+      "customerId": "C-100025",
+      "dateTime": "2025-06-27T16:40:44Z",
+      "value": 578.64
+    },
+    {
+      "customerId": "C-100085",
+      "dateTime": "2025-07-10T02:19:16Z",
+      "value": 2643.3
+    },
+    {
+      "customerId": "C-100081",
+      "dateTime": "2025-05-02T17:08:16Z",
+      "value": 2988.88
+    },
+    {
+      "customerId": "C-100078",
+      "dateTime": "2025-06-02T10:46:31Z",
+      "value": 2939.15
+    },
+    {
+      "customerId": "C-100044",
+      "dateTime": "2025-05-17T16:44:14Z",
+      "value": 4229.13
+    },
+    {
+      "customerId": "C-100079",
+      "dateTime": "2025-03-09T00:04:22Z",
+      "value": 4070.55
+    },
+    {
+      "customerId": "C-100090",
+      "dateTime": "2025-04-26T12:23:12Z",
+      "value": 4594.23
+    },
+    {
+      "customerId": "C-100075",
+      "dateTime": "2025-02-02T21:56:44Z",
+      "value": 3363.83
+    },
+    {
+      "customerId": "C-100040",
+      "dateTime": "2025-02-15T18:33:00Z",
+      "value": 1200.48
+    },
+    {
+      "customerId": "C-100014",
+      "dateTime": "2025-03-13T02:05:54Z",
+      "value": 1872.8
+    },
+    {
+      "customerId": "C-100018",
+      "dateTime": "2025-07-18T09:13:58Z",
+      "value": 1948.43
+    },
+    {
+      "customerId": "C-100076",
+      "dateTime": "2025-02-23T13:00:58Z",
+      "value": 2878.28
+    },
+    {
+      "customerId": "C-100054",
+      "dateTime": "2025-03-14T03:20:59Z",
+      "value": 2438.48
+    },
+    {
+      "customerId": "C-100068",
+      "dateTime": "2025-09-27T07:15:47Z",
+      "value": 4596.61
+    },
+    {
+      "customerId": "C-100022",
+      "dateTime": "2025-08-04T12:09:36Z",
+      "value": 842.66
+    },
+    {
+      "customerId": "C-100036",
+      "dateTime": "2025-02-24T11:39:30Z",
+      "value": 943.62
+    },
+    {
+      "customerId": "C-100057",
+      "dateTime": "2025-08-29T13:19:10Z",
+      "value": 277.52
+    },
+    {
+      "customerId": "C-100045",
+      "dateTime": "2025-01-04T17:19:26Z",
+      "value": 2428.2
+    },
+    {
+      "customerId": "C-100024",
+      "dateTime": "2025-05-30T02:37:08Z",
+      "value": 4819.51
+    },
+    {
+      "customerId": "C-100064",
+      "dateTime": "2025-09-11T15:03:04Z",
+      "value": 2479.9
+    },
+    {
+      "customerId": "C-100087",
+      "dateTime": "2025-07-10T23:13:02Z",
+      "value": 2084.0
+    },
+    {
+      "customerId": "C-100056",
+      "dateTime": "2025-07-09T19:00:34Z",
+      "value": 844.59
+    },
+    {
+      "customerId": "C-100072",
+      "dateTime": "2025-01-12T23:38:33Z",
+      "value": 3981.45
+    },
+    {
+      "customerId": "C-100028",
+      "dateTime": "2025-04-24T10:28:31Z",
+      "value": 173.15
+    },
+    {
+      "customerId": "C-100028",
+      "dateTime": "2025-07-28T18:52:31Z",
+      "value": 1450.46
+    },
+    {
+      "customerId": "C-100099",
+      "dateTime": "2025-06-27T14:32:39Z",
+      "value": 2832.6
+    },
+    {
+      "customerId": "C-100098",
+      "dateTime": "2025-07-12T08:39:17Z",
+      "value": 2753.13
+    },
+    {
+      "customerId": "C-100014",
+      "dateTime": "2025-08-11T10:04:54Z",
+      "value": 579.89
+    },
+    {
+      "customerId": "C-100099",
+      "dateTime": "2025-07-30T22:06:59Z",
+      "value": 4118.18
+    },
+    {
+      "customerId": "C-100046",
+      "dateTime": "2025-07-30T12:12:37Z",
+      "value": 4114.83
+    },
+    {
+      "customerId": "C-100005",
+      "dateTime": "2025-10-07T05:22:53Z",
+      "value": 2212.42
+    },
+    {
+      "customerId": "C-100027",
+      "dateTime": "2025-06-15T02:43:44Z",
+      "value": 521.06
+    },
+    {
+      "customerId": "C-100083",
+      "dateTime": "2025-04-07T03:09:43Z",
+      "value": 1495.57
+    },
+    {
+      "customerId": "C-100004",
+      "dateTime": "2025-06-24T15:48:33Z",
+      "value": 1321.45
+    },
+    {
+      "customerId": "C-100011",
+      "dateTime": "2025-06-20T12:25:41Z",
+      "value": 4327.8
+    },
+    {
+      "customerId": "C-100015",
+      "dateTime": "2025-04-03T00:29:50Z",
+      "value": 1057.29
+    },
+    {
+      "customerId": "C-100094",
+      "dateTime": "2025-08-17T07:50:52Z",
+      "value": 3448.78
+    },
+    {
+      "customerId": "C-100090",
+      "dateTime": "2025-08-26T00:03:08Z",
+      "value": 3167.53
+    },
+    {
+      "customerId": "C-100021",
+      "dateTime": "2025-08-28T06:56:43Z",
+      "value": 704.78
+    },
+    {
+      "customerId": "C-100026",
+      "dateTime": "2025-03-22T08:50:45Z",
+      "value": 4029.15
+    },
+    {
+      "customerId": "C-100072",
+      "dateTime": "2025-05-17T05:50:14Z",
+      "value": 2666.08
+    },
+    {
+      "customerId": "C-100076",
+      "dateTime": "2025-07-29T05:41:12Z",
+      "value": 850.2
+    },
+    {
+      "customerId": "C-100090",
+      "dateTime": "2025-04-24T15:33:11Z",
+      "value": 1453.77
+    },
+    {
+      "customerId": "C-100034",
+      "dateTime": "2025-07-19T18:41:42Z",
+      "value": 4927.59
+    },
+    {
+      "customerId": "C-100086",
+      "dateTime": "2025-02-06T23:33:46Z",
+      "value": 686.59
+    },
+    {
+      "customerId": "C-100096",
+      "dateTime": "2025-06-09T20:21:17Z",
+      "value": 4594.66
+    },
+    {
+      "customerId": "C-100035",
+      "dateTime": "2025-09-12T17:23:47Z",
+      "value": 643.17
+    },
+    {
+      "customerId": "C-100016",
+      "dateTime": "2025-04-07T23:09:38Z",
+      "value": 739.75
+    },
+    {
+      "customerId": "C-100041",
+      "dateTime": "2025-04-07T03:22:38Z",
+      "value": 3809.75
+    },
+    {
+      "customerId": "C-100086",
+      "dateTime": "2025-06-02T12:14:10Z",
+      "value": 2452.4
+    },
+    {
+      "customerId": "C-100073",
+      "dateTime": "2025-09-03T14:24:49Z",
+      "value": 1350.9
+    },
+    {
+      "customerId": "C-100053",
+      "dateTime": "2025-05-26T16:51:34Z",
+      "value": 2265.44
+    },
+    {
+      "customerId": "C-100081",
+      "dateTime": "2025-02-06T03:42:22Z",
+      "value": 2020.23
+    },
+    {
+      "customerId": "C-100095",
+      "dateTime": "2025-04-19T01:15:04Z",
+      "value": 3476.57
+    },
+    {
+      "customerId": "C-100047",
+      "dateTime": "2025-06-26T14:04:14Z",
+      "value": 4751.77
+    },
+    {
+      "customerId": "C-100041",
+      "dateTime": "2025-08-15T00:13:07Z",
+      "value": 22.34
+    },
+    {
+      "customerId": "C-100099",
+      "dateTime": "2025-02-06T04:08:35Z",
+      "value": 3657.35
+    },
+    {
+      "customerId": "C-100058",
+      "dateTime": "2025-09-04T13:08:33Z",
+      "value": 3324.08
+    },
+    {
+      "customerId": "C-100045",
+      "dateTime": "2025-01-25T14:17:05Z",
+      "value": 3980.43
+    },
+    {
+      "customerId": "C-100050",
+      "dateTime": "2025-03-26T14:19:19Z",
+      "value": 4840.96
+    },
+    {
+      "customerId": "C-100027",
+      "dateTime": "2025-07-12T03:04:39Z",
+      "value": 1350.0
+    },
+    {
+      "customerId": "C-100036",
+      "dateTime": "2025-05-12T04:06:22Z",
+      "value": 2741.08
+    },
+    {
+      "customerId": "C-100016",
+      "dateTime": "2025-08-08T20:49:36Z",
+      "value": 4263.59
+    },
+    {
+      "customerId": "C-100043",
+      "dateTime": "2025-09-23T01:50:42Z",
+      "value": 3813.65
+    },
+    {
+      "customerId": "C-100005",
+      "dateTime": "2025-02-08T16:06:13Z",
+      "value": 3134.64
+    },
+    {
+      "customerId": "C-100058",
+      "dateTime": "2025-01-07T07:45:11Z",
+      "value": 629.94
+    },
+    {
+      "customerId": "C-100020",
+      "dateTime": "2025-06-21T09:04:59Z",
+      "value": 2288.03
+    },
+    {
+      "customerId": "C-100054",
+      "dateTime": "2025-03-20T13:44:32Z",
+      "value": 4978.51
+    },
+    {
+      "customerId": "C-100016",
+      "dateTime": "2025-09-10T10:24:46Z",
+      "value": 1516.31
+    },
+    {
+      "customerId": "C-100035",
+      "dateTime": "2025-02-06T05:59:30Z",
+      "value": 3276.39
+    },
+    {
+      "customerId": "C-100032",
+      "dateTime": "2025-02-02T00:12:54Z",
+      "value": 1865.5
+    },
+    {
+      "customerId": "C-100083",
+      "dateTime": "2025-03-06T06:48:20Z",
+      "value": 268.42
+    },
+    {
+      "customerId": "C-100080",
+      "dateTime": "2025-04-29T15:33:09Z",
+      "value": 3632.68
+    },
+    {
+      "customerId": "C-100096",
+      "dateTime": "2025-04-01T22:22:43Z",
+      "value": 2151.86
+    },
+    {
+      "customerId": "C-100011",
+      "dateTime": "2025-10-01T06:56:28Z",
+      "value": 484.97
+    },
+    {
+      "customerId": "C-100027",
+      "dateTime": "2025-07-05T04:09:38Z",
+      "value": 398.91
+    },
+    {
+      "customerId": "C-100075",
+      "dateTime": "2025-03-29T20:15:05Z",
+      "value": 2602.03
+    },
+    {
+      "customerId": "C-100056",
+      "dateTime": "2025-01-04T14:33:38Z",
+      "value": 50.23
+    },
+    {
+      "customerId": "C-100043",
+      "dateTime": "2025-02-16T20:00:55Z",
+      "value": 4940.89
+    },
+    {
+      "customerId": "C-100054",
+      "dateTime": "2025-09-27T12:50:16Z",
+      "value": 669.55
+    },
+    {
+      "customerId": "C-100009",
+      "dateTime": "2025-03-30T21:56:22Z",
+      "value": 1921.52
+    },
+    {
+      "customerId": "C-100093",
+      "dateTime": "2025-02-09T18:41:25Z",
+      "value": 524.98
+    },
+    {
+      "customerId": "C-100047",
+      "dateTime": "2025-04-27T05:15:42Z",
+      "value": 694.28
+    },
+    {
+      "customerId": "C-100099",
+      "dateTime": "2025-02-21T17:00:46Z",
+      "value": 3211.46
+    },
+    {
+      "customerId": "C-100086",
+      "dateTime": "2025-02-25T11:29:13Z",
+      "value": 351.37
+    },
+    {
+      "customerId": "C-100072",
+      "dateTime": "2025-01-04T06:59:25Z",
+      "value": 3055.49
+    },
+    {
+      "customerId": "C-100021",
+      "dateTime": "2025-06-20T22:01:26Z",
+      "value": 1762.43
+    },
+    {
+      "customerId": "C-100027",
+      "dateTime": "2025-09-01T22:07:48Z",
+      "value": 3743.86
+    },
+    {
+      "customerId": "C-100052",
+      "dateTime": "2025-08-28T06:14:40Z",
+      "value": 3435.97
+    },
+    {
+      "customerId": "C-100027",
+      "dateTime": "2025-02-03T15:59:27Z",
+      "value": 4484.0
+    },
+    {
+      "customerId": "C-100017",
+      "dateTime": "2025-02-17T19:54:30Z",
+      "value": 2951.97
+    },
+    {
+      "customerId": "C-100049",
+      "dateTime": "2025-05-17T12:32:58Z",
+      "value": 4816.61
+    },
+    {
+      "customerId": "C-100040",
+      "dateTime": "2025-02-24T07:18:42Z",
+      "value": 1246.45
+    }
+  ],
+  "partnerTiers": [
+    {
+      "tier": "Bronze",
+      "range": "$0-$499.99",
+      "reward": "No reward"
+    },
+    {
+      "tier": "Silver",
+      "range": "$500-$999.99",
+      "reward": "4%"
+    },
+    {
+      "tier": "Gold",
+      "range": "$1,000-$4,999.99",
+      "reward": "6%"
+    },
+    {
+      "tier": "Platinum",
+      "range": "$5,000+",
+      "reward": "8%"
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Home • Partner Report</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:,">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="Home dashboard for partner report">
+  <script defer src="script.js"></script>
+  <style>body{opacity:0}html{background:#0f172a}</style>
+  <script>window.addEventListener('load',function(){document.body.style.opacity=1});</script>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo"></div>
+        <h1>Partner Report</h1>
+      </div>
+      <nav class="side-nav">
+        <a href="index.html"><span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 10l9-7 9 7v10a2 2 0 0 1-2 2h-4v-6H9v6H5a2 2 0 0 1-2-2V10z" stroke="currentColor" stroke-width="2"/></svg></span><span class="label">Home</span></a>
+        <a href="clients.html"><span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="2"/></svg></span><span class="label">Clients</span></a>
+        <a href="commissions.html"><span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 19h16M4 15l4-4 3 3 6-6" stroke="currentColor" stroke-width="2"/></svg></span><span class="label">Commissions</span></a>
+        <a href="master-partner.html"><span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3l7 4v6c0 5-7 8-7 8s-7-3-7-8V7l7-4z" stroke="currentColor" stroke-width="2"/></svg></span><span class="label">Master Partner</span></a>
+        <a href="events.html"><span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" stroke-width="2"/><path d="M16 3v4M8 3v4M3 11h18" stroke="currentColor" stroke-width="2"/></svg></span><span class="label">Events</span></a>
+        <a href="tiers-badges.html"><span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3l3 6 6 1-4.5 4.4L17 21l-5-2.6L7 21l1.5-6.6L4 10l6-1 2-6z" stroke="currentColor" stroke-width="2"/></svg></span><span class="label">Tiers &amp; Badges</span></a>
+        <a href="client-funnel.html"><span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 5h18l-7 8v5l-4 2v-7L3 5z" stroke="currentColor" stroke-width="2"/></svg></span><span class="label">Client Funnel</span></a>
+        <a href="country-analysis.html"><span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18" stroke="currentColor" stroke-width="2"/></svg></span><span class="label">Country Analysis</span></a>
+        <a href="sitemap.html"><span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M10 3h4v4h-4V3zM4 17h4v4H4v-4zm12 0h4v4h-4v-4zM12 7v4m0 0H7v6m5-6h5v6" stroke="currentColor" stroke-width="2"/></svg></span><span class="label">Sitemap</span></a>
+        <a href="database.html"><span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="5" rx="8" ry="3" stroke="currentColor" stroke-width="2"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6" stroke="currentColor" stroke-width="2"/></svg></span><span class="label">Database</span></a>
+      </nav>
+    </aside>
+    <div class="content">
+      <div class="container">
+        <main class="panel">
+      <h2 class="page-title">Home</h2>
+      <p class="page-subtitle">Overview of key partner metrics</p>
+
+          <div class="card filter-bar" style="margin-bottom:16px">
+            <label for="partnerSelect" class="muted" style="display:block; margin-bottom:8px">Select partner</label>
+            <select id="partnerSelect" style="width:100%; max-width:360px; padding:10px 12px; background:#0b1220; color:var(--text); border:1px solid rgba(148,163,184,0.3); border-radius:8px">
+              <option value="">All partners</option>
+            </select>
+            <div style="margin-top:8px">
+              <span class="muted">Tier: </span><span id="partner-tier-display" class="tier-tag">—</span>
+            </div>
+          </div>
+
+      <div class="grid">
+            <section class="card">
+              <h3>Lifetime</h3>
+              <div class="grid">
+                <section class="card">
+                  <h4 style="margin:0 0 6px 0">Commissions</h4>
+                  <p class="muted" id="metric-lt-comm">—</p>
+                </section>
+                <section class="card">
+                  <h4 style="margin:0 0 6px 0">Volume Traded</h4>
+                  <p class="muted" id="metric-lt-volume">—</p>
+                </section>
+                <section class="card">
+                  <h4 style="margin:0 0 6px 0">Deposits</h4>
+                  <p class="muted" id="metric-lt-deposits">—</p>
+                </section>
+                <section class="card">
+                  <h4 style="margin:0 0 6px 0">Clients</h4>
+                  <p class="muted" id="metric-lt-clients">—</p>
+                </section>
+              </div>
+            </section>
+      </div>
+
+          <div class="card" style="margin-top:16px; margin-bottom:16px">
+            <h3 style="margin-top:0">This Month</h3>
+            <div class="grid">
+              <section class="card">
+                <h4 style="margin:0 0 6px 0">Commissions</h4>
+                <p class="muted" id="metric-mtd-comm">—</p>
+              </section>
+              <section class="card">
+                <h4 style="margin:0 0 6px 0">Volume Traded</h4>
+                <p class="muted" id="metric-mtd-volume">—</p>
+              </section>
+              <section class="card">
+                <h4 style="margin:0 0 6px 0">Deposits</h4>
+                <p class="muted" id="metric-mtd-deposits">—</p>
+              </section>
+              <section class="card">
+                <h4 style="margin:0 0 6px 0">Clients</h4>
+                <p class="muted" id="metric-mtd-clients">—</p>
+              </section>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:16px">
+            <h3 style="margin-top:0">Commissions — Last 6 Months</h3>
+            <div id="chart-6mo-comm" class="card" style="padding:0; overflow:hidden"></div>
+          </div>
+
+          <div class="footer">v1.0 • Static template</div>
+        </main>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
+
