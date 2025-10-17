@@ -26,8 +26,7 @@
       select.removeChild(select.lastChild);
     }
     
-    fetch('database.json')
-      .then(function (r) { return r.json(); })
+    window.DataManager.load()
       .then(function (db) {
         var partners = Array.isArray(db.partners) ? db.partners : [];
         partners.forEach(function (p) {
@@ -119,17 +118,22 @@
     byId('metric-mtd-deposits').textContent = fmtCurrency(metrics.mtdDeposits);
     byId('metric-mtd-clients').textContent = fmtNumber(metrics.mtdClients);
     
-    // Update tier tag
+    // Update tier tag with proper styling
     var tierDisplay = byId('partner-tier-display');
     if (tierDisplay) {
       tierDisplay.textContent = metrics.partnerTier;
+      // Remove existing tier classes
+      tierDisplay.className = 'tier-tag';
+      // Add appropriate tier class
+      if (metrics.partnerTier && metrics.partnerTier !== '—') {
+        tierDisplay.classList.add(metrics.partnerTier.toLowerCase());
+      }
     }
   }
 
   function initHomeMetrics() {
     var select = document.getElementById('partnerSelect');
-    fetch('database.json')
-      .then(function (r) { return r.json(); })
+    window.DataManager.load()
       .then(function (db) {
         function update() {
           var partnerId = select ? select.value : '';
@@ -214,6 +218,19 @@
       label.setAttribute('text-anchor', 'middle');
       label.textContent = s.label;
       svg.appendChild(label);
+      
+      // Add value label on top of bar
+      if (s.value > 0) {
+        var valueLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        valueLabel.setAttribute('x', String(x + barWidth/2));
+        valueLabel.setAttribute('y', String(y - 5));
+        valueLabel.setAttribute('fill', '#e5e7eb');
+        valueLabel.setAttribute('font-size', '11');
+        valueLabel.setAttribute('text-anchor', 'middle');
+        valueLabel.setAttribute('font-weight', '600');
+        valueLabel.textContent = '$' + s.value.toLocaleString();
+        svg.appendChild(valueLabel);
+      }
     });
 
     // Gradient definition
@@ -582,6 +599,24 @@
       title.textContent = tier + ': ' + count + ' clients (' + percentage.toFixed(1) + '%)';
       path.appendChild(title);
       
+      // Add data label in the center of each slice
+      if (percentage > 5) { // Only show labels for slices > 5%
+        var labelAngle = currentAngle + angle / 2;
+        var labelRadius = radius * 0.7;
+        var labelX = centerX + labelRadius * Math.cos(labelAngle);
+        var labelY = centerY + labelRadius * Math.sin(labelAngle);
+        
+        var dataLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        dataLabel.setAttribute('x', labelX);
+        dataLabel.setAttribute('y', labelY);
+        dataLabel.setAttribute('fill', '#0b1220');
+        dataLabel.setAttribute('font-size', '12');
+        dataLabel.setAttribute('text-anchor', 'middle');
+        dataLabel.setAttribute('font-weight', '600');
+        dataLabel.textContent = percentage.toFixed(1) + '%';
+        svg.appendChild(dataLabel);
+      }
+      
       svg.appendChild(path);
       currentAngle += angle;
     });
@@ -634,7 +669,7 @@
       html += '<div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: rgba(148,163,184,0.05); border-radius: 6px; border: 1px solid rgba(148,163,184,0.1);">';
       html += '<div>';
       html += '<div style="font-weight: 600; margin-bottom: 4px;">' + maskName(client.name) + '</div>';
-      html += '<div style="font-size: 12px; color: var(--muted);">' + client.customerId + ' • ' + client.country + '</div>';
+      html += '<div style="font-size: 12px; color: var(--muted);">' + client.customerId + ' • ' + client.country + ' • ' + (client.gender || 'N/A') + ', ' + (client.age || 'N/A') + ' years</div>';
       html += '</div>';
       html += '<div style="text-align: right;">';
       html += '<div style="font-size: 12px; color: var(--muted); margin-bottom: 2px;">' + client.tier + '</div>';
@@ -647,17 +682,120 @@
     container.innerHTML = html;
   }
 
+  function renderPopulationChart(db, partnerId) {
+    var container = document.getElementById('population-chart');
+    if (!container) return;
+    
+    var clients = Array.isArray(db.clients) ? db.clients : [];
+    var filteredClients = partnerId 
+      ? clients.filter(function(c) { return c.partnerId === partnerId; })
+      : clients;
+    
+    if (filteredClients.length === 0) {
+      container.innerHTML = '<p class="muted">No clients found for selected partner.</p>';
+      return;
+    }
+    
+    // Count by age groups
+    var ageGroups = {
+      '18-25': 0,
+      '26-35': 0,
+      '36-45': 0,
+      '46-55': 0,
+      '56-65': 0,
+      '65+': 0
+    };
+    
+    filteredClients.forEach(function(client) {
+      var age = client.age || 0;
+      if (age >= 18 && age <= 25) ageGroups['18-25']++;
+      else if (age >= 26 && age <= 35) ageGroups['26-35']++;
+      else if (age >= 36 && age <= 45) ageGroups['36-45']++;
+      else if (age >= 46 && age <= 55) ageGroups['46-55']++;
+      else if (age >= 56 && age <= 65) ageGroups['56-65']++;
+      else if (age > 65) ageGroups['65+']++;
+    });
+    
+    // Create bar chart
+    var width = 300;
+    var height = 200;
+    var padding = 40;
+    var barGap = 8;
+    var maxValue = Math.max.apply(null, Object.values(ageGroups));
+    
+    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('width', width);
+    svg.setAttribute('height', height);
+    svg.setAttribute('viewBox', '0 0 ' + width + ' ' + height);
+    
+    var barWidth = (width - padding * 2 - (Object.keys(ageGroups).length - 1) * barGap) / Object.keys(ageGroups).length;
+    var chartHeight = height - padding * 2;
+    
+    // Draw bars
+    Object.entries(ageGroups).forEach(function([ageGroup, count], index) {
+      var x = padding + index * (barWidth + barGap);
+      var barHeight = (count / maxValue) * chartHeight;
+      var y = height - padding - barHeight;
+      
+      // Bar
+      var rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+      rect.setAttribute('x', x);
+      rect.setAttribute('y', y);
+      rect.setAttribute('width', barWidth);
+      rect.setAttribute('height', barHeight);
+      rect.setAttribute('fill', '#38bdf8');
+      rect.setAttribute('rx', '4');
+      svg.appendChild(rect);
+      
+      // Value label on top
+      if (count > 0) {
+        var valueLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        valueLabel.setAttribute('x', x + barWidth / 2);
+        valueLabel.setAttribute('y', y - 5);
+        valueLabel.setAttribute('fill', '#e5e7eb');
+        valueLabel.setAttribute('font-size', '11');
+        valueLabel.setAttribute('text-anchor', 'middle');
+        valueLabel.setAttribute('font-weight', '600');
+        valueLabel.textContent = count;
+        svg.appendChild(valueLabel);
+      }
+      
+      // Age group label
+      var label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      label.setAttribute('x', x + barWidth / 2);
+      label.setAttribute('y', height - padding + 14);
+      label.setAttribute('fill', '#94a3b8');
+      label.setAttribute('font-size', '10');
+      label.setAttribute('text-anchor', 'middle');
+      label.textContent = ageGroup;
+      svg.appendChild(label);
+    });
+    
+    // Draw axis
+    var axis = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    axis.setAttribute('x1', padding);
+    axis.setAttribute('y1', height - padding);
+    axis.setAttribute('x2', width - padding);
+    axis.setAttribute('y2', height - padding);
+    axis.setAttribute('stroke', 'rgba(148,163,184,0.4)');
+    axis.setAttribute('stroke-width', '1');
+    svg.insertBefore(axis, svg.firstChild);
+    
+    container.innerHTML = '';
+    container.appendChild(svg);
+  }
+
   function initClientsPage() {
     var select = document.getElementById('partnerSelect');
     if (!select) return;
     
-    fetch('database.json')
-      .then(function(r) { return r.json(); })
+    window.DataManager.load()
       .then(function(db) {
         function update() {
           var partnerId = select.value;
           renderTierChart(db, partnerId);
           renderClientsList(db, partnerId);
+          renderPopulationChart(db, partnerId);
         }
         select.addEventListener('change', update);
         update();

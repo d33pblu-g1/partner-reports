@@ -14,7 +14,9 @@
       "sub-partner": true,
       "partnerId": "P-0001",
       "email": "wen.silva@example.com",
-      "preferredLanguage": "Norwegian"
+      "preferredLanguage": "Norwegian",
+      "gender": "Male",
+      "age": 66
     },
     {
       "customerId": "C-100001",
@@ -30,7 +32,9 @@
       "sub-partner": false,
       "partnerId": "P-0002",
       "email": "zane.bennett@example.com",
-      "preferredLanguage": "Swedish"
+      "preferredLanguage": "Swedish",
+      "gender": "Other",
+      "age": 72
     },
     {
       "customerId": "C-100002",
@@ -46,7 +50,9 @@
       "sub-partner": false,
       "partnerId": "P-0001",
       "email": "ivan.zhang@example.com",
-      "preferredLanguage": "Portuguese"
+      "preferredLanguage": "Portuguese",
+      "gender": "Other",
+      "age": 80
     },
     {
       "customerId": "C-100003",
@@ -62,7 +68,9 @@
       "sub-partner": false,
       "partnerId": "P-0001",
       "email": "yara.rossi@example.com",
-      "preferredLanguage": "English"
+      "preferredLanguage": "English",
+      "gender": "Female",
+      "age": 41
     },
     {
       "customerId": "C-100004",
@@ -78,7 +86,9 @@
       "sub-partner": true,
       "partnerId": "P-0001",
       "email": "hana.lopez@example.com",
-      "preferredLanguage": "Norwegian"
+      "preferredLanguage": "Norwegian",
+      "gender": "Other",
+      "age": 42
     },
     {
       "customerId": "C-100005",
@@ -94,7 +104,9 @@
       "sub-partner": false,
       "partnerId": "P-0002",
       "email": "marco.garcia@example.com",
-      "preferredLanguage": "Swedish"
+      "preferredLanguage": "Swedish",
+      "gender": "Other",
+      "age": 21
     },
     {
       "customerId": "C-100006",
@@ -110,7 +122,9 @@
       "sub-partner": true,
       "partnerId": "P-0002",
       "email": "uma.khan@example.com",
-      "preferredLanguage": "Norwegian"
+      "preferredLanguage": "Norwegian",
+      "gender": "Male",
+      "age": 68
     },
     {
       "customerId": "C-100007",
@@ -126,7 +140,9 @@
       "sub-partner": true,
       "partnerId": "P-0001",
       "email": "yara.kumar@example.com",
-      "preferredLanguage": "French"
+      "preferredLanguage": "French",
+      "gender": "Male",
+      "age": 41
     },
     {
       "customerId": "C-100008",
@@ -142,7 +158,9 @@
       "sub-partner": false,
       "partnerId": "P-0001",
       "email": "quinn.zhang@example.com",
-      "preferredLanguage": "Spanish"
+      "preferredLanguage": "Spanish",
+      "gender": "Female",
+      "age": 75
     },
     {
       "customerId": "C-100009",
@@ -158,7 +176,9 @@
       "sub-partner": false,
       "partnerId": "P-0001",
       "email": "george.kumar@example.com",
-      "preferredLanguage": "French"
+      "preferredLanguage": "French",
+      "gender": "Other",
+      "age": 44
     },
     {
       "customerId": "C-100010",
@@ -174,7 +194,9 @@
       "sub-partner": true,
       "partnerId": "P-0002",
       "email": "george.singh@example.com",
-      "preferredLanguage": "Norwegian"
+      "preferredLanguage": "Norwegian",
+      "gender": "Female",
+      "age": 46
     },
     {
       "customerId": "C-100011",
@@ -190,7 +212,9 @@
       "sub-partner": true,
       "partnerId": "P-0002",
       "email": "nora.zhang@example.com",
-      "preferredLanguage": "Swedish"
+      "preferredLanguage": "Swedish",
+      "gender": "Male",
+      "age": 24
     },
     {
       "customerId": "C-100012",
@@ -206,7 +230,9 @@
       "sub-partner": true,
       "partnerId": "P-0001",
       "email": "bob.garcia@example.com",
-      "preferredLanguage": "Norwegian"
+      "preferredLanguage": "Norwegian",
+      "gender": "Male",
+      "age": 58
     },
     {
       "customerId": "C-100013",
@@ -222,7 +248,9 @@
       "sub-partner": false,
       "partnerId": "P-0001",
       "email": "diana.smirnov@example.com",
-      "preferredLanguage": "Danish"
+      "preferredLanguage": "Danish",
+      "gender": "Female",
+      "age": 67
     },
     {
       "customerId": "C-100014",
@@ -238,7 +266,9 @@
       "sub-partner": false,
       "partnerId": "P-0001",
       "email": "kai.smirnov@example.com",
-      "preferredLanguage": "Spanish"
+      "preferredLanguage": "Spanish",
+      "gender": "Female",
+      "age": 27
     },
     {
       "customerId": "C-100015",
@@ -254,7 +284,9 @@
       "sub-partner": true,
       "partnerId": "P-0001",
       "email": "viktor.novak@example.com",
-      "preferredLanguage": "Norwegian"
+      "preferredLanguage": "Norwegian",
+      "gender": "Male",
+      "age": 48
     },
     {
       "customerId": "C-100016",
@@ -270,7 +302,9 @@
       "sub-partner": true,
       "partnerId": "P-0002",
       "email": "carlos.silva@example.com",
-      "preferredLanguage": "Dutch"
+      "preferredLanguage": "Dutch",
+      "gender": "Other",
+      "age": 68
     },
     {
       "customerId": "C-100017",
@@ -286,7 +320,9 @@
       "sub-partner": false,
       "partnerId": "P-0002",
       "email": "sara.kumar@example.com",
-      "preferredLanguage": "French"
+      "preferredLanguage": "French",
+      "gender": "Other",
+      "age": 44
     },
     {
       "customerId": "C-100018",
@@ -302,7 +338,9 @@
       "sub-partner": true,
       "partnerId": "P-0002",
       "email": "fiona.rossi@example.com",
-      "preferredLanguage": "French"
+      "preferredLanguage": "French",
+      "gender": "Other",
+      "age": 30
     },
     {
       "customerId": "C-100019",
@@ -318,7 +356,9 @@
       "sub-partner": false,
       "partnerId": "P-0002",
       "email": "julia.novak@example.com",
-      "preferredLanguage": "German"
+      "preferredLanguage": "German",
+      "gender": "Female",
+      "age": 40
     },
     {
       "customerId": "C-100020",
@@ -334,7 +374,9 @@
       "sub-partner": true,
       "partnerId": "P-0001",
       "email": "sara.khan@example.com",
-      "preferredLanguage": "English"
+      "preferredLanguage": "English",
+      "gender": "Male",
+      "age": 59
     },
     {
       "customerId": "C-100021",
@@ -350,7 +392,9 @@
       "sub-partner": false,
       "partnerId": "P-0001",
       "email": "nora.mendes@example.com",
-      "preferredLanguage": "Portuguese"
+      "preferredLanguage": "Portuguese",
+      "gender": "Other",
+      "age": 28
     },
     {
       "customerId": "C-100022",
@@ -366,7 +410,9 @@
       "sub-partner": false,
       "partnerId": "P-0002",
       "email": "ravi.novak@example.com",
-      "preferredLanguage": "English"
+      "preferredLanguage": "English",
+      "gender": "Male",
+      "age": 59
     },
     {
       "customerId": "C-100023",
@@ -382,7 +428,9 @@
       "sub-partner": true,
       "partnerId": "P-0002",
       "email": "yara.singh@example.com",
-      "preferredLanguage": "Italian"
+      "preferredLanguage": "Italian",
+      "gender": "Female",
+      "age": 48
     },
     {
       "customerId": "C-100024",
@@ -398,7 +446,9 @@
       "sub-partner": true,
       "partnerId": "P-0001",
       "email": "ethan.silva@example.com",
-      "preferredLanguage": "English"
+      "preferredLanguage": "English",
+      "gender": "Other",
+      "age": 21
     },
     {
       "customerId": "C-100025",
@@ -414,7 +464,9 @@
       "sub-partner": false,
       "partnerId": "P-0001",
       "email": "tomas.novak@example.com",
-      "preferredLanguage": "Norwegian"
+      "preferredLanguage": "Norwegian",
+      "gender": "Male",
+      "age": 22
     },
     {
       "customerId": "C-100026",
@@ -430,7 +482,9 @@
       "sub-partner": false,
       "partnerId": "P-0002",
       "email": "kai.costa@example.com",
-      "preferredLanguage": "Norwegian"
+      "preferredLanguage": "Norwegian",
+      "gender": "Other",
+      "age": 51
     },
     {
       "customerId": "C-100027",
@@ -446,7 +500,9 @@
       "sub-partner": false,
       "partnerId": "P-0001",
       "email": "priya.bennett@example.com",
-      "preferredLanguage": "Portuguese"
+      "preferredLanguage": "Portuguese",
+      "gender": "Other",
+      "age": 20
     },
     {
       "customerId": "C-100028",
@@ -462,7 +518,9 @@
       "sub-partner": false,
       "partnerId": "P-0002",
       "email": "sara.garcia@example.com",
-      "preferredLanguage": "English"
+      "preferredLanguage": "English",
+      "gender": "Other",
+      "age": 71
     },
     {
       "customerId": "C-100029",
@@ -478,7 +536,9 @@
       "sub-partner": false,
       "partnerId": "P-0001",
       "email": "alice.lopez@example.com",
-      "preferredLanguage": "Norwegian"
+      "preferredLanguage": "Norwegian",
+      "gender": "Other",
+      "age": 64
     },
     {
       "customerId": "C-100030",
@@ -494,7 +554,9 @@
       "sub-partner": false,
       "partnerId": "P-0001",
       "email": "wen.khan@example.com",
-      "preferredLanguage": "Portuguese"
+      "preferredLanguage": "Portuguese",
+      "gender": "Female",
+      "age": 32
     },
     {
       "customerId": "C-100031",
@@ -510,7 +572,9 @@
       "sub-partner": true,
       "partnerId": "P-0001",
       "email": "wen.rossi@example.com",
-      "preferredLanguage": "Italian"
+      "preferredLanguage": "Italian",
+      "gender": "Other",
+      "age": 60
     },
     {
       "customerId": "C-100032",
@@ -526,7 +590,9 @@
       "sub-partner": true,
       "partnerId": "P-0001",
       "email": "nora.nair@example.com",
-      "preferredLanguage": "Norwegian"
+      "preferredLanguage": "Norwegian",
+      "gender": "Female",
+      "age": 34
     },
     {
       "customerId": "C-100033",
@@ -542,7 +608,9 @@
       "sub-partner": false,
       "partnerId": "P-0002",
       "email": "alice.zhang@example.com",
-      "preferredLanguage": "Portuguese"
+      "preferredLanguage": "Portuguese",
+      "gender": "Other",
+      "age": 44
     },
     {
       "customerId": "C-100034",
@@ -558,7 +626,9 @@
       "sub-partner": false,
       "partnerId": "P-0001",
       "email": "uma.lopez@example.com",
-      "preferredLanguage": "Swedish"
+      "preferredLanguage": "Swedish",
+      "gender": "Other",
+      "age": 59
     },
     {
       "customerId": "C-100035",
@@ -574,7 +644,9 @@
       "sub-partner": false,
       "partnerId": "P-0002",
       "email": "julia.khan@example.com",
-      "preferredLanguage": "German"
+      "preferredLanguage": "German",
+      "gender": "Other",
+      "age": 61
     },
     {
       "customerId": "C-100036",
@@ -590,7 +662,9 @@
       "sub-partner": true,
       "partnerId": "P-0001",
       "email": "julia.singh@example.com",
-      "preferredLanguage": "Portuguese"
+      "preferredLanguage": "Portuguese",
+      "gender": "Male",
+      "age": 52
     },
     {
       "customerId": "C-100037",
@@ -606,7 +680,9 @@
       "sub-partner": false,
       "partnerId": "P-0001",
       "email": "omar.costa@example.com",
-      "preferredLanguage": "French"
+      "preferredLanguage": "French",
+      "gender": "Female",
+      "age": 31
     },
     {
       "customerId": "C-100038",
@@ -622,7 +698,9 @@
       "sub-partner": true,
       "partnerId": "P-0001",
       "email": "yara.kumar@example.com",
-      "preferredLanguage": "Dutch"
+      "preferredLanguage": "Dutch",
+      "gender": "Other",
+      "age": 50
     },
     {
       "customerId": "C-100039",
@@ -638,7 +716,9 @@
       "sub-partner": true,
       "partnerId": "P-0002",
       "email": "fiona.bennett@example.com",
-      "preferredLanguage": "Dutch"
+      "preferredLanguage": "Dutch",
+      "gender": "Other",
+      "age": 73
     },
     {
       "customerId": "C-100040",
@@ -654,7 +734,9 @@
       "sub-partner": false,
       "partnerId": "P-0002",
       "email": "diana.kumar@example.com",
-      "preferredLanguage": "German"
+      "preferredLanguage": "German",
+      "gender": "Female",
+      "age": 69
     },
     {
       "customerId": "C-100041",
@@ -670,7 +752,9 @@
       "sub-partner": false,
       "partnerId": "P-0001",
       "email": "carlos.garcia@example.com",
-      "preferredLanguage": "English"
+      "preferredLanguage": "English",
+      "gender": "Female",
+      "age": 52
     },
     {
       "customerId": "C-100042",
@@ -686,7 +770,9 @@
       "sub-partner": false,
       "partnerId": "P-0002",
       "email": "fiona.garcia@example.com",
-      "preferredLanguage": "Dutch"
+      "preferredLanguage": "Dutch",
+      "gender": "Female",
+      "age": 68
     },
     {
       "customerId": "C-100043",
@@ -702,7 +788,9 @@
       "sub-partner": false,
       "partnerId": "P-0002",
       "email": "ivan.costa@example.com",
-      "preferredLanguage": "Spanish"
+      "preferredLanguage": "Spanish",
+      "gender": "Female",
+      "age": 44
     },
     {
       "customerId": "C-100044",
@@ -718,7 +806,9 @@
       "sub-partner": true,
       "partnerId": "P-0002",
       "email": "alice.silva@example.com",
-      "preferredLanguage": "Danish"
+      "preferredLanguage": "Danish",
+      "gender": "Other",
+      "age": 42
     },
     {
       "customerId": "C-100045",
@@ -734,7 +824,9 @@
       "sub-partner": false,
       "partnerId": "P-0001",
       "email": "priya.zhang@example.com",
-      "preferredLanguage": "German"
+      "preferredLanguage": "German",
+      "gender": "Female",
+      "age": 58
     },
     {
       "customerId": "C-100046",
@@ -750,7 +842,9 @@
       "sub-partner": false,
       "partnerId": "P-0002",
       "email": "ximena.khan@example.com",
-      "preferredLanguage": "Danish"
+      "preferredLanguage": "Danish",
+      "gender": "Male",
+      "age": 60
     },
     {
       "customerId": "C-100047",
@@ -766,7 +860,9 @@
       "sub-partner": true,
       "partnerId": "P-0002",
       "email": "kai.lopez@example.com",
-      "preferredLanguage": "Swedish"
+      "preferredLanguage": "Swedish",
+      "gender": "Female",
+      "age": 55
     },
     {
       "customerId": "C-100048",
@@ -782,7 +878,9 @@
       "sub-partner": false,
       "partnerId": "P-0002",
       "email": "uma.nair@example.com",
-      "preferredLanguage": "Spanish"
+      "preferredLanguage": "Spanish",
+      "gender": "Male",
+      "age": 54
     },
     {
       "customerId": "C-100049",
@@ -798,7 +896,9 @@
       "sub-partner": false,
       "partnerId": "P-0002",
       "email": "hana.lopez@example.com",
-      "preferredLanguage": "Spanish"
+      "preferredLanguage": "Spanish",
+      "gender": "Female",
+      "age": 27
     },
     {
       "customerId": "C-100050",
@@ -814,7 +914,9 @@
       "sub-partner": true,
       "partnerId": "P-0002",
       "email": "fiona.mendes@example.com",
-      "preferredLanguage": "Danish"
+      "preferredLanguage": "Danish",
+      "gender": "Female",
+      "age": 53
     },
     {
       "customerId": "C-100051",
@@ -830,7 +932,9 @@
       "sub-partner": false,
       "partnerId": "P-0002",
       "email": "lina.garcia@example.com",
-      "preferredLanguage": "Italian"
+      "preferredLanguage": "Italian",
+      "gender": "Other",
+      "age": 76
     },
     {
       "customerId": "C-100052",
@@ -846,7 +950,9 @@
       "sub-partner": true,
       "partnerId": "P-0002",
       "email": "tomas.lopez@example.com",
-      "preferredLanguage": "Swedish"
+      "preferredLanguage": "Swedish",
+      "gender": "Male",
+      "age": 68
     },
     {
       "customerId": "C-100053",
@@ -862,7 +968,9 @@
       "sub-partner": false,
       "partnerId": "P-0002",
       "email": "bob.garcia@example.com",
-      "preferredLanguage": "Portuguese"
+      "preferredLanguage": "Portuguese",
+      "gender": "Male",
+      "age": 74
     },
     {
       "customerId": "C-100054",
@@ -878,7 +986,9 @@
       "sub-partner": false,
       "partnerId": "P-0001",
       "email": "zane.mendes@example.com",
-      "preferredLanguage": "Swedish"
+      "preferredLanguage": "Swedish",
+      "gender": "Other",
+      "age": 57
     },
     {
       "customerId": "C-100055",
@@ -894,7 +1004,9 @@
       "sub-partner": false,
       "partnerId": "P-0001",
       "email": "diana.silva@example.com",
-      "preferredLanguage": "German"
+      "preferredLanguage": "German",
+      "gender": "Male",
+      "age": 34
     },
     {
       "customerId": "C-100056",
@@ -910,7 +1022,9 @@
       "sub-partner": true,
       "partnerId": "P-0002",
       "email": "diana.singh@example.com",
-      "preferredLanguage": "Norwegian"
+      "preferredLanguage": "Norwegian",
+      "gender": "Male",
+      "age": 77
     },
     {
       "customerId": "C-100057",
@@ -926,7 +1040,9 @@
       "sub-partner": true,
       "partnerId": "P-0001",
       "email": "lina.mendes@example.com",
-      "preferredLanguage": "Portuguese"
+      "preferredLanguage": "Portuguese",
+      "gender": "Other",
+      "age": 71
     },
     {
       "customerId": "C-100058",
@@ -942,7 +1058,9 @@
       "sub-partner": true,
       "partnerId": "P-0002",
       "email": "yara.kumar@example.com",
-      "preferredLanguage": "German"
+      "preferredLanguage": "German",
+      "gender": "Male",
+      "age": 51
     },
     {
       "customerId": "C-100059",
@@ -958,7 +1076,9 @@
       "sub-partner": false,
       "partnerId": "P-0001",
       "email": "alice.nair@example.com",
-      "preferredLanguage": "Italian"
+      "preferredLanguage": "Italian",
+      "gender": "Female",
+      "age": 28
     },
     {
       "customerId": "C-100060",
@@ -974,7 +1094,9 @@
       "sub-partner": true,
       "partnerId": "P-0001",
       "email": "bob.zhang@example.com",
-      "preferredLanguage": "Dutch"
+      "preferredLanguage": "Dutch",
+      "gender": "Other",
+      "age": 29
     },
     {
       "customerId": "C-100061",
@@ -990,7 +1112,9 @@
       "sub-partner": false,
       "partnerId": "P-0002",
       "email": "quinn.garcia@example.com",
-      "preferredLanguage": "Dutch"
+      "preferredLanguage": "Dutch",
+      "gender": "Male",
+      "age": 27
     },
     {
       "customerId": "C-100062",
@@ -1006,7 +1130,9 @@
       "sub-partner": false,
       "partnerId": "P-0001",
       "email": "carlos.mendes@example.com",
-      "preferredLanguage": "Spanish"
+      "preferredLanguage": "Spanish",
+      "gender": "Male",
+      "age": 29
     },
     {
       "customerId": "C-100063",
@@ -1022,7 +1148,9 @@
       "sub-partner": false,
       "partnerId": "P-0001",
       "email": "diana.garcia@example.com",
-      "preferredLanguage": "Norwegian"
+      "preferredLanguage": "Norwegian",
+      "gender": "Other",
+      "age": 35
     },
     {
       "customerId": "C-100064",
@@ -1038,7 +1166,9 @@
       "sub-partner": false,
       "partnerId": "P-0001",
       "email": "alice.nair@example.com",
-      "preferredLanguage": "Italian"
+      "preferredLanguage": "Italian",
+      "gender": "Female",
+      "age": 57
     },
     {
       "customerId": "C-100065",
@@ -1054,7 +1184,9 @@
       "sub-partner": false,
       "partnerId": "P-0002",
       "email": "julia.lopez@example.com",
-      "preferredLanguage": "Portuguese"
+      "preferredLanguage": "Portuguese",
+      "gender": "Other",
+      "age": 20
     },
     {
       "customerId": "C-100066",
@@ -1070,7 +1202,9 @@
       "sub-partner": false,
       "partnerId": "P-0001",
       "email": "bob.singh@example.com",
-      "preferredLanguage": "Dutch"
+      "preferredLanguage": "Dutch",
+      "gender": "Other",
+      "age": 69
     },
     {
       "customerId": "C-100067",
@@ -1086,7 +1220,9 @@
       "sub-partner": true,
       "partnerId": "P-0001",
       "email": "marco.novak@example.com",
-      "preferredLanguage": "English"
+      "preferredLanguage": "English",
+      "gender": "Male",
+      "age": 19
     },
     {
       "customerId": "C-100068",
@@ -1102,7 +1238,9 @@
       "sub-partner": true,
       "partnerId": "P-0002",
       "email": "nora.novak@example.com",
-      "preferredLanguage": "Spanish"
+      "preferredLanguage": "Spanish",
+      "gender": "Other",
+      "age": 35
     },
     {
       "customerId": "C-100069",
@@ -1118,7 +1256,9 @@
       "sub-partner": true,
       "partnerId": "P-0001",
       "email": "hana.mendes@example.com",
-      "preferredLanguage": "French"
+      "preferredLanguage": "French",
+      "gender": "Other",
+      "age": 74
     },
     {
       "customerId": "C-100070",
@@ -1134,7 +1274,9 @@
       "sub-partner": false,
       "partnerId": "P-0002",
       "email": "ethan.zhang@example.com",
-      "preferredLanguage": "Spanish"
+      "preferredLanguage": "Spanish",
+      "gender": "Male",
+      "age": 50
     },
     {
       "customerId": "C-100071",
@@ -1150,7 +1292,9 @@
       "sub-partner": false,
       "partnerId": "P-0002",
       "email": "sara.kumar@example.com",
-      "preferredLanguage": "English"
+      "preferredLanguage": "English",
+      "gender": "Other",
+      "age": 55
     },
     {
       "customerId": "C-100072",
@@ -1166,7 +1310,9 @@
       "sub-partner": true,
       "partnerId": "P-0002",
       "email": "hana.lopez@example.com",
-      "preferredLanguage": "Swedish"
+      "preferredLanguage": "Swedish",
+      "gender": "Other",
+      "age": 34
     },
     {
       "customerId": "C-100073",
@@ -1182,7 +1328,9 @@
       "sub-partner": false,
       "partnerId": "P-0002",
       "email": "ivan.lopez@example.com",
-      "preferredLanguage": "Danish"
+      "preferredLanguage": "Danish",
+      "gender": "Male",
+      "age": 45
     },
     {
       "customerId": "C-100074",
@@ -1198,7 +1346,9 @@
       "sub-partner": true,
       "partnerId": "P-0001",
       "email": "viktor.lopez@example.com",
-      "preferredLanguage": "Norwegian"
+      "preferredLanguage": "Norwegian",
+      "gender": "Female",
+      "age": 29
     },
     {
       "customerId": "C-100075",
@@ -1214,7 +1364,9 @@
       "sub-partner": true,
       "partnerId": "P-0001",
       "email": "viktor.costa@example.com",
-      "preferredLanguage": "Danish"
+      "preferredLanguage": "Danish",
+      "gender": "Other",
+      "age": 28
     },
     {
       "customerId": "C-100076",
@@ -1230,7 +1382,9 @@
       "sub-partner": false,
       "partnerId": "P-0001",
       "email": "hana.kumar@example.com",
-      "preferredLanguage": "German"
+      "preferredLanguage": "German",
+      "gender": "Female",
+      "age": 36
     },
     {
       "customerId": "C-100077",
@@ -1246,7 +1400,9 @@
       "sub-partner": false,
       "partnerId": "P-0002",
       "email": "bob.silva@example.com",
-      "preferredLanguage": "Swedish"
+      "preferredLanguage": "Swedish",
+      "gender": "Other",
+      "age": 19
     },
     {
       "customerId": "C-100078",
@@ -1262,7 +1418,9 @@
       "sub-partner": false,
       "partnerId": "P-0002",
       "email": "quinn.costa@example.com",
-      "preferredLanguage": "German"
+      "preferredLanguage": "German",
+      "gender": "Male",
+      "age": 49
     },
     {
       "customerId": "C-100079",
@@ -1278,7 +1436,9 @@
       "sub-partner": false,
       "partnerId": "P-0002",
       "email": "tomas.bennett@example.com",
-      "preferredLanguage": "Spanish"
+      "preferredLanguage": "Spanish",
+      "gender": "Male",
+      "age": 63
     },
     {
       "customerId": "C-100080",
@@ -1294,7 +1454,9 @@
       "sub-partner": true,
       "partnerId": "P-0001",
       "email": "wen.nair@example.com",
-      "preferredLanguage": "Italian"
+      "preferredLanguage": "Italian",
+      "gender": "Female",
+      "age": 32
     },
     {
       "customerId": "C-100081",
@@ -1310,7 +1472,9 @@
       "sub-partner": false,
       "partnerId": "P-0002",
       "email": "bob.silva@example.com",
-      "preferredLanguage": "Dutch"
+      "preferredLanguage": "Dutch",
+      "gender": "Male",
+      "age": 66
     },
     {
       "customerId": "C-100082",
@@ -1326,7 +1490,9 @@
       "sub-partner": false,
       "partnerId": "P-0002",
       "email": "wen.zhang@example.com",
-      "preferredLanguage": "French"
+      "preferredLanguage": "French",
+      "gender": "Other",
+      "age": 59
     },
     {
       "customerId": "C-100083",
@@ -1342,7 +1508,9 @@
       "sub-partner": false,
       "partnerId": "P-0001",
       "email": "lina.novak@example.com",
-      "preferredLanguage": "English"
+      "preferredLanguage": "English",
+      "gender": "Male",
+      "age": 64
     },
     {
       "customerId": "C-100084",
@@ -1358,7 +1526,9 @@
       "sub-partner": false,
       "partnerId": "P-0002",
       "email": "carlos.ibrahim@example.com",
-      "preferredLanguage": "Danish"
+      "preferredLanguage": "Danish",
+      "gender": "Female",
+      "age": 71
     },
     {
       "customerId": "C-100085",
@@ -1374,7 +1544,9 @@
       "sub-partner": false,
       "partnerId": "P-0001",
       "email": "uma.rossi@example.com",
-      "preferredLanguage": "English"
+      "preferredLanguage": "English",
+      "gender": "Male",
+      "age": 64
     },
     {
       "customerId": "C-100086",
@@ -1390,7 +1562,9 @@
       "sub-partner": false,
       "partnerId": "P-0001",
       "email": "marco.garcia@example.com",
-      "preferredLanguage": "English"
+      "preferredLanguage": "English",
+      "gender": "Male",
+      "age": 71
     },
     {
       "customerId": "C-100087",
@@ -1406,7 +1580,9 @@
       "sub-partner": true,
       "partnerId": "P-0001",
       "email": "ivan.rossi@example.com",
-      "preferredLanguage": "Italian"
+      "preferredLanguage": "Italian",
+      "gender": "Other",
+      "age": 42
     },
     {
       "customerId": "C-100088",
@@ -1422,7 +1598,9 @@
       "sub-partner": false,
       "partnerId": "P-0002",
       "email": "fiona.lopez@example.com",
-      "preferredLanguage": "French"
+      "preferredLanguage": "French",
+      "gender": "Female",
+      "age": 76
     },
     {
       "customerId": "C-100089",
@@ -1438,7 +1616,9 @@
       "sub-partner": false,
       "partnerId": "P-0002",
       "email": "quinn.ibrahim@example.com",
-      "preferredLanguage": "Dutch"
+      "preferredLanguage": "Dutch",
+      "gender": "Female",
+      "age": 33
     },
     {
       "customerId": "C-100090",
@@ -1454,7 +1634,9 @@
       "sub-partner": true,
       "partnerId": "P-0001",
       "email": "quinn.nair@example.com",
-      "preferredLanguage": "Italian"
+      "preferredLanguage": "Italian",
+      "gender": "Female",
+      "age": 35
     },
     {
       "customerId": "C-100091",
@@ -1470,7 +1652,9 @@
       "sub-partner": true,
       "partnerId": "P-0001",
       "email": "sara.garcia@example.com",
-      "preferredLanguage": "French"
+      "preferredLanguage": "French",
+      "gender": "Male",
+      "age": 80
     },
     {
       "customerId": "C-100092",
@@ -1486,7 +1670,9 @@
       "sub-partner": true,
       "partnerId": "P-0001",
       "email": "priya.smirnov@example.com",
-      "preferredLanguage": "Norwegian"
+      "preferredLanguage": "Norwegian",
+      "gender": "Male",
+      "age": 75
     },
     {
       "customerId": "C-100093",
@@ -1502,7 +1688,9 @@
       "sub-partner": false,
       "partnerId": "P-0002",
       "email": "ximena.novak@example.com",
-      "preferredLanguage": "Portuguese"
+      "preferredLanguage": "Portuguese",
+      "gender": "Female",
+      "age": 35
     },
     {
       "customerId": "C-100094",
@@ -1518,7 +1706,9 @@
       "sub-partner": false,
       "partnerId": "P-0002",
       "email": "sara.lopez@example.com",
-      "preferredLanguage": "Portuguese"
+      "preferredLanguage": "Portuguese",
+      "gender": "Female",
+      "age": 52
     },
     {
       "customerId": "C-100095",
@@ -1534,7 +1724,9 @@
       "sub-partner": false,
       "partnerId": "P-0001",
       "email": "julia.kumar@example.com",
-      "preferredLanguage": "English"
+      "preferredLanguage": "English",
+      "gender": "Male",
+      "age": 79
     },
     {
       "customerId": "C-100096",
@@ -1550,7 +1742,9 @@
       "sub-partner": true,
       "partnerId": "P-0001",
       "email": "ethan.mendes@example.com",
-      "preferredLanguage": "Dutch"
+      "preferredLanguage": "Dutch",
+      "gender": "Male",
+      "age": 55
     },
     {
       "customerId": "C-100097",
@@ -1566,7 +1760,9 @@
       "sub-partner": false,
       "partnerId": "P-0002",
       "email": "tomas.costa@example.com",
-      "preferredLanguage": "French"
+      "preferredLanguage": "French",
+      "gender": "Female",
+      "age": 56
     },
     {
       "customerId": "C-100098",
@@ -1582,7 +1778,9 @@
       "sub-partner": false,
       "partnerId": "P-0002",
       "email": "ivan.silva@example.com",
-      "preferredLanguage": "Danish"
+      "preferredLanguage": "Danish",
+      "gender": "Male",
+      "age": 26
     },
     {
       "customerId": "C-100099",
@@ -1598,7 +1796,9 @@
       "sub-partner": false,
       "partnerId": "P-0001",
       "email": "kai.ibrahim@example.com",
-      "preferredLanguage": "French"
+      "preferredLanguage": "French",
+      "gender": "Male",
+      "age": 72
     }
   ],
   "trades": [

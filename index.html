@@ -4,11 +4,36 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Home • Partner Report</title>
-  <link rel="stylesheet" href="styles.css">
+  <!-- Critical CSS for above-the-fold content -->
+  <style>
+    :root{--bg:#0f172a;--panel:#111827;--text:#e5e7eb;--muted:#94a3b8;--accent:#38bdf8;--accent-2:#22c55e}*{box-sizing:border-box}html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}.layout{display:flex;min-height:100vh}.sidebar{width:240px;flex:0 0 240px;background:rgba(17,24,39,0.85);backdrop-filter:blur(8px);border-right:1px solid rgba(148,163,184,0.2);position:sticky;top:0;align-self:flex-start;height:100vh}.content{flex:1 1 auto;min-width:0}.brand{display:flex;align-items:center;gap:10px;padding:14px 16px}.brand .logo{width:10px;height:10px;border-radius:2px;background:linear-gradient(135deg,var(--accent),var(--accent-2))}.brand h1{font-size:16px;font-weight:600;margin:0}nav.side-nav{display:flex;flex-direction:column;padding:8px}.side-nav a{display:flex;align-items:center;gap:10px;color:var(--muted);text-decoration:none;padding:10px 12px;margin:2px 0;border-radius:8px;font-size:14px;transition:background 0.15s ease,color 0.15s ease}.side-nav a:hover{color:var(--text);background:rgba(148,163,184,0.08)}.side-nav a.active{color:var(--accent);background:rgba(56,189,248,0.12);font-weight:600}.side-nav .icon{width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center}.side-nav .label{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.container{max-width:1100px;margin:0 auto;padding:16px 16px 32px}main.panel{background:var(--panel);border:1px solid rgba(148,163,184,0.2);border-radius:10px;margin-top:16px;padding:16px}.page-title{font-size:22px;margin:0 0 12px}.page-subtitle{color:var(--muted);margin:0 0 24px}.card{background:#0b1220;border:1px solid rgba(148,163,184,0.15);border-radius:8px;padding:16px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}.muted{color:var(--muted)}.skeleton{background:linear-gradient(90deg,rgba(148,163,184,0.1) 25%,rgba(148,163,184,0.2) 50%,rgba(148,163,184,0.1) 75%);background-size:200% 100%;animation:skeleton-loading 1.5s infinite;border-radius:4px}@keyframes skeleton-loading{0%{background-position:200% 0}100%{background-position:-200% 0}}.skeleton-chart{height:200px;border-radius:8px}@media (max-width:900px){.sidebar{width:72px;flex-basis:72px}.side-nav .label{display:none}}@media (max-width:640px){.container{padding:16px 12px 32px}}
+  </style>
+  <!-- Load full CSS asynchronously -->
+  <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="styles.css"></noscript>
   <link rel="icon" href="data:,">
   <meta name="color-scheme" content="dark light">
   <meta name="description" content="Home dashboard for partner report">
+  
+  <!-- Performance optimized scripts -->
+  <script src="data-manager.js"></script>
+  <script src="data-processor.js"></script>
+  <script src="lazy-loader.js"></script>
+  <script src="virtual-scroll.js"></script>
+  <script src="canvas-charts.js"></script>
+  <script src="performance-monitor.js"></script>
   <script defer src="script.js"></script>
+  
+  <!-- Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(registration => console.log('SW registered'))
+          .catch(error => console.log('SW registration failed'));
+      });
+    }
+  </script>
   <style>body{opacity:0}html{background:#0f172a}</style>
   <script>window.addEventListener('load',function(){document.body.style.opacity=1});</script>
 </head>
@@ -53,7 +78,7 @@
 
           <div class="card" style="margin-bottom:16px">
             <h3 style="margin-top:0">Lifetime</h3>
-            <div class="grid">
+            <div class="grid" style="grid-template-columns: repeat(4, 1fr);">
               <section class="card">
                 <h4 style="margin:0 0 6px 0">Commissions</h4>
                 <p class="muted" id="metric-lt-comm">—</p>
@@ -75,7 +100,7 @@
 
           <div class="card" style="margin-top:16px; margin-bottom:16px">
             <h3 style="margin-top:0">This Month</h3>
-            <div class="grid">
+            <div class="grid" style="grid-template-columns: repeat(4, 1fr);">
               <section class="card">
                 <h4 style="margin:0 0 6px 0">Commissions</h4>
                 <p class="muted" id="metric-mtd-comm">—</p>
@@ -97,7 +122,14 @@
 
           <div class="card" style="margin-top:16px">
             <h3 style="margin-top:0">Commissions — Last 6 Months</h3>
-            <div id="chart-6mo-comm" class="card" style="padding:0; overflow:hidden"></div>
+            <div id="chart-6mo-comm" 
+                 class="card" 
+                 style="padding:0; overflow:hidden"
+                 data-lazy="chart"
+                 data-chart-type="six-month-commissions"
+                 data-partner-id="">
+              <div class="skeleton skeleton-chart"></div>
+            </div>
           </div>
 
           <div class="footer">v1.0 • Static template</div>
