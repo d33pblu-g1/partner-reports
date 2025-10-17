@@ -71,7 +71,7 @@
       <div class="container">
         <main class="panel">
           <h2 class="page-title">Database</h2>
-          <p class="page-subtitle">JSON-backed tables: clients, trades, countries, partners</p>
+          <p class="page-subtitle">MySQL database tables with CRUD operations</p>
 
           <div id="content"></div>
 
@@ -116,31 +116,47 @@
       return wrap;
     }
 
-    // If opened directly from the filesystem, fetch() may be blocked by the browser.
-    if (location.protocol === 'file:') {
-      var contentNotice = document.getElementById('content');
-      var note = document.createElement('div');
-      note.className = 'card';
-      note.innerHTML = '<strong>Heads up</strong>: This page is opened using the <code>file://</code> protocol. Most browsers block fetches of local files for security reasons.\n\
-      <div style="margin-top:8px">Run a local server in this folder, then open <code>http://localhost:8000/database.html</code>:</div>\n\
-      <pre style="margin-top:8px; white-space:pre-wrap">python3 -m http.server 8000</pre>';
-      contentNotice.appendChild(note);
-    }
+    // Show loading state
+    var content = document.getElementById('content');
+    var loading = document.createElement('div');
+    loading.className = 'card';
+    loading.innerHTML = '<div style="text-align: center; padding: 40px;"><div class="loading-spinner"></div><p style="margin-top: 16px; color: var(--muted);">Loading database tables from MySQL...</p></div>';
+    content.appendChild(loading);
 
-    fetch('database.json')
-      .then(function (r) { return r.json(); })
-      .then(function (db) {
-        var content = document.getElementById('content');
+    // Load data from MySQL via API
+    Promise.all([
+      fetch('api/index.php?endpoint=partners').then(r => r.json()),
+      fetch('api/index.php?endpoint=clients').then(r => r.json()),
+      window.ApiManager ? window.ApiManager.loadDashboardData() : fetch('api/index.php?endpoint=dashboard').then(r => r.json())
+    ])
+      .then(function (responses) {
+        var partnersResp = responses[0];
+        var clientsResp = responses[1];
+        var dashboardResp = responses[2];
+        
+        // Extract data from API responses
+        var db = {
+          partners: partnersResp.success ? partnersResp.data : [],
+          clients: clientsResp.success ? clientsResp.data : [],
+          trades: dashboardResp.success ? dashboardResp.data.trades : (dashboardResp.trades || []),
+          deposits: dashboardResp.success ? dashboardResp.data.deposits : (dashboardResp.deposits || [])
+        };
+        
+        console.log('✓ Loaded database tables from MySQL:', {
+          partners: db.partners.length,
+          clients: db.clients.length,
+          trades: db.trades.length,
+          deposits: db.deposits.length
+        });
+        
+        // Clear loading message
+        content.innerHTML = '';
+        
         var sections = [
+          { key: 'partners', title: 'Partners' },
           { key: 'clients', title: 'Clients' },
           { key: 'trades', title: 'Trades' },
-          { key: 'deposits', title: 'Deposits' },
-          { key: 'countries', title: 'Countries' },
-          { key: 'partners', title: 'Partners' },
-          { key: 'platformContractTypes', title: 'Platform Contract Types' },
-          { key: 'partnerTiers', title: 'Partner Tiers' },
-          { key: 'symbols', title: 'Symbols' },
-          { key: 'trackingLinks', title: 'Tracking Links' }
+          { key: 'deposits', title: 'Deposits' }
         ];
         
         // Create tabs
@@ -149,7 +165,7 @@
         sections.forEach(function(section, index) {
           var tab = document.createElement('div');
           tab.className = 'tab' + (index === 0 ? ' active' : '');
-          tab.textContent = section.title;
+          tab.textContent = section.title + ' (' + (db[section.key] ? db[section.key].length : 0) + ')';
           tab.addEventListener('click', function() {
             // Remove active from all tabs and contents
             document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
@@ -169,11 +185,12 @@
           tabContent.className = 'tab-content' + (index === 0 ? ' active' : '');
           var s = document.createElement('section');
           s.className = 'section';
-          var h3 = document.createElement('h3'); h3.textContent = section.title; s.appendChild(h3);
+          var h3 = document.createElement('h3'); 
+          h3.textContent = section.title + ' (' + (db[section.key] ? db[section.key].length : 0) + ' records)'; 
+          s.appendChild(h3);
           
-          // Use CRUD-enabled table for editable tables, regular for others
-          var editableTables = ['partners', 'clients', 'trades', 'deposits'];
-          if (editableTables.indexOf(section.key) !== -1 && window.DatabaseCRUD) {
+          // Use CRUD-enabled table for all tables
+          if (window.DatabaseCRUD) {
             s.appendChild(window.DatabaseCRUD.createTable(db[section.key] || [], section.key));
           } else {
             s.appendChild(createTableFromArray(db[section.key] || []));
@@ -184,12 +201,25 @@
         });
       })
       .catch(function (e) {
-        var content = document.getElementById('content');
-        var err = document.createElement('div'); err.className = 'card';
-        err.innerHTML = 'Failed to load <code>database.json</code>: ' + String(e) +
-          (location.protocol === 'file:' ? '\n\
-          <div style="margin-top:8px">Tip: Start a local server with <code>python3 -m http.server 8000</code> and reload this page at <code>http://localhost:8000/database.html</code>.</div>' : '');
+        content.innerHTML = '';
+        var err = document.createElement('div'); 
+        err.className = 'card';
+        err.style.background = 'rgba(239, 68, 68, 0.1)';
+        err.style.borderColor = '#ef4444';
+        err.innerHTML = '<h3 style="color: #ef4444; margin-top: 0;">⚠️ Database Connection Error</h3>' +
+          '<p>Failed to load data from MySQL database.</p>' +
+          '<p style="color: var(--muted); font-size: 14px;">Error: ' + String(e) + '</p>' +
+          '<div style="margin-top: 16px; padding: 16px; background: rgba(0,0,0,0.2); border-radius: 8px;">' +
+          '<strong>Troubleshooting:</strong>' +
+          '<ol style="margin: 8px 0; padding-left: 20px; color: var(--muted);">' +
+          '<li>Ensure MySQL server is running</li>' +
+          '<li>Check that PHP server is running: <code>php -S localhost:8000</code></li>' +
+          '<li>Verify database is populated: <code>mysql -u root -p partner_report</code></li>' +
+          '<li>Check API endpoints are accessible</li>' +
+          '<li>Review browser console for detailed errors (F12)</li>' +
+          '</ol></div>';
         content.appendChild(err);
+        console.error('Database loading error:', e);
       });
   </script>
 </body>
