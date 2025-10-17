@@ -50,11 +50,15 @@
           <h2 class="page-title">Database</h2>
           <p class="page-subtitle">JSON-backed tables: clients, trades, countries, partners</p>
 
-          <div class="card filter-bar" style="margin-bottom:16px">
-            <label for="partnerSelect" class="muted" style="display:block; margin-bottom:8px">Select partner</label>
-            <select id="partnerSelect" style="width:100%; max-width:360px; padding:10px 12px; background:#0b1220; color:var(--text); border:1px solid rgba(148,163,184,0.3); border-radius:8px">
+          <div class="card filter-bar" style="margin-bottom:16px; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <select id="partnerSelect" style="width:100%; max-width:360px; padding:10px 12px; background:#0b1220; color:var(--text); border:1px solid rgba(148,163,184,0.3); border-radius:8px">
               <option value="">All partners</option>
             </select>
+            </div>
+            <div style="text-align: right;">
+              <span id="partner-tier-display" class="tier-tag">—</span>
+            </div>
           </div>
 
           <div id="content"></div>
