@@ -74,7 +74,7 @@ try {
                 break;
             }
             
-            $requiredFields = ['customer_id', 'name', 'partner_id'];
+            $requiredFields = ['binary_user_id', 'name', 'partner_id'];
             foreach ($requiredFields as $field) {
                 if (!isset($input[$field])) {
                     http_response_code(400);
@@ -85,7 +85,7 @@ try {
             
             $stmt = $db->prepare("
                 INSERT INTO clients (
-                    customer_id, name, join_date, account_type, account_number,
+                    binary_user_id, name, join_date, account_type, account_number,
                     country, lifetime_deposits, commission_plan, tracking_link_used,
                     tier, sub_partner, partner_id, email, preferred_language,
                     gender, age
@@ -93,7 +93,7 @@ try {
             ");
             
             $stmt->execute([
-                $input['customer_id'],
+                $input['binary_user_id'],
                 $input['name'],
                 $input['join_date'] ?? null,
                 $input['account_type'] ?? null,
@@ -111,7 +111,7 @@ try {
                 $input['age'] ?? null
             ]);
             
-            echo json_encode(ApiResponse::success(['id' => $input['customer_id']], 'Client created successfully'));
+            echo json_encode(ApiResponse::success(['id' => $input['binary_user_id']], 'Client created successfully'));
             break;
             
         case 'PUT':
@@ -158,7 +158,7 @@ try {
             $stmt = $db->prepare("
                 UPDATE clients 
                 SET " . implode(', ', $updateFields) . "
-                WHERE customer_id = ?
+                WHERE binary_user_id = ?
             ");
             $stmt->execute($params);
             
@@ -174,7 +174,7 @@ try {
                 break;
             }
             
-            $stmt = $db->prepare("DELETE FROM clients WHERE customer_id = ?");
+            $stmt = $db->prepare("DELETE FROM clients WHERE binary_user_id = ?");
             $stmt->execute([$customerId]);
             
             if ($stmt->rowCount() > 0) {

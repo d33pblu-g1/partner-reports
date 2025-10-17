@@ -23,7 +23,7 @@ CREATE TABLE partner_tiers (
 
 -- Clients table
 CREATE TABLE clients (
-    customer_id VARCHAR(20) PRIMARY KEY,
+    binary_user_id VARCHAR(20) PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     join_date DATE,
     account_type VARCHAR(50),
@@ -51,13 +51,13 @@ CREATE TABLE clients (
 -- Trades table
 CREATE TABLE trades (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    customer_id VARCHAR(20) NOT NULL,
+    binary_user_id VARCHAR(20) NOT NULL,
     date_time DATETIME NOT NULL,
     commission DECIMAL(15,2) DEFAULT 0.00,
     volume DECIMAL(15,2) DEFAULT 0.00,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (customer_id) REFERENCES clients(customer_id) ON DELETE CASCADE,
-    INDEX idx_customer_id (customer_id),
+    FOREIGN KEY (binary_user_id) REFERENCES clients(binary_user_id) ON DELETE CASCADE,
+    INDEX idx_binary_user_id (binary_user_id),
     INDEX idx_date_time (date_time),
     INDEX idx_commission (commission)
 );
@@ -65,12 +65,12 @@ CREATE TABLE trades (
 -- Deposits table
 CREATE TABLE deposits (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    customer_id VARCHAR(20) NOT NULL,
+    binary_user_id VARCHAR(20) NOT NULL,
     date_time DATETIME NOT NULL,
     value DECIMAL(15,2) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (customer_id) REFERENCES clients(customer_id) ON DELETE CASCADE,
-    INDEX idx_customer_id (customer_id),
+    FOREIGN KEY (binary_user_id) REFERENCES clients(binary_user_id) ON DELETE CASCADE,
+    INDEX idx_binary_user_id (binary_user_id),
     INDEX idx_date_time (date_time),
     INDEX idx_value (value)
 );
