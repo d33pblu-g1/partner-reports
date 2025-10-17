@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Icon Animation Test</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="theme-toggle.js"></script>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 40px;
+      gap: 40px;
+    }
+    
+    .test-container {
+      text-align: center;
+      max-width: 600px;
+    }
+    
+    .test-container h1 {
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+    
+    .test-container p {
+      color: var(--muted);
+      margin-bottom: 30px;
+    }
+    
+    .icon-demo {
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+      margin: 40px 0;
+    }
+    
+    .icon-box {
+      padding: 20px;
+      border: 2px solid var(--accent);
+      border-radius: 12px;
+      background: var(--panel);
+    }
+    
+    .icon-box h3 {
+      color: var(--accent);
+      margin: 0 0 20px 0;
+      font-size: 14px;
+      text-transform: uppercase;
+    }
+    
+    .button-demo {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      justify-content: center;
+      margin: 40px 0;
+    }
+    
+    .status {
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    
+    .status.dark {
+      background: rgba(148, 163, 184, 0.2);
+      color: var(--accent);
+    }
+    
+    .status.light {
+      background: rgba(255, 193, 7, 0.2);
+      color: #ffa000;
+    }
+    
+    .instructions {
+      background: var(--panel);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 12px;
+      padding: 30px;
+      margin-top: 40px;
+    }
+    
+    .instructions h2 {
+      color: var(--accent);
+      margin-top: 0;
+    }
+    
+    .instructions ul {
+      text-align: left;
+      color: var(--text);
+    }
+    
+    .instructions li {
+      margin: 10px 0;
+      color: var(--muted);
+    }
+    
+    .success {
+      color: var(--accent-2);
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <!-- Actual theme toggle button -->
+  <div class="theme-toggle-container">
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+      <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
+      <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="test-container">
+    <h1>🎨 Theme Icon Test</h1>
+    <p>Test the theme toggle icon animations</p>
+    
+    <div class="button-demo">
+      <span style="color: var(--muted);">Current Theme:</span>
+      <span id="theme-status" class="status dark">DARK</span>
+    </div>
+    
+    <div class="icon-demo">
+      <div class="icon-box">
+        <h3>☀️ Sun Icon</h3>
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--text);">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1" x2="12" y2="3"/>
+          <line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/>
+          <line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <p id="sun-status" style="color: var(--muted); margin-top: 10px; font-size: 12px;">Hidden</p>
+      </div>
+      
+      <div class="icon-box">
+        <h3>🌙 Moon Icon</h3>
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--text);">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+        <p id="moon-status" style="color: var(--muted); margin-top: 10px; font-size: 12px;">Visible</p>
+      </div>
+    </div>
+    
+    <div class="instructions">
+      <h2>📋 How to Test</h2>
+      <ul>
+        <li><strong>Look at top-right corner</strong> - You should see the theme toggle button</li>
+        <li><strong>In Dark Mode:</strong> Moon icon (🌙) should be visible</li>
+        <li><strong>In Light Mode:</strong> Sun icon (☀️) should be visible</li>
+        <li><strong>Click the button</strong> - Watch the icon rotate and scale</li>
+        <li><strong>Watch the status</strong> - It should update below</li>
+        <li><strong>Check console</strong> - Press F12 to see debug messages</li>
+      </ul>
+      
+      <div style="margin-top: 20px; padding: 15px; background: rgba(56, 189, 248, 0.1); border-radius: 8px; border-left: 4px solid var(--accent);">
+        <p style="margin: 0; color: var(--text);"><strong class="success">✓ Success Criteria:</strong></p>
+        <p style="margin: 10px 0 0 0; color: var(--muted); font-size: 14px;">
+          • Only ONE icon visible at a time<br>
+          • Smooth rotation animation when switching<br>
+          • Icon scales from 0 to 1 (or vice versa)<br>
+          • No flickering or overlap<br>
+          • Status updates correctly
+        </p>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    function updateStatus() {
+      const theme = window.ThemeToggle.get();
+      const statusEl = document.getElementById('theme-status');
+      const sunStatus = document.getElementById('sun-status');
+      const moonStatus = document.getElementById('moon-status');
+      
+      if (theme === 'light') {
+        statusEl.textContent = 'LIGHT';
+        statusEl.className = 'status light';
+        sunStatus.textContent = '✓ Visible';
+        sunStatus.style.color = 'var(--accent-2)';
+        moonStatus.textContent = '✗ Hidden';
+        moonStatus.style.color = 'var(--muted)';
+      } else {
+        statusEl.textContent = 'DARK';
+        statusEl.className = 'status dark';
+        sunStatus.textContent = '✗ Hidden';
+        sunStatus.style.color = 'var(--muted)';
+        moonStatus.textContent = '✓ Visible';
+        moonStatus.style.color = 'var(--accent-2)';
+      }
+    }
+    
+    window.addEventListener('load', () => {
+      updateStatus();
+      window.addEventListener('themechange', updateStatus);
+    });
+  </script>
+</body>
+</html>
+
