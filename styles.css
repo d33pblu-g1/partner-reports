@@ -364,29 +364,39 @@ main.panel {
 
 .theme-toggle svg {
   position: absolute;
-  transition: all 0.3s ease;
+  top: 50%;
+  left: 50%;
+  transform-origin: center;
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  color: var(--text);
 }
 
+/* Dark theme - show moon, hide sun */
 .theme-toggle .sun-icon {
   opacity: 0;
-  transform: rotate(-90deg) scale(0.5);
-  color: var(--text);
+  visibility: hidden;
+  transform: translate(-50%, -50%) rotate(-90deg) scale(0);
 }
 
 .theme-toggle .moon-icon {
   opacity: 1;
-  transform: rotate(0deg) scale(1);
-  color: var(--text);
+  visibility: visible;
+  transform: translate(-50%, -50%) rotate(0deg) scale(1);
 }
 
+/* Light theme - show sun, hide moon */
 :root[data-theme="light"] .theme-toggle .sun-icon {
   opacity: 1;
-  transform: rotate(0deg) scale(1);
+  visibility: visible;
+  transform: translate(-50%, -50%) rotate(0deg) scale(1);
 }
 
 :root[data-theme="light"] .theme-toggle .moon-icon {
   opacity: 0;
-  transform: rotate(90deg) scale(0.5);
+  visibility: hidden;
+  transform: translate(-50%, -50%) rotate(90deg) scale(0);
 }
 
 /* Light theme specific adjustments */
