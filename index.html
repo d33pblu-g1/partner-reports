@@ -38,39 +38,40 @@
       <h2 class="page-title">Home</h2>
       <p class="page-subtitle">Overview of key partner metrics</p>
 
-          <div class="card filter-bar" style="margin-bottom:16px">
-            <label for="partnerSelect" class="muted" style="display:block; margin-bottom:8px">Select partner</label>
-            <select id="partnerSelect" style="width:100%; max-width:360px; padding:10px 12px; background:#0b1220; color:var(--text); border:1px solid rgba(148,163,184,0.3); border-radius:8px">
-              <option value="">All partners</option>
-            </select>
-            <div style="margin-top:8px">
-              <span class="muted">Tier: </span><span id="partner-tier-display" class="tier-tag">—</span>
+          <div class="card filter-bar" style="margin-bottom:16px; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <label for="partnerSelect" class="muted" style="display:block; margin-bottom:8px">Select partner</label>
+              <select id="partnerSelect" style="width:100%; max-width:360px; padding:10px 12px; background:#0b1220; color:var(--text); border:1px solid rgba(148,163,184,0.3); border-radius:8px">
+                <option value="">All partners</option>
+              </select>
+            </div>
+            <div style="text-align: right;">
+              <div class="muted" style="margin-bottom:8px">Partner Tier</div>
+              <span id="partner-tier-display" class="tier-tag">—</span>
             </div>
           </div>
 
-      <div class="grid">
-            <section class="card">
-              <h3>Lifetime</h3>
-              <div class="grid">
-                <section class="card">
-                  <h4 style="margin:0 0 6px 0">Commissions</h4>
-                  <p class="muted" id="metric-lt-comm">—</p>
-                </section>
-                <section class="card">
-                  <h4 style="margin:0 0 6px 0">Volume Traded</h4>
-                  <p class="muted" id="metric-lt-volume">—</p>
-                </section>
-                <section class="card">
-                  <h4 style="margin:0 0 6px 0">Deposits</h4>
-                  <p class="muted" id="metric-lt-deposits">—</p>
-                </section>
-                <section class="card">
-                  <h4 style="margin:0 0 6px 0">Clients</h4>
-                  <p class="muted" id="metric-lt-clients">—</p>
-                </section>
-              </div>
-            </section>
-      </div>
+          <div class="card" style="margin-bottom:16px">
+            <h3 style="margin-top:0">Lifetime</h3>
+            <div class="grid">
+              <section class="card">
+                <h4 style="margin:0 0 6px 0">Commissions</h4>
+                <p class="muted" id="metric-lt-comm">—</p>
+              </section>
+              <section class="card">
+                <h4 style="margin:0 0 6px 0">Volume Traded</h4>
+                <p class="muted" id="metric-lt-volume">—</p>
+              </section>
+              <section class="card">
+                <h4 style="margin:0 0 6px 0">Deposits</h4>
+                <p class="muted" id="metric-lt-deposits">—</p>
+              </section>
+              <section class="card">
+                <h4 style="margin:0 0 6px 0">Clients</h4>
+                <p class="muted" id="metric-lt-clients">—</p>
+              </section>
+            </div>
+          </div>
 
           <div class="card" style="margin-top:16px; margin-bottom:16px">
             <h3 style="margin-top:0">This Month</h3>

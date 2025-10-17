@@ -4126,5 +4126,289 @@
       "range": "$5,000+",
       "reward": "8%"
     }
+  ],
+  "symbols": [
+    {
+      "platform": "MT5",
+      "symbol": "EURUSD",
+      "unified_symb": "EUR/USD",
+      "unified_asset": "EUR/USD",
+      "unified_cate": "Forex",
+      "platform_syn": "EURUSD",
+      "duplicate_ch": false,
+      "validation_ch": true
+    },
+    {
+      "platform": "cTrader",
+      "symbol": "EURUSD",
+      "unified_symb": "EUR/USD",
+      "unified_asset": "EUR/USD",
+      "unified_cate": "Forex",
+      "platform_syn": "EURUSD",
+      "duplicate_ch": false,
+      "validation_ch": true
+    },
+    {
+      "platform": "DerivX",
+      "symbol": "EURUSD",
+      "unified_symb": "EUR/USD",
+      "unified_asset": "EUR/USD",
+      "unified_cate": "Forex",
+      "platform_syn": "EURUSD",
+      "duplicate_ch": false,
+      "validation_ch": true
+    },
+    {
+      "platform": "dTrader",
+      "symbol": "EURUSD",
+      "unified_symb": "EUR/USD",
+      "unified_asset": "EUR/USD",
+      "unified_cate": "Forex",
+      "platform_syn": "EURUSD",
+      "duplicate_ch": false,
+      "validation_ch": true
+    },
+    {
+      "platform": "MT5",
+      "symbol": "AAPL",
+      "unified_symb": "AAPL",
+      "unified_asset": "Apple Inc",
+      "unified_cate": "Stocks",
+      "platform_syn": "AAPL",
+      "duplicate_ch": false,
+      "validation_ch": true
+    },
+    {
+      "platform": "cTrader",
+      "symbol": "AAPL",
+      "unified_symb": "AAPL",
+      "unified_asset": "Apple Inc",
+      "unified_cate": "Stocks",
+      "platform_syn": "AAPL",
+      "duplicate_ch": false,
+      "validation_ch": true
+    },
+    {
+      "platform": "DerivX",
+      "symbol": "AAPL",
+      "unified_symb": "AAPL",
+      "unified_asset": "Apple Inc",
+      "unified_cate": "Stocks",
+      "platform_syn": "AAPL",
+      "duplicate_ch": false,
+      "validation_ch": true
+    },
+    {
+      "platform": "dTrader",
+      "symbol": "AAPL",
+      "unified_symb": "AAPL",
+      "unified_asset": "Apple Inc",
+      "unified_cate": "Stocks",
+      "platform_syn": "AAPL",
+      "duplicate_ch": false,
+      "validation_ch": true
+    },
+    {
+      "platform": "MT5",
+      "symbol": "BTCUSD",
+      "unified_symb": "BTC-USD",
+      "unified_asset": "Bitcoin",
+      "unified_cate": "Crypto",
+      "platform_syn": "BTCUSD",
+      "duplicate_ch": false,
+      "validation_ch": true
+    },
+    {
+      "platform": "cTrader",
+      "symbol": "BTCUSD",
+      "unified_symb": "BTC-USD",
+      "unified_asset": "Bitcoin",
+      "unified_cate": "Crypto",
+      "platform_syn": "BTCUSD",
+      "duplicate_ch": false,
+      "validation_ch": true
+    },
+    {
+      "platform": "DerivX",
+      "symbol": "BTCUSD",
+      "unified_symb": "BTC-USD",
+      "unified_asset": "Bitcoin",
+      "unified_cate": "Crypto",
+      "platform_syn": "BTCUSD",
+      "duplicate_ch": false,
+      "validation_ch": true
+    },
+    {
+      "platform": "dTrader",
+      "symbol": "BTCUSD",
+      "unified_symb": "BTC-USD",
+      "unified_asset": "Bitcoin",
+      "unified_cate": "Crypto",
+      "platform_syn": "BTCUSD",
+      "duplicate_ch": false,
+      "validation_ch": true
+    },
+    {
+      "platform": "MT5",
+      "symbol": "ETHUSD",
+      "unified_symb": "ETH-USD",
+      "unified_asset": "Ethereum",
+      "unified_cate": "Crypto",
+      "platform_syn": "ETHUSD",
+      "duplicate_ch": false,
+      "validation_ch": true
+    },
+    {
+      "platform": "cTrader",
+      "symbol": "ETHUSD",
+      "unified_symb": "ETH-USD",
+      "unified_asset": "Ethereum",
+      "unified_cate": "Crypto",
+      "platform_syn": "ETHUSD",
+      "duplicate_ch": false,
+      "validation_ch": true
+    },
+    {
+      "platform": "DerivX",
+      "symbol": "ETHUSD",
+      "unified_symb": "ETH-USD",
+      "unified_asset": "Ethereum",
+      "unified_cate": "Crypto",
+      "platform_syn": "ETHUSD",
+      "duplicate_ch": false,
+      "validation_ch": true
+    },
+    {
+      "platform": "dTrader",
+      "symbol": "ETHUSD",
+      "unified_symb": "ETH-USD",
+      "unified_asset": "Ethereum",
+      "unified_cate": "Crypto",
+      "platform_syn": "ETHUSD",
+      "duplicate_ch": false,
+      "validation_ch": true
+    },
+    {
+      "platform": "MT5",
+      "symbol": "XAUUSD",
+      "unified_symb": "XAUUSD",
+      "unified_asset": "Gold",
+      "unified_cate": "Commodities",
+      "platform_syn": "XAUUSD",
+      "duplicate_ch": false,
+      "validation_ch": true
+    },
+    {
+      "platform": "cTrader",
+      "symbol": "XAUUSD",
+      "unified_symb": "XAUUSD",
+      "unified_asset": "Gold",
+      "unified_cate": "Commodities",
+      "platform_syn": "XAUUSD",
+      "duplicate_ch": false,
+      "validation_ch": true
+    },
+    {
+      "platform": "DerivX",
+      "symbol": "XAUUSD",
+      "unified_symb": "XAUUSD",
+      "unified_asset": "Gold",
+      "unified_cate": "Commodities",
+      "platform_syn": "XAUUSD",
+      "duplicate_ch": false,
+      "validation_ch": true
+    },
+    {
+      "platform": "dTrader",
+      "symbol": "XAUUSD",
+      "unified_symb": "XAUUSD",
+      "unified_asset": "Gold",
+      "unified_cate": "Commodities",
+      "platform_syn": "XAUUSD",
+      "duplicate_ch": false,
+      "validation_ch": true
+    },
+    {
+      "platform": "MT5",
+      "symbol": "TSLA",
+      "unified_symb": "TSLA",
+      "unified_asset": "Tesla Inc",
+      "unified_cate": "Stocks",
+      "platform_syn": "TSLA",
+      "duplicate_ch": false,
+      "validation_ch": true
+    },
+    {
+      "platform": "cTrader",
+      "symbol": "TSLA",
+      "unified_symb": "TSLA",
+      "unified_asset": "Tesla Inc",
+      "unified_cate": "Stocks",
+      "platform_syn": "TSLA",
+      "duplicate_ch": false,
+      "validation_ch": true
+    },
+    {
+      "platform": "DerivX",
+      "symbol": "TSLA",
+      "unified_symb": "TSLA",
+      "unified_asset": "Tesla Inc",
+      "unified_cate": "Stocks",
+      "platform_syn": "TSLA",
+      "duplicate_ch": false,
+      "validation_ch": true
+    },
+    {
+      "platform": "dTrader",
+      "symbol": "TSLA",
+      "unified_symb": "TSLA",
+      "unified_asset": "Tesla Inc",
+      "unified_cate": "Stocks",
+      "platform_syn": "TSLA",
+      "duplicate_ch": false,
+      "validation_ch": true
+    }
+  ],
+  "trackingLinks": [
+    {
+      "partnerId": "P-0001",
+      "planType": "RevenueShare",
+      "url": "https://track.deriv.com/revshare/apex-affiliates"
+    },
+    {
+      "partnerId": "P-0001",
+      "planType": "Turnover",
+      "url": "https://track.deriv.com/turnover/apex-affiliates"
+    },
+    {
+      "partnerId": "P-0001",
+      "planType": "CPA",
+      "url": "https://track.deriv.com/cpa/apex-affiliates"
+    },
+    {
+      "partnerId": "P-0001",
+      "planType": "Master partner",
+      "url": "https://track.deriv.com/master/apex-affiliates"
+    },
+    {
+      "partnerId": "P-0002",
+      "planType": "RevenueShare",
+      "url": "https://track.deriv.com/revshare/brightreach-media"
+    },
+    {
+      "partnerId": "P-0002",
+      "planType": "Turnover",
+      "url": "https://track.deriv.com/turnover/brightreach-media"
+    },
+    {
+      "partnerId": "P-0002",
+      "planType": "CPA",
+      "url": "https://track.deriv.com/cpa/brightreach-media"
+    },
+    {
+      "partnerId": "P-0002",
+      "planType": "Master partner",
+      "url": "https://track.deriv.com/master/brightreach-media"
+    }
   ]
 }
