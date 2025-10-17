@@ -26,7 +26,7 @@
       select.removeChild(select.lastChild);
     }
     
-    window.DataManager.load()
+    window.ApiManager.loadDashboardData()
       .then(function (db) {
         var partners = Array.isArray(db.partners) ? db.partners : [];
         partners.forEach(function (p) {
@@ -133,7 +133,7 @@
 
   function initHomeMetrics() {
     var select = document.getElementById('partnerSelect');
-    window.DataManager.load()
+    window.ApiManager.loadDashboardData()
       .then(function (db) {
         function update() {
           var partnerId = select ? select.value : '';
@@ -789,7 +789,7 @@
     var select = document.getElementById('partnerSelect');
     if (!select) return;
     
-    window.DataManager.load()
+    window.ApiManager.loadDashboardData()
       .then(function(db) {
         function update() {
           var partnerId = select.value;
