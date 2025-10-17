@@ -8,6 +8,10 @@
   <link rel="icon" href="data:,">
   <meta name="color-scheme" content="dark light">
   <meta name="description" content="Commissions page">
+  
+  <!-- API Manager and Stacked Chart -->
+  <script src="api-manager.js"></script>
+  <script src="stacked-chart.js"></script>
   <script defer src="script.js"></script>
 </head>
 <body>
@@ -106,7 +110,27 @@
           </div>
 
       <div class="card">
-        <p class="muted">Commission chart placeholder</p>
+        <h3 style="margin-top:0">Commissions by Plan</h3>
+        
+        <!-- Period selector -->
+        <div style="margin-bottom: 16px; display: flex; gap: 16px; align-items: center;">
+          <label style="font-weight: 600; color: var(--text);">Group by:</label>
+          <div style="display: flex; gap: 12px;">
+            <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+              <input type="radio" name="periodType" value="daily" checked style="cursor: pointer;">
+              <span>Daily</span>
+            </label>
+            <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+              <input type="radio" name="periodType" value="monthly" style="cursor: pointer;">
+              <span>Monthly</span>
+            </label>
+          </div>
+        </div>
+        
+        <!-- Chart container -->
+        <div id="commissions-stacked-chart" style="min-height: 400px;">
+          <p class="muted">Loading chart...</p>
+        </div>
       </div>
 
           <div class="footer">v1.0 • Static template</div>

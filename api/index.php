@@ -45,6 +45,10 @@ switch ($path) {
         require_once 'endpoints/charts.php';
         break;
         
+    case 'commissions':
+        require_once 'endpoints/commissions.php';
+        break;
+        
     default:
         http_response_code(404);
         echo json_encode(ApiResponse::error('Endpoint not found', 404));
