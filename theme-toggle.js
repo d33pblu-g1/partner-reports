@@ -62,8 +62,17 @@
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', setupToggleButton);
     } else {
+      // Try immediately
       setupToggleButton();
     }
+    
+    // Also try when window loads (backup)
+    window.addEventListener('load', () => {
+      const button = document.getElementById('theme-toggle');
+      if (button && !button.hasAttribute('data-theme-initialized')) {
+        setupToggleButton();
+      }
+    });
   }
   
   /**
@@ -73,15 +82,33 @@
     const toggleButton = document.getElementById('theme-toggle');
     
     if (toggleButton) {
-      toggleButton.addEventListener('click', toggleTheme);
+      // Skip if already initialized
+      if (toggleButton.hasAttribute('data-theme-initialized')) {
+        return;
+      }
+      
+      // Mark as initialized
+      toggleButton.setAttribute('data-theme-initialized', 'true');
+      
+      // Add click listener
+      toggleButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleTheme();
+      });
       
       // Add keyboard support
       toggleButton.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
+          e.stopPropagation();
           toggleTheme();
         }
       });
+      
+      console.log('✓ Theme toggle initialized');
+    } else {
+      console.warn('⚠ Theme toggle button not found');
     }
   }
   

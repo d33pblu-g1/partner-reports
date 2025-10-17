@@ -395,8 +395,9 @@ main.panel {
 }
 
 :root[data-theme="light"] .card {
-  background: #f8fafc;
-  border: 1px solid rgba(15, 23, 42, 0.1);
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.15);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 :root[data-theme="light"] main.panel {
@@ -405,11 +406,32 @@ main.panel {
 }
 
 :root[data-theme="light"] .side-nav a:hover {
-  background: rgba(15, 23, 42, 0.05);
+  background: rgba(15, 23, 42, 0.08);
+  color: var(--text);
 }
 
 :root[data-theme="light"] .side-nav a.active {
-  background: rgba(2, 132, 199, 0.1);
+  background: rgba(2, 132, 199, 0.15);
+  color: var(--accent);
+}
+
+/* Light theme button styles */
+:root[data-theme="light"] select,
+:root[data-theme="light"] input,
+:root[data-theme="light"] button {
+  background: #ffffff;
+  border-color: rgba(15, 23, 42, 0.2);
+  color: var(--text);
+}
+
+:root[data-theme="light"] .theme-toggle {
+  background: #ffffff;
+  border-color: rgba(15, 23, 42, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+:root[data-theme="light"] .theme-toggle:hover {
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.2);
 }
 
 @media (max-width: 768px) {
