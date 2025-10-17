@@ -253,6 +253,16 @@ def main():
         migrate_trades(connection, data)
         migrate_deposits(connection, data)
         
+        # Award badges to partners
+        print("\nAwarding badges to partners...")
+        try:
+            cursor = connection.cursor()
+            cursor.execute("CALL award_badges()")
+            connection.commit()
+            print("Badges awarded successfully!")
+        except Error as e:
+            print(f"Note: Could not award badges (may need to run badges_table.sql first): {e}")
+        
         print("\nMigration completed successfully!")
         
         # Show summary
@@ -269,11 +279,19 @@ def main():
         cursor.execute("SELECT COUNT(*) FROM deposits")
         deposits_count = cursor.fetchone()[0]
         
+        # Try to get badge count
+        try:
+            cursor.execute("SELECT COUNT(*) FROM partner_badges")
+            badges_count = cursor.fetchone()[0]
+        except:
+            badges_count = 'N/A'
+        
         print(f"\nDatabase Summary:")
         print(f"- Partners: {partners_count}")
         print(f"- Clients: {clients_count}")
         print(f"- Trades: {trades_count}")
         print(f"- Deposits: {deposits_count}")
+        print(f"- Badges Awarded: {badges_count}")
         
     except Error as e:
         print(f"Migration failed: {e}")

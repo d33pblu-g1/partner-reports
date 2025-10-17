@@ -49,6 +49,10 @@ switch ($path) {
         require_once 'endpoints/commissions.php';
         break;
         
+    case 'badges':
+        require_once 'endpoints/badges.php';
+        break;
+        
     default:
         http_response_code(404);
         echo json_encode(ApiResponse::error('Endpoint not found', 404));
