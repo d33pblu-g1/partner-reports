@@ -28,10 +28,14 @@
   function applyTheme(theme) {
     const root = document.documentElement;
     
+    console.log(`🎨 Applying theme: ${theme}`);
+    
     if (theme === 'light') {
       root.setAttribute('data-theme', 'light');
+      console.log('✓ Light theme applied');
     } else {
       root.removeAttribute('data-theme');
+      console.log('✓ Dark theme applied');
     }
     
     // Save to localStorage
@@ -47,6 +51,7 @@
   function toggleTheme() {
     const currentTheme = getCurrentTheme();
     const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    console.log(`🔄 Toggling theme: ${currentTheme} → ${newTheme}`);
     applyTheme(newTheme);
   }
   

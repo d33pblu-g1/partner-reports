@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Theme Toggle Test</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="theme-toggle.js"></script>
+  <style>
+    .test-info {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: var(--panel);
+      border: 2px solid var(--accent);
+      padding: 20px;
+      border-radius: 8px;
+      z-index: 999;
+    }
+    .test-info h3 {
+      margin: 0 0 10px 0;
+      color: var(--accent);
+    }
+    .test-info p {
+      margin: 5px 0;
+      color: var(--text);
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <div class="content" style="width: 100%;">
+      <!-- Theme Toggle -->
+      <div class="theme-toggle-container">
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+          <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+          <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+      </div>
+      
+      <div class="container">
+        <main class="panel">
+          <h2 class="page-title">Theme Toggle Test Page</h2>
+          <p class="page-subtitle">Click the button in the top-right to test theme switching</p>
+          
+          <div class="card" style="margin-bottom: 20px;">
+            <h3>Current Theme Status</h3>
+            <p>Background: <span style="color: var(--bg);">██████</span> var(--bg)</p>
+            <p>Panel: <span style="color: var(--panel);">██████</span> var(--panel)</p>
+            <p>Text: <span style="color: var(--text);">██████</span> var(--text)</p>
+            <p>Muted: <span style="color: var(--muted);">██████</span> var(--muted)</p>
+            <p>Accent: <span style="color: var(--accent);">██████</span> var(--accent)</p>
+          </div>
+          
+          <div class="card">
+            <h3>Instructions</h3>
+            <ol>
+              <li>Look at the top-right corner for the theme toggle button</li>
+              <li>If you see a moon icon 🌙 - you're in DARK theme</li>
+              <li>If you see a sun icon ☀️ - you're in LIGHT theme</li>
+              <li>Click the button to switch themes</li>
+              <li>The entire page should smoothly transition</li>
+              <li>Refresh the page - your theme choice should persist</li>
+            </ol>
+          </div>
+        </main>
+      </div>
+    </div>
+  </div>
+  
+  <div class="test-info">
+    <h3>Debug Info</h3>
+    <p>Current Theme: <strong id="current-theme">Loading...</strong></p>
+    <p>Data Attribute: <strong id="data-attr">Loading...</strong></p>
+    <p>Button Found: <strong id="button-status">Loading...</strong></p>
+    <p>Click Count: <strong id="click-count">0</strong></p>
+  </div>
+  
+  <script>
+    let clickCount = 0;
+    
+    function updateDebugInfo() {
+      const theme = window.ThemeToggle ? window.ThemeToggle.get() : 'N/A';
+      const dataAttr = document.documentElement.getAttribute('data-theme') || 'none (dark)';
+      const button = document.getElementById('theme-toggle');
+      
+      document.getElementById('current-theme').textContent = theme;
+      document.getElementById('data-attr').textContent = dataAttr;
+      document.getElementById('button-status').textContent = button ? 'Yes ✓' : 'No ✗';
+    }
+    
+    // Update debug info on load
+    window.addEventListener('load', () => {
+      updateDebugInfo();
+      
+      // Listen for theme changes
+      window.addEventListener('themechange', (e) => {
+        clickCount++;
+        document.getElementById('click-count').textContent = clickCount;
+        setTimeout(updateDebugInfo, 100);
+      });
+      
+      // Also listen for clicks on the button
+      const button = document.getElementById('theme-toggle');
+      if (button) {
+        button.addEventListener('click', () => {
+          console.log('Button clicked!');
+        });
+      }
+    });
+    
+    // Initial update
+    setTimeout(updateDebugInfo, 500);
+  </script>
+</body>
+</html>
+
