@@ -7,9 +7,15 @@ require_once 'config.php';
 
 // Get request method and path
 $method = $_SERVER['REQUEST_METHOD'];
-$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$path = str_replace('/api', '', $path);
-$path = trim($path, '/');
+
+// Check if endpoint is provided as query parameter (for direct access)
+if (isset($_GET['endpoint'])) {
+    $path = $_GET['endpoint'];
+} else {
+    $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    $path = str_replace('/api', '', $path);
+    $path = trim($path, '/');
+}
 
 // Get query parameters
 $queryParams = $_GET;

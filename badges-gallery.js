@@ -187,7 +187,7 @@
       params.append('action', 'progress');
       params.append('partner_id', partnerId);
       
-      const response = await fetch(`/api/badges?${params.toString()}`);
+      const response = await fetch(`api/index.php?${params.toString()}&endpoint=badges`);
       const result = await response.json();
       
       if (!result.success) {

@@ -1,0 +1,34 @@
+# Enable URL rewriting
+RewriteEngine On
+
+# API routing - route /api/* to api/index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^api/(.*)$ api/index.php [L,QSA]
+
+# Prevent direct access to sensitive files
+<FilesMatch "\.(sql|md|json)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Allow access to database.json for development (remove in production)
+<Files "database.json">
+    Order allow,deny
+    Allow from all
+</Files>
+
+# Set default charset
+AddDefaultCharset UTF-8
+
+# Enable CORS for API (adjust in production)
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+    Header set Access-Control-Allow-Headers "Content-Type, Authorization"
+</IfModule>
+
+# Handle OPTIONS requests for CORS preflight
+RewriteCond %{REQUEST_METHOD} OPTIONS
+RewriteRule ^(.*)$ $1 [R=200,L]
+

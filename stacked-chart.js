@@ -232,7 +232,7 @@
       params.append('limit', periodType === 'daily' ? '30' : '12');
       if (partnerId) params.append('partner_id', partnerId);
       
-      const response = await fetch(`/api/commissions?${params.toString()}`);
+      const response = await fetch(`api/index.php?${params.toString()}&endpoint=commissions`);
       const result = await response.json();
       
       if (!result.success) {

@@ -3,6 +3,8 @@
  * Commissions API endpoint
  */
 
+require_once __DIR__ . '/../config.php';
+
 $db = getDB();
 
 try {
@@ -51,8 +53,16 @@ function getStackedCommissionData($db, $partnerId = null, $periodType = 'daily',
  * Get stacked data from cube table
  */
 function getStackedDataFromCube($db, $partnerId, $periodType, $limit) {
-    $whereClause = $partnerId ? "WHERE partner_id = ?" : "WHERE partner_id IS NOT NULL OR partner_id IS NULL";
-    $params = $partnerId ? [$periodType, $partnerId] : [$periodType];
+    $params = [$periodType];
+    $wherePartner = "";
+    
+    if ($partnerId) {
+        $wherePartner = "AND partner_id = ?";
+        $params[] = $partnerId;
+    }
+    
+    $daysBack = $periodType === 'daily' ? $limit : $limit * 30;
+    $params[] = $daysBack;
     
     $stmt = $db->prepare("
         SELECT 
@@ -61,13 +71,12 @@ function getStackedDataFromCube($db, $partnerId, $periodType, $limit) {
             SUM(total_commission) as commission
         FROM cube_commissions_by_plan
         WHERE period_type = ?
-        " . ($partnerId ? "AND partner_id = ?" : "") . "
+        $wherePartner
         AND date >= DATE_SUB(CURDATE(), INTERVAL ? DAY)
         GROUP BY date, commission_plan
         ORDER BY date ASC
     ");
     
-    $params[] = $periodType === 'daily' ? $limit : $limit * 30;
     $stmt->execute($params);
     $results = $stmt->fetchAll();
     
@@ -111,6 +120,11 @@ function formatStackedData($results, $periodType) {
         'series' => []
     ];
     
+    // If no results, return empty data structure
+    if (empty($results)) {
+        return $data;
+    }
+    
     // Collect all unique dates and commission plans
     $dates = [];
     $plans = [];
@@ -141,10 +155,14 @@ function formatStackedData($results, $periodType) {
     
     // Format dates for display
     $data['dates'] = array_map(function($date) use ($periodType) {
-        $dt = new DateTime($date);
-        return $periodType === 'daily' 
-            ? $dt->format('M d') 
-            : $dt->format('M Y');
+        try {
+            $dt = new DateTime($date);
+            return $periodType === 'daily' 
+                ? $dt->format('M d') 
+                : $dt->format('M Y');
+        } catch (Exception $e) {
+            return $date;
+        }
     }, $dates);
     
     // Create series data
