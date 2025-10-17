@@ -644,9 +644,15 @@ main.panel {
 :root[data-theme="light"] select,
 :root[data-theme="light"] input,
 :root[data-theme="light"] button {
-  background: #ffffff;
-  border-color: rgba(15, 23, 42, 0.2);
-  color: var(--text);
+  background: #ffffff !important;
+  border-color: rgba(15, 23, 42, 0.2) !important;
+  color: var(--text) !important;
+}
+
+:root[data-theme="light"] #partnerSelect {
+  background: #ffffff !important;
+  border-color: rgba(15, 23, 42, 0.2) !important;
+  color: var(--text) !important;
 }
 
 :root[data-theme="light"] .theme-toggle {
