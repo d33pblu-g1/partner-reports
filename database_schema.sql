@@ -23,29 +23,31 @@ CREATE TABLE partner_tiers (
 
 -- Clients table
 CREATE TABLE clients (
-    binary_user_id VARCHAR(20) PRIMARY KEY,
+    binary_user_id VARCHAR(50) PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    join_date DATE,
-    account_type VARCHAR(50),
-    account_number VARCHAR(50),
-    country VARCHAR(100),
-    lifetime_deposits DECIMAL(15,2) DEFAULT 0.00,
-    commission_plan VARCHAR(100),
-    tracking_link_used VARCHAR(100),
-    tier VARCHAR(50),
-    sub_partner BOOLEAN DEFAULT FALSE,
-    partner_id VARCHAR(20),
     email VARCHAR(255),
-    preferred_language VARCHAR(50),
+    country VARCHAR(100),
+    joinDate DATE,
+    partnerId VARCHAR(20),
+    tier VARCHAR(50),
     gender VARCHAR(20),
     age INT,
+    account_type VARCHAR(50),
+    accountNumber TEXT,
+    sub_partner BOOLEAN DEFAULT FALSE,
+    preferredLanguage VARCHAR(100),
+    commissionPlan VARCHAR(100),
+    trackingLinkUsed VARCHAR(255),
+    total_trades INT,
+    lifetimeDeposits DECIMAL(15,2),
+    PNL DECIMAL(15,2),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (partner_id) REFERENCES partners(partner_id) ON DELETE SET NULL,
-    INDEX idx_partner_id (partner_id),
+    FOREIGN KEY (partnerId) REFERENCES partners(partner_id) ON DELETE SET NULL,
+    INDEX idx_partnerId (partnerId),
     INDEX idx_country (country),
     INDEX idx_tier (tier),
-    INDEX idx_join_date (join_date)
+    INDEX idx_joinDate (joinDate)
 );
 
 -- Trades table
