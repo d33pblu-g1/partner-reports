@@ -331,8 +331,9 @@ main.panel {
 .theme-toggle-container {
   position: fixed;
   top: 20px;
-  right: 20px;
+  right: 0;
   z-index: 1000;
+  padding-right: 20px;
 }
 
 .theme-toggle {
@@ -437,7 +438,8 @@ main.panel {
 @media (max-width: 768px) {
   .theme-toggle-container {
     top: 12px;
-    right: 12px;
+    right: 0;
+    padding-right: 12px;
   }
   
   .theme-toggle {
