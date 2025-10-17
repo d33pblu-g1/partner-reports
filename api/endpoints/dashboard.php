@@ -3,6 +3,8 @@
  * Dashboard API endpoint
  */
 
+require_once __DIR__ . '/../config.php';
+
 $db = getDB();
 
 try {
