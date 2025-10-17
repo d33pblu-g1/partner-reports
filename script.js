@@ -15,34 +15,72 @@
   }
 })();
 
-// Populate partner select on all pages from database.json and remember selection
+// Populate partner select on all pages and remember selection
 (function () {
   function populatePartnerSelect() {
     var select = document.getElementById('partnerSelect');
     if (!select) return;
     
+    // Show loading state
+    var loadingOption = document.createElement('option');
+    loadingOption.textContent = 'Loading partners...';
+    loadingOption.disabled = true;
+    
     // Clear existing options except "All partners"
     while (select.children.length > 1) {
       select.removeChild(select.lastChild);
     }
+    select.appendChild(loadingOption);
     
-    window.ApiManager.loadDashboardData()
-      .then(function (db) {
-        var partners = Array.isArray(db.partners) ? db.partners : [];
+    // Load partners from API
+    window.ApiManager.loadPartners()
+      .then(function (partners) {
+        // Remove loading option
+        if (loadingOption.parentNode) {
+          loadingOption.parentNode.removeChild(loadingOption);
+        }
+        
+        if (!Array.isArray(partners) || partners.length === 0) {
+          var noDataOption = document.createElement('option');
+          noDataOption.textContent = 'No partners found';
+          noDataOption.disabled = true;
+          select.appendChild(noDataOption);
+          console.warn('No partners data available');
+          return;
+        }
+        
+        // Populate with partners
         partners.forEach(function (p) {
-          if (!p || !p.partnerId) return;
+          if (!p || !p.partner_id) return;
           var opt = document.createElement('option');
-          opt.value = p.partnerId;
-          opt.textContent = p.name + ' (' + p.partnerId + ')';
+          opt.value = p.partner_id;
+          opt.textContent = p.name + ' (' + p.partner_id + ')';
           select.appendChild(opt);
         });
+        
+        console.log('✓ Loaded ' + partners.length + ' partners into dropdown');
+        
+        // Restore saved selection
         var saved = localStorage.getItem('selectedPartnerId') || '';
         if (saved) select.value = saved;
+        
+        // Save selection on change
         select.addEventListener('change', function () {
           localStorage.setItem('selectedPartnerId', select.value);
         });
       })
-      .catch(function () { /* ignore */ });
+      .catch(function (error) {
+        // Remove loading option
+        if (loadingOption.parentNode) {
+          loadingOption.parentNode.removeChild(loadingOption);
+        }
+        
+        var errorOption = document.createElement('option');
+        errorOption.textContent = 'Error loading partners';
+        errorOption.disabled = true;
+        select.appendChild(errorOption);
+        console.error('Failed to load partners:', error);
+      });
   }
 
   if (document.readyState === 'loading') {
