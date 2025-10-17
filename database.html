@@ -137,9 +137,9 @@
         // Extract data from API responses
         var db = {
           partners: partnersResp.success ? partnersResp.data : [],
-          clients: clientsResp.success ? clientsResp.data : [],
-          trades: dashboardResp.success ? dashboardResp.data.trades : (dashboardResp.trades || []),
-          deposits: dashboardResp.success ? dashboardResp.data.deposits : (dashboardResp.deposits || [])
+          clients: clientsResp.success ? (clientsResp.data.clients || clientsResp.data) : [],
+          trades: dashboardResp.success ? (dashboardResp.data.trades || []) : (dashboardResp.trades || []),
+          deposits: dashboardResp.success ? (dashboardResp.data.deposits || []) : (dashboardResp.deposits || [])
         };
         
         console.log('✓ Loaded database tables from MySQL:', {

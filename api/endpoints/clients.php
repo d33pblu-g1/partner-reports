@@ -74,7 +74,7 @@ try {
                 break;
             }
             
-            $requiredFields = ['binary_user_id', 'name', 'partner_id'];
+            $requiredFields = ['binary_user_id', 'name', 'partnerId'];
             foreach ($requiredFields as $field) {
                 if (!isset($input[$field])) {
                     http_response_code(400);
@@ -85,30 +85,32 @@ try {
             
             $stmt = $db->prepare("
                 INSERT INTO clients (
-                    binary_user_id, name, join_date, account_type, account_number,
-                    country, lifetime_deposits, commission_plan, tracking_link_used,
-                    tier, sub_partner, partner_id, email, preferred_language,
-                    gender, age
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    binary_user_id, name, email, country, joinDate, partnerId,
+                    tier, gender, age, account_type, accountNumber, sub_partner,
+                    preferredLanguage, commissionPlan, trackingLinkUsed, total_trades,
+                    lifetimeDeposits, PNL
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ");
             
             $stmt->execute([
                 $input['binary_user_id'],
                 $input['name'],
-                $input['join_date'] ?? null,
-                $input['account_type'] ?? null,
-                $input['account_number'] ?? null,
-                $input['country'] ?? null,
-                $input['lifetime_deposits'] ?? 0.0,
-                $input['commission_plan'] ?? null,
-                $input['tracking_link_used'] ?? null,
-                $input['tier'] ?? null,
-                $input['sub_partner'] ?? false,
-                $input['partner_id'],
                 $input['email'] ?? null,
-                $input['preferred_language'] ?? null,
+                $input['country'] ?? null,
+                $input['joinDate'] ?? $input['join_date'] ?? null,
+                $input['partnerId'] ?? $input['partner_id'] ?? null,
+                $input['tier'] ?? null,
                 $input['gender'] ?? null,
-                $input['age'] ?? null
+                $input['age'] ?? null,
+                $input['account_type'] ?? null,
+                $input['accountNumber'] ?? $input['account_number'] ?? null,
+                $input['sub_partner'] ?? false,
+                $input['preferredLanguage'] ?? $input['preferred_language'] ?? null,
+                $input['commissionPlan'] ?? $input['commission_plan'] ?? null,
+                $input['trackingLinkUsed'] ?? $input['tracking_link_used'] ?? null,
+                $input['total_trades'] ?? null,
+                $input['lifetimeDeposits'] ?? $input['lifetime_deposits'] ?? null,
+                $input['PNL'] ?? null
             ]);
             
             echo json_encode(ApiResponse::success(['id' => $input['binary_user_id']], 'Client created successfully'));
