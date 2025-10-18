@@ -20,11 +20,25 @@
         .then(r => r.json())
         .then(response => {
           if (!response.success || !response.data || response.data.length === 0) {
-            const container = document.getElementById(containerId);
-            if (container) {
-              container.innerHTML = '<div style="text-align: center; padding: 40px; color: var(--muted);">No data available for partner scorecard</div>';
-            }
-            return;
+            // Fallback to metrics API
+            return fetch(`api/index.php?endpoint=metrics&partner_id=${partnerId}`)
+              .then(r => r.json())
+              .then(metricsResponse => {
+                if (metricsResponse.success && metricsResponse.data) {
+                  this.renderScorecardFromMetrics(containerId, metricsResponse.data);
+                } else {
+                  const container = document.getElementById(containerId);
+                  if (container) {
+                    container.innerHTML = '<div style="text-align: center; padding: 40px; color: var(--muted);">No data available for partner scorecard</div>';
+                  }
+                }
+              })
+              .catch(() => {
+                const container = document.getElementById(containerId);
+                if (container) {
+                  container.innerHTML = '<div style="text-align: center; padding: 40px; color: var(--muted);">No data available for partner scorecard</div>';
+                }
+              });
           }
           
           const data = response.data[0];
@@ -108,6 +122,84 @@
             container.innerHTML = '<div style="text-align: center; padding: 40px; color: var(--muted);">Failed to load scorecard data</div>';
           }
         });
+    },
+    
+    /**
+     * Render scorecard from metrics data (fallback)
+     */
+    renderScorecardFromMetrics: function(containerId, metricsData) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      
+      const kpis = [
+        {
+          title: 'Total Revenue',
+          value: metricsData.total_commissions || 0,
+          format: 'currency',
+          trend: this.calculateTrend(metricsData.month_commissions, metricsData.total_commissions),
+          icon: '💰',
+          color: '#10b981'
+        },
+        {
+          title: 'Active Clients',
+          value: metricsData.total_clients || 0,
+          format: 'number',
+          trend: this.calculateTrend(metricsData.mtd_clients, metricsData.total_clients),
+          icon: '👥',
+          color: '#38bdf8'
+        },
+        {
+          title: 'Total Trades',
+          value: metricsData.total_trades || 0,
+          format: 'number',
+          trend: this.calculateTrend(metricsData.mtd_trades, metricsData.total_trades),
+          icon: '📈',
+          color: '#f59e0b'
+        },
+        {
+          title: 'Avg. Trade Size',
+          value: metricsData.total_trades > 0 ? (metricsData.total_commissions / metricsData.total_trades) : 0,
+          format: 'currency',
+          trend: 0,
+          icon: '📊',
+          color: '#8b5cf6'
+        }
+      ];
+      
+      let html = '<div class="kpi-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">';
+      
+      kpis.forEach(kpi => {
+        const formattedValue = this.formatValue(kpi.value, kpi.format);
+        const trendIcon = kpi.trend > 0 ? '↗️' : kpi.trend < 0 ? '↘️' : '→';
+        const trendColor = kpi.trend > 0 ? '#10b981' : kpi.trend < 0 ? '#ef4444' : '#94a3b8';
+        
+        html += `
+          <div class="kpi-card" style="background: var(--panel); border: 1px solid rgba(148,163,184,0.2); border-radius: 12px; padding: 20px; text-align: center; transition: transform 0.2s ease;">
+            <div style="font-size: 32px; margin-bottom: 8px;">${kpi.icon}</div>
+            <div style="font-size: 24px; font-weight: 700; color: ${kpi.color}; margin-bottom: 4px;">${formattedValue}</div>
+            <div style="font-size: 14px; color: var(--muted); margin-bottom: 8px;">${kpi.title}</div>
+            <div style="font-size: 12px; color: ${trendColor}; display: flex; align-items: center; justify-content: center; gap: 4px;">
+              <span>${trendIcon}</span>
+              <span>${Math.abs(kpi.trend).toFixed(1)}%</span>
+            </div>
+          </div>
+        `;
+      });
+      
+      html += '</div>';
+      container.innerHTML = html;
+      
+      // Add hover effects
+      container.querySelectorAll('.kpi-card').forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          card.style.transform = 'translateY(-2px)';
+          card.style.boxShadow = '0 8px 25px rgba(0,0,0,0.15)';
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'translateY(0)';
+          card.style.boxShadow = 'none';
+        });
+      });
     },
     
     /**
