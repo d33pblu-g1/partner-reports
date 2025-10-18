@@ -367,10 +367,13 @@ function populateCountryDropdown(partnerId) {
             window.EnhancedUX.showInsights('quick-insights', partnerId);
           }
           
-          // Render 6-month chart with data
-          if (transformedMetrics.last6Months) {
-            renderSixMonthChartFromMetrics(transformedMetrics.last6Months);
-          }
+  // Render 6-month chart with data
+  if (transformedMetrics.last6Months) {
+    renderSixMonthChartFromMetrics(transformedMetrics.last6Months);
+  }
+  
+  // Initialize other home page charts
+  initializeHomePageCharts(partnerId);
         })
         .catch(function (error) {
           console.error('Failed to load metrics:', error);
@@ -504,6 +507,273 @@ function populateCountryDropdown(partnerId) {
     }
   };
 })();
+
+// Render 6-month chart from metrics data
+function renderSixMonthChartFromMetrics(last6Months) {
+  var el = document.getElementById('chart-6mo-comm');
+  if (!el || !last6Months) return;
+  
+  el.innerHTML = '';
+  
+  var width = el.clientWidth || 800;
+  var height = 300;
+  var margin = {top: 20, right: 40, bottom: 40, left: 60};
+  
+  var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('width', width);
+  svg.setAttribute('height', height);
+  svg.style.background = 'rgba(148,163,184,0.05)';
+  
+  // Create chart content
+  var chartGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+  chartGroup.setAttribute('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+  
+  var chartWidth = width - margin.left - margin.right;
+  var chartHeight = height - margin.top - margin.bottom;
+  
+  // Calculate scales
+  var maxValue = Math.max.apply(Math, last6Months);
+  var yScale = chartHeight / maxValue;
+  
+  // Generate month labels
+  var now = new Date();
+  var monthLabels = [];
+  for (var i = 5; i >= 0; i--) {
+    var d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+    monthLabels.push(d.toLocaleString(undefined, { month: 'short', year: '2-digit' }));
+  }
+  
+  // Draw bars
+  var barWidth = chartWidth / last6Months.length;
+  last6Months.forEach(function(value, i) {
+    var barHeight = value * yScale;
+    var x = i * barWidth;
+    var y = chartHeight - barHeight;
+    
+    var rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    rect.setAttribute('x', x + barWidth * 0.1);
+    rect.setAttribute('y', y);
+    rect.setAttribute('width', barWidth * 0.8);
+    rect.setAttribute('height', barHeight);
+    rect.setAttribute('fill', '#3b82f6');
+    rect.setAttribute('rx', '4');
+    
+    chartGroup.appendChild(rect);
+    
+    // Add value label
+    if (value > 0) {
+      var text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      text.setAttribute('x', x + barWidth / 2);
+      text.setAttribute('y', y - 5);
+      text.setAttribute('text-anchor', 'middle');
+      text.setAttribute('font-size', '12');
+      text.setAttribute('fill', '#64748b');
+      text.textContent = '$' + Math.round(value).toLocaleString();
+      chartGroup.appendChild(text);
+    }
+    
+    // Add month label
+    var monthText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    monthText.setAttribute('x', x + barWidth / 2);
+    monthText.setAttribute('y', chartHeight + 20);
+    monthText.setAttribute('text-anchor', 'middle');
+    monthText.setAttribute('font-size', '12');
+    monthText.setAttribute('fill', '#64748b');
+    monthText.textContent = monthLabels[i];
+    chartGroup.appendChild(monthText);
+  });
+  
+  svg.appendChild(chartGroup);
+  el.appendChild(svg);
+}
+
+// Initialize all home page charts
+function initializeHomePageCharts(partnerId) {
+  if (!partnerId) return;
+  
+  // Initialize KPI Scorecard
+  if (window.AdvancedCharts && document.getElementById('kpi-scorecard')) {
+    window.AdvancedCharts.renderKPIScorecard('kpi-scorecard', partnerId);
+  }
+  
+  // Initialize Performance Radar
+  if (window.AdvancedCharts && document.getElementById('performance-radar')) {
+    window.AdvancedCharts.renderPerformanceRadar('performance-radar', partnerId);
+  }
+  
+  // Initialize Revenue Attribution
+  if (window.AdvancedCharts && document.getElementById('revenue-attribution')) {
+    window.AdvancedCharts.renderRevenueAttribution('revenue-attribution', partnerId);
+  }
+  
+  // Initialize Top Countries Chart
+  if (document.getElementById('top-countries-chart')) {
+    loadTopCountriesChart(partnerId);
+  }
+  
+  // Initialize Client Growth Trend
+  if (document.getElementById('client-growth-chart')) {
+    loadClientGrowthChart(partnerId);
+  }
+  
+  // Initialize Revenue by Platform
+  if (document.getElementById('revenue-platform-chart')) {
+    loadRevenuePlatformChart(partnerId);
+  }
+  
+  // Initialize Deposit Trends
+  if (document.getElementById('deposit-trends-chart')) {
+    loadDepositTrendsChart(partnerId);
+  }
+}
+
+// Load Top Countries Chart
+function loadTopCountriesChart(partnerId) {
+  fetch(`api/index.php?endpoint=cubes&cube=country_performance&partner_id=${partnerId}`)
+    .then(r => r.json())
+    .then(response => {
+      if (!response.success || !response.data) return;
+      
+      const container = document.getElementById('top-countries-chart');
+      if (!container) return;
+      
+      const data = response.data.slice(0, 10); // Top 10 countries
+      const width = container.clientWidth || 400;
+      const height = 300;
+      
+      let svg = `<svg width="${width}" height="${height}" style="background: rgba(148,163,184,0.05);">`;
+      
+      const maxValue = Math.max(...data.map(d => parseFloat(d.total_commissions)));
+      const barHeight = 20;
+      const spacing = 25;
+      
+      data.forEach((country, i) => {
+        const barWidth = (parseFloat(country.total_commissions) / maxValue) * (width - 100);
+        const y = i * spacing + 20;
+        
+        svg += `<rect x="80" y="${y}" width="${barWidth}" height="${barHeight}" fill="#3b82f6" rx="4"/>`;
+        svg += `<text x="75" y="${y + 15}" text-anchor="end" font-size="12" fill="#64748b">${country.country}</text>`;
+        svg += `<text x="${barWidth + 85}" y="${y + 15}" font-size="12" fill="#64748b">$${parseFloat(country.total_commissions).toLocaleString()}</text>`;
+      });
+      
+      svg += '</svg>';
+      container.innerHTML = svg;
+    })
+    .catch(err => console.error('Error loading top countries chart:', err));
+}
+
+// Load Client Growth Chart
+function loadClientGrowthChart(partnerId) {
+  fetch(`api/index.php?endpoint=cubes&cube=daily_signups&partner_id=${partnerId}`)
+    .then(r => r.json())
+    .then(response => {
+      if (!response.success || !response.data) return;
+      
+      const container = document.getElementById('client-growth-chart');
+      if (!container) return;
+      
+      const data = response.data.slice(-30); // Last 30 days
+      const width = container.clientWidth || 400;
+      const height = 300;
+      
+      let svg = `<svg width="${width}" height="${height}" style="background: rgba(148,163,184,0.05);">`;
+      
+      const maxValue = Math.max(...data.map(d => parseInt(d.signup_count)));
+      const barWidth = width / data.length;
+      
+      data.forEach((day, i) => {
+        const barHeight = (parseInt(day.signup_count) / maxValue) * (height - 40);
+        const x = i * barWidth;
+        const y = height - barHeight - 20;
+        
+        svg += `<rect x="${x}" y="${y}" width="${barWidth * 0.8}" height="${barHeight}" fill="#10b981" rx="2"/>`;
+      });
+      
+      svg += '</svg>';
+      container.innerHTML = svg;
+    })
+    .catch(err => console.error('Error loading client growth chart:', err));
+}
+
+// Load Revenue by Platform Chart
+function loadRevenuePlatformChart(partnerId) {
+  fetch(`api/index.php?endpoint=cubes&cube=daily_commissions_platform&partner_id=${partnerId}`)
+    .then(r => r.json())
+    .then(response => {
+      if (!response.success || !response.data) return;
+      
+      const container = document.getElementById('revenue-platform-chart');
+      if (!container) return;
+      
+      // Group by platform
+      const platformData = {};
+      response.data.forEach(row => {
+        if (!platformData[row.platform]) {
+          platformData[row.platform] = 0;
+        }
+        platformData[row.platform] += parseFloat(row.total_commissions);
+      });
+      
+      const platforms = Object.keys(platformData);
+      const width = container.clientWidth || 400;
+      const height = 300;
+      
+      let svg = `<svg width="${width}" height="${height}" style="background: rgba(148,163,184,0.05);">`;
+      
+      const maxValue = Math.max(...Object.values(platformData));
+      const colors = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'];
+      
+      platforms.forEach((platform, i) => {
+        const value = platformData[platform];
+        const percentage = (value / maxValue) * 100;
+        const color = colors[i % colors.length];
+        
+        svg += `<circle cx="${width/2}" cy="${height/2}" r="${percentage}" fill="${color}" opacity="0.7"/>`;
+        svg += `<text x="${width/2}" y="${height/2 + i * 20}" text-anchor="middle" font-size="12" fill="#64748b">${platform}: $${value.toLocaleString()}</text>`;
+      });
+      
+      svg += '</svg>';
+      container.innerHTML = svg;
+    })
+    .catch(err => console.error('Error loading revenue platform chart:', err));
+}
+
+// Load Deposit Trends Chart
+function loadDepositTrendsChart(partnerId) {
+  fetch(`api/index.php?endpoint=cubes&cube=daily_funding&partner_id=${partnerId}`)
+    .then(r => r.json())
+    .then(response => {
+      if (!response.success || !response.data) return;
+      
+      const container = document.getElementById('deposit-trends-chart');
+      if (!container) return;
+      
+      const data = response.data.slice(-30); // Last 30 days
+      const width = container.clientWidth || 400;
+      const height = 300;
+      
+      let svg = `<svg width="${width}" height="${height}" style="background: rgba(148,163,184,0.05);">`;
+      
+      const maxDeposits = Math.max(...data.map(d => parseFloat(d.total_deposits)));
+      const maxWithdrawals = Math.max(...data.map(d => parseFloat(d.total_withdrawals)));
+      const maxValue = Math.max(maxDeposits, maxWithdrawals);
+      
+      const barWidth = width / data.length;
+      
+      data.forEach((day, i) => {
+        const depositHeight = (parseFloat(day.total_deposits) / maxValue) * (height - 40);
+        const withdrawalHeight = (parseFloat(day.total_withdrawals) / maxValue) * (height - 40);
+        const x = i * barWidth;
+        
+        svg += `<rect x="${x}" y="${height - depositHeight - 20}" width="${barWidth * 0.4}" height="${depositHeight}" fill="#10b981" rx="2"/>`;
+        svg += `<rect x="${x + barWidth * 0.5}" y="${height - withdrawalHeight - 20}" width="${barWidth * 0.4}" height="${withdrawalHeight}" fill="#ef4444" rx="2"/>`;
+      });
+      
+      svg += '</svg>';
+      container.innerHTML = svg;
+    })
+    .catch(err => console.error('Error loading deposit trends chart:', err));
+}
 
 // Country Analysis page: show country metrics
 (function () {
@@ -1196,6 +1466,9 @@ function populateCountryDropdown(partnerId) {
           if (document.getElementById('countryFilter')) {
             populateCountryDropdown(partnerId);
           }
+          
+          // Initialize additional charts
+          initializeClientsPageCharts(partnerId);
         }
         select.addEventListener('change', update);
         if (timePeriodSelect) {
@@ -1215,6 +1488,519 @@ function populateCountryDropdown(partnerId) {
     document.addEventListener('DOMContentLoaded', initClientsPage);
   } else {
     initClientsPage();
+  }
+})();
+
+// Initialize all clients page charts
+function initializeClientsPageCharts(partnerId) {
+  if (!partnerId) return;
+  
+  // Initialize Age Distribution Chart
+  if (document.getElementById('age-distribution-chart')) {
+    loadAgeDistributionChart(partnerId);
+  }
+  
+  // Initialize Gender Breakdown Chart
+  if (document.getElementById('gender-breakdown-chart')) {
+    loadGenderBreakdownChart(partnerId);
+  }
+  
+  // Initialize Registration Trends Chart
+  if (document.getElementById('registration-trends-chart')) {
+    loadRegistrationTrendsChart(partnerId);
+  }
+  
+  // Initialize Commission Plans Chart
+  if (document.getElementById('commission-plans-chart')) {
+    loadCommissionPlansChart(partnerId);
+  }
+}
+
+// Load Age Distribution Chart
+function loadAgeDistributionChart(partnerId) {
+  fetch(`api/index.php?endpoint=cubes&cube=client_demographics&partner_id=${partnerId}`)
+    .then(r => r.json())
+    .then(response => {
+      if (!response.success || !response.data) return;
+      
+      const container = document.getElementById('age-distribution-chart');
+      if (!container) return;
+      
+      const data = response.data;
+      const width = container.clientWidth || 400;
+      const height = 300;
+      
+      let svg = `<svg width="${width}" height="${height}" style="background: rgba(148,163,184,0.05);">`;
+      
+      // Group by age ranges
+      const ageGroups = {
+        '18-25': 0,
+        '26-35': 0,
+        '36-45': 0,
+        '46-55': 0,
+        '56-65': 0,
+        '65+': 0
+      };
+      
+      data.forEach(client => {
+        const age = parseInt(client.age);
+        if (age >= 18 && age <= 25) ageGroups['18-25']++;
+        else if (age >= 26 && age <= 35) ageGroups['26-35']++;
+        else if (age >= 36 && age <= 45) ageGroups['36-45']++;
+        else if (age >= 46 && age <= 55) ageGroups['46-55']++;
+        else if (age >= 56 && age <= 65) ageGroups['56-65']++;
+        else if (age > 65) ageGroups['65+']++;
+      });
+      
+      const maxValue = Math.max(...Object.values(ageGroups));
+      const barWidth = width / Object.keys(ageGroups).length;
+      const colors = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#8b5cf6'];
+      
+      Object.entries(ageGroups).forEach(([ageGroup, count], i) => {
+        const barHeight = (count / maxValue) * (height - 40);
+        const x = i * barWidth;
+        const y = height - barHeight - 20;
+        
+        svg += `<rect x="${x + barWidth * 0.1}" y="${y}" width="${barWidth * 0.8}" height="${barHeight}" fill="${colors[i]}" rx="4"/>`;
+        svg += `<text x="${x + barWidth / 2}" y="${height - 5}" text-anchor="middle" font-size="10" fill="#64748b">${ageGroup}</text>`;
+        svg += `<text x="${x + barWidth / 2}" y="${y - 5}" text-anchor="middle" font-size="12" fill="#64748b">${count}</text>`;
+      });
+      
+      svg += '</svg>';
+      container.innerHTML = svg;
+    })
+    .catch(err => console.error('Error loading age distribution chart:', err));
+}
+
+// Load Gender Breakdown Chart
+function loadGenderBreakdownChart(partnerId) {
+  fetch(`api/index.php?endpoint=cubes&cube=client_demographics&partner_id=${partnerId}`)
+    .then(r => r.json())
+    .then(response => {
+      if (!response.success || !response.data) return;
+      
+      const container = document.getElementById('gender-breakdown-chart');
+      if (!container) return;
+      
+      const data = response.data;
+      const width = container.clientWidth || 400;
+      const height = 300;
+      
+      // Count genders
+      const genderCounts = { 'Male': 0, 'Female': 0, 'Other': 0 };
+      data.forEach(client => {
+        const gender = client.gender || 'Other';
+        genderCounts[gender] = (genderCounts[gender] || 0) + 1;
+      });
+      
+      let svg = `<svg width="${width}" height="${height}" style="background: rgba(148,163,184,0.05);">`;
+      
+      const total = Object.values(genderCounts).reduce((sum, count) => sum + count, 0);
+      const colors = ['#3b82f6', '#ec4899', '#10b981'];
+      let currentAngle = 0;
+      
+      Object.entries(genderCounts).forEach(([gender, count], i) => {
+        if (count > 0) {
+          const percentage = (count / total) * 100;
+          const angle = (count / total) * 360;
+          
+          const x1 = width / 2 + Math.cos(currentAngle * Math.PI / 180) * 80;
+          const y1 = height / 2 + Math.sin(currentAngle * Math.PI / 180) * 80;
+          const x2 = width / 2 + Math.cos((currentAngle + angle) * Math.PI / 180) * 80;
+          const y2 = height / 2 + Math.sin((currentAngle + angle) * Math.PI / 180) * 80;
+          
+          const largeArcFlag = angle > 180 ? 1 : 0;
+          
+          svg += `<path d="M ${width/2} ${height/2} L ${x1} ${y1} A 80 80 0 ${largeArcFlag} 1 ${x2} ${y2} Z" fill="${colors[i]}"/>`;
+          svg += `<text x="${width/2}" y="${height/2 + i * 20 - 20}" text-anchor="middle" font-size="12" fill="#64748b">${gender}: ${count} (${percentage.toFixed(1)}%)</text>`;
+          
+          currentAngle += angle;
+        }
+      });
+      
+      svg += '</svg>';
+      container.innerHTML = svg;
+    })
+    .catch(err => console.error('Error loading gender breakdown chart:', err));
+}
+
+// Load Registration Trends Chart
+function loadRegistrationTrendsChart(partnerId) {
+  fetch(`api/index.php?endpoint=cubes&cube=daily_signups&partner_id=${partnerId}`)
+    .then(r => r.json())
+    .then(response => {
+      if (!response.success || !response.data) return;
+      
+      const container = document.getElementById('registration-trends-chart');
+      if (!container) return;
+      
+      const data = response.data.slice(-30); // Last 30 days
+      const width = container.clientWidth || 400;
+      const height = 300;
+      
+      let svg = `<svg width="${width}" height="${height}" style="background: rgba(148,163,184,0.05);">`;
+      
+      const maxValue = Math.max(...data.map(d => parseInt(d.signup_count)));
+      const barWidth = width / data.length;
+      
+      data.forEach((day, i) => {
+        const barHeight = (parseInt(day.signup_count) / maxValue) * (height - 40);
+        const x = i * barWidth;
+        const y = height - barHeight - 20;
+        
+        svg += `<rect x="${x}" y="${y}" width="${barWidth * 0.8}" height="${barHeight}" fill="#10b981" rx="2"/>`;
+      });
+      
+      svg += '</svg>';
+      container.innerHTML = svg;
+    })
+    .catch(err => console.error('Error loading registration trends chart:', err));
+}
+
+// Load Commission Plans Chart
+function loadCommissionPlansChart(partnerId) {
+  fetch(`api/index.php?endpoint=cubes&cube=daily_commissions_plan&partner_id=${partnerId}`)
+    .then(r => r.json())
+    .then(response => {
+      if (!response.success || !response.data) return;
+      
+      const container = document.getElementById('commission-plans-chart');
+      if (!container) return;
+      
+      // Group by commission plan
+      const planData = {};
+      response.data.forEach(row => {
+        if (!planData[row.commission_plan]) {
+          planData[row.commission_plan] = 0;
+        }
+        planData[row.commission_plan] += parseFloat(row.total_commissions);
+      });
+      
+      const width = container.clientWidth || 400;
+      const height = 300;
+      
+      let svg = `<svg width="${width}" height="${height}" style="background: rgba(148,163,184,0.05);">`;
+      
+      const plans = Object.keys(planData);
+      const maxValue = Math.max(...Object.values(planData));
+      const colors = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'];
+      
+      plans.forEach((plan, i) => {
+        const value = planData[plan];
+        const barHeight = (value / maxValue) * (height - 40);
+        const barWidth = width / plans.length;
+        const x = i * barWidth;
+        const y = height - barHeight - 20;
+        
+        svg += `<rect x="${x + barWidth * 0.1}" y="${y}" width="${barWidth * 0.8}" height="${barHeight}" fill="${colors[i % colors.length]}" rx="4"/>`;
+        svg += `<text x="${x + barWidth / 2}" y="${height - 5}" text-anchor="middle" font-size="10" fill="#64748b">${plan}</text>`;
+        svg += `<text x="${x + barWidth / 2}" y="${y - 5}" text-anchor="middle" font-size="12" fill="#64748b">$${value.toLocaleString()}</text>`;
+      });
+      
+      svg += '</svg>';
+      container.innerHTML = svg;
+    })
+    .catch(err => console.error('Error loading commission plans chart:', err));
+}
+
+// Commissions page initialization
+(function() {
+  function initCommissionsPage() {
+    const partnerSelect = document.getElementById('partnerSelect');
+    const timePeriodSelect = document.getElementById('timePeriod');
+    const groupTypeSelect = document.getElementById('groupType');
+    
+    if (!partnerSelect) return;
+    
+    function update() {
+      const partnerId = partnerSelect.value;
+      const timePeriod = timePeriodSelect ? timePeriodSelect.value : 'last_30_days';
+      const groupType = groupTypeSelect ? groupTypeSelect.value : 'commission_plan';
+      
+      // Load main stacked chart
+      loadCommissionsStackedChart(partnerId, timePeriod, groupType);
+      
+      // Initialize additional charts
+      initializeCommissionsPageCharts(partnerId);
+    }
+    
+    partnerSelect.addEventListener('change', update);
+    if (timePeriodSelect) timePeriodSelect.addEventListener('change', update);
+    if (groupTypeSelect) groupTypeSelect.addEventListener('change', update);
+    
+    // Initial load
+    setTimeout(update, 600);
+  }
+  
+  // Load main commissions stacked chart
+  function loadCommissionsStackedChart(partnerId, timePeriod, groupType) {
+    if (!partnerId) return;
+    
+    const params = new URLSearchParams({
+      partner_id: partnerId,
+      timePeriod: timePeriod,
+      groupType: groupType
+    });
+    
+    fetch(`api/index.php?${params.toString()}&endpoint=commissions`)
+      .then(r => r.json())
+      .then(response => {
+        if (!response.success || !response.data) return;
+        
+        const container = document.getElementById('commissions-stacked-chart');
+        if (!container) return;
+        
+        // Transform data for stacked chart
+        const chartData = transformCommissionsData(response.data, groupType);
+        
+        // Render chart using stacked-chart.js
+        if (window.renderStackedBarChart) {
+          window.renderStackedBarChart(container, chartData);
+        } else {
+          container.innerHTML = '<p class="muted">Chart library not loaded</p>';
+        }
+      })
+      .catch(err => {
+        console.error('Error loading commissions chart:', err);
+        const container = document.getElementById('commissions-stacked-chart');
+        if (container) container.innerHTML = '<p class="muted">Failed to load chart data</p>';
+      });
+  }
+  
+  // Transform commissions data for stacked chart
+  function transformCommissionsData(data, groupType) {
+    // Group data by date and category
+    const groupedData = {};
+    const categories = new Set();
+    
+    data.forEach(row => {
+      const date = row.trade_date || row.date;
+      const category = row[groupType] || 'Unknown';
+      
+      if (!groupedData[date]) {
+        groupedData[date] = {};
+      }
+      
+      groupedData[date][category] = (groupedData[date][category] || 0) + parseFloat(row.total_commissions || row.commission || 0);
+      categories.add(category);
+    });
+    
+    // Convert to chart format
+    const dates = Object.keys(groupedData).sort();
+    const series = Array.from(categories).map(category => ({
+      name: category,
+      data: dates.map(date => groupedData[date][category] || 0)
+    }));
+    
+    return {
+      dates: dates,
+      series: series
+    };
+  }
+  
+  // Initialize all commissions page charts
+  function initializeCommissionsPageCharts(partnerId) {
+    if (!partnerId) return;
+    
+    // Initialize Commission Plans Breakdown Chart
+    if (document.getElementById('commission-plans-breakdown-chart')) {
+      loadCommissionPlansBreakdownChart(partnerId);
+    }
+    
+    // Initialize Monthly Trends Chart
+    if (document.getElementById('monthly-trends-chart')) {
+      loadMonthlyTrendsChart(partnerId);
+    }
+    
+    // Initialize Top Assets Chart
+    if (document.getElementById('top-assets-chart')) {
+      loadTopAssetsChart(partnerId);
+    }
+    
+    // Initialize Contract Type Chart
+    if (document.getElementById('contract-type-chart')) {
+      loadContractTypeChart(partnerId);
+    }
+  }
+  
+  // Load Commission Plans Breakdown Chart
+  function loadCommissionPlansBreakdownChart(partnerId) {
+    fetch(`api/index.php?endpoint=cubes&cube=daily_commissions_plan&partner_id=${partnerId}`)
+      .then(r => r.json())
+      .then(response => {
+        if (!response.success || !response.data) return;
+        
+        const container = document.getElementById('commission-plans-breakdown-chart');
+        if (!container) return;
+        
+        // Group by commission plan
+        const planData = {};
+        response.data.forEach(row => {
+          if (!planData[row.commission_plan]) {
+            planData[row.commission_plan] = 0;
+          }
+          planData[row.commission_plan] += parseFloat(row.total_commissions);
+        });
+        
+        const width = container.clientWidth || 400;
+        const height = 300;
+        
+        let svg = `<svg width="${width}" height="${height}" style="background: rgba(148,163,184,0.05);">`;
+        
+        const plans = Object.keys(planData);
+        const maxValue = Math.max(...Object.values(planData));
+        const colors = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'];
+        
+        plans.forEach((plan, i) => {
+          const value = planData[plan];
+          const barHeight = (value / maxValue) * (height - 40);
+          const barWidth = width / plans.length;
+          const x = i * barWidth;
+          const y = height - barHeight - 20;
+          
+          svg += `<rect x="${x + barWidth * 0.1}" y="${y}" width="${barWidth * 0.8}" height="${barHeight}" fill="${colors[i % colors.length]}" rx="4"/>`;
+          svg += `<text x="${x + barWidth / 2}" y="${height - 5}" text-anchor="middle" font-size="10" fill="#64748b">${plan}</text>`;
+          svg += `<text x="${x + barWidth / 2}" y="${y - 5}" text-anchor="middle" font-size="12" fill="#64748b">$${value.toLocaleString()}</text>`;
+        });
+        
+        svg += '</svg>';
+        container.innerHTML = svg;
+      })
+      .catch(err => console.error('Error loading commission plans breakdown chart:', err));
+  }
+  
+  // Load Monthly Trends Chart
+  function loadMonthlyTrendsChart(partnerId) {
+    fetch(`api/index.php?endpoint=cubes&cube=daily_commissions_plan&partner_id=${partnerId}`)
+      .then(r => r.json())
+      .then(response => {
+        if (!response.success || !response.data) return;
+        
+        const container = document.getElementById('monthly-trends-chart');
+        if (!container) return;
+        
+        // Group by month
+        const monthlyData = {};
+        response.data.forEach(row => {
+          const month = row.trade_date.substring(0, 7); // YYYY-MM
+          if (!monthlyData[month]) {
+            monthlyData[month] = 0;
+          }
+          monthlyData[month] += parseFloat(row.total_commissions);
+        });
+        
+        const width = container.clientWidth || 400;
+        const height = 300;
+        
+        let svg = `<svg width="${width}" height="${height}" style="background: rgba(148,163,184,0.05);">`;
+        
+        const months = Object.keys(monthlyData).sort();
+        const maxValue = Math.max(...Object.values(monthlyData));
+        const barWidth = width / months.length;
+        
+        months.forEach((month, i) => {
+          const value = monthlyData[month];
+          const barHeight = (value / maxValue) * (height - 40);
+          const x = i * barWidth;
+          const y = height - barHeight - 20;
+          
+          svg += `<rect x="${x + barWidth * 0.1}" y="${y}" width="${barWidth * 0.8}" height="${barHeight}" fill="#3b82f6" rx="4"/>`;
+          svg += `<text x="${x + barWidth / 2}" y="${height - 5}" text-anchor="middle" font-size="10" fill="#64748b">${month}</text>`;
+          svg += `<text x="${x + barWidth / 2}" y="${y - 5}" text-anchor="middle" font-size="12" fill="#64748b">$${value.toLocaleString()}</text>`;
+        });
+        
+        svg += '</svg>';
+        container.innerHTML = svg;
+      })
+      .catch(err => console.error('Error loading monthly trends chart:', err));
+  }
+  
+  // Load Top Assets Chart
+  function loadTopAssetsChart(partnerId) {
+    fetch(`api/index.php?endpoint=cubes&cube=commissions_symbol&partner_id=${partnerId}`)
+      .then(r => r.json())
+      .then(response => {
+        if (!response.success || !response.data) return;
+        
+        const container = document.getElementById('top-assets-chart');
+        if (!container) return;
+        
+        const data = response.data.slice(0, 10); // Top 10 assets
+        const width = container.clientWidth || 400;
+        const height = 300;
+        
+        let svg = `<svg width="${width}" height="${height}" style="background: rgba(148,163,184,0.05);">`;
+        
+        const maxValue = Math.max(...data.map(d => parseFloat(d.total_commissions)));
+        const barHeight = 20;
+        const spacing = 25;
+        
+        data.forEach((asset, i) => {
+          const barWidth = (parseFloat(asset.total_commissions) / maxValue) * (width - 100);
+          const y = i * spacing + 20;
+          
+          svg += `<rect x="80" y="${y}" width="${barWidth}" height="${barHeight}" fill="#3b82f6" rx="4"/>`;
+          svg += `<text x="75" y="${y + 15}" text-anchor="end" font-size="12" fill="#64748b">${asset.symbol}</text>`;
+          svg += `<text x="${barWidth + 85}" y="${y + 15}" font-size="12" fill="#64748b">$${parseFloat(asset.total_commissions).toLocaleString()}</text>`;
+        });
+        
+        svg += '</svg>';
+        container.innerHTML = svg;
+      })
+      .catch(err => console.error('Error loading top assets chart:', err));
+  }
+  
+  // Load Contract Type Chart
+  function loadContractTypeChart(partnerId) {
+    fetch(`api/index.php?endpoint=cubes&cube=commissions_product&partner_id=${partnerId}`)
+      .then(r => r.json())
+      .then(response => {
+        if (!response.success || !response.data) return;
+        
+        const container = document.getElementById('contract-type-chart');
+        if (!container) return;
+        
+        // Group by contract type
+        const contractData = {};
+        response.data.forEach(row => {
+          if (!contractData[row.contract_type]) {
+            contractData[row.contract_type] = 0;
+          }
+          contractData[row.contract_type] += parseFloat(row.total_commissions);
+        });
+        
+        const width = container.clientWidth || 400;
+        const height = 300;
+        
+        let svg = `<svg width="${width}" height="${height}" style="background: rgba(148,163,184,0.05);">`;
+        
+        const contracts = Object.keys(contractData);
+        const maxValue = Math.max(...Object.values(contractData));
+        const colors = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'];
+        
+        contracts.forEach((contract, i) => {
+          const value = contractData[contract];
+          const barHeight = (value / maxValue) * (height - 40);
+          const barWidth = width / contracts.length;
+          const x = i * barWidth;
+          const y = height - barHeight - 20;
+          
+          svg += `<rect x="${x + barWidth * 0.1}" y="${y}" width="${barWidth * 0.8}" height="${barHeight}" fill="${colors[i % colors.length]}" rx="4"/>`;
+          svg += `<text x="${x + barWidth / 2}" y="${height - 5}" text-anchor="middle" font-size="10" fill="#64748b">${contract}</text>`;
+          svg += `<text x="${x + barWidth / 2}" y="${y - 5}" text-anchor="middle" font-size="12" fill="#64748b">$${value.toLocaleString()}</text>`;
+        });
+        
+        svg += '</svg>';
+        container.innerHTML = svg;
+      })
+      .catch(err => console.error('Error loading contract type chart:', err));
+  }
+  
+  // Initialize on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCommissionsPage);
+  } else {
+    initCommissionsPage();
   }
 })();
 
