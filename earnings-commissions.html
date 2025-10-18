@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Earnings & Commissions | Partner Report</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="logo">
+        <h1>Partner Report</h1>
+      </div>
+      <nav class="side-nav">
+        <a href="index.html">📊 Dashboard</a>
+        <a href="earnings-commissions.html" class="active">💰 Earnings & Commissions</a>
+        <a href="clients.html">👥 Clients</a>
+        <a href="country-analysis.html">🌍 Country Analysis</a>
+        <a href="commissions.html">📈 Commissions</a>
+        <a href="client-funnel.html">🔄 Client Funnel</a>
+        <a href="tiers-badges.html">🏆 Tiers & Badges</a>
+        <a href="master-partner.html">🌟 Master Partner</a>
+        <a href="events.html">🎉 Events</a>
+        <a href="database.html">💾 Database</a>
+        <a href="sitemap.html">🗺️ Sitemap</a>
+      </nav>
+    </aside>
+
+    <div class="main-content">
+      <div class="theme-toggle-container">
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+          <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+          <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="container">
+        <main class="panel">
+          <h2 class="page-title">💰 Earnings & Commissions</h2>
+          <p class="page-subtitle">Comprehensive breakdown of your revenue streams</p>
+
+          <!-- Partner Selection -->
+          <div class="card filter-bar" style="margin-bottom:16px; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <select id="partnerSelect" style="width:100%; max-width:360px; padding:10px 12px; background:#0b1220; color:var(--text); border:1px solid rgba(148,163,184,0.3); border-radius:8px">
+                <option value="">All partners</option>
+              </select>
+            </div>
+            <div style="text-align: right;">
+              <span id="partner-tier-display" class="tier-tag">—</span>
+            </div>
+          </div>
+
+          <!-- Summary Cards -->
+          <div class="grid" style="margin-bottom: 24px;">
+            <div class="card metric-card">
+              <h4 style="margin: 0 0 8px 0; color: var(--muted);">Total Commissions</h4>
+              <p class="metric-value" id="total-commissions-value">$0</p>
+              <p class="metric-subtitle">Lifetime earnings</p>
+            </div>
+            <div class="card metric-card">
+              <h4 style="margin: 0 0 8px 0; color: var(--muted);">This Month</h4>
+              <p class="metric-value" id="mtd-commissions-value">$0</p>
+              <p class="metric-subtitle">Month-to-date</p>
+            </div>
+            <div class="card metric-card">
+              <h4 style="margin: 0 0 8px 0; color: var(--muted);">Avg Daily</h4>
+              <p class="metric-value" id="avg-daily-value">$0</p>
+              <p class="metric-subtitle">Last 30 days</p>
+            </div>
+            <div class="card metric-card">
+              <h4 style="margin: 0 0 8px 0; color: var(--muted);">Growth</h4>
+              <p class="metric-value" id="growth-value">+0%</p>
+              <p class="metric-subtitle">vs last month</p>
+            </div>
+          </div>
+
+          <!-- Section 1: Daily Commissions -->
+          <div class="card" style="margin-bottom: 20px;">
+            <h3 style="margin-top: 0;">📅 Daily Commission Payouts by Plan</h3>
+            <p class="muted">Track your daily earnings across different commission plans</p>
+            <div id="daily-commissions-plan-chart" style="width: 100%; min-height: 300px; margin-top: 16px;"></div>
+          </div>
+
+          <div class="card" style="margin-bottom: 20px;">
+            <h3 style="margin-top: 0;">📱 Daily Commission Payouts by Platform</h3>
+            <p class="muted">See which platforms generate the most revenue</p>
+            <div id="daily-commissions-platform-chart" style="width: 100%; min-height: 300px; margin-top: 16px;"></div>
+          </div>
+
+          <!-- Section 2: Product Breakdown -->
+          <div class="grid" style="margin-bottom: 20px;">
+            <div class="card">
+              <h3 style="margin-top: 0;">📊 Commission by Product Group</h3>
+              <p class="muted">Revenue distribution across asset types</p>
+              <div id="commissions-product-chart" style="width: 100%; min-height: 300px; margin-top: 16px;"></div>
+            </div>
+            <div class="card">
+              <h3 style="margin-top: 0;">🎯 Top Symbols</h3>
+              <p class="muted">Your most profitable trading instruments</p>
+              <div id="top-symbols-chart" style="width: 100%; min-height: 300px; margin-top: 16px;"></div>
+            </div>
+          </div>
+
+          <!-- Section 3: Commission Model Breakdown -->
+          <div class="card" style="margin-bottom: 20px;">
+            <h3 style="margin-top: 0;">💼 Commission Model Breakdown</h3>
+            <div class="grid">
+              <div style="padding: 16px; background: rgba(56, 189, 248, 0.1); border-radius: 8px; border: 1px solid rgba(56, 189, 248, 0.3);">
+                <h4 style="margin: 0 0 8px 0; color: #38bdf8;">Rev Share / Turnover</h4>
+                <p class="metric-value" id="revshare-value" style="font-size: 28px;">$0</p>
+                <p class="muted" style="font-size: 13px; margin: 4px 0 0 0;">Commission from trading volume</p>
+              </div>
+              <div style="padding: 16px; background: rgba(16, 185, 129, 0.1); border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.3);">
+                <h4 style="margin: 0 0 8px 0; color: #10b981;">CPA (Cost Per Acquisition)</h4>
+                <p class="metric-value" id="cpa-value" style="font-size: 28px;">$0</p>
+                <p class="muted" style="font-size: 13px; margin: 4px 0 0 0;">One-time client acquisition fees</p>
+              </div>
+              <div style="padding: 16px; background: rgba(245, 158, 11, 0.1); border-radius: 8px; border: 1px solid rgba(245, 158, 11, 0.3);">
+                <h4 style="margin: 0 0 8px 0; color: #f59e0b;">Direct Commissions</h4>
+                <p class="metric-value" id="direct-comm-value" style="font-size: 28px;">$0</p>
+                <p class="muted" style="font-size: 13px; margin: 4px 0 0 0;">Earnings from your own clients</p>
+              </div>
+              <div style="padding: 16px; background: rgba(139, 92, 246, 0.1); border-radius: 8px; border: 1px solid rgba(139, 92, 246, 0.3);">
+                <h4 style="margin: 0 0 8px 0; color: #8b5cf6;">Network Commissions</h4>
+                <p class="metric-value" id="network-comm-value" style="font-size: 28px;">$0</p>
+                <p class="muted" style="font-size: 13px; margin: 4px 0 0 0;">Earnings from sub-partners (multi-tier)</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 4: Product Deep Dive -->
+          <div class="card" style="margin-bottom: 20px;">
+            <h3 style="margin-top: 0;">📈 Product Performance Deep Dive</h3>
+            <div style="margin-top: 16px;">
+              <h4 style="margin: 0 0 12px 0; color: var(--muted); font-size: 14px; font-weight: 600;">CFDs (Contracts for Difference)</h4>
+              <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 20px;">
+                <div style="padding: 12px; background: rgba(148,163,184,0.05); border-radius: 6px;">
+                  <p style="margin: 0; font-size: 12px; color: var(--muted);">Forex</p>
+                  <p style="margin: 4px 0 0 0; font-size: 20px; font-weight: 600;" id="cfd-forex">$0</p>
+                </div>
+                <div style="padding: 12px; background: rgba(148,163,184,0.05); border-radius: 6px;">
+                  <p style="margin: 0; font-size: 12px; color: var(--muted);">Stocks</p>
+                  <p style="margin: 4px 0 0 0; font-size: 20px; font-weight: 600;" id="cfd-stocks">$0</p>
+                </div>
+                <div style="padding: 12px; background: rgba(148,163,184,0.05); border-radius: 6px;">
+                  <p style="margin: 0; font-size: 12px; color: var(--muted);">Indices</p>
+                  <p style="margin: 4px 0 0 0; font-size: 20px; font-weight: 600;" id="cfd-indices">$0</p>
+                </div>
+                <div style="padding: 12px; background: rgba(148,163,184,0.05); border-radius: 6px;">
+                  <p style="margin: 0; font-size: 12px; color: var(--muted);">Commodities</p>
+                  <p style="margin: 4px 0 0 0; font-size: 20px; font-weight: 600;" id="cfd-commodities">$0</p>
+                </div>
+                <div style="padding: 12px; background: rgba(148,163,184,0.05); border-radius: 6px;">
+                  <p style="margin: 0; font-size: 12px; color: var(--muted);">Crypto</p>
+                  <p style="margin: 4px 0 0 0; font-size: 20px; font-weight: 600;" id="cfd-crypto">$0</p>
+                </div>
+                <div style="padding: 12px; background: rgba(148,163,184,0.05); border-radius: 6px;">
+                  <p style="margin: 0; font-size: 12px; color: var(--muted);">ETFs</p>
+                  <p style="margin: 4px 0 0 0; font-size: 20px; font-weight: 600;" id="cfd-etfs">$0</p>
+                </div>
+              </div>
+
+              <h4 style="margin: 0 0 12px 0; color: var(--muted); font-size: 14px; font-weight: 600;">Options & Derivatives</h4>
+              <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+                <div style="padding: 12px; background: rgba(148,163,184,0.05); border-radius: 6px;">
+                  <p style="margin: 0; font-size: 12px; color: var(--muted);">Digital Options</p>
+                  <p style="margin: 4px 0 0 0; font-size: 20px; font-weight: 600;" id="opt-digital">$0</p>
+                </div>
+                <div style="padding: 12px; background: rgba(148,163,184,0.05); border-radius: 6px;">
+                  <p style="margin: 0; font-size: 12px; color: var(--muted);">Multipliers</p>
+                  <p style="margin: 4px 0 0 0; font-size: 20px; font-weight: 600;" id="opt-multipliers">$0</p>
+                </div>
+                <div style="padding: 12px; background: rgba(148,163,184,0.05); border-radius: 6px;">
+                  <p style="margin: 0; font-size: 12px; color: var(--muted);">Accumulators</p>
+                  <p style="margin: 4px 0 0 0; font-size: 20px; font-weight: 600;" id="opt-accumulators">$0</p>
+                </div>
+                <div style="padding: 12px; background: rgba(148,163,184,0.05); border-radius: 6px;">
+                  <p style="margin: 0; font-size: 12px; color: var(--muted);">Other Derivatives</p>
+                  <p style="margin: 4px 0 0 0; font-size: 20px; font-weight: 600;" id="opt-other">$0</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 5: Client Lifecycle -->
+          <div class="card" style="margin-bottom: 20px;">
+            <h3 style="margin-top: 0;">🔄 Commission by Client Lifecycle Stage</h3>
+            <div class="grid">
+              <div style="padding: 16px; background: rgba(56, 189, 248, 0.08); border-radius: 8px; border-left: 4px solid #38bdf8;">
+                <h4 style="margin: 0 0 8px 0;">New Clients (0-30 days)</h4>
+                <p class="metric-value" style="font-size: 28px;" id="new-client-comm">$0</p>
+                <p class="muted" style="font-size: 13px; margin: 4px 0 0 0;"><span id="new-client-count">0</span> clients</p>
+              </div>
+              <div style="padding: 16px; background: rgba(16, 185, 129, 0.08); border-radius: 8px; border-left: 4px solid #10b981;">
+                <h4 style="margin: 0 0 8px 0;">Existing Clients (30+ days)</h4>
+                <p class="metric-value" style="font-size: 28px;" id="existing-client-comm">$0</p>
+                <p class="muted" style="font-size: 13px; margin: 4px 0 0 0;"><span id="existing-client-count">0</span> clients</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="footer">v1.0 • Advanced Earnings Analytics</div>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="theme-toggle.js"></script>
+  <script src="api-manager.js"></script>
+  <script src="enhanced-charts.js"></script>
+  <script>
+    // Initialize charts when partner is selected
+    document.addEventListener('DOMContentLoaded', function() {
+      const partnerSelect = document.getElementById('partnerSelect');
+      
+      function updateAllCharts() {
+        const partnerId = partnerSelect.value;
+        if (!partnerId) {
+          console.log('No partner selected');
+          return;
+        }
+        
+        console.log('Loading charts for partner:', partnerId);
+        
+        // Render all charts
+        window.EnhancedCharts.renderDailyCommissionsByPlan('daily-commissions-plan-chart', partnerId);
+        window.EnhancedCharts.renderDailyCommissionsByPlatform('daily-commissions-platform-chart', partnerId);
+        window.EnhancedCharts.renderCommissionsByProduct('commissions-product-chart', partnerId);
+        window.EnhancedCharts.renderTopSymbols('top-symbols-chart', partnerId, 10);
+        
+        // Load summary metrics from dashboard cube
+        fetch(`api/index.php?endpoint=cubes&cube=dashboard&partner_id=${partnerId}`)
+          .then(r => r.json())
+          .then(response => {
+            if (response.success && response.data) {
+              const data = response.data;
+              document.getElementById('total-commissions-value').textContent = 
+                '$' + (data.total_commissions || 0).toLocaleString();
+              document.getElementById('mtd-commissions-value').textContent = 
+                '$' + (data.mtd_commissions || 0).toLocaleString();
+              
+              // Calculate average daily (last 30 days - approximate)
+              const avgDaily = (data.mtd_commissions || 0) / new Date().getDate();
+              document.getElementById('avg-daily-value').textContent = 
+                '$' + avgDaily.toLocaleString(undefined, {maximumFractionDigits: 0});
+              
+              // Growth calculation (month 1 vs month 2)
+              const thisMonth = data.month_1_commissions || 0;
+              const lastMonth = data.month_2_commissions || 1;
+              const growth = ((thisMonth - lastMonth) / lastMonth * 100).toFixed(1);
+              document.getElementById('growth-value').textContent = 
+                (growth > 0 ? '+' : '') + growth + '%';
+              document.getElementById('growth-value').style.color = 
+                growth > 0 ? '#10b981' : '#ef4444';
+            }
+          });
+      }
+      
+      partnerSelect.addEventListener('change', updateAllCharts);
+      
+      // Initial load if partner is pre-selected
+      setTimeout(() => {
+        if (partnerSelect.value) {
+          updateAllCharts();
+        }
+      }, 500);
+    });
+  </script>
+</body>
+</html>
+

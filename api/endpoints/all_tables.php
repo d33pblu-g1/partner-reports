@@ -59,26 +59,28 @@ try {
             $stmt->execute();
             $allTables['partner_tiers'] = $stmt->fetchAll();
             
-            // Get cube tables
-            $stmt = $db->prepare("SELECT * FROM cube_partner_dashboard ORDER BY partner_id");
-            $stmt->execute();
-            $allTables['cube_partner_dashboard'] = $stmt->fetchAll();
+            // Get all cube tables
+            $cubes = [
+                'cube_partner_dashboard' => 'partner_id',
+                'cube_daily_commissions_plan' => 'partner_id, trade_date DESC',
+                'cube_daily_commissions_platform' => 'partner_id, trade_date DESC',
+                'cube_commissions_product' => 'partner_id, total_commissions DESC',
+                'cube_commissions_symbol' => 'partner_id, total_commissions DESC',
+                'cube_daily_signups' => 'partner_id, signup_date DESC',
+                'cube_daily_funding' => 'partner_id, funding_date DESC',
+                'cube_client_tiers' => 'partner_id, client_count DESC',
+                'cube_client_demographics' => 'partner_id, dimension, dimension_value',
+                'cube_country_performance' => 'partner_id, country',
+                'cube_product_volume' => 'partner_id, total_volume DESC',
+                'cube_daily_trends' => 'partner_id, trend_date DESC',
+                'cube_badge_progress' => 'partner_id'
+            ];
             
-            $stmt = $db->prepare("SELECT * FROM cube_client_tiers ORDER BY partner_id, tier");
-            $stmt->execute();
-            $allTables['cube_client_tiers'] = $stmt->fetchAll();
-            
-            $stmt = $db->prepare("SELECT * FROM cube_client_demographics ORDER BY partner_id, dimension, dimension_value");
-            $stmt->execute();
-            $allTables['cube_client_demographics'] = $stmt->fetchAll();
-            
-            $stmt = $db->prepare("SELECT * FROM cube_country_performance ORDER BY partner_id, country");
-            $stmt->execute();
-            $allTables['cube_country_performance'] = $stmt->fetchAll();
-            
-            $stmt = $db->prepare("SELECT * FROM cube_badge_progress ORDER BY partner_id");
-            $stmt->execute();
-            $allTables['cube_badge_progress'] = $stmt->fetchAll();
+            foreach ($cubes as $tableName => $orderBy) {
+                $stmt = $db->prepare("SELECT * FROM {$tableName} ORDER BY {$orderBy} LIMIT 1000");
+                $stmt->execute();
+                $allTables[$tableName] = $stmt->fetchAll();
+            }
             
             // Add metadata about whether all records were loaded
             $allTables['_metadata'] = [

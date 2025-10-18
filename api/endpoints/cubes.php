@@ -169,18 +169,169 @@ try {
                     echo json_encode(ApiResponse::success($data));
                     break;
                     
+                case 'daily_commissions_plan':
+                    // Daily commissions by plan
+                    if (!$partnerId) {
+                        http_response_code(400);
+                        echo json_encode(ApiResponse::error('Partner ID required', 400));
+                        break;
+                    }
+                    
+                    $stmt = $db->prepare("
+                        SELECT trade_date, commission_plan, total_commissions, trade_count
+                        FROM cube_daily_commissions_plan
+                        WHERE partner_id = ?
+                        ORDER BY trade_date DESC
+                        LIMIT 90
+                    ");
+                    $stmt->execute([$partnerId]);
+                    echo json_encode(ApiResponse::success($stmt->fetchAll()));
+                    break;
+                    
+                case 'daily_commissions_platform':
+                    // Daily commissions by platform
+                    if (!$partnerId) {
+                        http_response_code(400);
+                        echo json_encode(ApiResponse::error('Partner ID required', 400));
+                        break;
+                    }
+                    
+                    $stmt = $db->prepare("
+                        SELECT trade_date, platform, total_commissions, trade_count
+                        FROM cube_daily_commissions_platform
+                        WHERE partner_id = ?
+                        ORDER BY trade_date DESC
+                        LIMIT 90
+                    ");
+                    $stmt->execute([$partnerId]);
+                    echo json_encode(ApiResponse::success($stmt->fetchAll()));
+                    break;
+                    
+                case 'commissions_product':
+                    // Commissions by product (asset type/contract type)
+                    if (!$partnerId) {
+                        http_response_code(400);
+                        echo json_encode(ApiResponse::error('Partner ID required', 400));
+                        break;
+                    }
+                    
+                    $stmt = $db->prepare("
+                        SELECT asset_type, contract_type, total_commissions, trade_count
+                        FROM cube_commissions_product
+                        WHERE partner_id = ?
+                        ORDER BY total_commissions DESC
+                    ");
+                    $stmt->execute([$partnerId]);
+                    echo json_encode(ApiResponse::success($stmt->fetchAll()));
+                    break;
+                    
+                case 'commissions_symbol':
+                    // Top symbols by commissions
+                    if (!$partnerId) {
+                        http_response_code(400);
+                        echo json_encode(ApiResponse::error('Partner ID required', 400));
+                        break;
+                    }
+                    
+                    $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 20;
+                    $stmt = $db->prepare("
+                        SELECT asset, total_commissions, trade_count
+                        FROM cube_commissions_symbol
+                        WHERE partner_id = ?
+                        ORDER BY total_commissions DESC
+                        LIMIT ?
+                    ");
+                    $stmt->execute([$partnerId, $limit]);
+                    echo json_encode(ApiResponse::success($stmt->fetchAll()));
+                    break;
+                    
+                case 'daily_signups':
+                    // Daily client signups
+                    if (!$partnerId) {
+                        http_response_code(400);
+                        echo json_encode(ApiResponse::error('Partner ID required', 400));
+                        break;
+                    }
+                    
+                    $stmt = $db->prepare("
+                        SELECT signup_date, commission_plan, platform, signup_count
+                        FROM cube_daily_signups
+                        WHERE partner_id = ?
+                        ORDER BY signup_date DESC
+                        LIMIT 90
+                    ");
+                    $stmt->execute([$partnerId]);
+                    echo json_encode(ApiResponse::success($stmt->fetchAll()));
+                    break;
+                    
+                case 'daily_funding':
+                    // Daily deposits & withdrawals
+                    if (!$partnerId) {
+                        http_response_code(400);
+                        echo json_encode(ApiResponse::error('Partner ID required', 400));
+                        break;
+                    }
+                    
+                    $stmt = $db->prepare("
+                        SELECT funding_date, category, total_amount, transaction_count
+                        FROM cube_daily_funding
+                        WHERE partner_id = ?
+                        ORDER BY funding_date DESC
+                        LIMIT 90
+                    ");
+                    $stmt->execute([$partnerId]);
+                    echo json_encode(ApiResponse::success($stmt->fetchAll()));
+                    break;
+                    
+                case 'product_volume':
+                    // Product volume and trading activity
+                    if (!$partnerId) {
+                        http_response_code(400);
+                        echo json_encode(ApiResponse::error('Partner ID required', 400));
+                        break;
+                    }
+                    
+                    $stmt = $db->prepare("
+                        SELECT asset_type, total_volume, trade_count, avg_trade_size, client_count
+                        FROM cube_product_volume
+                        WHERE partner_id = ?
+                        ORDER BY total_volume DESC
+                    ");
+                    $stmt->execute([$partnerId]);
+                    echo json_encode(ApiResponse::success($stmt->fetchAll()));
+                    break;
+                    
+                case 'daily_trends':
+                    // Daily performance trends
+                    if (!$partnerId) {
+                        http_response_code(400);
+                        echo json_encode(ApiResponse::error('Partner ID required', 400));
+                        break;
+                    }
+                    
+                    $days = isset($_GET['days']) ? (int)$_GET['days'] : 30;
+                    $stmt = $db->prepare("
+                        SELECT trend_date, signups, deposits, commissions, trades
+                        FROM cube_daily_trends
+                        WHERE partner_id = ?
+                        ORDER BY trend_date DESC
+                        LIMIT ?
+                    ");
+                    $stmt->execute([$partnerId, $days]);
+                    echo json_encode(ApiResponse::success($stmt->fetchAll()));
+                    break;
+                    
                 case 'refresh':
                     // Manual refresh (admin only - add auth check in production)
-                    if ($partnerId) {
-                        $stmt = $db->prepare("CALL refresh_partner_cubes(?)");
-                        $stmt->execute([$partnerId]);
-                        $message = "Cubes refreshed for partner {$partnerId}";
-                    } else {
-                        $stmt = $db->prepare("CALL refresh_all_cubes()");
+                    try {
+                        $stmt = $db->prepare("CALL populate_all_cubes()");
                         $stmt->execute();
                         $message = "All cubes refreshed successfully";
+                        echo json_encode(ApiResponse::success(null, $message));
+                    } catch (Exception $e) {
+                        http_response_code(500);
+                        echo json_encode(ApiResponse::error('Refresh failed: ' . $e->getMessage(), 500));
                     }
-                    echo json_encode(ApiResponse::success(null, $message));
                     break;
                     
                 default:
