@@ -484,10 +484,23 @@ function populateCountryDropdown(partnerId) {
       .then(function(db) {
         function update() {
           var partnerId = select.value;
+          
+          // If no partner selected, try to get from localStorage
+          if (!partnerId) {
+            var savedPartnerId = localStorage.getItem('selectedPartnerId');
+            if (savedPartnerId) {
+              partnerId = savedPartnerId;
+              select.value = savedPartnerId;
+            }
+          }
+          
           renderCountryAnalysis(db, partnerId);
         }
+        
         select.addEventListener('change', update);
-        update();
+        
+        // Delay initial update to allow partner dropdown to be populated with persisted value
+        setTimeout(update, 600);
       })
       .catch(function() {
         document.getElementById('most-clients-country').textContent = 'Error loading data';
@@ -623,10 +636,23 @@ function populateCountryDropdown(partnerId) {
       .then(function(db) {
         function update() {
           var partnerId = select.value;
+          
+          // If no partner selected, try to get from localStorage
+          if (!partnerId) {
+            var savedPartnerId = localStorage.getItem('selectedPartnerId');
+            if (savedPartnerId) {
+              partnerId = savedPartnerId;
+              select.value = savedPartnerId;
+            }
+          }
+          
           renderTiersProgress(db, partnerId);
         }
+        
         select.addEventListener('change', update);
-        update();
+        
+        // Delay initial update to allow partner dropdown to be populated
+        setTimeout(update, 600);
       })
       .catch(function() {
         var container = document.getElementById('tiers-progress');
