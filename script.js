@@ -15,6 +15,44 @@
   }
 })();
 
+// Update tier tag on all pages
+function updatePartnerTier(partnerId) {
+  var tierDisplay = document.getElementById('partner-tier-display');
+  if (!tierDisplay) return;
+  
+  if (!partnerId) {
+    tierDisplay.textContent = '—';
+    tierDisplay.className = 'tier-tag';
+    return;
+  }
+  
+  // Fetch partner info from API
+  fetch('api/index.php?endpoint=partners')
+    .then(function(r) { return r.json(); })
+    .then(function(response) {
+      if (response.success && response.data) {
+        var partner = response.data.find(function(p) { return p.partner_id === partnerId; });
+        if (partner) {
+          tierDisplay.textContent = partner.tier || '—';
+          // Remove existing tier classes
+          tierDisplay.className = 'tier-tag';
+          // Add appropriate tier class
+          if (partner.tier && partner.tier !== '—') {
+            tierDisplay.classList.add(partner.tier.toLowerCase());
+          }
+        } else {
+          tierDisplay.textContent = '—';
+          tierDisplay.className = 'tier-tag';
+        }
+      }
+    })
+    .catch(function(err) {
+      console.error('Error loading partner tier:', err);
+      tierDisplay.textContent = '—';
+      tierDisplay.className = 'tier-tag';
+    });
+}
+
 // Populate country dropdown based on partner selection
 function populateCountryDropdown(partnerId) {
   var countrySelect = document.getElementById('countryFilter');
@@ -105,9 +143,16 @@ function populateCountryDropdown(partnerId) {
           select.dispatchEvent(event);
         }
         
+        // Also update tier tag on initial load
+        setTimeout(function() {
+          updatePartnerTier(select.value);
+        }, 100);
+        
         // Save selection on change and populate country dropdown
         select.addEventListener('change', function () {
           localStorage.setItem('selectedPartnerId', select.value);
+          // Update tier tag on all pages
+          updatePartnerTier(select.value);
           // Populate country dropdown if it exists on this page
           if (document.getElementById('countryFilter')) {
             populateCountryDropdown(select.value);

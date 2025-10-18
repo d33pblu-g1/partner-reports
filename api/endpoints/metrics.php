@@ -101,7 +101,7 @@ function calculatePartnerMetrics($db, $partnerId = null) {
         SELECT 
             COUNT(DISTINCT c.binary_user_id) as total_clients,
             COALESCE(SUM(c.lifetimeDeposits), 0) as total_deposits,
-            COALESCE(SUM(t.closed_pnl_usd), 0) as total_commissions,
+            COALESCE(SUM(t.expected_revenue_usd), 0) as total_commissions,
             COUNT(t.id) as total_trades
         FROM clients c
         LEFT JOIN trades t ON c.binary_user_id = t.binary_user_id
@@ -123,7 +123,7 @@ function calculatePartnerMetrics($db, $partnerId = null) {
         SELECT 
             COUNT(DISTINCT c.binary_user_id) as new_clients,
             COALESCE(SUM(d.amount_usd), 0) as month_deposits,
-            COALESCE(SUM(t.closed_pnl_usd), 0) as month_commissions,
+            COALESCE(SUM(t.expected_revenue_usd), 0) as month_commissions,
             COUNT(t.id) as month_trades
         FROM clients c
         LEFT JOIN trades t ON c.binary_user_id = t.binary_user_id AND DATE_FORMAT(t.date, '%Y-%m') = ?
