@@ -141,11 +141,12 @@
       <div class="card">
         <h3 style="margin-top:0">Commissions by Plan</h3>
         
-        <!-- Time Period selector -->
-        <div style="margin-bottom: 16px; display: flex; gap: 24px; align-items: center; flex-wrap: wrap;">
-          <div style="display: flex; gap: 12px; align-items: center;">
-            <label style="font-weight: 600; color: var(--text);">Time Period:</label>
-            <div style="display: flex; gap: 12px;">
+        <!-- Chart Controls -->
+        <div style="margin-bottom: 16px;">
+          <!-- Time Period selector -->
+          <div style="margin-bottom: 12px;">
+            <label style="font-weight: 600; color: var(--text); margin-bottom: 8px; display: block;">Time Period:</label>
+            <div style="display: flex; gap: 16px;">
               <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
                 <input type="radio" name="periodType" value="daily" checked style="cursor: pointer;">
                 <span>Daily</span>
@@ -157,9 +158,10 @@
             </div>
           </div>
           
-          <div style="display: flex; gap: 12px; align-items: center;">
-            <label style="font-weight: 600; color: var(--text);">Group by:</label>
-            <div style="display: flex; gap: 12px;">
+          <!-- Group by selector -->
+          <div>
+            <label style="font-weight: 600; color: var(--text); margin-bottom: 8px; display: block;">Group by:</label>
+            <div style="display: flex; gap: 16px;">
               <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
                 <input type="radio" name="groupType" value="commission_plan" checked style="cursor: pointer;">
                 <span>Commission Plan</span>
@@ -213,7 +215,7 @@
         </div>
       </div>
 
-          <div class="footer">v1.005 - partner report</div>
+          <div class="footer">v1.006 - partner report</div>
         </main>
       </div>
     </div>
