@@ -86,7 +86,7 @@
   }
   
   /**
-   * Create enhanced table with action buttons
+   * Create enhanced table with action buttons, pagination, and count
    */
   function createTableWithActions(arr, tableName) {
     if (!Array.isArray(arr) || arr.length === 0) {
@@ -105,14 +105,75 @@
     
     const wrap = document.createElement('div');
     wrap.className = 'table-container';
+    wrap.setAttribute('data-table-name', tableName);
+    wrap.setAttribute('data-records-per-page', '25');
     
-    // Add "Add New" button at top
+    // Top controls container (button + dropdown)
+    const topControls = document.createElement('div');
+    topControls.style.display = 'flex';
+    topControls.style.justifyContent = 'space-between';
+    topControls.style.alignItems = 'center';
+    topControls.style.marginBottom = '12px';
+    
+    // Add "Add New" button at top left
     const addBtn = document.createElement('button');
     addBtn.className = 'btn-primary';
     addBtn.innerHTML = `➕ Add ${tableName.slice(0, -1)}`;
-    addBtn.style.marginBottom = '12px';
     addBtn.onclick = () => openAddModal(tableName);
-    wrap.appendChild(addBtn);
+    topControls.appendChild(addBtn);
+    
+    // Records per page dropdown at top right
+    const dropdownContainer = document.createElement('div');
+    dropdownContainer.style.display = 'flex';
+    dropdownContainer.style.alignItems = 'center';
+    dropdownContainer.style.gap = '8px';
+    
+    const dropdownLabel = document.createElement('label');
+    dropdownLabel.textContent = 'Show:';
+    dropdownLabel.style.fontSize = '14px';
+    dropdownLabel.style.color = 'var(--muted)';
+    dropdownContainer.appendChild(dropdownLabel);
+    
+    const dropdown = document.createElement('select');
+    dropdown.id = `records-per-page-${tableName}`;
+    dropdown.style.padding = '6px 12px';
+    dropdown.style.background = 'rgba(148,163,184,0.05)';
+    dropdown.style.color = 'var(--text)';
+    dropdown.style.border = '1px solid rgba(148,163,184,0.2)';
+    dropdown.style.borderRadius = '6px';
+    dropdown.style.cursor = 'pointer';
+    dropdown.innerHTML = `
+      <option value="25">25</option>
+      <option value="50">50</option>
+      <option value="75">75</option>
+      <option value="100">100</option>
+      <option value="all">All</option>
+    `;
+    dropdown.addEventListener('change', function() {
+      const value = this.value === 'all' ? -1 : parseInt(this.value);
+      wrap.setAttribute('data-records-per-page', value);
+      renderTable(arr, columns, tableName, wrap, value);
+    });
+    dropdownContainer.appendChild(dropdown);
+    topControls.appendChild(dropdownContainer);
+    
+    wrap.appendChild(topControls);
+    
+    // Render table with initial page size
+    renderTable(arr, columns, tableName, wrap, 25);
+    
+    return wrap;
+  }
+  
+  /**
+   * Render table with pagination
+   */
+  function renderTable(arr, columns, tableName, wrap, recordsPerPage) {
+    // Remove existing table wrap and count if they exist
+    const existingTableWrap = wrap.querySelector('.table-wrap');
+    const existingCount = wrap.querySelector('.table-count');
+    if (existingTableWrap) existingTableWrap.remove();
+    if (existingCount) existingCount.remove();
     
     const tableWrap = document.createElement('div');
     tableWrap.className = 'table-wrap';
@@ -139,8 +200,11 @@
     
     thead.appendChild(trHead);
     
+    // Determine which records to display
+    const displayRecords = recordsPerPage === -1 ? arr : arr.slice(0, recordsPerPage);
+    
     const tbody = document.createElement('tbody');
-    arr.forEach(row => {
+    displayRecords.forEach(row => {
       const tr = document.createElement('tr');
       columns.forEach(col => {
         const td = document.createElement('td');
@@ -165,7 +229,25 @@
     tableWrap.appendChild(table);
     wrap.appendChild(tableWrap);
     
-    return wrap;
+    // Add count display at the bottom
+    const countDiv = document.createElement('div');
+    countDiv.className = 'table-count';
+    countDiv.style.marginTop = '16px';
+    countDiv.style.padding = '12px';
+    countDiv.style.textAlign = 'center';
+    countDiv.style.background = 'rgba(148,163,184,0.05)';
+    countDiv.style.borderRadius = '6px';
+    countDiv.style.border = '1px solid rgba(148,163,184,0.1)';
+    countDiv.style.fontSize = '14px';
+    countDiv.style.color = 'var(--muted)';
+    
+    if (recordsPerPage === -1 || arr.length <= recordsPerPage) {
+      countDiv.innerHTML = `Showing all <strong style="color: var(--text);">${arr.length}</strong> records`;
+    } else {
+      countDiv.innerHTML = `Showing <strong style="color: var(--text);">${displayRecords.length}</strong> of <strong style="color: var(--text);">${arr.length}</strong> records`;
+    }
+    
+    wrap.appendChild(countDiv);
   }
   
   /**
