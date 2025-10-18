@@ -226,46 +226,91 @@
         
         content.appendChild(topBar);
         
-        var sections = [
+        // Group sections into tables and cubes
+        var tableSections = [
           { key: 'partners', title: 'Partners' },
           { key: 'clients', title: 'Clients' },
           { key: 'trades', title: 'Trades' },
           { key: 'deposits', title: 'Deposits' },
           { key: 'badges', title: 'Badges' },
           { key: 'partner_badges', title: 'Partner Badges' },
-          { key: 'partner_tiers', title: 'Partner Tiers' },
-          { key: 'cube_partner_dashboard', title: '📊 Dashboard Cube' },
-          { key: 'cube_daily_commissions_plan', title: '📊 Daily Commissions (Plan)' },
-          { key: 'cube_daily_commissions_platform', title: '📊 Daily Commissions (Platform)' },
-          { key: 'cube_commissions_product', title: '📊 Commissions by Product' },
-          { key: 'cube_commissions_symbol', title: '📊 Commissions by Symbol' },
-          { key: 'cube_daily_signups', title: '📊 Daily Signups' },
-          { key: 'cube_daily_funding', title: '📊 Daily Deposits/Withdrawals' },
-          { key: 'cube_client_tiers', title: '📊 Client Tiers' },
-          { key: 'cube_client_demographics', title: '📊 Demographics' },
-          { key: 'cube_country_performance', title: '📊 Country Performance' },
-          { key: 'cube_product_volume', title: '📊 Product Volume' },
-          { key: 'cube_daily_trends', title: '📊 Daily Trends' },
-          { key: 'cube_badge_progress', title: '📊 Badge Progress' }
+          { key: 'partner_tiers', title: 'Partner Tiers' }
         ];
         
-        // Create tabs
+        var cubeSections = [
+          { key: 'cube_partner_dashboard', title: 'Dashboard' },
+          { key: 'cube_daily_commissions_plan', title: 'Daily Commissions (Plan)' },
+          { key: 'cube_daily_commissions_platform', title: 'Daily Commissions (Platform)' },
+          { key: 'cube_commissions_product', title: 'Commissions by Product' },
+          { key: 'cube_commissions_symbol', title: 'Commissions by Symbol' },
+          { key: 'cube_daily_signups', title: 'Daily Signups' },
+          { key: 'cube_daily_funding', title: 'Daily Deposits/Withdrawals' },
+          { key: 'cube_client_tiers', title: 'Client Tiers' },
+          { key: 'cube_client_demographics', title: 'Demographics' },
+          { key: 'cube_country_performance', title: 'Country Performance' },
+          { key: 'cube_product_volume', title: 'Product Volume' },
+          { key: 'cube_daily_trends', title: 'Daily Trends' },
+          { key: 'cube_badge_progress', title: 'Badge Progress' },
+          { key: 'cube_partner_countries', title: 'Partner Countries' }
+        ];
+        
+        var sections = tableSections.concat(cubeSections);
+        
+        // Create tabs with section headers
         var tabsContainer = document.createElement('div');
         tabsContainer.className = 'tabs';
-        sections.forEach(function(section, index) {
+        
+        // Add "Database Tables" header
+        var tablesHeader = document.createElement('div');
+        tablesHeader.style.padding = '12px 20px';
+        tablesHeader.style.fontWeight = '700';
+        tablesHeader.style.fontSize = '14px';
+        tablesHeader.style.color = 'var(--accent)';
+        tablesHeader.style.borderBottom = '2px solid var(--accent)';
+        tablesHeader.style.marginBottom = '8px';
+        tablesHeader.textContent = '💾 DATABASE TABLES';
+        tabsContainer.appendChild(tablesHeader);
+        
+        // Add table tabs
+        tableSections.forEach(function(section, index) {
           var tab = document.createElement('div');
           tab.className = 'tab' + (index === 0 ? ' active' : '');
           tab.textContent = section.title + ' (' + (db[section.key] ? db[section.key].length : 0) + ')';
           tab.addEventListener('click', function() {
-            // Remove active from all tabs and contents
             document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
             document.querySelectorAll('.tab-content').forEach(function(c) { c.classList.remove('active'); });
-            // Add active to clicked tab and corresponding content
             tab.classList.add('active');
             document.getElementById('tab-' + section.key).classList.add('active');
           });
           tabsContainer.appendChild(tab);
         });
+        
+        // Add "Data Cubes" header
+        var cubesHeader = document.createElement('div');
+        cubesHeader.style.padding = '12px 20px';
+        cubesHeader.style.fontWeight = '700';
+        cubesHeader.style.fontSize = '14px';
+        cubesHeader.style.color = '#10b981';
+        cubesHeader.style.borderBottom = '2px solid #10b981';
+        cubesHeader.style.marginTop = '16px';
+        cubesHeader.style.marginBottom = '8px';
+        cubesHeader.textContent = '📊 DATA CUBES (Performance Optimized)';
+        tabsContainer.appendChild(cubesHeader);
+        
+        // Add cube tabs
+        cubeSections.forEach(function(section) {
+          var tab = document.createElement('div');
+          tab.className = 'tab';
+          tab.textContent = section.title + ' (' + (db[section.key] ? db[section.key].length : 0) + ')';
+          tab.addEventListener('click', function() {
+            document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+            document.querySelectorAll('.tab-content').forEach(function(c) { c.classList.remove('active'); });
+            tab.classList.add('active');
+            document.getElementById('tab-' + section.key).classList.add('active');
+          });
+          tabsContainer.appendChild(tab);
+        });
+        
         content.appendChild(tabsContainer);
         
         // Create tab contents

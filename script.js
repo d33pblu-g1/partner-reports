@@ -15,6 +15,42 @@
   }
 })();
 
+// Populate country dropdown based on partner selection
+function populateCountryDropdown(partnerId) {
+  var countrySelect = document.getElementById('countryFilter');
+  if (!countrySelect) return;
+  
+  // Clear existing options except "All countries"
+  while (countrySelect.children.length > 1) {
+    countrySelect.removeChild(countrySelect.lastChild);
+  }
+  
+  if (!partnerId) {
+    console.log('No partner selected for country filter');
+    return;
+  }
+  
+  // Fetch countries for this partner from cube
+  fetch('api/index.php?endpoint=cubes&cube=partner_countries&partner_id=' + partnerId)
+    .then(function(r) { return r.json(); })
+    .then(function(response) {
+      if (response.success && response.data && response.data.length > 0) {
+        response.data.forEach(function(item) {
+          var opt = document.createElement('option');
+          opt.value = item.country;
+          opt.textContent = item.country + ' (' + item.client_count + ' clients)';
+          countrySelect.appendChild(opt);
+        });
+        console.log('✓ Loaded ' + response.data.length + ' countries for partner ' + partnerId);
+      } else {
+        console.log('No countries found for partner ' + partnerId);
+      }
+    })
+    .catch(function(err) {
+      console.error('Error loading countries:', err);
+    });
+}
+
 // Populate partner select on all pages and remember selection
 (function () {
   function populatePartnerSelect() {
@@ -62,11 +98,20 @@
         
         // Restore saved selection
         var saved = localStorage.getItem('selectedPartnerId') || '';
-        if (saved) select.value = saved;
+        if (saved && select.value !== saved) {
+          select.value = saved;
+          // Trigger change event to update page
+          var event = new Event('change', { bubbles: true });
+          select.dispatchEvent(event);
+        }
         
-        // Save selection on change
+        // Save selection on change and populate country dropdown
         select.addEventListener('change', function () {
           localStorage.setItem('selectedPartnerId', select.value);
+          // Populate country dropdown if it exists on this page
+          if (document.getElementById('countryFilter')) {
+            populateCountryDropdown(select.value);
+          }
         });
       })
       .catch(function (error) {

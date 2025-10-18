@@ -321,6 +321,24 @@ try {
                     echo json_encode(ApiResponse::success($stmt->fetchAll()));
                     break;
                     
+                case 'partner_countries':
+                    // Get countries for a specific partner
+                    if (!$partnerId) {
+                        http_response_code(400);
+                        echo json_encode(ApiResponse::error('Partner ID required', 400));
+                        break;
+                    }
+                    
+                    $stmt = $db->prepare("
+                        SELECT country, client_count
+                        FROM cube_partner_countries
+                        WHERE partner_id = ?
+                        ORDER BY client_count DESC
+                    ");
+                    $stmt->execute([$partnerId]);
+                    echo json_encode(ApiResponse::success($stmt->fetchAll()));
+                    break;
+                    
                 case 'refresh':
                     // Manual refresh (admin only - add auth check in production)
                     try {
