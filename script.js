@@ -702,22 +702,62 @@
       return;
     }
     
-    var html = '<div style="display: grid; gap: 12px;">';
-    filteredClients.forEach(function(client) {
+    // Get or create the records per page selection
+    var recordsPerPage = parseInt(container.getAttribute('data-records-per-page') || '25');
+    
+    // Dropdown for records per page
+    var html = '<div style="display: flex; justify-content: flex-end; margin-bottom: 12px;">';
+    html += '<div style="display: flex; align-items: center; gap: 8px;">';
+    html += '<label style="font-size: 14px; color: var(--muted);">Show:</label>';
+    html += '<select id="records-per-page-select" style="padding: 6px 12px; background: rgba(148,163,184,0.05); color: var(--text); border: 1px solid rgba(148,163,184,0.2); border-radius: 6px; cursor: pointer;">';
+    html += '<option value="25"' + (recordsPerPage === 25 ? ' selected' : '') + '>25</option>';
+    html += '<option value="50"' + (recordsPerPage === 50 ? ' selected' : '') + '>50</option>';
+    html += '<option value="75"' + (recordsPerPage === 75 ? ' selected' : '') + '>75</option>';
+    html += '<option value="100"' + (recordsPerPage === 100 ? ' selected' : '') + '>100</option>';
+    html += '<option value="all"' + (recordsPerPage === -1 ? ' selected' : '') + '>All</option>';
+    html += '</select>';
+    html += '</div>';
+    html += '</div>';
+    
+    // Display clients (limited or all)
+    html += '<div style="display: grid; gap: 12px;">';
+    var displayClients = recordsPerPage === -1 ? filteredClients : filteredClients.slice(0, recordsPerPage);
+    displayClients.forEach(function(client) {
       html += '<div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: rgba(148,163,184,0.05); border-radius: 6px; border: 1px solid rgba(148,163,184,0.1);">';
       html += '<div>';
       html += '<div style="font-weight: 600; margin-bottom: 4px;">' + maskName(client.name) + '</div>';
-      html += '<div style="font-size: 12px; color: var(--muted);">' + client.customerId + ' • ' + client.country + ' • ' + (client.gender || 'N/A') + ', ' + (client.age || 'N/A') + ' years</div>';
+      html += '<div style="font-size: 12px; color: var(--muted);">' + (client.binary_user_id || client.customerId) + ' • ' + client.country + ' • ' + (client.gender || 'N/A') + ', ' + (client.age || 'N/A') + ' years</div>';
       html += '</div>';
       html += '<div style="text-align: right;">';
-      html += '<div style="font-size: 12px; color: var(--muted); margin-bottom: 2px;">' + client.tier + '</div>';
-      html += '<div style="font-size: 14px; font-weight: 600;">$' + (client.lifetimeDeposits || 0).toLocaleString() + '</div>';
+      html += '<div style="font-size: 12px; color: var(--muted); margin-bottom: 2px;">' + (client.tier || 'N/A') + '</div>';
+      html += '<div style="font-size: 14px; font-weight: 600;">$' + ((client.lifetimeDeposits || 0)).toLocaleString() + '</div>';
       html += '</div>';
       html += '</div>';
     });
     html += '</div>';
     
+    // Add count at the end
+    html += '<div style="margin-top: 16px; padding: 12px; text-align: center; background: rgba(148,163,184,0.05); border-radius: 6px; border: 1px solid rgba(148,163,184,0.1);">';
+    html += '<div style="font-size: 14px; color: var(--muted);">';
+    if (recordsPerPage === -1 || filteredClients.length <= recordsPerPage) {
+      html += 'Showing all <strong style="color: var(--text);">' + filteredClients.length + '</strong> clients';
+    } else {
+      html += 'Showing <strong style="color: var(--text);">' + displayClients.length + '</strong> of <strong style="color: var(--text);">' + filteredClients.length + '</strong> clients';
+    }
+    html += '</div>';
+    html += '</div>';
+    
     container.innerHTML = html;
+    
+    // Add event listener for dropdown
+    var select = document.getElementById('records-per-page-select');
+    if (select) {
+      select.addEventListener('change', function() {
+        var value = this.value === 'all' ? -1 : parseInt(this.value);
+        container.setAttribute('data-records-per-page', value);
+        renderClientsList(db, partnerId);
+      });
+    }
   }
 
   function renderPopulationChart(db, partnerId) {
