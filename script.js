@@ -561,14 +561,27 @@
     return maskedFirst + ' ' + maskedLast;
   }
 
-  function renderTierChart(db, partnerId) {
+  function renderTierChart(db, partnerId, timePeriod) {
     var container = document.getElementById('tier-chart');
     if (!container) return;
     
     var clients = Array.isArray(db.clients) ? db.clients : [];
-    var filteredClients = partnerId 
-      ? clients.filter(function(c) { return c.partnerId === partnerId; })
-      : clients;
+    var filteredClients = clients;
+    
+    // Filter by partner
+    if (partnerId) {
+      filteredClients = filteredClients.filter(function(c) { return c.partnerId === partnerId; });
+    }
+    
+    // Filter by time period (joinDate)
+    if (timePeriod) {
+      filteredClients = filteredClients.filter(function(c) {
+        if (!c.joinDate) return false;
+        var joinDate = c.joinDate;
+        var clientMonth = joinDate.substring(0, 7);
+        return clientMonth === timePeriod;
+      });
+    }
     
     if (filteredClients.length === 0) {
       container.innerHTML = '<p class="muted">No clients found for selected partner.</p>';
@@ -688,14 +701,28 @@
     container.appendChild(svg);
   }
 
-  function renderClientsList(db, partnerId) {
+  function renderClientsList(db, partnerId, timePeriod) {
     var container = document.getElementById('clients-list');
     if (!container) return;
     
     var clients = Array.isArray(db.clients) ? db.clients : [];
-    var filteredClients = partnerId 
-      ? clients.filter(function(c) { return c.partnerId === partnerId; })
-      : clients;
+    var filteredClients = clients;
+    
+    // Filter by partner
+    if (partnerId) {
+      filteredClients = filteredClients.filter(function(c) { return c.partnerId === partnerId; });
+    }
+    
+    // Filter by time period (joinDate)
+    if (timePeriod) {
+      filteredClients = filteredClients.filter(function(c) {
+        if (!c.joinDate) return false;
+        var joinDate = c.joinDate;
+        // Extract year-month from joinDate (format: YYYY-MM-DD or YYYY-MM)
+        var clientMonth = joinDate.substring(0, 7); // Gets YYYY-MM
+        return clientMonth === timePeriod;
+      });
+    }
     
     if (filteredClients.length === 0) {
       container.innerHTML = '<p class="muted">No clients found for selected partner.</p>';
@@ -755,19 +782,32 @@
       select.addEventListener('change', function() {
         var value = this.value === 'all' ? -1 : parseInt(this.value);
         container.setAttribute('data-records-per-page', value);
-        renderClientsList(db, partnerId);
+        renderClientsList(db, partnerId, timePeriod);
       });
     }
   }
 
-  function renderPopulationChart(db, partnerId) {
+  function renderPopulationChart(db, partnerId, timePeriod) {
     var container = document.getElementById('population-chart');
     if (!container) return;
     
     var clients = Array.isArray(db.clients) ? db.clients : [];
-    var filteredClients = partnerId 
-      ? clients.filter(function(c) { return c.partnerId === partnerId; })
-      : clients;
+    var filteredClients = clients;
+    
+    // Filter by partner
+    if (partnerId) {
+      filteredClients = filteredClients.filter(function(c) { return c.partnerId === partnerId; });
+    }
+    
+    // Filter by time period (joinDate)
+    if (timePeriod) {
+      filteredClients = filteredClients.filter(function(c) {
+        if (!c.joinDate) return false;
+        var joinDate = c.joinDate;
+        var clientMonth = joinDate.substring(0, 7);
+        return clientMonth === timePeriod;
+      });
+    }
     
     if (filteredClients.length === 0) {
       container.innerHTML = '<p class="muted">No clients found for selected partner.</p>';
@@ -865,17 +905,22 @@
 
   function initClientsPage() {
     var select = document.getElementById('partnerSelect');
+    var timePeriodSelect = document.getElementById('timePeriod');
     if (!select) return;
     
     window.ApiManager.loadDashboardData()
       .then(function(db) {
         function update() {
           var partnerId = select.value;
-          renderTierChart(db, partnerId);
-          renderClientsList(db, partnerId);
-          renderPopulationChart(db, partnerId);
+          var timePeriod = timePeriodSelect ? timePeriodSelect.value : '';
+          renderTierChart(db, partnerId, timePeriod);
+          renderClientsList(db, partnerId, timePeriod);
+          renderPopulationChart(db, partnerId, timePeriod);
         }
         select.addEventListener('change', update);
+        if (timePeriodSelect) {
+          timePeriodSelect.addEventListener('change', update);
+        }
         update();
       })
       .catch(function() {
