@@ -1,21 +1,46 @@
-/* Base styles for the 9-page report */
+/* Deriv-inspired theme for Partner Report */
 :root {
-  --bg: #0f172a;
-  --panel: #111827;
-  --text: #e5e7eb;
-  --muted: #94a3b8;
-  --accent: #38bdf8;
-  --accent-2: #22c55e;
+  /* Deriv Primary Colors */
+  --deriv-blue: #0066cc;
+  --deriv-blue-dark: #003366;
+  --deriv-blue-light: #4d94ff;
+  --deriv-green: #00d4aa;
+  --deriv-orange: #ff6b35;
+  
+  /* Base Colors */
+  --bg: #ffffff;
+  --panel: #f8fafc;
+  --text: #1a202c;
+  --muted: #64748b;
+  --accent: var(--deriv-blue);
+  --accent-2: var(--deriv-green);
+  
+  /* Borders and Shadows */
+  --border: #e2e8f0;
+  --border-light: #f1f5f9;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+  
+  /* Status Colors */
+  --success: #10b981;
+  --warning: #f59e0b;
+  --error: #ef4444;
+  --info: var(--deriv-blue);
 }
 
-/* Light theme */
-:root[data-theme="light"] {
-  --bg: #f8fafc;
-  --panel: #ffffff;
-  --text: #0f172a;
-  --muted: #64748b;
-  --accent: #0284c7;
-  --accent-2: #16a34a;
+/* Dark theme - Deriv-inspired dark mode */
+:root[data-theme="dark"] {
+  --bg: #0f172a;
+  --panel: #1e293b;
+  --text: #f1f5f9;
+  --muted: #94a3b8;
+  --accent: var(--deriv-blue-light);
+  --accent-2: var(--deriv-green);
+  
+  --border: #334155;
+  --border-light: #475569;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
 * { box-sizing: border-box; }
@@ -25,7 +50,10 @@ html, body {
   padding: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  font-weight: 400;
 }
 
 .container {
@@ -57,39 +85,64 @@ html, body {
 /* Layout with sidebar */
 .layout { display: flex; min-height: 100vh; }
 .sidebar {
-  width: 240px;
-  flex: 0 0 240px;
-  background: rgba(17, 24, 39, 0.85);
-  backdrop-filter: blur(8px);
-  border-right: 1px solid rgba(148, 163, 184, 0.2);
+  width: 280px;
+  flex: 0 0 280px;
+  background: var(--panel);
+  border-right: 1px solid var(--border);
   position: sticky;
   top: 0;
   align-self: flex-start;
   height: 100vh;
+  box-shadow: var(--shadow);
 }
 .content { flex: 1 1 auto; min-width: 0; }
 
 nav.side-nav {
   display: flex;
   flex-direction: column;
-  padding: 8px;
+  padding: 16px;
+  gap: 4px;
 }
 
 .side-nav a {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   color: var(--muted);
   text-decoration: none;
-  padding: 10px 12px;
+  padding: 12px 16px;
   margin: 2px 0;
-  border-radius: 8px;
-  font-size: 14px;
-  transition: background 0.15s ease, color 0.15s ease;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  position: relative;
 }
 
-.side-nav a:hover { color: var(--text); background: rgba(148,163,184,0.08); }
-.side-nav a.active { color: var(--accent); background: rgba(56,189,248,0.12); font-weight: 600; }
+.side-nav a:hover { 
+  color: var(--text); 
+  background: var(--border-light);
+  transform: translateX(2px);
+}
+
+.side-nav a.active { 
+  color: var(--accent); 
+  background: rgba(0, 102, 204, 0.1);
+  font-weight: 600;
+  box-shadow: var(--shadow);
+}
+
+.side-nav a.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 20px;
+  background: var(--accent);
+  border-radius: 0 2px 2px 0;
+}
 
 .side-nav .icon {
   width: 18px;
@@ -125,10 +178,18 @@ main.panel {
 }
 
 .card {
-  background: #0b1220;
-  border: 1px solid rgba(148, 163, 184, 0.15);
-  border-radius: 8px;
-  padding: 16px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+  transition: all 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
 }
 
 .muted { color: var(--muted); }
@@ -364,35 +425,40 @@ main.panel {
 }
 
 .btn-primary {
-  padding: 10px 20px;
+  padding: 12px 24px;
   background: var(--accent);
-  color: #0f172a;
+  color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   font-weight: 600;
+  font-size: 15px;
   cursor: pointer;
   transition: all 0.2s ease;
+  box-shadow: var(--shadow);
 }
 
 .btn-primary:hover {
-  background: #0ea5e9;
+  background: var(--deriv-blue-dark);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
+  box-shadow: var(--shadow-lg);
 }
 
 .btn-secondary {
-  padding: 10px 20px;
-  background: transparent;
+  padding: 12px 24px;
+  background: var(--panel);
   color: var(--text);
-  border: 1px solid rgba(148, 163, 184, 0.3);
-  border-radius: 8px;
-  font-weight: 600;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 15px;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .btn-secondary:hover {
-  background: rgba(148, 163, 184, 0.1);
+  background: var(--border-light);
+  border-color: var(--accent);
+  transform: translateY(-1px);
 }
 
 .empty-state {
@@ -541,27 +607,39 @@ main.panel {
   position: relative;
 }
 
-/* Theme Toggle */
-.theme-toggle-container {
+/* Top Controls Container */
+.top-controls-container {
   position: fixed;
   top: 20px;
   right: 0;
   z-index: 1000;
   padding-right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Theme Toggle */
+.theme-toggle-container {
+  position: static;
+  top: auto;
+  right: auto;
+  z-index: auto;
+  padding-right: 0;
 }
 
 .theme-toggle {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
+  width: 48px;
+  height: 48px;
   background: var(--panel);
-  border: 1px solid rgba(148, 163, 184, 0.3);
+  border: 1px solid var(--border);
+  border-radius: 12px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow);
   position: relative;
   overflow: hidden;
 }

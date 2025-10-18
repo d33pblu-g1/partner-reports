@@ -1155,12 +1155,19 @@ function populateCountryDropdown(partnerId) {
           renderTierChart(db, partnerId, timePeriod);
           renderClientsList(db, partnerId, timePeriod);
           renderPopulationChart(db, partnerId, timePeriod);
+          
+          // Populate country dropdown for the selected partner
+          if (document.getElementById('countryFilter')) {
+            populateCountryDropdown(partnerId);
+          }
         }
         select.addEventListener('change', update);
         if (timePeriodSelect) {
           timePeriodSelect.addEventListener('change', update);
         }
-        update();
+        
+        // Initial load after a brief delay to ensure partner dropdown is populated
+        setTimeout(update, 600);
       })
       .catch(function() {
         var container = document.getElementById('clients-list');
