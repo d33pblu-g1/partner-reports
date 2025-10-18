@@ -93,7 +93,7 @@ function calculatePartnerMetrics($db, $partnerId = null) {
     }
     
     // Build WHERE clause for partner filter
-    $whereClause = $partnerId ? "WHERE c.partnerId = ?" : "";
+    $whereClause = $partnerId ? "WHERE c.partner_id = ?" : "";
     $params = $partnerId ? [$partnerId] : [];
     
     // Lifetime metrics
