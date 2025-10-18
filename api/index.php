@@ -63,6 +63,10 @@ switch ($path) {
         require_once 'endpoints/all_tables.php';
         break;
         
+    case 'cubes':
+        require_once 'endpoints/cubes.php';
+        break;
+        
     default:
         http_response_code(404);
         echo json_encode(ApiResponse::error('Endpoint not found', 404));

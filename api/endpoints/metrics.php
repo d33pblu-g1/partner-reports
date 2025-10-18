@@ -11,10 +11,46 @@ try {
     switch ($_SERVER['REQUEST_METHOD']) {
         case 'GET':
             $partnerId = $_GET['partner_id'] ?? null;
+            $useCache = !isset($_GET['no_cache']); // Allow bypassing cache for debugging
             
-            // Calculate metrics
+            // Try to get from cube first for better performance
+            if ($useCache && $partnerId) {
+                $stmt = $db->prepare("SELECT * FROM cube_partner_dashboard WHERE partner_id = ?");
+                $stmt->execute([$partnerId]);
+                $cached = $stmt->fetch();
+                
+                if ($cached) {
+                    // Transform cube data to metrics format
+                    $metrics = [
+                        'partnerName' => $cached['partner_name'],
+                        'partnerTier' => $cached['partner_tier'] ?? '—',
+                        'ltClients' => (int)$cached['total_clients'],
+                        'ltDeposits' => (float)$cached['total_deposits'],
+                        'ltCommissions' => (float)$cached['total_commissions'],
+                        'ltVolume' => (int)$cached['total_trades'],
+                        'mtdClients' => (int)$cached['mtd_clients'],
+                        'mtdDeposits' => (float)$cached['mtd_deposits'],
+                        'mtdComm' => (float)$cached['mtd_commissions'],
+                        'mtdVolume' => (int)$cached['mtd_trades'],
+                        'last6Months' => [
+                            (float)$cached['month_1_commissions'],
+                            (float)$cached['month_2_commissions'],
+                            (float)$cached['month_3_commissions'],
+                            (float)$cached['month_4_commissions'],
+                            (float)$cached['month_5_commissions'],
+                            (float)$cached['month_6_commissions']
+                        ],
+                        '_cached' => true,
+                        '_cache_time' => $cached['last_updated']
+                    ];
+                    echo json_encode(ApiResponse::success($metrics));
+                    break;
+                }
+            }
+            
+            // Fallback to live calculation if no cache
             $metrics = calculatePartnerMetrics($db, $partnerId);
-            
+            $metrics['_cached'] = false;
             echo json_encode(ApiResponse::success($metrics));
             break;
             
