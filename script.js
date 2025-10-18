@@ -53,6 +53,39 @@ function updatePartnerTier(partnerId) {
     });
 }
 
+// Load country manager information
+function loadCountryManagerInfo(partnerId) {
+  if (!partnerId) return;
+  
+  fetch('api/index.php?endpoint=partners&partner_id=' + partnerId)
+    .then(function(r) { return r.json(); })
+    .then(function(response) {
+      if (response.success && response.data && response.data.length > 0) {
+        var partner = response.data[0];
+        var managerNameEl = document.getElementById('country-manager-name');
+        var managerTelEl = document.getElementById('country-manager-tel');
+        
+        if (managerNameEl) {
+          managerNameEl.textContent = partner.country_manager || 'Country Manager';
+        }
+        
+        if (managerTelEl) {
+          managerTelEl.textContent = partner.country_manager_tel || '+971521462917';
+        }
+        
+        // Update WhatsApp link with actual phone number
+        var whatsappLink = document.querySelector('.whatsapp-link');
+        if (whatsappLink && partner.country_manager_tel) {
+          var phoneNumber = partner.country_manager_tel.replace(/[^\d]/g, '');
+          whatsappLink.href = 'https://wa.me/' + phoneNumber;
+        }
+      }
+    })
+    .catch(function(err) {
+      console.error('Error loading country manager info:', err);
+    });
+}
+
 // Populate country dropdown based on partner selection
 function populateCountryDropdown(partnerId) {
   var countrySelect = document.getElementById('countryFilter');
@@ -146,6 +179,7 @@ function populateCountryDropdown(partnerId) {
         // Also update tier tag on initial load
         setTimeout(function() {
           updatePartnerTier(select.value);
+          loadCountryManagerInfo(select.value);
         }, 100);
         
         // Save selection on change and populate country dropdown
@@ -157,6 +191,8 @@ function populateCountryDropdown(partnerId) {
           if (document.getElementById('countryFilter')) {
             populateCountryDropdown(select.value);
           }
+          // Load country manager info
+          loadCountryManagerInfo(select.value);
         });
       })
       .catch(function (error) {

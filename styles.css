@@ -369,6 +369,63 @@ main.panel {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
+/* Country Manager Info */
+.country-manager-info {
+  position: absolute;
+  bottom: 20px;
+  left: 16px;
+  right: 16px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+
+.manager-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.manager-contact {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.manager-tel {
+  font-size: 13px;
+  color: var(--muted);
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+}
+
+.whatsapp-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: #25D366;
+  border-radius: 8px;
+  color: white;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow);
+}
+
+.whatsapp-link:hover {
+  background: #128C7E;
+  transform: scale(1.05);
+  box-shadow: var(--shadow-lg);
+}
+
+.whatsapp-link svg {
+  width: 18px;
+  height: 18px;
+}
+
 /* Responsive badges grid */
 @media (max-width: 768px) {
   .badges-grid {
