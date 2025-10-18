@@ -25,6 +25,7 @@
   <script src="virtual-scroll.js"></script>
   <script src="canvas-charts.js"></script>
   <script src="performance-monitor.js"></script>
+  <script src="forecasting.js"></script>
   <script defer src="script.js"></script>
   
   <!-- Service Worker Registration -->
@@ -179,6 +180,11 @@
                  data-partner-id="">
               <div class="skeleton skeleton-chart"></div>
             </div>
+            <div style="text-align: center; margin-top: 12px;">
+              <button id="forecast-6mo-comm" class="btn-secondary" style="padding: 8px 16px; font-size: 14px;">
+                📈 Enable Forecasting
+              </button>
+            </div>
           </div>
 
           <!-- Additional Charts Section -->
@@ -193,6 +199,11 @@
               <h3 style="margin-top:0; text-align: center;">Client Growth Trend</h3>
               <div id="client-growth-chart" style="height: 300px; display: flex; align-items: center; justify-content: center;">
                 <p class="muted">Loading chart...</p>
+              </div>
+              <div style="text-align: center; margin-top: 12px;">
+                <button id="forecast-client-growth" class="btn-secondary" style="padding: 6px 12px; font-size: 12px;">
+                  📈 Forecast
+                </button>
               </div>
             </div>
           </div>
@@ -209,10 +220,15 @@
               <div id="deposit-trends-chart" style="height: 300px; display: flex; align-items: center; justify-content: center;">
                 <p class="muted">Loading chart...</p>
               </div>
+              <div style="text-align: center; margin-top: 12px;">
+                <button id="forecast-deposit-trends" class="btn-secondary" style="padding: 6px 12px; font-size: 12px;">
+                  📈 Forecast
+                </button>
+              </div>
             </div>
           </div>
 
-          <div class="footer">v1.003 - partner report</div>
+          <div class="footer">v1.007 - partner report</div>
         </main>
       </div>
     </div>

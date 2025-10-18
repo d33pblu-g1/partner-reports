@@ -12,6 +12,7 @@
   <!-- API Manager and Stacked Chart -->
   <script src="api-manager.js"></script>
   <script src="stacked-chart.js"></script>
+  <script src="forecasting.js"></script>
   <!-- Theme toggle (load first to prevent flash) -->
   <script src="theme-toggle.js"></script>
   <script defer src="script.js"></script>
@@ -182,6 +183,13 @@
         <div id="commissions-stacked-chart" style="min-height: 400px;">
           <p class="muted">Loading chart...</p>
         </div>
+        
+        <!-- Forecasting button -->
+        <div style="text-align: center; margin-top: 12px;">
+          <button id="forecast-commissions-stacked" class="btn-secondary" style="padding: 8px 16px; font-size: 14px;">
+            📈 Enable Forecasting
+          </button>
+        </div>
       </div>
 
       <!-- Additional Charts Section -->
@@ -196,6 +204,11 @@
           <h3 style="margin-top:0">Monthly Commission Trends</h3>
           <div id="monthly-trends-chart" style="height: 300px; display: flex; align-items: center; justify-content: center;">
             <p class="muted">Loading chart...</p>
+          </div>
+          <div style="text-align: center; margin-top: 12px;">
+            <button id="forecast-monthly-trends" class="btn-secondary" style="padding: 6px 12px; font-size: 12px;">
+              📈 Forecast
+            </button>
           </div>
         </div>
       </div>
@@ -215,7 +228,7 @@
         </div>
       </div>
 
-          <div class="footer">v1.006 - partner report</div>
+          <div class="footer">v1.007 - partner report</div>
         </main>
       </div>
     </div>
