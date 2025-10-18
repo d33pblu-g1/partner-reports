@@ -19,12 +19,85 @@
     .table-wrap { overflow-x: auto; max-height: 400px; overflow-y: auto; }
     .section { margin-bottom: 28px; }
     
-    .tabs { display: flex; border-bottom: 1px solid rgba(148,163,184,0.2); margin-bottom: 16px; }
-    .tab { padding: 12px 16px; cursor: pointer; border-bottom: 2px solid transparent; color: var(--muted); transition: all 0.15s ease; }
-    .tab:hover { color: var(--text); }
-    .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
+    /* Horizontal scrolling containers */
+    .horizontal-scroll-container {
+      overflow-x: auto;
+      overflow-y: hidden;
+      white-space: nowrap;
+      padding: 16px 0;
+      margin: 16px 0;
+      border-radius: 8px;
+      background: rgba(148,163,184,0.05);
+    }
+    
+    .horizontal-scroll-container::-webkit-scrollbar {
+      height: 8px;
+    }
+    
+    .horizontal-scroll-container::-webkit-scrollbar-track {
+      background: rgba(148,163,184,0.1);
+      border-radius: 4px;
+    }
+    
+    .horizontal-scroll-container::-webkit-scrollbar-thumb {
+      background: var(--accent);
+      border-radius: 4px;
+    }
+    
+    .horizontal-scroll-container::-webkit-scrollbar-thumb:hover {
+      background: #0ea5e9;
+    }
+    
+    .scroll-item {
+      display: inline-block;
+      vertical-align: top;
+      white-space: normal;
+      margin-right: 16px;
+      min-width: 300px;
+      max-width: 400px;
+    }
+    
+    .scroll-item:last-child {
+      margin-right: 0;
+    }
+    
+    /* Section headers */
+    .section-header {
+      background: var(--panel);
+      border: 1px solid rgba(148,163,184,0.2);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    
+    .section-header h2 {
+      margin: 0 0 8px 0;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    
+    .section-header p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    
+    .tables-section {
+      margin-bottom: 32px;
+    }
+    
+    .cubes-section {
+      margin-top: 32px;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .scroll-item {
+        min-width: 280px;
+        max-width: 320px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -38,6 +111,7 @@
         <a href="index.html"><span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 10l9-7 9 7v10a2 2 0 0 1-2 2h-4v-6H9v6H5a2 2 0 0 1-2-2V10z" stroke="currentColor" stroke-width="2"/></svg></span><span class="label">Home</span></a>
         <a href="clients.html"><span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="2"/></svg></span><span class="label">Clients</span></a>
         <a href="commissions.html"><span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 19h16M4 15l4-4 3 3 6-6" stroke="currentColor" stroke-width="2"/></svg></span><span class="label">Commissions</span></a>
+        <a href="client-lifecycle.html"><span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 5h18l-7 8v5l-4 2v-7L3 5z" stroke="currentColor" stroke-width="2"/></svg></span><span class="label">Client Lifecycle</span></a>
         <a href="master-partner.html"><span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3l7 4v6c0 5-7 8-7 8s-7-3-7-8V7l7-4z" stroke="currentColor" stroke-width="2"/></svg></span><span class="label">Master Partner</span></a>
         <a href="events.html"><span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" stroke-width="2"/><path d="M16 3v4M8 3v4M3 11h18" stroke="currentColor" stroke-width="2"/></svg></span><span class="label">Events</span></a>
         <a href="tiers-badges.html"><span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3l3 6 6 1-4.5 4.4L17 21l-5-2.6L7 21l1.5-6.6L4 10l6-1 2-6z" stroke="currentColor" stroke-width="2"/></svg></span><span class="label">Tiers &amp; Badges</span></a>
@@ -75,7 +149,7 @@
 
           <div id="content"></div>
 
-          <div class="footer">v1.000 - partner report</div>
+          <div class="footer">v1.009 - partner report</div>
         </main>
       </div>
     </div>
@@ -254,86 +328,85 @@
           { key: 'cube_partner_countries', title: 'Partner Countries' }
         ];
         
-        var sections = tableSections.concat(cubeSections);
+        // Create Database Tables Section
+        var tablesSection = document.createElement('div');
+        tablesSection.className = 'tables-section';
         
-        // Create tabs with section headers
-        var tabsContainer = document.createElement('div');
-        tabsContainer.className = 'tabs';
-        
-        // Add "Database Tables" header
         var tablesHeader = document.createElement('div');
-        tablesHeader.style.padding = '12px 20px';
-        tablesHeader.style.fontWeight = '700';
-        tablesHeader.style.fontSize = '14px';
-        tablesHeader.style.color = 'var(--accent)';
-        tablesHeader.style.borderBottom = '2px solid var(--accent)';
-        tablesHeader.style.marginBottom = '8px';
-        tablesHeader.textContent = '💾 DATABASE TABLES';
-        tabsContainer.appendChild(tablesHeader);
+        tablesHeader.className = 'section-header';
+        tablesHeader.innerHTML = '<h2>💾 Database Tables</h2><p>Core database tables with CRUD operations</p>';
+        tablesSection.appendChild(tablesHeader);
         
-        // Add table tabs
-        tableSections.forEach(function(section, index) {
-          var tab = document.createElement('div');
-          tab.className = 'tab' + (index === 0 ? ' active' : '');
-          tab.textContent = section.title + ' (' + (db[section.key] ? db[section.key].length : 0) + ')';
-          tab.addEventListener('click', function() {
-            document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
-            document.querySelectorAll('.tab-content').forEach(function(c) { c.classList.remove('active'); });
-            tab.classList.add('active');
-            document.getElementById('tab-' + section.key).classList.add('active');
-          });
-          tabsContainer.appendChild(tab);
-        });
+        var tablesScrollContainer = document.createElement('div');
+        tablesScrollContainer.className = 'horizontal-scroll-container';
         
-        // Add "Data Cubes" header
-        var cubesHeader = document.createElement('div');
-        cubesHeader.style.padding = '12px 20px';
-        cubesHeader.style.fontWeight = '700';
-        cubesHeader.style.fontSize = '14px';
-        cubesHeader.style.color = '#10b981';
-        cubesHeader.style.borderBottom = '2px solid #10b981';
-        cubesHeader.style.marginTop = '16px';
-        cubesHeader.style.marginBottom = '8px';
-        cubesHeader.textContent = '📊 DATA CUBES (Performance Optimized)';
-        tabsContainer.appendChild(cubesHeader);
-        
-        // Add cube tabs
-        cubeSections.forEach(function(section) {
-          var tab = document.createElement('div');
-          tab.className = 'tab';
-          tab.textContent = section.title + ' (' + (db[section.key] ? db[section.key].length : 0) + ')';
-          tab.addEventListener('click', function() {
-            document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
-            document.querySelectorAll('.tab-content').forEach(function(c) { c.classList.remove('active'); });
-            tab.classList.add('active');
-            document.getElementById('tab-' + section.key).classList.add('active');
-          });
-          tabsContainer.appendChild(tab);
-        });
-        
-        content.appendChild(tabsContainer);
-        
-        // Create tab contents
-        sections.forEach(function(section, index) {
-          var tabContent = document.createElement('div');
-          tabContent.id = 'tab-' + section.key;
-          tabContent.className = 'tab-content' + (index === 0 ? ' active' : '');
-          var s = document.createElement('section');
-          s.className = 'section';
-          var h3 = document.createElement('h3'); 
-          h3.textContent = section.title + ' (' + (db[section.key] ? db[section.key].length : 0) + ' records)'; 
-          s.appendChild(h3);
+        tableSections.forEach(function(section) {
+          var scrollItem = document.createElement('div');
+          scrollItem.className = 'scroll-item';
+          
+          var card = document.createElement('div');
+          card.className = 'card';
+          
+          var title = document.createElement('h3');
+          title.textContent = section.title + ' (' + (db[section.key] ? db[section.key].length : 0) + ' records)';
+          title.style.marginTop = '0';
+          title.style.marginBottom = '12px';
+          title.style.fontSize = '16px';
+          card.appendChild(title);
           
           // Use CRUD-enabled table for all tables
           if (window.DatabaseCRUD) {
-            s.appendChild(window.DatabaseCRUD.createTable(db[section.key] || [], section.key));
+            card.appendChild(window.DatabaseCRUD.createTable(db[section.key] || [], section.key));
           } else {
-            s.appendChild(createTableFromArray(db[section.key] || []));
+            card.appendChild(createTableFromArray(db[section.key] || []));
           }
           
-          tabContent.appendChild(s);
-          content.appendChild(tabContent);
+          scrollItem.appendChild(card);
+          tablesScrollContainer.appendChild(scrollItem);
         });
+        
+        tablesSection.appendChild(tablesScrollContainer);
+        content.appendChild(tablesSection);
+        
+        // Create Data Cubes Section
+        var cubesSection = document.createElement('div');
+        cubesSection.className = 'cubes-section';
+        
+        var cubesHeader = document.createElement('div');
+        cubesHeader.className = 'section-header';
+        cubesHeader.innerHTML = '<h2>📊 Data Cubes</h2><p>Performance-optimized pre-aggregated data for fast reporting</p>';
+        cubesSection.appendChild(cubesHeader);
+        
+        var cubesScrollContainer = document.createElement('div');
+        cubesScrollContainer.className = 'horizontal-scroll-container';
+        
+        cubeSections.forEach(function(section) {
+          var scrollItem = document.createElement('div');
+          scrollItem.className = 'scroll-item';
+          
+          var card = document.createElement('div');
+          card.className = 'card';
+          
+          var title = document.createElement('h3');
+          title.textContent = section.title + ' (' + (db[section.key] ? db[section.key].length : 0) + ' records)';
+          title.style.marginTop = '0';
+          title.style.marginBottom = '12px';
+          title.style.fontSize = '16px';
+          card.appendChild(title);
+          
+          // Use CRUD-enabled table for all tables
+          if (window.DatabaseCRUD) {
+            card.appendChild(window.DatabaseCRUD.createTable(db[section.key] || [], section.key));
+          } else {
+            card.appendChild(createTableFromArray(db[section.key] || []));
+          }
+          
+          scrollItem.appendChild(card);
+          cubesScrollContainer.appendChild(scrollItem);
+        });
+        
+        cubesSection.appendChild(cubesScrollContainer);
+        content.appendChild(cubesSection);
       })
       .catch(function (e) {
         content.innerHTML = '';

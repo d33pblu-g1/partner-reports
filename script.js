@@ -308,6 +308,29 @@ function populateCountryDropdown(partnerId) {
           
           renderMetrics(transformedMetrics);
           
+          // Initialize advanced charts
+          if (window.AdvancedCharts) {
+            // KPI Scorecard
+            if (document.getElementById('kpi-scorecard')) {
+              window.AdvancedCharts.renderKPIScorecard('kpi-scorecard', partnerId);
+            }
+            
+            // Performance Radar
+            if (document.getElementById('performance-radar')) {
+              window.AdvancedCharts.renderPerformanceRadar('performance-radar', partnerId);
+            }
+            
+            // Revenue Attribution
+            if (document.getElementById('revenue-attribution')) {
+              window.AdvancedCharts.renderRevenueAttribution('revenue-attribution', partnerId);
+            }
+          }
+          
+          // Initialize Quick Insights
+          if (window.EnhancedUX && document.getElementById('quick-insights')) {
+            window.EnhancedUX.showInsights('quick-insights', partnerId);
+          }
+          
           // Render 6-month chart with data
           if (transformedMetrics.last6Months) {
             renderSixMonthChartFromMetrics(transformedMetrics.last6Months);
