@@ -39,6 +39,28 @@
   </script>
   <style>body{opacity:0}html{background:#0f172a}</style>
   <script>window.addEventListener('load',function(){document.body.style.opacity=1});</script>
+  
+  <!-- Home page specific styles: remove borders -->
+  <style>
+    /* Remove borders from all cards on home page */
+    .card {
+      border: none !important;
+    }
+    
+    /* Also remove border from main panel */
+    main.panel {
+      border: none !important;
+    }
+    
+    /* Remove borders in light theme as well */
+    :root[data-theme="light"] .card {
+      border: none !important;
+    }
+    
+    :root[data-theme="light"] main.panel {
+      border: none !important;
+    }
+  </style>
 </head>
 <body>
   <div class="layout">
