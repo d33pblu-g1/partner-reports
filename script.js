@@ -2004,4 +2004,755 @@ function loadCommissionPlansChart(partnerId) {
   }
 })();
 
+// Tiers & Badges page initialization
+(function() {
+  function initTiersBadgesPage() {
+    const partnerSelect = document.getElementById('partnerSelect');
+    
+    if (!partnerSelect) return;
+    
+    function update() {
+      const partnerId = partnerSelect.value;
+      
+      // Initialize badges gallery
+      if (window.BadgesGallery) {
+        window.BadgesGallery.init('badges-gallery', partnerId);
+      }
+      
+      // Initialize additional charts
+      initializeTiersBadgesPageCharts(partnerId);
+    }
+    
+    partnerSelect.addEventListener('change', update);
+    
+    // Initial load
+    setTimeout(update, 600);
+  }
+  
+  // Initialize all tiers & badges page charts
+  function initializeTiersBadgesPageCharts(partnerId) {
+    if (!partnerId) return;
+    
+    // Initialize Tier Progression Chart
+    if (document.getElementById('tier-progression-chart')) {
+      loadTierProgressionChart(partnerId);
+    }
+    
+    // Initialize Badge Timeline Chart
+    if (document.getElementById('badge-timeline-chart')) {
+      loadBadgeTimelineChart(partnerId);
+    }
+    
+    // Initialize Partner Tier Distribution Chart
+    if (document.getElementById('partner-tier-distribution-chart')) {
+      loadPartnerTierDistributionChart(partnerId);
+    }
+    
+    // Initialize Badge Progress Overview Chart
+    if (document.getElementById('badge-progress-overview-chart')) {
+      loadBadgeProgressOverviewChart(partnerId);
+    }
+  }
+  
+  // Load Tier Progression Chart
+  function loadTierProgressionChart(partnerId) {
+    fetch(`api/index.php?endpoint=cubes&cube=badge_progress&partner_id=${partnerId}`)
+      .then(r => r.json())
+      .then(response => {
+        if (!response.success || !response.data) return;
+        
+        const container = document.getElementById('tier-progression-chart');
+        if (!container) return;
+        
+        const data = response.data;
+        const width = container.clientWidth || 400;
+        const height = 300;
+        
+        let svg = `<svg width="${width}" height="${height}" style="background: rgba(148,163,184,0.05);">`;
+        
+        // Create a simple progression chart
+        const tiers = ['Bronze', 'Silver', 'Gold', 'Platinum'];
+        const colors = ['#cd7f32', '#c0c0c0', '#ffd700', '#e5e4e2'];
+        
+        tiers.forEach((tier, i) => {
+          const x = (i * width) / tiers.length;
+          const y = height / 2;
+          const tierWidth = width / tiers.length;
+          
+          svg += `<rect x="${x + tierWidth * 0.1}" y="${y - 20}" width="${tierWidth * 0.8}" height="40" fill="${colors[i]}" rx="8"/>`;
+          svg += `<text x="${x + tierWidth / 2}" y="${y + 5}" text-anchor="middle" font-size="12" fill="#64748b">${tier}</text>`;
+          
+          if (i < tiers.length - 1) {
+            svg += `<path d="M ${x + tierWidth} ${y} L ${x + tierWidth + 10} ${y}" stroke="#64748b" stroke-width="2"/>`;
+          }
+        });
+        
+        svg += '</svg>';
+        container.innerHTML = svg;
+      })
+      .catch(err => console.error('Error loading tier progression chart:', err));
+  }
+  
+  // Load Badge Timeline Chart
+  function loadBadgeTimelineChart(partnerId) {
+    fetch(`api/index.php?endpoint=cubes&cube=badge_progress&partner_id=${partnerId}`)
+      .then(r => r.json())
+      .then(response => {
+        if (!response.success || !response.data) return;
+        
+        const container = document.getElementById('badge-timeline-chart');
+        if (!container) return;
+        
+        const data = response.data;
+        const width = container.clientWidth || 400;
+        const height = 300;
+        
+        let svg = `<svg width="${width}" height="${height}" style="background: rgba(148,163,184,0.05);">`;
+        
+        // Create timeline chart
+        const maxValue = Math.max(...data.map(d => parseInt(d.badges_earned || 0)));
+        const barWidth = width / data.length;
+        
+        data.forEach((row, i) => {
+          const value = parseInt(row.badges_earned || 0);
+          const barHeight = (value / maxValue) * (height - 40);
+          const x = i * barWidth;
+          const y = height - barHeight - 20;
+          
+          svg += `<rect x="${x + barWidth * 0.1}" y="${y}" width="${barWidth * 0.8}" height="${barHeight}" fill="#3b82f6" rx="4"/>`;
+          svg += `<text x="${x + barWidth / 2}" y="${height - 5}" text-anchor="middle" font-size="10" fill="#64748b">${row.date || i}</text>`;
+          svg += `<text x="${x + barWidth / 2}" y="${y - 5}" text-anchor="middle" font-size="12" fill="#64748b">${value}</text>`;
+        });
+        
+        svg += '</svg>';
+        container.innerHTML = svg;
+      })
+      .catch(err => console.error('Error loading badge timeline chart:', err));
+  }
+  
+  // Load Partner Tier Distribution Chart
+  function loadPartnerTierDistributionChart(partnerId) {
+    fetch(`api/index.php?endpoint=cubes&cube=client_tiers&partner_id=${partnerId}`)
+      .then(r => r.json())
+      .then(response => {
+        if (!response.success || !response.data) return;
+        
+        const container = document.getElementById('partner-tier-distribution-chart');
+        if (!container) return;
+        
+        const data = response.data;
+        const width = container.clientWidth || 400;
+        const height = 300;
+        
+        let svg = `<svg width="${width}" height="${height}" style="background: rgba(148,163,184,0.05);">`;
+        
+        // Group by tier
+        const tierData = {};
+        data.forEach(row => {
+          const tier = row.tier || 'Unknown';
+          tierData[tier] = (tierData[tier] || 0) + parseInt(row.client_count || 0);
+        });
+        
+        const total = Object.values(tierData).reduce((sum, count) => sum + count, 0);
+        const colors = ['#cd7f32', '#c0c0c0', '#ffd700', '#e5e4e2'];
+        let currentAngle = 0;
+        
+        Object.entries(tierData).forEach(([tier, count], i) => {
+          if (count > 0) {
+            const percentage = (count / total) * 100;
+            const angle = (count / total) * 360;
+            
+            const x1 = width / 2 + Math.cos(currentAngle * Math.PI / 180) * 80;
+            const y1 = height / 2 + Math.sin(currentAngle * Math.PI / 180) * 80;
+            const x2 = width / 2 + Math.cos((currentAngle + angle) * Math.PI / 180) * 80;
+            const y2 = height / 2 + Math.sin((currentAngle + angle) * Math.PI / 180) * 80;
+            
+            const largeArcFlag = angle > 180 ? 1 : 0;
+            
+            svg += `<path d="M ${width/2} ${height/2} L ${x1} ${y1} A 80 80 0 ${largeArcFlag} 1 ${x2} ${y2} Z" fill="${colors[i % colors.length]}"/>`;
+            svg += `<text x="${width/2}" y="${height/2 + i * 20 - 20}" text-anchor="middle" font-size="12" fill="#64748b">${tier}: ${count} (${percentage.toFixed(1)}%)</text>`;
+            
+            currentAngle += angle;
+          }
+        });
+        
+        svg += '</svg>';
+        container.innerHTML = svg;
+      })
+      .catch(err => console.error('Error loading partner tier distribution chart:', err));
+  }
+  
+  // Load Badge Progress Overview Chart
+  function loadBadgeProgressOverviewChart(partnerId) {
+    fetch(`api/index.php?endpoint=cubes&cube=badge_progress&partner_id=${partnerId}`)
+      .then(r => r.json())
+      .then(response => {
+        if (!response.success || !response.data) return;
+        
+        const container = document.getElementById('badge-progress-overview-chart');
+        if (!container) return;
+        
+        const data = response.data;
+        const width = container.clientWidth || 400;
+        const height = 300;
+        
+        let svg = `<svg width="${width}" height="${height}" style="background: rgba(148,163,184,0.05);">`;
+        
+        // Create progress overview
+        const totalBadges = data.reduce((sum, row) => sum + parseInt(row.badges_earned || 0), 0);
+        const maxBadges = Math.max(...data.map(d => parseInt(d.badges_earned || 0)));
+        
+        const barHeight = 20;
+        const spacing = 30;
+        
+        data.forEach((row, i) => {
+          const badges = parseInt(row.badges_earned || 0);
+          const barWidth = (badges / maxBadges) * (width - 100);
+          const y = i * spacing + 20;
+          
+          svg += `<rect x="80" y="${y}" width="${barWidth}" height="${barHeight}" fill="#3b82f6" rx="4"/>`;
+          svg += `<text x="75" y="${y + 15}" text-anchor="end" font-size="12" fill="#64748b">${row.badge_name || 'Badge ' + (i + 1)}</text>`;
+          svg += `<text x="${barWidth + 85}" y="${y + 15}" font-size="12" fill="#64748b">${badges}</text>`;
+        });
+        
+        svg += '</svg>';
+        container.innerHTML = svg;
+      })
+      .catch(err => console.error('Error loading badge progress overview chart:', err));
+  }
+  
+  // Initialize on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTiersBadgesPage);
+  } else {
+    initTiersBadgesPage();
+  }
+})();
+
+// Country Analysis page initialization
+(function() {
+  function initCountryAnalysisPage() {
+    const partnerSelect = document.getElementById('partnerSelect');
+    
+    if (!partnerSelect) return;
+    
+    function update() {
+      const partnerId = partnerSelect.value;
+      
+      // Initialize additional charts
+      initializeCountryAnalysisPageCharts(partnerId);
+    }
+    
+    partnerSelect.addEventListener('change', update);
+    
+    // Initial load
+    setTimeout(update, 600);
+  }
+  
+  // Initialize all country analysis page charts
+  function initializeCountryAnalysisPageCharts(partnerId) {
+    if (!partnerId) return;
+    
+    // Initialize Country Heatmap Chart
+    if (document.getElementById('country-heatmap-chart')) {
+      loadCountryHeatmapChart(partnerId);
+    }
+    
+    // Initialize Regional Analysis Chart
+    if (document.getElementById('regional-analysis-chart')) {
+      loadRegionalAnalysisChart(partnerId);
+    }
+    
+    // Initialize Top Countries Revenue Chart
+    if (document.getElementById('top-countries-revenue-chart')) {
+      loadTopCountriesRevenueChart(partnerId);
+    }
+    
+    // Initialize Client Region Distribution Chart
+    if (document.getElementById('client-region-distribution-chart')) {
+      loadClientRegionDistributionChart(partnerId);
+    }
+  }
+  
+  // Load Country Heatmap Chart
+  function loadCountryHeatmapChart(partnerId) {
+    fetch(`api/index.php?endpoint=cubes&cube=country_performance&partner_id=${partnerId}`)
+      .then(r => r.json())
+      .then(response => {
+        if (!response.success || !response.data) return;
+        
+        const container = document.getElementById('country-heatmap-chart');
+        if (!container) return;
+        
+        const data = response.data.slice(0, 20); // Top 20 countries
+        const width = container.clientWidth || 400;
+        const height = 300;
+        
+        let svg = `<svg width="${width}" height="${height}" style="background: rgba(148,163,184,0.05);">`;
+        
+        const maxValue = Math.max(...data.map(d => parseFloat(d.total_commissions)));
+        const cellSize = Math.min(width / 5, height / 4);
+        
+        data.forEach((country, i) => {
+          const row = Math.floor(i / 5);
+          const col = i % 5;
+          const x = col * cellSize;
+          const y = row * cellSize;
+          
+          const intensity = parseFloat(country.total_commissions) / maxValue;
+          const color = `rgba(59, 130, 246, ${intensity})`;
+          
+          svg += `<rect x="${x}" y="${y}" width="${cellSize - 2}" height="${cellSize - 2}" fill="${color}" rx="4"/>`;
+          svg += `<text x="${x + cellSize/2}" y="${y + cellSize/2}" text-anchor="middle" font-size="10" fill="#64748b">${country.country}</text>`;
+        });
+        
+        svg += '</svg>';
+        container.innerHTML = svg;
+      })
+      .catch(err => console.error('Error loading country heatmap chart:', err));
+  }
+  
+  // Load Regional Analysis Chart
+  function loadRegionalAnalysisChart(partnerId) {
+    fetch(`api/index.php?endpoint=cubes&cube=country_performance&partner_id=${partnerId}`)
+      .then(r => r.json())
+      .then(response => {
+        if (!response.success || !response.data) return;
+        
+        const container = document.getElementById('regional-analysis-chart');
+        if (!container) return;
+        
+        const data = response.data;
+        const width = container.clientWidth || 400;
+        const height = 300;
+        
+        let svg = `<svg width="${width}" height="${height}" style="background: rgba(148,163,184,0.05);">`;
+        
+        // Group by region (simplified)
+        const regionData = {
+          'Europe': 0,
+          'Asia': 0,
+          'Americas': 0,
+          'Africa': 0,
+          'Oceania': 0
+        };
+        
+        data.forEach(row => {
+          const country = row.country.toLowerCase();
+          if (country.includes('europe') || country.includes('germany') || country.includes('france')) {
+            regionData['Europe'] += parseFloat(row.total_commissions);
+          } else if (country.includes('asia') || country.includes('china') || country.includes('japan')) {
+            regionData['Asia'] += parseFloat(row.total_commissions);
+          } else if (country.includes('america') || country.includes('usa') || country.includes('canada')) {
+            regionData['Americas'] += parseFloat(row.total_commissions);
+          } else if (country.includes('africa') || country.includes('south africa')) {
+            regionData['Africa'] += parseFloat(row.total_commissions);
+          } else {
+            regionData['Oceania'] += parseFloat(row.total_commissions);
+          }
+        });
+        
+        const maxValue = Math.max(...Object.values(regionData));
+        const colors = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'];
+        
+        Object.entries(regionData).forEach(([region, value], i) => {
+          const barHeight = (value / maxValue) * (height - 40);
+          const barWidth = width / Object.keys(regionData).length;
+          const x = i * barWidth;
+          const y = height - barHeight - 20;
+          
+          svg += `<rect x="${x + barWidth * 0.1}" y="${y}" width="${barWidth * 0.8}" height="${barHeight}" fill="${colors[i]}" rx="4"/>`;
+          svg += `<text x="${x + barWidth / 2}" y="${height - 5}" text-anchor="middle" font-size="10" fill="#64748b">${region}</text>`;
+          svg += `<text x="${x + barWidth / 2}" y="${y - 5}" text-anchor="middle" font-size="12" fill="#64748b">$${value.toLocaleString()}</text>`;
+        });
+        
+        svg += '</svg>';
+        container.innerHTML = svg;
+      })
+      .catch(err => console.error('Error loading regional analysis chart:', err));
+  }
+  
+  // Load Top Countries Revenue Chart
+  function loadTopCountriesRevenueChart(partnerId) {
+    fetch(`api/index.php?endpoint=cubes&cube=country_performance&partner_id=${partnerId}`)
+      .then(r => r.json())
+      .then(response => {
+        if (!response.success || !response.data) return;
+        
+        const container = document.getElementById('top-countries-revenue-chart');
+        if (!container) return;
+        
+        const data = response.data.slice(0, 10); // Top 10 countries
+        const width = container.clientWidth || 400;
+        const height = 300;
+        
+        let svg = `<svg width="${width}" height="${height}" style="background: rgba(148,163,184,0.05);">`;
+        
+        const maxValue = Math.max(...data.map(d => parseFloat(d.total_commissions)));
+        const barHeight = 20;
+        const spacing = 25;
+        
+        data.forEach((country, i) => {
+          const barWidth = (parseFloat(country.total_commissions) / maxValue) * (width - 100);
+          const y = i * spacing + 20;
+          
+          svg += `<rect x="80" y="${y}" width="${barWidth}" height="${barHeight}" fill="#3b82f6" rx="4"/>`;
+          svg += `<text x="75" y="${y + 15}" text-anchor="end" font-size="12" fill="#64748b">${country.country}</text>`;
+          svg += `<text x="${barWidth + 85}" y="${y + 15}" font-size="12" fill="#64748b">$${parseFloat(country.total_commissions).toLocaleString()}</text>`;
+        });
+        
+        svg += '</svg>';
+        container.innerHTML = svg;
+      })
+      .catch(err => console.error('Error loading top countries revenue chart:', err));
+  }
+  
+  // Load Client Region Distribution Chart
+  function loadClientRegionDistributionChart(partnerId) {
+    fetch(`api/index.php?endpoint=cubes&cube=country_performance&partner_id=${partnerId}`)
+      .then(r => r.json())
+      .then(response => {
+        if (!response.success || !response.data) return;
+        
+        const container = document.getElementById('client-region-distribution-chart');
+        if (!container) return;
+        
+        const data = response.data;
+        const width = container.clientWidth || 400;
+        const height = 300;
+        
+        let svg = `<svg width="${width}" height="${height}" style="background: rgba(148,163,184,0.05);">`;
+        
+        // Group by region
+        const regionData = {
+          'Europe': 0,
+          'Asia': 0,
+          'Americas': 0,
+          'Africa': 0,
+          'Oceania': 0
+        };
+        
+        data.forEach(row => {
+          const country = row.country.toLowerCase();
+          if (country.includes('europe') || country.includes('germany') || country.includes('france')) {
+            regionData['Europe'] += parseInt(row.client_count || 0);
+          } else if (country.includes('asia') || country.includes('china') || country.includes('japan')) {
+            regionData['Asia'] += parseInt(row.client_count || 0);
+          } else if (country.includes('america') || country.includes('usa') || country.includes('canada')) {
+            regionData['Americas'] += parseInt(row.client_count || 0);
+          } else if (country.includes('africa') || country.includes('south africa')) {
+            regionData['Africa'] += parseInt(row.client_count || 0);
+          } else {
+            regionData['Oceania'] += parseInt(row.client_count || 0);
+          }
+        });
+        
+        const total = Object.values(regionData).reduce((sum, count) => sum + count, 0);
+        const colors = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'];
+        let currentAngle = 0;
+        
+        Object.entries(regionData).forEach(([region, count], i) => {
+          if (count > 0) {
+            const percentage = (count / total) * 100;
+            const angle = (count / total) * 360;
+            
+            const x1 = width / 2 + Math.cos(currentAngle * Math.PI / 180) * 80;
+            const y1 = height / 2 + Math.sin(currentAngle * Math.PI / 180) * 80;
+            const x2 = width / 2 + Math.cos((currentAngle + angle) * Math.PI / 180) * 80;
+            const y2 = height / 2 + Math.sin((currentAngle + angle) * Math.PI / 180) * 80;
+            
+            const largeArcFlag = angle > 180 ? 1 : 0;
+            
+            svg += `<path d="M ${width/2} ${height/2} L ${x1} ${y1} A 80 80 0 ${largeArcFlag} 1 ${x2} ${y2} Z" fill="${colors[i]}"/>`;
+            svg += `<text x="${width/2}" y="${height/2 + i * 20 - 20}" text-anchor="middle" font-size="12" fill="#64748b">${region}: ${count} (${percentage.toFixed(1)}%)</text>`;
+            
+            currentAngle += angle;
+          }
+        });
+        
+        svg += '</svg>';
+        container.innerHTML = svg;
+      })
+      .catch(err => console.error('Error loading client region distribution chart:', err));
+  }
+  
+  // Initialize on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCountryAnalysisPage);
+  } else {
+    initCountryAnalysisPage();
+  }
+})();
+
+// Chart Performance Optimizations
+(function() {
+  'use strict';
+  
+  // Chart cache to avoid re-rendering
+  const chartCache = new Map();
+  
+  // Debounce function for chart updates
+  function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  }
+  
+  // Optimized chart rendering with caching
+  function renderChartWithCache(containerId, chartType, partnerId, renderFunction) {
+    const cacheKey = `${chartType}_${partnerId}`;
+    
+    // Check cache first
+    if (chartCache.has(cacheKey)) {
+      const cachedData = chartCache.get(cacheKey);
+      const container = document.getElementById(containerId);
+      if (container && cachedData.timestamp > Date.now() - 300000) { // 5 minute cache
+        container.innerHTML = cachedData.html;
+        return Promise.resolve(cachedData.data);
+      }
+    }
+    
+    // Render new chart
+    return renderFunction().then(data => {
+      const container = document.getElementById(containerId);
+      if (container) {
+        const html = container.innerHTML;
+        chartCache.set(cacheKey, {
+          html: html,
+          data: data,
+          timestamp: Date.now()
+        });
+      }
+      return data;
+    });
+  }
+  
+  // Optimized API calls with request deduplication
+  const pendingRequests = new Map();
+  
+  function fetchWithDeduplication(url) {
+    if (pendingRequests.has(url)) {
+      return pendingRequests.get(url);
+    }
+    
+    const promise = fetch(url)
+      .then(response => response.json())
+      .finally(() => {
+        pendingRequests.delete(url);
+      });
+    
+    pendingRequests.set(url, promise);
+    return promise;
+  }
+  
+  // Intersection Observer for lazy loading charts
+  function setupLazyChartLoading() {
+    if (!('IntersectionObserver' in window)) return;
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const element = entry.target;
+          const chartType = element.dataset.chartType;
+          const partnerId = element.dataset.partnerId;
+          
+          if (chartType && partnerId) {
+            // Load chart when it becomes visible
+            loadLazyChart(element, chartType, partnerId);
+            observer.unobserve(element);
+          }
+        }
+      });
+    }, {
+      rootMargin: '50px'
+    });
+    
+    // Observe all chart containers
+    document.querySelectorAll('[data-lazy="chart"]').forEach(element => {
+      observer.observe(element);
+    });
+  }
+  
+  function loadLazyChart(element, chartType, partnerId) {
+    // Show loading state
+    element.innerHTML = '<div class="chart-loading">Loading chart...</div>';
+    
+    // Load appropriate chart based on type
+    switch (chartType) {
+      case 'six-month-commissions':
+        loadSixMonthChartLazy(partnerId, element);
+        break;
+      case 'tier-distribution':
+        loadTierChartLazy(partnerId, element);
+        break;
+      case 'country-analysis':
+        loadCountryChartLazy(partnerId, element);
+        break;
+      default:
+        element.innerHTML = '<p class="muted">Chart type not supported</p>';
+    }
+  }
+  
+  function loadSixMonthChartLazy(partnerId, element) {
+    fetchWithDeduplication(`api/index.php?endpoint=metrics&partner_id=${partnerId}`)
+      .then(response => {
+        if (response.success && response.data.last6Months) {
+          renderSixMonthChartFromMetrics(response.data.last6Months);
+        } else {
+          element.innerHTML = '<p class="muted">No data available</p>';
+        }
+      })
+      .catch(err => {
+        element.innerHTML = '<p class="muted">Failed to load chart</p>';
+        console.error('Chart loading error:', err);
+      });
+  }
+  
+  function loadTierChartLazy(partnerId, element) {
+    fetchWithDeduplication(`api/index.php?endpoint=cubes&cube=client_tiers&partner_id=${partnerId}`)
+      .then(response => {
+        if (response.success && response.data) {
+          // Render tier chart
+          const data = response.data;
+          const width = element.clientWidth || 400;
+          const height = 300;
+          
+          let svg = `<svg width="${width}" height="${height}" style="background: rgba(148,163,184,0.05);">`;
+          
+          const tierData = {};
+          data.forEach(row => {
+            const tier = row.tier || 'Unknown';
+            tierData[tier] = (tierData[tier] || 0) + parseInt(row.client_count || 0);
+          });
+          
+          const total = Object.values(tierData).reduce((sum, count) => sum + count, 0);
+          const colors = ['#cd7f32', '#c0c0c0', '#ffd700', '#e5e4e2'];
+          let currentAngle = 0;
+          
+          Object.entries(tierData).forEach(([tier, count], i) => {
+            if (count > 0) {
+              const percentage = (count / total) * 100;
+              const angle = (count / total) * 360;
+              
+              const x1 = width / 2 + Math.cos(currentAngle * Math.PI / 180) * 80;
+              const y1 = height / 2 + Math.sin(currentAngle * Math.PI / 180) * 80;
+              const x2 = width / 2 + Math.cos((currentAngle + angle) * Math.PI / 180) * 80;
+              const y2 = height / 2 + Math.sin((currentAngle + angle) * Math.PI / 180) * 80;
+              
+              const largeArcFlag = angle > 180 ? 1 : 0;
+              
+              svg += `<path d="M ${width/2} ${height/2} L ${x1} ${y1} A 80 80 0 ${largeArcFlag} 1 ${x2} ${y2} Z" fill="${colors[i % colors.length]}"/>`;
+              svg += `<text x="${width/2}" y="${height/2 + i * 20 - 20}" text-anchor="middle" font-size="12" fill="#64748b">${tier}: ${count} (${percentage.toFixed(1)}%)</text>`;
+              
+              currentAngle += angle;
+            }
+          });
+          
+          svg += '</svg>';
+          element.innerHTML = svg;
+        } else {
+          element.innerHTML = '<p class="muted">No data available</p>';
+        }
+      })
+      .catch(err => {
+        element.innerHTML = '<p class="muted">Failed to load chart</p>';
+        console.error('Chart loading error:', err);
+      });
+  }
+  
+  function loadCountryChartLazy(partnerId, element) {
+    fetchWithDeduplication(`api/index.php?endpoint=cubes&cube=country_performance&partner_id=${partnerId}`)
+      .then(response => {
+        if (response.success && response.data) {
+          const data = response.data.slice(0, 10);
+          const width = element.clientWidth || 400;
+          const height = 300;
+          
+          let svg = `<svg width="${width}" height="${height}" style="background: rgba(148,163,184,0.05);">`;
+          
+          const maxValue = Math.max(...data.map(d => parseFloat(d.total_commissions)));
+          const barHeight = 20;
+          const spacing = 25;
+          
+          data.forEach((country, i) => {
+            const barWidth = (parseFloat(country.total_commissions) / maxValue) * (width - 100);
+            const y = i * spacing + 20;
+            
+            svg += `<rect x="80" y="${y}" width="${barWidth}" height="${barHeight}" fill="#3b82f6" rx="4"/>`;
+            svg += `<text x="75" y="${y + 15}" text-anchor="end" font-size="12" fill="#64748b">${country.country}</text>`;
+            svg += `<text x="${barWidth + 85}" y="${y + 15}" font-size="12" fill="#64748b">$${parseFloat(country.total_commissions).toLocaleString()}</text>`;
+          });
+          
+          svg += '</svg>';
+          element.innerHTML = svg;
+        } else {
+          element.innerHTML = '<p class="muted">No data available</p>';
+        }
+      })
+      .catch(err => {
+        element.innerHTML = '<p class="muted">Failed to load chart</p>';
+        console.error('Chart loading error:', err);
+      });
+  }
+  
+  // Performance monitoring
+  function monitorChartPerformance() {
+    const startTime = performance.now();
+    
+    // Monitor chart rendering time
+    const observer = new PerformanceObserver((list) => {
+      for (const entry of list.getEntries()) {
+        if (entry.name.includes('chart')) {
+          console.log(`Chart ${entry.name} took ${entry.duration}ms to render`);
+        }
+      }
+    });
+    
+    observer.observe({ entryTypes: ['measure'] });
+    
+    // Monitor memory usage
+    if ('memory' in performance) {
+      setInterval(() => {
+        const memory = performance.memory;
+        if (memory.usedJSHeapSize > 50 * 1024 * 1024) { // 50MB threshold
+          console.warn('High memory usage detected:', memory.usedJSHeapSize / 1024 / 1024, 'MB');
+          // Clear chart cache if memory usage is high
+          chartCache.clear();
+        }
+      }, 30000); // Check every 30 seconds
+    }
+  }
+  
+  // Initialize performance optimizations
+  function initPerformanceOptimizations() {
+    setupLazyChartLoading();
+    monitorChartPerformance();
+    
+    // Clear cache periodically
+    setInterval(() => {
+      chartCache.clear();
+    }, 300000); // Clear every 5 minutes
+  }
+  
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPerformanceOptimizations);
+  } else {
+    initPerformanceOptimizations();
+  }
+  
+  // Export optimization functions
+  window.ChartOptimizations = {
+    renderChartWithCache,
+    fetchWithDeduplication,
+    debounce
+  };
+})();
+
 
