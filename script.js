@@ -53,38 +53,46 @@ function updatePartnerTier(partnerId) {
     });
 }
 
-// Load country manager information
-function loadCountryManagerInfo(partnerId) {
-  if (!partnerId) return;
-  
-  fetch('api/index.php?endpoint=partners&partner_id=' + partnerId)
-    .then(function(r) { return r.json(); })
-    .then(function(response) {
-      if (response.success && response.data && response.data.length > 0) {
-        var partner = response.data[0];
-        var managerNameEl = document.getElementById('country-manager-name');
-        var managerTelEl = document.getElementById('country-manager-tel');
-        
-        if (managerNameEl) {
-          managerNameEl.textContent = partner.country_manager || 'Country Manager';
+  // Load country manager information
+  function loadCountryManagerInfo(partnerId) {
+    if (!partnerId) return;
+    
+    fetch('api/index.php?endpoint=partners&partner_id=' + partnerId)
+      .then(function(r) { return r.json(); })
+      .then(function(response) {
+        if (response.success && response.data && response.data.length > 0) {
+          var partner = response.data[0];
+          var managerNameEl = document.getElementById('country-manager-name');
+          var managerTelEl = document.getElementById('country-manager-tel');
+          
+          if (managerNameEl) {
+            managerNameEl.textContent = partner.country_manager || 'Country Manager';
+          }
+          
+          if (managerTelEl) {
+            managerTelEl.textContent = partner.country_manager_tel || '+971521462917';
+          }
+          
+          // Update WhatsApp link with actual phone number
+          var whatsappLink = document.querySelector('.whatsapp-link');
+          if (whatsappLink && partner.country_manager_tel) {
+            var phoneNumber = partner.country_manager_tel.replace(/[^\d]/g, '');
+            whatsappLink.href = 'https://wa.me/' + phoneNumber;
+          }
         }
-        
-        if (managerTelEl) {
-          managerTelEl.textContent = partner.country_manager_tel || '+971521462917';
-        }
-        
-        // Update WhatsApp link with actual phone number
-        var whatsappLink = document.querySelector('.whatsapp-link');
-        if (whatsappLink && partner.country_manager_tel) {
-          var phoneNumber = partner.country_manager_tel.replace(/[^\d]/g, '');
-          whatsappLink.href = 'https://wa.me/' + phoneNumber;
-        }
-      }
-    })
-    .catch(function(err) {
-      console.error('Error loading country manager info:', err);
-    });
-}
+      })
+      .catch(function(err) {
+        console.error('Error loading country manager info:', err);
+      });
+  }
+
+  // Update chart data attributes for lazy loading
+  function updateChartDataAttributes(partnerId) {
+    var chartElement = document.getElementById('chart-6mo-comm');
+    if (chartElement) {
+      chartElement.setAttribute('data-partner-id', partnerId);
+    }
+  }
 
 // Populate country dropdown based on partner selection
 function populateCountryDropdown(partnerId) {
@@ -180,6 +188,7 @@ function populateCountryDropdown(partnerId) {
         setTimeout(function() {
           updatePartnerTier(select.value);
           loadCountryManagerInfo(select.value);
+          updateChartDataAttributes(select.value);
         }, 100);
         
         // Save selection on change and populate country dropdown
@@ -193,6 +202,8 @@ function populateCountryDropdown(partnerId) {
           }
           // Load country manager info
           loadCountryManagerInfo(select.value);
+          // Update chart data attributes
+          updateChartDataAttributes(select.value);
         });
       })
       .catch(function (error) {
@@ -509,8 +520,8 @@ function populateCountryDropdown(partnerId) {
 })();
 
 // Render 6-month chart from metrics data
-function renderSixMonthChartFromMetrics(last6Months) {
-  var el = document.getElementById('chart-6mo-comm');
+function renderSixMonthChartFromMetrics(last6Months, targetElement) {
+  var el = targetElement || document.getElementById('chart-6mo-comm');
   if (!el || !last6Months) return;
   
   el.innerHTML = '';
@@ -1920,7 +1931,13 @@ function loadCommissionPlansChart(partnerId) {
     fetch(`api/index.php?endpoint=cubes&cube=commissions_symbol&partner_id=${partnerId}`)
       .then(r => r.json())
       .then(response => {
-        if (!response.success || !response.data) return;
+        if (!response.success || !response.data || response.data.length === 0) {
+          const container = document.getElementById('top-assets-chart');
+          if (container) {
+            container.innerHTML = '<p class="muted">No asset data available</p>';
+          }
+          return;
+        }
         
         const container = document.getElementById('top-assets-chart');
         if (!container) return;
@@ -1940,14 +1957,20 @@ function loadCommissionPlansChart(partnerId) {
           const y = i * spacing + 20;
           
           svg += `<rect x="80" y="${y}" width="${barWidth}" height="${barHeight}" fill="#3b82f6" rx="4"/>`;
-          svg += `<text x="75" y="${y + 15}" text-anchor="end" font-size="12" fill="#64748b">${asset.symbol}</text>`;
+          svg += `<text x="75" y="${y + 15}" text-anchor="end" font-size="12" fill="#64748b">${asset.asset || 'Unknown'}</text>`;
           svg += `<text x="${barWidth + 85}" y="${y + 15}" font-size="12" fill="#64748b">$${parseFloat(asset.total_commissions).toLocaleString()}</text>`;
         });
         
         svg += '</svg>';
         container.innerHTML = svg;
       })
-      .catch(err => console.error('Error loading top assets chart:', err));
+      .catch(err => {
+        console.error('Error loading top assets chart:', err);
+        const container = document.getElementById('top-assets-chart');
+        if (container) {
+          container.innerHTML = '<p class="muted">Failed to load asset data</p>';
+        }
+      });
   }
   
   // Load Contract Type Chart
@@ -2603,7 +2626,7 @@ function loadCommissionPlansChart(partnerId) {
     fetchWithDeduplication(`api/index.php?endpoint=metrics&partner_id=${partnerId}`)
       .then(response => {
         if (response.success && response.data.last6Months) {
-          renderSixMonthChartFromMetrics(response.data.last6Months);
+          renderSixMonthChartFromMetrics(response.data.last6Months, element);
         } else {
           element.innerHTML = '<p class="muted">No data available</p>';
         }
