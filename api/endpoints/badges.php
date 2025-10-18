@@ -89,7 +89,7 @@ function getPartnerBadges($db, $partnerId) {
             p.name as partner_name,
             p.tier as partner_tier
         FROM partner_badges pb
-        JOIN badges b ON pb.badge_id = b.id
+        JOIN badges b ON pb.badge_name = b.badge_name
         JOIN partners p ON pb.partner_id = p.partner_id
         WHERE pb.partner_id = ?
         ORDER BY b.badge_criteria, CAST(REPLACE(REPLACE(b.badge_trigger, '$', ''), 'k', '000') AS UNSIGNED)
@@ -131,12 +131,12 @@ function getPartnerBadgeProgress($db, $partnerId) {
     
     // Get earned badges
     $stmt = $db->prepare("
-        SELECT badge_id 
+        SELECT badge_name 
         FROM partner_badges 
         WHERE partner_id = ?
     ");
     $stmt->execute([$partnerId]);
-    $earnedBadgeIds = array_column($stmt->fetchAll(), 'badge_id');
+    $earnedBadgeNames = array_column($stmt->fetchAll(), 'badge_name');
     
     // Get partner totals
     $stmt = $db->prepare("
@@ -160,7 +160,7 @@ function getPartnerBadgeProgress($db, $partnerId) {
         $triggerAmount = parseBadgeTrigger($badge['badge_trigger']);
         $currentAmount = $badge['badge_criteria'] === 'commissions' ? $totalCommissions : $totalDeposits;
         
-        $earned = in_array($badge['id'], $earnedBadgeIds);
+        $earned = in_array($badge['badge_name'], $earnedBadgeNames);
         $progressPercent = $earned ? 100 : min(100, ($currentAmount / $triggerAmount) * 100);
         
         $progress[] = [
@@ -217,8 +217,8 @@ function getBadgeSummary($db) {
             b.badge_trigger,
             COUNT(pb.partner_id) as earned_count
         FROM badges b
-        LEFT JOIN partner_badges pb ON b.id = pb.badge_id
-        GROUP BY b.id
+        LEFT JOIN partner_badges pb ON b.badge_name = pb.badge_name
+        GROUP BY b.id, b.badge_name, b.badge_criteria, b.badge_trigger
         ORDER BY earned_count DESC
         LIMIT 5
     ");

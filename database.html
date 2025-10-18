@@ -124,29 +124,23 @@
     content.appendChild(loading);
 
     // Load data from MySQL via API
-    Promise.all([
-      fetch('api/index.php?endpoint=partners').then(r => r.json()),
-      fetch('api/index.php?endpoint=clients').then(r => r.json()),
-      window.ApiManager ? window.ApiManager.loadDashboardData() : fetch('api/index.php?endpoint=dashboard').then(r => r.json())
-    ])
-      .then(function (responses) {
-        var partnersResp = responses[0];
-        var clientsResp = responses[1];
-        var dashboardResp = responses[2];
+    fetch('api/index.php?endpoint=all_tables')
+      .then(r => r.json())
+      .then(function (response) {
+        if (!response.success) {
+          throw new Error(response.message || 'Failed to load tables');
+        }
         
-        // Extract data from API responses
-        var db = {
-          partners: partnersResp.success ? partnersResp.data : [],
-          clients: clientsResp.success ? (clientsResp.data.clients || clientsResp.data) : [],
-          trades: dashboardResp.success ? (dashboardResp.data.trades || []) : (dashboardResp.trades || []),
-          deposits: dashboardResp.success ? (dashboardResp.data.deposits || []) : (dashboardResp.deposits || [])
-        };
+        var db = response.data;
         
         console.log('✓ Loaded database tables from MySQL:', {
-          partners: db.partners.length,
-          clients: db.clients.length,
-          trades: db.trades.length,
-          deposits: db.deposits.length
+          partners: db.partners ? db.partners.length : 0,
+          clients: db.clients ? db.clients.length : 0,
+          trades: db.trades ? db.trades.length : 0,
+          deposits: db.deposits ? db.deposits.length : 0,
+          badges: db.badges ? db.badges.length : 0,
+          partner_badges: db.partner_badges ? db.partner_badges.length : 0,
+          partner_tiers: db.partner_tiers ? db.partner_tiers.length : 0
         });
         
         // Clear loading message
@@ -156,7 +150,10 @@
           { key: 'partners', title: 'Partners' },
           { key: 'clients', title: 'Clients' },
           { key: 'trades', title: 'Trades' },
-          { key: 'deposits', title: 'Deposits' }
+          { key: 'deposits', title: 'Deposits' },
+          { key: 'badges', title: 'Badges' },
+          { key: 'partner_badges', title: 'Partner Badges' },
+          { key: 'partner_tiers', title: 'Partner Tiers' }
         ];
         
         // Create tabs
