@@ -39,8 +39,9 @@ try {
  * Get stacked commission data by plan
  */
 function getStackedCommissionData($db, $partnerId = null, $periodType = 'daily', $limit = 30) {
-    // Try to use cube table first for better performance
-    $useCube = tableExists($db, 'cube_commissions_by_plan');
+    // Use cube table - cube_daily_commissions_plan
+    $cubeName = 'cube_daily_commissions_plan';
+    $useCube = tableExists($db, $cubeName);
     
     if ($useCube) {
         return getStackedDataFromCube($db, $partnerId, $periodType, $limit);
@@ -53,30 +54,50 @@ function getStackedCommissionData($db, $partnerId = null, $periodType = 'daily',
  * Get stacked data from cube table
  */
 function getStackedDataFromCube($db, $partnerId, $periodType, $limit) {
-    $params = [$periodType];
+    $params = [];
     $wherePartner = "";
     
     if ($partnerId) {
-        $wherePartner = "AND partner_id = ?";
+        $wherePartner = "WHERE partner_id = ?";
         $params[] = $partnerId;
     }
     
-    $daysBack = $periodType === 'daily' ? $limit : $limit * 30;
-    $params[] = $daysBack;
+    if ($periodType === 'daily') {
+        // Daily data - direct from cube
+        $sql = "
+            SELECT 
+                trade_date as date,
+                commission_plan,
+                total_commissions as commission,
+                trade_count
+            FROM cube_daily_commissions_plan
+            $wherePartner
+            " . ($wherePartner ? "AND" : "WHERE") . " trade_date >= DATE_SUB(CURDATE(), INTERVAL ? DAY)
+            ORDER BY trade_date ASC
+            LIMIT ?
+        ";
+        $params[] = $limit;
+        $params[] = $limit * 2; // Safety limit
+    } else {
+        // Monthly data - aggregate daily data by month
+        $sql = "
+            SELECT 
+                DATE_FORMAT(trade_date, '%Y-%m-01') as date,
+                commission_plan,
+                SUM(total_commissions) as commission,
+                SUM(trade_count) as trade_count
+            FROM cube_daily_commissions_plan
+            $wherePartner
+            " . ($wherePartner ? "AND" : "WHERE") . " trade_date >= DATE_SUB(CURDATE(), INTERVAL ? DAY)
+            GROUP BY DATE_FORMAT(trade_date, '%Y-%m'), commission_plan
+            ORDER BY date ASC
+            LIMIT ?
+        ";
+        $params[] = $limit * 30; // Look back more days for monthly
+        $params[] = $limit * 2;
+    }
     
-    $stmt = $db->prepare("
-        SELECT 
-            date,
-            commission_plan,
-            SUM(total_commission) as commission
-        FROM cube_commissions_by_plan
-        WHERE period_type = ?
-        $wherePartner
-        AND date >= DATE_SUB(CURDATE(), INTERVAL ? DAY)
-        GROUP BY date, commission_plan
-        ORDER BY date ASC
-    ");
-    
+    $stmt = $db->prepare($sql);
     $stmt->execute($params);
     $results = $stmt->fetchAll();
     
@@ -87,20 +108,21 @@ function getStackedDataFromCube($db, $partnerId, $periodType, $limit) {
  * Get stacked data from original tables
  */
 function getStackedDataFromTables($db, $partnerId, $periodType, $limit) {
-    $dateFormat = $periodType === 'daily' ? 'DATE(t.date_time)' : 'DATE_FORMAT(t.date_time, \'%Y-%m-01\')';
-    $whereClause = $partnerId ? "WHERE c.partner_id = ?" : "";
+    $dateFormat = $periodType === 'daily' ? 'DATE(t.date)' : 'DATE_FORMAT(t.date, \'%Y-%m-01\')';
+    $whereClause = $partnerId ? "WHERE t.affiliated_partner_id = ?" : "";
     $params = $partnerId ? [$partnerId] : [];
     
     $stmt = $db->prepare("
         SELECT 
             $dateFormat as date,
-            c.commission_plan,
-            SUM(t.commission) as commission
+            COALESCE(c.commissionPlan, 'Unknown') as commission_plan,
+            SUM(t.closed_pnl_usd) as commission,
+            SUM(t.number_of_trades) as trade_count
         FROM trades t
-        JOIN clients c ON t.customer_id = c.customer_id
+        LEFT JOIN clients c ON t.binary_user_id = c.binary_user_id
         $whereClause
-        AND t.date_time >= DATE_SUB(CURDATE(), INTERVAL ? DAY)
-        GROUP BY date, c.commission_plan
+        AND t.date >= DATE_SUB(CURDATE(), INTERVAL ? DAY)
+        GROUP BY date, c.commissionPlan
         ORDER BY date ASC
     ");
     
@@ -195,22 +217,22 @@ function formatStackedData($results, $periodType) {
  * Get commission summary
  */
 function getCommissionSummary($db, $partnerId = null) {
-    $whereClause = $partnerId ? "WHERE c.partner_id = ?" : "";
+    $whereClause = $partnerId ? "WHERE t.affiliated_partner_id = ?" : "";
     $params = $partnerId ? [$partnerId] : [];
     
     $stmt = $db->prepare("
         SELECT 
-            COUNT(DISTINCT t.customer_id) as unique_clients,
-            COUNT(t.id) as total_trades,
-            SUM(t.commission) as total_commission,
-            AVG(t.commission) as avg_commission,
-            c.commission_plan,
-            COUNT(CASE WHEN DATE(t.date_time) = CURDATE() THEN 1 END) as trades_today,
-            SUM(CASE WHEN DATE(t.date_time) = CURDATE() THEN t.commission ELSE 0 END) as commission_today
+            COUNT(DISTINCT t.binary_user_id) as unique_clients,
+            SUM(t.number_of_trades) as total_trades,
+            SUM(t.closed_pnl_usd) as total_commission,
+            AVG(t.closed_pnl_usd) as avg_commission,
+            COALESCE(c.commissionPlan, 'Unknown') as commission_plan,
+            SUM(CASE WHEN t.date = CURDATE() THEN t.number_of_trades ELSE 0 END) as trades_today,
+            SUM(CASE WHEN t.date = CURDATE() THEN t.closed_pnl_usd ELSE 0 END) as commission_today
         FROM trades t
-        JOIN clients c ON t.customer_id = c.customer_id
+        LEFT JOIN clients c ON t.binary_user_id = c.binary_user_id
         $whereClause
-        GROUP BY c.commission_plan
+        GROUP BY c.commissionPlan
     ");
     
     $stmt->execute($params);

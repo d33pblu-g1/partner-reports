@@ -216,17 +216,73 @@ function populateCountryDropdown(partnerId) {
 
   function initHomeMetrics() {
     var select = document.getElementById('partnerSelect');
-    window.ApiManager.loadDashboardData()
-      .then(function (db) {
-        function update() {
-          var partnerId = select ? select.value : '';
-          renderMetrics(computeMetrics(db, partnerId));
-          renderSixMonthChart(db, partnerId);
+    
+    function update() {
+      var partnerId = select ? select.value : '';
+      
+      // Show loading state
+      var byId = function (id) { return document.getElementById(id); };
+      if (byId('metric-lt-comm')) {
+        byId('metric-lt-comm').textContent = '⏳';
+        byId('metric-mtd-comm').textContent = '⏳';
+      }
+      
+      // If no partner selected, show placeholder
+      if (!partnerId) {
+        if (byId('metric-lt-comm')) {
+          byId('metric-lt-comm').textContent = '—';
+          byId('metric-lt-volume').textContent = '—';
+          byId('metric-lt-deposits').textContent = '—';
+          byId('metric-lt-clients').textContent = '—';
+          byId('metric-mtd-comm').textContent = '—';
+          byId('metric-mtd-volume').textContent = '—';
+          byId('metric-mtd-deposits').textContent = '—';
+          byId('metric-mtd-clients').textContent = '—';
         }
-        if (select) select.addEventListener('change', update);
-        update();
-      })
-      .catch(function () { /* ignore on home */ });
+        return;
+      }
+      
+      // Load metrics from API (uses cube for speed)
+      window.ApiManager.loadMetrics(partnerId)
+        .then(function(metrics) {
+          console.log('✓ Loaded metrics for partner ' + partnerId + ':', metrics);
+          
+          // Transform API response to match expected format
+          var transformedMetrics = {
+            partnerTier: metrics.partnerTier || '—',
+            ltCommissions: metrics.ltCommissions || 0,
+            ltVolume: metrics.ltVolume || 0,
+            ltDeposits: metrics.ltDeposits || 0,
+            ltClients: metrics.ltClients || 0,
+            mtdComm: metrics.mtdComm || 0,
+            mtdVolume: metrics.mtdVolume || 0,
+            mtdDeposits: metrics.mtdDeposits || 0,
+            mtdClients: metrics.mtdClients || 0,
+            last6Months: metrics.last6Months || [0,0,0,0,0,0]
+          };
+          
+          renderMetrics(transformedMetrics);
+          
+          // Render 6-month chart with data
+          if (transformedMetrics.last6Months) {
+            renderSixMonthChartFromMetrics(transformedMetrics.last6Months);
+          }
+        })
+        .catch(function (error) {
+          console.error('Failed to load metrics:', error);
+          if (byId('metric-lt-comm')) {
+            byId('metric-lt-comm').textContent = '❌ Error';
+            byId('metric-mtd-comm').textContent = '❌ Error';
+          }
+        });
+    }
+    
+    if (select) {
+      select.addEventListener('change', update);
+    }
+    
+    // Initial load after a brief delay to ensure partner dropdown is populated
+    setTimeout(update, 500);
   }
 
   if (document.readyState === 'loading') {

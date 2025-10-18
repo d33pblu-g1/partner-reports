@@ -215,13 +215,26 @@
       loadBadgeGallery(partnerId);
     }
     
-    // Initial load
-    updateGallery();
-    
     // Listen for partner selection changes
     if (partnerSelect) {
       partnerSelect.addEventListener('change', updateGallery);
     }
+    
+    // Initial load after a delay to allow partner dropdown to be populated
+    // This gives time for the partner dropdown to restore saved selection
+    setTimeout(function() {
+      const partnerId = partnerSelect ? partnerSelect.value : null;
+      
+      // If no partner is selected, try to get from localStorage
+      if (!partnerId) {
+        const savedPartnerId = localStorage.getItem('selectedPartnerId');
+        if (savedPartnerId && partnerSelect) {
+          partnerSelect.value = savedPartnerId;
+        }
+      }
+      
+      updateGallery();
+    }, 600); // Wait 600ms for partner dropdown population
   }
   
   // Expose functions
