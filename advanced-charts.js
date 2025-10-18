@@ -16,10 +16,16 @@
      * Render KPI Scorecard with trend indicators
      */
     renderKPIScorecard: function(containerId, partnerId) {
-      fetch(`api/index.php?endpoint=cubes&cube=partner_dashboard&partner_id=${partnerId}`)
+      fetch(`api/index.php?endpoint=cubes&cube=cube_partner_dashboard&partner_id=${partnerId}`)
         .then(r => r.json())
         .then(response => {
-          if (!response.success || !response.data) return;
+          if (!response.success || !response.data || response.data.length === 0) {
+            const container = document.getElementById(containerId);
+            if (container) {
+              container.innerHTML = '<div style="text-align: center; padding: 40px; color: var(--muted);">No data available for partner scorecard</div>';
+            }
+            return;
+          }
           
           const data = response.data[0];
           const container = document.getElementById(containerId);
@@ -95,14 +101,20 @@
             });
           });
         })
-        .catch(err => console.error('Error loading KPI scorecard:', err));
+        .catch(err => {
+          console.error('Error loading KPI scorecard:', err);
+          const container = document.getElementById(containerId);
+          if (container) {
+            container.innerHTML = '<div style="text-align: center; padding: 40px; color: var(--muted);">Failed to load scorecard data</div>';
+          }
+        });
     },
     
     /**
      * Render Performance Radar Chart
      */
     renderPerformanceRadar: function(containerId, partnerId) {
-      fetch(`api/index.php?endpoint=cubes&cube=partner_dashboard&partner_id=${partnerId}`)
+      fetch(`api/index.php?endpoint=cubes&cube=cube_partner_dashboard&partner_id=${partnerId}`)
         .then(r => r.json())
         .then(response => {
           if (!response.success || !response.data) return;
@@ -184,7 +196,7 @@
      * Render Acquisition Funnel
      */
     renderAcquisitionFunnel: function(containerId, partnerId) {
-      fetch(`api/index.php?endpoint=cubes&cube=client_funnel&partner_id=${partnerId}`)
+      fetch(`api/index.php?endpoint=cubes&cube=cube_client_funnel&partner_id=${partnerId}`)
         .then(r => r.json())
         .then(response => {
           if (!response.success || !response.data) return;
@@ -250,8 +262,8 @@
      */
     renderRevenueAttribution: function(containerId, partnerId) {
       Promise.all([
-        fetch(`api/index.php?endpoint=cubes&cube=commissions_product&partner_id=${partnerId}`).then(r => r.json()),
-        fetch(`api/index.php?endpoint=cubes&cube=country_performance&partner_id=${partnerId}`).then(r => r.json())
+        fetch(`api/index.php?endpoint=cubes&cube=cube_commissions_product&partner_id=${partnerId}`).then(r => r.json()),
+        fetch(`api/index.php?endpoint=cubes&cube=cube_country_performance&partner_id=${partnerId}`).then(r => r.json())
       ]).then(([productResponse, countryResponse]) => {
         const container = document.getElementById(containerId);
         if (!container) return;
