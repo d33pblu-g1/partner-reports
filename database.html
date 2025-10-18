@@ -122,8 +122,17 @@
       </nav>
     </aside>
     <div class="content">
-      <!-- Theme Toggle -->
-      <div class="theme-toggle-container">
+      <!-- Theme Toggle and Language Selector -->
+      <div class="theme-toggle-container" style="display: flex; gap: 12px; align-items: center;">
+        <!-- Language Selector -->
+        <div class="language-selector-container">
+          <select id="language-selector" style="padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--panel); color: var(--text); font-size: 14px;">
+            <option value="en">🇺🇸 English</option>
+            <option value="el">🇬🇷 Ελληνικά</option>
+          </select>
+        </div>
+        
+        <!-- Theme Toggle -->
         <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
           <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="5"/>
@@ -144,35 +153,271 @@
 
       <div class="container">
         <main class="panel">
-          <h2 class="page-title">Database</h2>
-          <p class="page-subtitle">MySQL database tables with CRUD operations</p>
+          <h2 class="page-title" data-translate="database.title">Database</h2>
+          <p class="page-subtitle" data-translate="database.subtitle">MySQL database tables with CRUD operations</p>
 
-          <div id="content"></div>
+          <!-- Database Tables Section -->
+          <div class="card" style="margin-bottom: 24px;">
+            <h3 style="margin-top: 0; margin-bottom: 16px;" data-translate="database.tables.title">💾 Database Tables</h3>
+            <div style="display: flex; gap: 16px; align-items: center; margin-bottom: 16px;">
+              <label for="tableSelect" style="font-weight: 600; color: var(--text);" data-translate="database.tables.select">Select Table:</label>
+              <select id="tableSelect" style="flex: 1; padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--panel); color: var(--text);">
+                <option value="" data-translate="database.tables.loading">Loading tables...</option>
+              </select>
+            </div>
+            <div id="tableContent" style="min-height: 400px; border: 1px solid var(--border); border-radius: 8px; padding: 16px; background: rgba(148,163,184,0.05);">
+              <div style="text-align: center; padding: 40px; color: var(--muted);" data-translate="database.tables.select_prompt">
+                Select a table to view its contents
+              </div>
+            </div>
+          </div>
 
-          <div class="footer">v1.009 - partner report</div>
+          <!-- Data Cubes Section -->
+          <div class="card">
+            <h3 style="margin-top: 0; margin-bottom: 16px;" data-translate="database.cubes.title">📊 Data Cubes</h3>
+            <div style="display: flex; gap: 16px; align-items: center; margin-bottom: 16px;">
+              <label for="cubeSelect" style="font-weight: 600; color: var(--text);" data-translate="database.cubes.select">Select Cube:</label>
+              <select id="cubeSelect" style="flex: 1; padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--panel); color: var(--text);">
+                <option value="" data-translate="database.cubes.loading">Loading cubes...</option>
+              </select>
+            </div>
+            <div id="cubeContent" style="min-height: 400px; border: 1px solid var(--border); border-radius: 8px; padding: 16px; background: rgba(148,163,184,0.05);">
+              <div style="text-align: center; padding: 40px; color: var(--muted);" data-translate="database.cubes.select_prompt">
+                Select a cube to view its contents
+              </div>
+            </div>
+          </div>
+
+          <div id="content" style="display: none;"></div>
+
+          <div class="footer" data-translate="database.version">v1.015 - partner report</div>
         </main>
       </div>
     </div>
   </div>
 
   <script>
-    function createTableFromArray(arr) {
+    // Translation system
+    const translations = {
+      en: {
+        'database.title': 'Database',
+        'database.subtitle': 'MySQL database tables with CRUD operations',
+        'database.tables.title': '💾 Database Tables',
+        'database.tables.select': 'Select Table:',
+        'database.tables.loading': 'Loading tables...',
+        'database.tables.select_prompt': 'Select a table to view its contents',
+        'database.cubes.title': '📊 Data Cubes',
+        'database.cubes.select': 'Select Cube:',
+        'database.cubes.loading': 'Loading cubes...',
+        'database.cubes.select_prompt': 'Select a cube to view its contents',
+        'database.version': 'v1.015 - partner report',
+        'database.tables.names': {
+          'partners': 'Partners',
+          'clients': 'Clients',
+          'trades': 'Trades',
+          'deposits': 'Deposits',
+          'badges': 'Badges',
+          'partner_badges': 'Partner Badges',
+          'partner_tiers': 'Partner Tiers'
+        },
+        'database.cubes.names': {
+          'cube_partner_dashboard': 'Dashboard',
+          'cube_daily_commissions_plan': 'Daily Commissions (Plan)',
+          'cube_daily_commissions_platform': 'Daily Commissions (Platform)',
+          'cube_commissions_product': 'Commissions by Product',
+          'cube_commissions_symbol': 'Commissions by Symbol',
+          'cube_daily_signups': 'Daily Signups',
+          'cube_daily_funding': 'Daily Deposits/Withdrawals',
+          'cube_client_tiers': 'Client Tiers',
+          'cube_client_demographics': 'Demographics',
+          'cube_country_performance': 'Country Performance',
+          'cube_product_volume': 'Product Volume',
+          'cube_daily_trends': 'Daily Trends',
+          'cube_badge_progress': 'Badge Progress',
+          'cube_partner_countries': 'Partner Countries'
+        },
+        'database.messages': {
+          'no_data': 'No data available',
+          'records': 'records',
+          'add_record': '➕ Add Record',
+          'error_loading': 'Error loading tables',
+          'error_loading_cubes': 'Error loading cubes'
+        }
+      },
+      el: {
+        'database.title': 'Βάση Δεδομένων',
+        'database.subtitle': 'Πίνακες βάσης δεδομένων MySQL με λειτουργίες CRUD',
+        'database.tables.title': '💾 Πίνακες Βάσης Δεδομένων',
+        'database.tables.select': 'Επιλογή Πίνακα:',
+        'database.tables.loading': 'Φόρτωση πινάκων...',
+        'database.tables.select_prompt': 'Επιλέξτε έναν πίνακα για να δείτε τα περιεχόμενά του',
+        'database.cubes.title': '📊 Κύβοι Δεδομένων',
+        'database.cubes.select': 'Επιλογή Κύβου:',
+        'database.cubes.loading': 'Φόρτωση κύβων...',
+        'database.cubes.select_prompt': 'Επιλέξτε έναν κύβο για να δείτε τα περιεχόμενά του',
+        'database.version': 'v1.015 - αναφορά συνεργατών',
+        'database.tables.names': {
+          'partners': 'Συνεργάτες',
+          'clients': 'Πελάτες',
+          'trades': 'Συναλλαγές',
+          'deposits': 'Καταθέσεις',
+          'badges': 'Σήματα',
+          'partner_badges': 'Σήματα Συνεργατών',
+          'partner_tiers': 'Επίπεδα Συνεργατών'
+        },
+        'database.cubes.names': {
+          'cube_partner_dashboard': 'Πίνακας Ελέγχου',
+          'cube_daily_commissions_plan': 'Ημερήσιες Προμήθειες (Σχέδιο)',
+          'cube_daily_commissions_platform': 'Ημερήσιες Προμήθειες (Πλατφόρμα)',
+          'cube_commissions_product': 'Προμήθειες κατά Προϊόν',
+          'cube_commissions_symbol': 'Προμήθειες κατά Σύμβολο',
+          'cube_daily_signups': 'Ημερήσιες Εγγραφές',
+          'cube_daily_funding': 'Ημερήσιες Καταθέσεις/Αναλήψεις',
+          'cube_client_tiers': 'Επίπεδα Πελατών',
+          'cube_client_demographics': 'Δημογραφικά',
+          'cube_country_performance': 'Απόδοση Χώρας',
+          'cube_product_volume': 'Όγκος Προϊόντος',
+          'cube_daily_trends': 'Ημερήσιες Τάσεις',
+          'cube_badge_progress': 'Πρόοδος Σημάτων',
+          'cube_partner_countries': 'Χώρες Συνεργατών'
+        },
+        'database.messages': {
+          'no_data': 'Δεν υπάρχουν διαθέσιμα δεδομένα',
+          'records': 'εγγραφές',
+          'add_record': '➕ Προσθήκη Εγγραφής',
+          'error_loading': 'Σφάλμα φόρτωσης πινάκων',
+          'error_loading_cubes': 'Σφάλμα φόρτωσης κύβων'
+        }
+      }
+    };
+
+    // Current language
+    let currentLanguage = localStorage.getItem('language') || 'en';
+
+    // Translation functions
+    function translateElement(element) {
+      const key = element.getAttribute('data-translate');
+      if (key && translations[currentLanguage] && translations[currentLanguage][key]) {
+        element.textContent = translations[currentLanguage][key];
+      }
+    }
+
+    function translatePage() {
+      document.querySelectorAll('[data-translate]').forEach(translateElement);
+    }
+
+    function getTranslation(key) {
+      return translations[currentLanguage] && translations[currentLanguage][key] 
+        ? translations[currentLanguage][key] 
+        : key;
+    }
+
+    // Language selector functionality
+    function initLanguageSelector() {
+      const languageSelector = document.getElementById('language-selector');
+      if (languageSelector) {
+        languageSelector.value = currentLanguage;
+        languageSelector.addEventListener('change', function() {
+          currentLanguage = this.value;
+          localStorage.setItem('language', currentLanguage);
+          translatePage();
+          updateTableAndCubeNames();
+        });
+      }
+    }
+
+    // Global variables to store database data
+    var databaseData = {};
+    var tableSections = [
+      { key: 'partners', title: 'Partners' },
+      { key: 'clients', title: 'Clients' },
+      { key: 'trades', title: 'Trades' },
+      { key: 'deposits', title: 'Deposits' },
+      { key: 'badges', title: 'Badges' },
+      { key: 'partner_badges', title: 'Partner Badges' },
+      { key: 'partner_tiers', title: 'Partner Tiers' }
+    ];
+    
+    var cubeSections = [
+      { key: 'cube_partner_dashboard', title: 'Dashboard' },
+      { key: 'cube_daily_commissions_plan', title: 'Daily Commissions (Plan)' },
+      { key: 'cube_daily_commissions_platform', title: 'Daily Commissions (Platform)' },
+      { key: 'cube_commissions_product', title: 'Commissions by Product' },
+      { key: 'cube_commissions_symbol', title: 'Commissions by Symbol' },
+      { key: 'cube_daily_signups', title: 'Daily Signups' },
+      { key: 'cube_daily_funding', title: 'Daily Deposits/Withdrawals' },
+      { key: 'cube_client_tiers', title: 'Client Tiers' },
+      { key: 'cube_client_demographics', title: 'Demographics' },
+      { key: 'cube_country_performance', title: 'Country Performance' },
+      { key: 'cube_product_volume', title: 'Product Volume' },
+      { key: 'cube_daily_trends', title: 'Daily Trends' },
+      { key: 'cube_badge_progress', title: 'Badge Progress' },
+      { key: 'cube_partner_countries', title: 'Partner Countries' }
+    ];
+
+    function updateTableAndCubeNames() {
+      // Update table section names
+      tableSections.forEach(function(section) {
+        const translatedName = getTranslation('database.tables.names.' + section.key);
+        if (translatedName !== 'database.tables.names.' + section.key) {
+          section.title = translatedName;
+        }
+      });
+
+      // Update cube section names
+      cubeSections.forEach(function(section) {
+        const translatedName = getTranslation('database.cubes.names.' + section.key);
+        if (translatedName !== 'database.cubes.names.' + section.key) {
+          section.title = translatedName;
+        }
+      });
+
+      // Repopulate dropdowns if data is already loaded
+      if (Object.keys(databaseData).length > 0) {
+        populateTableSelect();
+        populateCubeSelect();
+      }
+    }
+
+    function createTableFromArray(arr, tableName) {
       if (!Array.isArray(arr) || arr.length === 0) {
         var empty = document.createElement('div');
-        empty.className = 'card';
-        empty.textContent = 'No rows';
+        empty.innerHTML = '<div style="text-align: center; padding: 40px; color: var(--muted);">' + getTranslation('database.messages.no_data') + '</div>';
         return empty;
       }
+      
       var columns = Array.from(new Set(arr.flatMap(function (row) { return Object.keys(row); })));
       var wrap = document.createElement('div');
-      wrap.className = 'card table-wrap';
+      wrap.className = 'table-wrap';
+      
+      // Add record count header
+      var header = document.createElement('div');
+      header.style.marginBottom = '16px';
+      header.style.padding = '12px';
+      header.style.background = 'var(--panel)';
+      header.style.borderRadius = '8px';
+      header.style.border = '1px solid var(--border)';
+      header.innerHTML = '<strong>' + arr.length + ' ' + getTranslation('database.messages.records') + '</strong> ' + (currentLanguage === 'el' ? 'στον' : 'in') + ' ' + tableName;
+      wrap.appendChild(header);
+      
       var table = document.createElement('table');
+      table.style.width = '100%';
+      table.style.borderCollapse = 'collapse';
+      
       var thead = document.createElement('thead');
       var trHead = document.createElement('tr');
       columns.forEach(function (col) {
-        var th = document.createElement('th'); th.textContent = col; trHead.appendChild(th);
+        var th = document.createElement('th'); 
+        th.textContent = col; 
+        th.style.padding = '10px 12px';
+        th.style.borderBottom = '1px solid var(--border)';
+        th.style.textAlign = 'left';
+        th.style.color = 'var(--muted)';
+        th.style.fontWeight = '600';
+        trHead.appendChild(th);
       });
       thead.appendChild(trHead);
+      
       var tbody = document.createElement('tbody');
       arr.forEach(function (row) {
         var tr = document.createElement('tr');
@@ -180,22 +425,94 @@
           var td = document.createElement('td');
           var v = row[col];
           td.textContent = (v == null) ? '' : (typeof v === 'object' ? JSON.stringify(v) : v);
+          td.style.padding = '10px 12px';
+          td.style.borderBottom = '1px solid rgba(148,163,184,0.2)';
+          td.style.textAlign = 'left';
           tr.appendChild(td);
         });
         tbody.appendChild(tr);
       });
+      
       table.appendChild(thead);
       table.appendChild(tbody);
       wrap.appendChild(table);
       return wrap;
     }
 
-    // Show loading state
-    var content = document.getElementById('content');
-    var loading = document.createElement('div');
-    loading.className = 'card';
-    loading.innerHTML = '<div style="text-align: center; padding: 40px;"><div class="loading-spinner"></div><p style="margin-top: 16px; color: var(--muted);">Loading database tables from MySQL...</p></div>';
-    content.appendChild(loading);
+    function populateTableSelect() {
+      var tableSelect = document.getElementById('tableSelect');
+      tableSelect.innerHTML = '<option value="">' + (currentLanguage === 'el' ? 'Επιλέξτε πίνακα...' : 'Select a table...') + '</option>';
+      
+      tableSections.forEach(function(section) {
+        var option = document.createElement('option');
+        option.value = section.key;
+        option.textContent = section.title + ' (' + (databaseData[section.key] ? databaseData[section.key].length : 0) + ' ' + getTranslation('database.messages.records') + ')';
+        tableSelect.appendChild(option);
+      });
+    }
+
+    function populateCubeSelect() {
+      var cubeSelect = document.getElementById('cubeSelect');
+      cubeSelect.innerHTML = '<option value="">' + (currentLanguage === 'el' ? 'Επιλέξτε κύβο...' : 'Select a cube...') + '</option>';
+      
+      cubeSections.forEach(function(section) {
+        var option = document.createElement('option');
+        option.value = section.key;
+        option.textContent = section.title + ' (' + (databaseData[section.key] ? databaseData[section.key].length : 0) + ' ' + getTranslation('database.messages.records') + ')';
+        cubeSelect.appendChild(option);
+      });
+    }
+
+    function displayTable(tableKey) {
+      var tableContent = document.getElementById('tableContent');
+      var section = tableSections.find(s => s.key === tableKey);
+      
+      if (!section || !databaseData[tableKey]) {
+        tableContent.innerHTML = '<div style="text-align: center; padding: 40px; color: var(--muted);">' + getTranslation('database.messages.no_data') + ' ' + (currentLanguage === 'el' ? 'για' : 'for') + ' ' + (section ? section.title : tableKey) + '</div>';
+        return;
+      }
+      
+      tableContent.innerHTML = '';
+      
+      // Add CRUD buttons if available
+      if (window.DatabaseCRUD) {
+        var crudButtons = document.createElement('div');
+        crudButtons.style.marginBottom = '16px';
+        crudButtons.style.display = 'flex';
+        crudButtons.style.gap = '8px';
+        
+        var addBtn = document.createElement('button');
+        addBtn.className = 'btn-primary';
+        addBtn.innerHTML = getTranslation('database.messages.add_record');
+        addBtn.style.padding = '8px 16px';
+        addBtn.onclick = function() {
+          window.DatabaseCRUD.showAddModal(tableKey);
+        };
+        crudButtons.appendChild(addBtn);
+        
+        tableContent.appendChild(crudButtons);
+      }
+      
+      // Add the table
+      if (window.DatabaseCRUD) {
+        tableContent.appendChild(window.DatabaseCRUD.createTable(databaseData[tableKey], tableKey));
+      } else {
+        tableContent.appendChild(createTableFromArray(databaseData[tableKey], section.title));
+      }
+    }
+
+    function displayCube(cubeKey) {
+      var cubeContent = document.getElementById('cubeContent');
+      var section = cubeSections.find(s => s.key === cubeKey);
+      
+      if (!section || !databaseData[cubeKey]) {
+        cubeContent.innerHTML = '<div style="text-align: center; padding: 40px; color: var(--muted);">' + getTranslation('database.messages.no_data') + ' ' + (currentLanguage === 'el' ? 'για' : 'for') + ' ' + (section ? section.title : cubeKey) + '</div>';
+        return;
+      }
+      
+      cubeContent.innerHTML = '';
+      cubeContent.appendChild(createTableFromArray(databaseData[cubeKey], section.title));
+    }
 
     // Function to load database tables
     function loadDatabaseTables(loadAll) {
@@ -204,10 +521,11 @@
         url += '&load_all=true';
       }
       
-      // Update loading message if loading all
-      if (loadAll) {
-        loading.innerHTML = '<div style="text-align: center; padding: 40px;"><div class="loading-spinner"></div><p style="margin-top: 16px; color: var(--muted);">Loading ALL database records... This may take a moment.</p></div>';
-      }
+      // Show loading state
+      var tableSelect = document.getElementById('tableSelect');
+      var cubeSelect = document.getElementById('cubeSelect');
+      tableSelect.innerHTML = '<option value="">Loading tables...</option>';
+      cubeSelect.innerHTML = '<option value="">Loading cubes...</option>';
       
       fetch(url)
       .then(r => r.json())
@@ -216,222 +534,51 @@
           throw new Error(response.message || 'Failed to load tables');
         }
         
-        var db = response.data;
+        databaseData = response.data;
         
         console.log('✓ Loaded database tables from MySQL:', {
-          partners: db.partners ? db.partners.length : 0,
-          clients: db.clients ? db.clients.length : 0,
-          trades: db.trades ? db.trades.length : 0,
-          deposits: db.deposits ? db.deposits.length : 0,
-          badges: db.badges ? db.badges.length : 0,
-          partner_badges: db.partner_badges ? db.partner_badges.length : 0,
-          partner_tiers: db.partner_tiers ? db.partner_tiers.length : 0
+          partners: databaseData.partners ? databaseData.partners.length : 0,
+          clients: databaseData.clients ? databaseData.clients.length : 0,
+          trades: databaseData.trades ? databaseData.trades.length : 0,
+          deposits: databaseData.deposits ? databaseData.deposits.length : 0,
+          badges: databaseData.badges ? databaseData.badges.length : 0,
+          partner_badges: databaseData.partner_badges ? databaseData.partner_badges.length : 0,
+          partner_tiers: databaseData.partner_tiers ? databaseData.partner_tiers.length : 0
         });
         
-        // Clear loading message
-        content.innerHTML = '';
+        // Populate dropdowns
+        populateTableSelect();
+        populateCubeSelect();
         
-        // Add "Load All Records" button at the top
-        var topBar = document.createElement('div');
-        topBar.style.marginBottom = '16px';
-        topBar.style.display = 'flex';
-        topBar.style.justifyContent = 'space-between';
-        topBar.style.alignItems = 'center';
+        // Add event listeners
+        tableSelect.addEventListener('change', function() {
+          displayTable(this.value);
+        });
         
-        var infoDiv = document.createElement('div');
-        infoDiv.style.fontSize = '14px';
-        infoDiv.style.color = 'var(--muted)';
+        cubeSelect.addEventListener('change', function() {
+          displayCube(this.value);
+        });
         
-        var metadata = db._metadata || {};
+        // Show metadata info
+        var metadata = databaseData._metadata || {};
         if (metadata.has_limits) {
-          infoDiv.innerHTML = '⚠️ Showing up to 1,000 records for Trades and Deposits tables';
+          console.log('⚠️ Showing up to 1,000 records for Trades and Deposits tables');
         } else if (metadata.load_all) {
-          infoDiv.innerHTML = '✓ All records loaded';
-          infoDiv.style.color = 'var(--accent)';
+          console.log('✓ All records loaded');
         }
-        topBar.appendChild(infoDiv);
-        
-        var buttonsDiv = document.createElement('div');
-        buttonsDiv.style.display = 'flex';
-        buttonsDiv.style.gap = '8px';
-        
-        if (metadata.has_limits !== false) {
-          var loadAllBtn = document.createElement('button');
-          loadAllBtn.className = 'btn-primary';
-          loadAllBtn.innerHTML = '📥 Load All Records';
-          loadAllBtn.style.padding = '8px 16px';
-          loadAllBtn.onclick = function() {
-            this.disabled = true;
-            this.innerHTML = '⏳ Loading...';
-            loadDatabaseTables(true);
-          };
-          buttonsDiv.appendChild(loadAllBtn);
-        }
-        
-        // Add refresh cubes button
-        var refreshCubesBtn = document.createElement('button');
-        refreshCubesBtn.className = 'btn-secondary';
-        refreshCubesBtn.innerHTML = '🔄 Refresh Cubes';
-        refreshCubesBtn.style.padding = '8px 16px';
-        refreshCubesBtn.onclick = function() {
-          this.disabled = true;
-          this.innerHTML = '⏳ Refreshing...';
-          fetch('api/index.php?endpoint=cubes&cube=refresh')
-            .then(r => r.json())
-            .then(function(result) {
-              if (result.success) {
-                alert('✓ All cubes refreshed successfully!');
-                loadDatabaseTables(false);
-              } else {
-                alert('❌ Error: ' + result.message);
-              }
-            })
-            .catch(function(e) {
-              alert('❌ Error refreshing cubes: ' + e);
-            })
-            .finally(function() {
-              refreshCubesBtn.disabled = false;
-              refreshCubesBtn.innerHTML = '🔄 Refresh Cubes';
-            });
-        };
-        buttonsDiv.appendChild(refreshCubesBtn);
-        
-        topBar.appendChild(buttonsDiv);
-        
-        content.appendChild(topBar);
-        
-        // Group sections into tables and cubes
-        var tableSections = [
-          { key: 'partners', title: 'Partners' },
-          { key: 'clients', title: 'Clients' },
-          { key: 'trades', title: 'Trades' },
-          { key: 'deposits', title: 'Deposits' },
-          { key: 'badges', title: 'Badges' },
-          { key: 'partner_badges', title: 'Partner Badges' },
-          { key: 'partner_tiers', title: 'Partner Tiers' }
-        ];
-        
-        var cubeSections = [
-          { key: 'cube_partner_dashboard', title: 'Dashboard' },
-          { key: 'cube_daily_commissions_plan', title: 'Daily Commissions (Plan)' },
-          { key: 'cube_daily_commissions_platform', title: 'Daily Commissions (Platform)' },
-          { key: 'cube_commissions_product', title: 'Commissions by Product' },
-          { key: 'cube_commissions_symbol', title: 'Commissions by Symbol' },
-          { key: 'cube_daily_signups', title: 'Daily Signups' },
-          { key: 'cube_daily_funding', title: 'Daily Deposits/Withdrawals' },
-          { key: 'cube_client_tiers', title: 'Client Tiers' },
-          { key: 'cube_client_demographics', title: 'Demographics' },
-          { key: 'cube_country_performance', title: 'Country Performance' },
-          { key: 'cube_product_volume', title: 'Product Volume' },
-          { key: 'cube_daily_trends', title: 'Daily Trends' },
-          { key: 'cube_badge_progress', title: 'Badge Progress' },
-          { key: 'cube_partner_countries', title: 'Partner Countries' }
-        ];
-        
-        // Create Database Tables Section
-        var tablesSection = document.createElement('div');
-        tablesSection.className = 'tables-section';
-        
-        var tablesHeader = document.createElement('div');
-        tablesHeader.className = 'section-header';
-        tablesHeader.innerHTML = '<h2>💾 Database Tables</h2><p>Core database tables with CRUD operations</p>';
-        tablesSection.appendChild(tablesHeader);
-        
-        var tablesScrollContainer = document.createElement('div');
-        tablesScrollContainer.className = 'horizontal-scroll-container';
-        
-        tableSections.forEach(function(section) {
-          var scrollItem = document.createElement('div');
-          scrollItem.className = 'scroll-item';
-          
-          var card = document.createElement('div');
-          card.className = 'card';
-          
-          var title = document.createElement('h3');
-          title.textContent = section.title + ' (' + (db[section.key] ? db[section.key].length : 0) + ' records)';
-          title.style.marginTop = '0';
-          title.style.marginBottom = '12px';
-          title.style.fontSize = '16px';
-          card.appendChild(title);
-          
-          // Use CRUD-enabled table for all tables
-          if (window.DatabaseCRUD) {
-            card.appendChild(window.DatabaseCRUD.createTable(db[section.key] || [], section.key));
-          } else {
-            card.appendChild(createTableFromArray(db[section.key] || []));
-          }
-          
-          scrollItem.appendChild(card);
-          tablesScrollContainer.appendChild(scrollItem);
-        });
-        
-        tablesSection.appendChild(tablesScrollContainer);
-        content.appendChild(tablesSection);
-        
-        // Create Data Cubes Section
-        var cubesSection = document.createElement('div');
-        cubesSection.className = 'cubes-section';
-        
-        var cubesHeader = document.createElement('div');
-        cubesHeader.className = 'section-header';
-        cubesHeader.innerHTML = '<h2>📊 Data Cubes</h2><p>Performance-optimized pre-aggregated data for fast reporting</p>';
-        cubesSection.appendChild(cubesHeader);
-        
-        var cubesScrollContainer = document.createElement('div');
-        cubesScrollContainer.className = 'horizontal-scroll-container';
-        
-        cubeSections.forEach(function(section) {
-          var scrollItem = document.createElement('div');
-          scrollItem.className = 'scroll-item';
-          
-          var card = document.createElement('div');
-          card.className = 'card';
-          
-          var title = document.createElement('h3');
-          title.textContent = section.title + ' (' + (db[section.key] ? db[section.key].length : 0) + ' records)';
-          title.style.marginTop = '0';
-          title.style.marginBottom = '12px';
-          title.style.fontSize = '16px';
-          card.appendChild(title);
-          
-          // Use CRUD-enabled table for all tables
-          if (window.DatabaseCRUD) {
-            card.appendChild(window.DatabaseCRUD.createTable(db[section.key] || [], section.key));
-          } else {
-            card.appendChild(createTableFromArray(db[section.key] || []));
-          }
-          
-          scrollItem.appendChild(card);
-          cubesScrollContainer.appendChild(scrollItem);
-        });
-        
-        cubesSection.appendChild(cubesScrollContainer);
-        content.appendChild(cubesSection);
       })
       .catch(function (e) {
-        content.innerHTML = '';
-        var err = document.createElement('div'); 
-        err.className = 'card';
-        err.style.background = 'rgba(239, 68, 68, 0.1)';
-        err.style.borderColor = '#ef4444';
-        err.innerHTML = '<h3 style="color: #ef4444; margin-top: 0;">⚠️ Database Connection Error</h3>' +
-          '<p>Failed to load data from MySQL database.</p>' +
-          '<p style="color: var(--muted); font-size: 14px;">Error: ' + String(e) + '</p>' +
-          '<div style="margin-top: 16px; padding: 16px; background: rgba(0,0,0,0.2); border-radius: 8px;">' +
-          '<strong>Troubleshooting:</strong>' +
-          '<ol style="margin: 8px 0; padding-left: 20px; color: var(--muted);">' +
-          '<li>Ensure MySQL server is running</li>' +
-          '<li>Check that PHP server is running: <code>php -S localhost:8000</code></li>' +
-          '<li>Verify database is populated: <code>mysql -u root -p partner_report</code></li>' +
-          '<li>Check API endpoints are accessible</li>' +
-          '<li>Review browser console for detailed errors (F12)</li>' +
-          '</ol></div>';
-        content.appendChild(err);
+        var tableSelect = document.getElementById('tableSelect');
+        var cubeSelect = document.getElementById('cubeSelect');
+        tableSelect.innerHTML = '<option value="">Error loading tables</option>';
+        cubeSelect.innerHTML = '<option value="">Error loading cubes</option>';
+        
         console.error('Database loading error:', e);
+        alert('❌ Database Connection Error: ' + String(e));
       });
     }
     
-    // Initial load with limits
+    // Initial load
     loadDatabaseTables(false);
   </script>
 </body>
