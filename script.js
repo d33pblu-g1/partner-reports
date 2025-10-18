@@ -754,36 +754,80 @@ function loadDepositTrendsChart(partnerId) {
   fetch(`api/index.php?endpoint=cubes&cube=daily_funding&partner_id=${partnerId}`)
     .then(r => r.json())
     .then(response => {
-      if (!response.success || !response.data) return;
+      if (!response.success || !response.data || response.data.length === 0) {
+        const container = document.getElementById('deposit-trends-chart');
+        if (container) {
+          container.innerHTML = '<p class="muted">No deposit data available</p>';
+        }
+        return;
+      }
       
       const container = document.getElementById('deposit-trends-chart');
       if (!container) return;
       
-      const data = response.data.slice(-30); // Last 30 days
+      // Group data by date and category
+      const dailyData = {};
+      response.data.forEach(row => {
+        const date = row.funding_date;
+        const category = row.category;
+        const amount = parseFloat(row.total_amount) || 0;
+        
+        if (!dailyData[date]) {
+          dailyData[date] = { deposits: 0, withdrawals: 0 };
+        }
+        
+        if (category === 'deposit') {
+          dailyData[date].deposits += amount;
+        } else if (category === 'withdrawal') {
+          dailyData[date].withdrawals += amount;
+        }
+      });
+      
+      // Convert to array and sort by date
+      const data = Object.keys(dailyData)
+        .map(date => ({
+          date: date,
+          deposits: dailyData[date].deposits,
+          withdrawals: dailyData[date].withdrawals
+        }))
+        .sort((a, b) => new Date(a.date) - new Date(b.date))
+        .slice(-30); // Last 30 days
+      
       const width = container.clientWidth || 400;
       const height = 300;
       
       let svg = `<svg width="${width}" height="${height}" style="background: rgba(148,163,184,0.05);">`;
       
-      const maxDeposits = Math.max(...data.map(d => parseFloat(d.total_deposits)));
-      const maxWithdrawals = Math.max(...data.map(d => parseFloat(d.total_withdrawals)));
+      const maxDeposits = Math.max(...data.map(d => parseFloat(d.deposits)));
+      const maxWithdrawals = Math.max(...data.map(d => parseFloat(d.withdrawals)));
       const maxValue = Math.max(maxDeposits, maxWithdrawals);
       
       const barWidth = width / data.length;
       
       data.forEach((day, i) => {
-        const depositHeight = (parseFloat(day.total_deposits) / maxValue) * (height - 40);
-        const withdrawalHeight = (parseFloat(day.total_withdrawals) / maxValue) * (height - 40);
+        const depositHeight = (parseFloat(day.deposits) / maxValue) * (height - 40);
+        const withdrawalHeight = (parseFloat(day.withdrawals) / maxValue) * (height - 40);
         const x = i * barWidth;
         
         svg += `<rect x="${x}" y="${height - depositHeight - 20}" width="${barWidth * 0.4}" height="${depositHeight}" fill="#10b981" rx="2"/>`;
         svg += `<rect x="${x + barWidth * 0.5}" y="${height - withdrawalHeight - 20}" width="${barWidth * 0.4}" height="${withdrawalHeight}" fill="#ef4444" rx="2"/>`;
+        
+        // Date labels
+        if (i % 5 === 0) {
+          svg += `<text x="${x + barWidth/2}" y="${height - 5}" text-anchor="middle" font-size="10" fill="#64748b">${new Date(day.date).toLocaleDateString('en-US', {month: 'short', day: 'numeric'})}</text>`;
+        }
       });
       
       svg += '</svg>';
       container.innerHTML = svg;
     })
-    .catch(err => console.error('Error loading deposit trends chart:', err));
+    .catch(err => {
+      console.error('Error loading deposit trends chart:', err);
+      const container = document.getElementById('deposit-trends-chart');
+      if (container) {
+        container.innerHTML = '<p class="muted">Failed to load deposit data</p>';
+      }
+    });
 }
 
 // Country Analysis page: show country metrics
@@ -922,7 +966,39 @@ function loadDepositTrendsChart(partnerId) {
     return { min: 0, max: 0 };
   }
 
-  function renderTiersProgress(db, partnerId) {
+  // Filter trades by time period
+  function filterTradesByTimePeriod(trades, timePeriod) {
+    if (!timePeriod || timePeriod === 'lifetime') {
+      return trades;
+    }
+    
+    var now = new Date();
+    var cutoffDate = new Date();
+    
+    switch (timePeriod) {
+      case 'ytd':
+        cutoffDate = new Date(now.getFullYear(), 0, 1);
+        break;
+      case '6months':
+        cutoffDate.setMonth(now.getMonth() - 6);
+        break;
+      case '3months':
+        cutoffDate.setMonth(now.getMonth() - 3);
+        break;
+      case '1month':
+        cutoffDate.setMonth(now.getMonth() - 1);
+        break;
+      default:
+        return trades;
+    }
+    
+    return trades.filter(function(trade) {
+      var tradeDate = new Date(trade.dateTime);
+      return tradeDate >= cutoffDate;
+    });
+  }
+
+  function renderTiersProgress(db, partnerId, timePeriod) {
     var container = document.getElementById('tiers-progress');
     if (!container) return;
     
@@ -936,10 +1012,13 @@ function loadDepositTrendsChart(partnerId) {
     var partnerClients = partnerId ? clients.filter(function(c) { return c.partnerId === partnerId; }) : clients;
     var partnerClientIds = new Set(partnerClients.map(function(c) { return c.customerId; }));
     
-    // Calculate total commissions for selected partner(s)
-    var totalCommissions = trades
+    // Filter trades by time period
+    var filteredTrades = filterTradesByTimePeriod(trades, timePeriod);
+    
+    // Calculate total commissions for selected partner(s) within time period
+    var totalCommissions = filteredTrades
       .filter(function(t) { return partnerClientIds.has(t.customerId); })
-      .reduce(function(sum, t) { return sum + (t.commission || 0); }, 0);
+      .reduce(function(sum, t) { return sum + (parseFloat(t.expected_revenue_usd) || 0); }, 0);
     
     var html = '<div class="grid" style="grid-template-columns: repeat(4, 1fr); gap: 16px;">';
     
@@ -1005,6 +1084,7 @@ function loadDepositTrendsChart(partnerId) {
     if (selectedPartner) {
       html += 'Partner: ' + selectedPartner.name + ' • ';
     }
+    html += 'Time Period: ' + getTimePeriodLabel(timePeriod) + ' • ';
     html += 'Total Commissions: $' + totalCommissions.toLocaleString();
     html += '</div>';
     html += '</div>';
@@ -1014,6 +1094,7 @@ function loadDepositTrendsChart(partnerId) {
 
   function initTiersPage() {
     var select = document.getElementById('partnerSelect');
+    var timePeriodSelect = document.getElementById('timePeriodSelect');
     if (!select) return;
     
     fetch('database.json')
@@ -1021,6 +1102,7 @@ function loadDepositTrendsChart(partnerId) {
       .then(function(db) {
         function update() {
           var partnerId = select.value;
+          var timePeriod = timePeriodSelect ? timePeriodSelect.value : 'lifetime';
           
           // If no partner selected, try to get from localStorage
           if (!partnerId) {
@@ -1031,10 +1113,13 @@ function loadDepositTrendsChart(partnerId) {
             }
           }
           
-          renderTiersProgress(db, partnerId);
+          renderTiersProgress(db, partnerId, timePeriod);
         }
         
         select.addEventListener('change', update);
+        if (timePeriodSelect) {
+          timePeriodSelect.addEventListener('change', update);
+        }
         
         // Delay initial update to allow partner dropdown to be populated
         setTimeout(update, 600);

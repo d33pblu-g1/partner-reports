@@ -63,10 +63,17 @@
       <p class="page-subtitle">Status and progression</p>
 
           <div class="card filter-bar" style="margin-bottom:16px; display: flex; justify-content: space-between; align-items: center;">
-            <div>
+            <div style="display: flex; gap: 12px; align-items: center;">
               <select id="partnerSelect" style="width:100%; max-width:360px; padding:10px 12px; background:#0b1220; color:var(--text); border:1px solid rgba(148,163,184,0.3); border-radius:8px">
-              <option value="">All partners</option>
-            </select>
+                <option value="">All partners</option>
+              </select>
+              <select id="timePeriodSelect" style="padding:10px 12px; background:#0b1220; color:var(--text); border:1px solid rgba(148,163,184,0.3); border-radius:8px">
+                <option value="lifetime">Lifetime</option>
+                <option value="ytd">Year to Date</option>
+                <option value="6months">Last 6 Months</option>
+                <option value="3months">Last 3 Months</option>
+                <option value="1month">Last Month</option>
+              </select>
             </div>
             <div style="text-align: right;">
               <span id="partner-tier-display" class="tier-tag">—</span>
