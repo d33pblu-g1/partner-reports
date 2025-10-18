@@ -158,10 +158,45 @@
           </div>
 
       <div class="card">
-        <p class="muted">Country heatmap placeholder</p>
+        <h3 style="margin-top:0">🗺️ World Map</h3>
+        <p class="muted" style="margin-bottom: 12px;">Countries highlighted in blue have clients from the selected partner</p>
+        <div id="world-map-container" style="width: 100%; height: 400px; display: flex; align-items: center; justify-content: center; background: rgba(148,163,184,0.05); border-radius: 8px;">
+          <p class="muted">Loading map...</p>
+        </div>
       </div>
 
-          <div class="footer">v1.000 - partner report</div>
+      <!-- Additional Charts Section -->
+      <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px;">
+        <div class="card">
+          <h3 style="margin-top:0">Country Performance Heatmap</h3>
+          <div id="country-heatmap-chart" style="height: 300px; display: flex; align-items: center; justify-content: center;">
+            <p class="muted">Loading chart...</p>
+          </div>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0">Regional Analysis</h3>
+          <div id="regional-analysis-chart" style="height: 300px; display: flex; align-items: center; justify-content: center;">
+            <p class="muted">Loading chart...</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px;">
+        <div class="card">
+          <h3 style="margin-top:0">Top Countries by Revenue</h3>
+          <div id="top-countries-revenue-chart" style="height: 300px; display: flex; align-items: center; justify-content: center;">
+            <p class="muted">Loading chart...</p>
+          </div>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0">Client Distribution by Region</h3>
+          <div id="client-region-distribution-chart" style="height: 300px; display: flex; align-items: center; justify-content: center;">
+            <p class="muted">Loading chart...</p>
+          </div>
+        </div>
+      </div>
+
+          <div class="footer">v1.003 - partner report</div>
         </main>
       </div>
     </div>
