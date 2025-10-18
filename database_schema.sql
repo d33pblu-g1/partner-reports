@@ -8,8 +8,11 @@ CREATE TABLE partners (
     partner_id VARCHAR(20) PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     tier VARCHAR(50),
+    Country_Rank INT,
+    Alternate_Accounts TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_country_rank (Country_Rank)
 );
 
 -- Partner tiers configuration

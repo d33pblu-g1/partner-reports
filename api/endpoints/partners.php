@@ -54,14 +54,16 @@ try {
             }
             
             $stmt = $db->prepare("
-                INSERT INTO partners (partner_id, name, tier) 
-                VALUES (?, ?, ?)
+                INSERT INTO partners (partner_id, name, tier, Country_Rank, Alternate_Accounts) 
+                VALUES (?, ?, ?, ?, ?)
             ");
             
             $stmt->execute([
                 $input['partner_id'],
                 $input['name'],
-                $input['tier'] ?? null
+                $input['tier'] ?? null,
+                $input['Country_Rank'] ?? $input['country_rank'] ?? null,
+                $input['Alternate_Accounts'] ?? $input['alternate_accounts'] ?? null
             ]);
             
             echo json_encode(ApiResponse::success(['id' => $input['partner_id']], 'Partner created successfully'));
@@ -85,13 +87,15 @@ try {
             
             $stmt = $db->prepare("
                 UPDATE partners 
-                SET name = ?, tier = ?
+                SET name = ?, tier = ?, Country_Rank = ?, Alternate_Accounts = ?
                 WHERE partner_id = ?
             ");
             
             $stmt->execute([
                 $input['name'] ?? '',
                 $input['tier'] ?? null,
+                $input['Country_Rank'] ?? $input['country_rank'] ?? null,
+                $input['Alternate_Accounts'] ?? $input['alternate_accounts'] ?? null,
                 $partnerId
             ]);
             
