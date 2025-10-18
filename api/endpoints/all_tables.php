@@ -10,6 +10,9 @@ $db = getDB();
 try {
     switch ($_SERVER['REQUEST_METHOD']) {
         case 'GET':
+            // Check if user wants to load all records (no limit)
+            $loadAll = isset($_GET['load_all']) && $_GET['load_all'] === 'true';
+            
             // Get all tables data
             $allTables = [];
             
@@ -23,13 +26,21 @@ try {
             $stmt->execute();
             $allTables['clients'] = $stmt->fetchAll();
             
-            // Get trades
-            $stmt = $db->prepare("SELECT * FROM trades ORDER BY date DESC LIMIT 1000");
+            // Get trades (with optional limit)
+            if ($loadAll) {
+                $stmt = $db->prepare("SELECT * FROM trades ORDER BY date DESC");
+            } else {
+                $stmt = $db->prepare("SELECT * FROM trades ORDER BY date DESC LIMIT 1000");
+            }
             $stmt->execute();
             $allTables['trades'] = $stmt->fetchAll();
             
-            // Get deposits
-            $stmt = $db->prepare("SELECT * FROM deposits ORDER BY date_time DESC LIMIT 1000");
+            // Get deposits (with optional limit)
+            if ($loadAll) {
+                $stmt = $db->prepare("SELECT * FROM deposits ORDER BY date_time DESC");
+            } else {
+                $stmt = $db->prepare("SELECT * FROM deposits ORDER BY date_time DESC LIMIT 1000");
+            }
             $stmt->execute();
             $allTables['deposits'] = $stmt->fetchAll();
             
@@ -47,6 +58,12 @@ try {
             $stmt = $db->prepare("SELECT * FROM partner_tiers ORDER BY tier");
             $stmt->execute();
             $allTables['partner_tiers'] = $stmt->fetchAll();
+            
+            // Add metadata about whether all records were loaded
+            $allTables['_metadata'] = [
+                'load_all' => $loadAll,
+                'has_limits' => !$loadAll
+            ];
             
             echo json_encode(ApiResponse::success($allTables));
             break;

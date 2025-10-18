@@ -123,8 +123,19 @@
     loading.innerHTML = '<div style="text-align: center; padding: 40px;"><div class="loading-spinner"></div><p style="margin-top: 16px; color: var(--muted);">Loading database tables from MySQL...</p></div>';
     content.appendChild(loading);
 
-    // Load data from MySQL via API
-    fetch('api/index.php?endpoint=all_tables')
+    // Function to load database tables
+    function loadDatabaseTables(loadAll) {
+      var url = 'api/index.php?endpoint=all_tables';
+      if (loadAll) {
+        url += '&load_all=true';
+      }
+      
+      // Update loading message if loading all
+      if (loadAll) {
+        loading.innerHTML = '<div style="text-align: center; padding: 40px;"><div class="loading-spinner"></div><p style="margin-top: 16px; color: var(--muted);">Loading ALL database records... This may take a moment.</p></div>';
+      }
+      
+      fetch(url)
       .then(r => r.json())
       .then(function (response) {
         if (!response.success) {
@@ -145,6 +156,41 @@
         
         // Clear loading message
         content.innerHTML = '';
+        
+        // Add "Load All Records" button at the top
+        var topBar = document.createElement('div');
+        topBar.style.marginBottom = '16px';
+        topBar.style.display = 'flex';
+        topBar.style.justifyContent = 'space-between';
+        topBar.style.alignItems = 'center';
+        
+        var infoDiv = document.createElement('div');
+        infoDiv.style.fontSize = '14px';
+        infoDiv.style.color = 'var(--muted)';
+        
+        var metadata = db._metadata || {};
+        if (metadata.has_limits) {
+          infoDiv.innerHTML = '⚠️ Showing up to 1,000 records for Trades and Deposits tables';
+        } else if (metadata.load_all) {
+          infoDiv.innerHTML = '✓ All records loaded';
+          infoDiv.style.color = 'var(--accent)';
+        }
+        topBar.appendChild(infoDiv);
+        
+        if (metadata.has_limits !== false) {
+          var loadAllBtn = document.createElement('button');
+          loadAllBtn.className = 'btn-primary';
+          loadAllBtn.innerHTML = '📥 Load All Records';
+          loadAllBtn.style.padding = '8px 16px';
+          loadAllBtn.onclick = function() {
+            this.disabled = true;
+            this.innerHTML = '⏳ Loading...';
+            loadDatabaseTables(true);
+          };
+          topBar.appendChild(loadAllBtn);
+        }
+        
+        content.appendChild(topBar);
         
         var sections = [
           { key: 'partners', title: 'Partners' },
@@ -218,6 +264,10 @@
         content.appendChild(err);
         console.error('Database loading error:', e);
       });
+    }
+    
+    // Initial load with limits
+    loadDatabaseTables(false);
   </script>
 </body>
 </html>

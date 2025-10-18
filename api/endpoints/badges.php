@@ -101,12 +101,12 @@ function getPartnerBadges($db, $partnerId) {
     // Get totals
     $stmt = $db->prepare("
         SELECT 
-            COALESCE(SUM(t.commission), 0) as total_commissions,
+            COALESCE(SUM(t.closed_pnl_usd), 0) as total_commissions,
             COALESCE(SUM(d.value), 0) as total_deposits
         FROM clients c
-        LEFT JOIN trades t ON c.customer_id = t.customer_id
-        LEFT JOIN deposits d ON c.customer_id = d.customer_id
-        WHERE c.partner_id = ?
+        LEFT JOIN trades t ON c.binary_user_id = t.binary_user_id
+        LEFT JOIN deposits d ON c.binary_user_id = d.binary_user_id
+        WHERE c.partnerId = ?
     ");
     $stmt->execute([$partnerId]);
     $totals = $stmt->fetch();
@@ -141,12 +141,12 @@ function getPartnerBadgeProgress($db, $partnerId) {
     // Get partner totals
     $stmt = $db->prepare("
         SELECT 
-            COALESCE(SUM(t.commission), 0) as total_commissions,
+            COALESCE(SUM(t.closed_pnl_usd), 0) as total_commissions,
             COALESCE(SUM(d.value), 0) as total_deposits
         FROM clients c
-        LEFT JOIN trades t ON c.customer_id = t.customer_id
-        LEFT JOIN deposits d ON c.customer_id = d.customer_id
-        WHERE c.partner_id = ?
+        LEFT JOIN trades t ON c.binary_user_id = t.binary_user_id
+        LEFT JOIN deposits d ON c.binary_user_id = d.binary_user_id
+        WHERE c.partnerId = ?
     ");
     $stmt->execute([$partnerId]);
     $totals = $stmt->fetch();
