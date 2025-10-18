@@ -724,16 +724,44 @@
       });
     }
     
+    // Filter by search query
+    var searchQuery = container.getAttribute('data-search-query') || '';
+    if (searchQuery) {
+      var query = searchQuery.toLowerCase();
+      filteredClients = filteredClients.filter(function(c) {
+        return (c.name && c.name.toLowerCase().includes(query)) ||
+               (c.email && c.email.toLowerCase().includes(query)) ||
+               (c.binary_user_id && c.binary_user_id.toLowerCase().includes(query)) ||
+               (c.customerId && c.customerId.toLowerCase().includes(query)) ||
+               (c.country && c.country.toLowerCase().includes(query)) ||
+               (c.tier && c.tier.toLowerCase().includes(query)) ||
+               (c.accountNumber && c.accountNumber.toLowerCase().includes(query)) ||
+               (c.client_loginid && c.client_loginid.toLowerCase().includes(query));
+      });
+    }
+    
     if (filteredClients.length === 0) {
-      container.innerHTML = '<p class="muted">No clients found for selected partner.</p>';
+      container.innerHTML = '<p class="muted">No clients found' + (searchQuery ? ' matching "' + searchQuery + '"' : ' for selected partner') + '.</p>';
       return;
     }
     
     // Get or create the records per page selection
     var recordsPerPage = parseInt(container.getAttribute('data-records-per-page') || '25');
     
+    // Search bar and controls
+    var html = '<div style="margin-bottom: 16px;">';
+    html += '<input type="text" id="client-search-input" placeholder="🔍 Search clients by name, email, ID, country..." ';
+    html += 'value="' + (searchQuery || '') + '" ';
+    html += 'style="width: 100%; padding: 10px 16px; background: rgba(148,163,184,0.05); color: var(--text); border: 1px solid rgba(148,163,184,0.2); border-radius: 8px; font-size: 14px; margin-bottom: 8px;">';
+    html += '</div>';
+    
     // Dropdown for records per page
-    var html = '<div style="display: flex; justify-content: flex-end; margin-bottom: 12px;">';
+    html += '<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">';
+    html += '<div style="font-size: 14px; color: var(--muted);">';
+    if (searchQuery) {
+      html += 'Search results for "<strong style="color: var(--text);">' + searchQuery + '</strong>"';
+    }
+    html += '</div>';
     html += '<div style="display: flex; align-items: center; gap: 8px;">';
     html += '<label style="font-size: 14px; color: var(--muted);">Show:</label>';
     html += '<select id="records-per-page-select" style="padding: 6px 12px; background: rgba(148,163,184,0.05); color: var(--text); border: 1px solid rgba(148,163,184,0.2); border-radius: 6px; cursor: pointer;">';
@@ -753,6 +781,9 @@
       html += '<div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: rgba(148,163,184,0.05); border-radius: 6px; border: 1px solid rgba(148,163,184,0.1);">';
       html += '<div>';
       html += '<div style="font-weight: 600; margin-bottom: 4px;">' + maskName(client.name) + '</div>';
+      if (client.email) {
+        html += '<div style="font-size: 12px; color: var(--accent); margin-bottom: 2px;">📧 ' + client.email + '</div>';
+      }
       html += '<div style="font-size: 12px; color: var(--muted);">' + (client.binary_user_id || client.customerId) + ' • ' + client.country + ' • ' + (client.gender || 'N/A') + ', ' + (client.age || 'N/A') + ' years</div>';
       html += '</div>';
       html += '<div style="text-align: right;">';
@@ -775,6 +806,19 @@
     html += '</div>';
     
     container.innerHTML = html;
+    
+    // Add event listener for search
+    var searchInput = document.getElementById('client-search-input');
+    if (searchInput) {
+      searchInput.addEventListener('input', function() {
+        container.setAttribute('data-search-query', this.value);
+        renderClientsList(db, partnerId, timePeriod);
+      });
+      // Focus on search input if there was a query
+      if (searchQuery) {
+        setTimeout(function() { searchInput.focus(); }, 100);
+      }
+    }
     
     // Add event listener for dropdown
     var select = document.getElementById('records-per-page-select');

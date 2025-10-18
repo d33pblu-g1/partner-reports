@@ -59,6 +59,27 @@ try {
             $stmt->execute();
             $allTables['partner_tiers'] = $stmt->fetchAll();
             
+            // Get cube tables
+            $stmt = $db->prepare("SELECT * FROM cube_partner_dashboard ORDER BY partner_id");
+            $stmt->execute();
+            $allTables['cube_partner_dashboard'] = $stmt->fetchAll();
+            
+            $stmt = $db->prepare("SELECT * FROM cube_client_tiers ORDER BY partner_id, tier");
+            $stmt->execute();
+            $allTables['cube_client_tiers'] = $stmt->fetchAll();
+            
+            $stmt = $db->prepare("SELECT * FROM cube_client_demographics ORDER BY partner_id, dimension, dimension_value");
+            $stmt->execute();
+            $allTables['cube_client_demographics'] = $stmt->fetchAll();
+            
+            $stmt = $db->prepare("SELECT * FROM cube_country_performance ORDER BY partner_id, country");
+            $stmt->execute();
+            $allTables['cube_country_performance'] = $stmt->fetchAll();
+            
+            $stmt = $db->prepare("SELECT * FROM cube_badge_progress ORDER BY partner_id");
+            $stmt->execute();
+            $allTables['cube_badge_progress'] = $stmt->fetchAll();
+            
             // Add metadata about whether all records were loaded
             $allTables['_metadata'] = [
                 'load_all' => $loadAll,

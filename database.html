@@ -177,6 +177,10 @@
         }
         topBar.appendChild(infoDiv);
         
+        var buttonsDiv = document.createElement('div');
+        buttonsDiv.style.display = 'flex';
+        buttonsDiv.style.gap = '8px';
+        
         if (metadata.has_limits !== false) {
           var loadAllBtn = document.createElement('button');
           loadAllBtn.className = 'btn-primary';
@@ -187,8 +191,38 @@
             this.innerHTML = '⏳ Loading...';
             loadDatabaseTables(true);
           };
-          topBar.appendChild(loadAllBtn);
+          buttonsDiv.appendChild(loadAllBtn);
         }
+        
+        // Add refresh cubes button
+        var refreshCubesBtn = document.createElement('button');
+        refreshCubesBtn.className = 'btn-secondary';
+        refreshCubesBtn.innerHTML = '🔄 Refresh Cubes';
+        refreshCubesBtn.style.padding = '8px 16px';
+        refreshCubesBtn.onclick = function() {
+          this.disabled = true;
+          this.innerHTML = '⏳ Refreshing...';
+          fetch('api/index.php?endpoint=cubes&cube=refresh')
+            .then(r => r.json())
+            .then(function(result) {
+              if (result.success) {
+                alert('✓ All cubes refreshed successfully!');
+                loadDatabaseTables(false);
+              } else {
+                alert('❌ Error: ' + result.message);
+              }
+            })
+            .catch(function(e) {
+              alert('❌ Error refreshing cubes: ' + e);
+            })
+            .finally(function() {
+              refreshCubesBtn.disabled = false;
+              refreshCubesBtn.innerHTML = '🔄 Refresh Cubes';
+            });
+        };
+        buttonsDiv.appendChild(refreshCubesBtn);
+        
+        topBar.appendChild(buttonsDiv);
         
         content.appendChild(topBar);
         
@@ -199,7 +233,12 @@
           { key: 'deposits', title: 'Deposits' },
           { key: 'badges', title: 'Badges' },
           { key: 'partner_badges', title: 'Partner Badges' },
-          { key: 'partner_tiers', title: 'Partner Tiers' }
+          { key: 'partner_tiers', title: 'Partner Tiers' },
+          { key: 'cube_partner_dashboard', title: 'Cube: Partner Dashboard' },
+          { key: 'cube_client_tiers', title: 'Cube: Client Tiers' },
+          { key: 'cube_client_demographics', title: 'Cube: Demographics' },
+          { key: 'cube_country_performance', title: 'Cube: Country Performance' },
+          { key: 'cube_badge_progress', title: 'Cube: Badge Progress' }
         ];
         
         // Create tabs
