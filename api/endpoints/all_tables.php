@@ -37,9 +37,9 @@ try {
             
             // Get deposits (with optional limit)
             if ($loadAll) {
-                $stmt = $db->prepare("SELECT * FROM deposits ORDER BY date_time DESC");
+                $stmt = $db->prepare("SELECT * FROM deposits ORDER BY transaction_time DESC");
             } else {
-                $stmt = $db->prepare("SELECT * FROM deposits ORDER BY date_time DESC LIMIT 1000");
+                $stmt = $db->prepare("SELECT * FROM deposits ORDER BY transaction_time DESC LIMIT 1000");
             }
             $stmt->execute();
             $allTables['deposits'] = $stmt->fetchAll();

@@ -47,10 +47,15 @@
         primaryKey: 'id',
         fields: [
           { name: 'id', type: 'number', required: true, editable: false, label: 'ID' },
-          { name: 'customer_id', type: 'text', required: true, editable: true, label: 'Customer ID' },
-          { name: 'date_time', type: 'datetime-local', required: true, editable: true, label: 'Date/Time' },
-          { name: 'value', type: 'number', required: false, editable: true, label: 'Value' },
-          { name: 'method', type: 'text', required: false, editable: true, label: 'Method' }
+          { name: 'binary_user_id_1', type: 'text', required: false, editable: true, label: 'Binary User ID' },
+          { name: 'transaction_id', type: 'text', required: false, editable: true, label: 'Transaction ID' },
+          { name: 'payment_id', type: 'text', required: false, editable: true, label: 'Payment ID' },
+          { name: 'currency_code', type: 'text', required: false, editable: true, label: 'Currency' },
+          { name: 'transaction_time', type: 'datetime-local', required: false, editable: true, label: 'Transaction Time' },
+          { name: 'amount', type: 'number', required: false, editable: true, label: 'Amount' },
+          { name: 'amount_usd', type: 'number', required: false, editable: true, label: 'Amount USD' },
+          { name: 'category', type: 'text', required: false, editable: true, label: 'Category' },
+          { name: 'affiliate_id', type: 'text', required: false, editable: true, label: 'Affiliate ID' }
         ]
       }
     };

@@ -50,8 +50,8 @@ try {
                 $stmt->execute($clientIds);
                 $dashboardData['trades'] = $stmt->fetchAll();
                 
-                // Get deposits for filtered clients
-                $stmt = $db->prepare("SELECT * FROM deposits WHERE customer_id IN ($placeholders) ORDER BY date_time DESC");
+                // Get deposits for filtered clients (using binary_user_id_1)
+                $stmt = $db->prepare("SELECT * FROM deposits WHERE binary_user_id_1 IN ($placeholders) ORDER BY transaction_time DESC");
                 $stmt->execute($clientIds);
                 $dashboardData['deposits'] = $stmt->fetchAll();
             }

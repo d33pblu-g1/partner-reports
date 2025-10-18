@@ -57,18 +57,18 @@ function calculatePartnerMetrics($db, $partnerId = null) {
     }
     
     // Build WHERE clause for partner filter
-    $whereClause = $partnerId ? "WHERE c.partner_id = ?" : "";
+    $whereClause = $partnerId ? "WHERE c.partnerId = ?" : "";
     $params = $partnerId ? [$partnerId] : [];
     
     // Lifetime metrics
     $stmt = $db->prepare("
         SELECT 
-            COUNT(DISTINCT c.customer_id) as total_clients,
-            COALESCE(SUM(c.lifetime_deposits), 0) as total_deposits,
-            COALESCE(SUM(t.commission), 0) as total_commissions,
+            COUNT(DISTINCT c.binary_user_id) as total_clients,
+            COALESCE(SUM(c.lifetimeDeposits), 0) as total_deposits,
+            COALESCE(SUM(t.closed_pnl_usd), 0) as total_commissions,
             COUNT(t.id) as total_trades
         FROM clients c
-        LEFT JOIN trades t ON c.customer_id = t.customer_id
+        LEFT JOIN trades t ON c.binary_user_id = t.binary_user_id
         $whereClause
     ");
     $stmt->execute($params);
@@ -85,13 +85,13 @@ function calculatePartnerMetrics($db, $partnerId = null) {
     
     $stmt = $db->prepare("
         SELECT 
-            COUNT(DISTINCT c.customer_id) as new_clients,
-            COALESCE(SUM(d.value), 0) as month_deposits,
-            COALESCE(SUM(t.commission), 0) as month_commissions,
+            COUNT(DISTINCT c.binary_user_id) as new_clients,
+            COALESCE(SUM(d.amount_usd), 0) as month_deposits,
+            COALESCE(SUM(t.closed_pnl_usd), 0) as month_commissions,
             COUNT(t.id) as month_trades
         FROM clients c
-        LEFT JOIN trades t ON c.customer_id = t.customer_id AND DATE_FORMAT(t.date_time, '%Y-%m') = ?
-        LEFT JOIN deposits d ON c.customer_id = d.customer_id AND DATE_FORMAT(d.date_time, '%Y-%m') = ?
+        LEFT JOIN trades t ON c.binary_user_id = t.binary_user_id AND DATE_FORMAT(t.date, '%Y-%m') = ?
+        LEFT JOIN deposits d ON c.binary_user_id = d.binary_user_id_1 AND DATE_FORMAT(d.transaction_time, '%Y-%m') = ?
         $whereClause
     ");
     $stmt->execute($monthParams);

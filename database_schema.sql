@@ -89,17 +89,36 @@ CREATE TABLE trades (
     INDEX idx_contract_type (contract_type)
 );
 
--- Deposits table
+-- Deposits table (from deposits1.csv)
 CREATE TABLE deposits (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    binary_user_id VARCHAR(20) NOT NULL,
-    date_time DATETIME NOT NULL,
-    value DECIMAL(15,2) NOT NULL,
+    binary_user_id_1 VARCHAR(50),
+    transaction_id VARCHAR(50),
+    payment_id VARCHAR(50),
+    currency_code VARCHAR(10),
+    transaction_time DATETIME,
+    amount DECIMAL(15,2),
+    payment_gateway_code VARCHAR(100),
+    payment_type_code VARCHAR(100),
+    account_id VARCHAR(50),
+    client_loginid VARCHAR(50),
+    remark TEXT,
+    transfer_fees DECIMAL(15,2),
+    is_pa VARCHAR(10),
+    amount_usd DECIMAL(15,2),
+    transfer_type VARCHAR(100),
+    category VARCHAR(100),
+    payment_processor VARCHAR(100),
+    payment_method VARCHAR(100),
+    affiliate_id VARCHAR(50),
+    target_loginid VARCHAR(50),
+    target_is_pa VARCHAR(10),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (binary_user_id) REFERENCES clients(binary_user_id) ON DELETE CASCADE,
-    INDEX idx_binary_user_id (binary_user_id),
-    INDEX idx_date_time (date_time),
-    INDEX idx_value (value)
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_binary_user_id (binary_user_id_1),
+    INDEX idx_affiliate_id (affiliate_id),
+    INDEX idx_transaction_time (transaction_time),
+    INDEX idx_category (category)
 );
 
 -- Create views for common queries
