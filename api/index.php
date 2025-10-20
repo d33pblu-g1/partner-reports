@@ -63,6 +63,10 @@ switch ($path) {
         require_once 'endpoints/all_tables.php';
         break;
         
+    case 'partner_links':
+        require_once 'endpoints/partner_links.php';
+        break;
+        
     case 'cubes':
         require_once 'endpoints/cubes.php';
         break;

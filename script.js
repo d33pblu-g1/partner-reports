@@ -636,6 +636,11 @@ function initializeHomePageCharts(partnerId) {
   if (document.getElementById('deposit-trends-chart')) {
     loadDepositTrendsChart(partnerId);
   }
+  
+  // Initialize Recommendations
+  if (document.getElementById('recommendations-container')) {
+    loadRecommendations(partnerId);
+  }
 }
 
 // Load Top Countries Chart
@@ -747,6 +752,35 @@ function loadRevenuePlatformChart(partnerId) {
       container.innerHTML = svg;
     })
     .catch(err => console.error('Error loading revenue platform chart:', err));
+}
+
+// Load Recommendations
+function loadRecommendations(partnerId) {
+  if (!partnerId) {
+    const container = document.getElementById('recommendations-container');
+    if (container) {
+      container.innerHTML = '<p class="muted" style="text-align: center; padding: 40px;">Select a partner to see personalized recommendations</p>';
+    }
+    return;
+  }
+  
+  const container = document.getElementById('recommendations-container');
+  if (!container) return;
+  
+  container.innerHTML = '<p class="muted" style="text-align: center; padding: 40px;">Analyzing partner data...</p>';
+  
+  if (window.PartnerRecommendations) {
+    window.PartnerRecommendations.generateRecommendations(partnerId)
+      .then(recommendations => {
+        window.PartnerRecommendations.renderRecommendations('recommendations-container', recommendations);
+      })
+      .catch(error => {
+        console.error('Error loading recommendations:', error);
+        container.innerHTML = '<p class="muted" style="text-align: center; padding: 40px;">Error loading recommendations. Please try again.</p>';
+      });
+  } else {
+    container.innerHTML = '<p class="muted" style="text-align: center; padding: 40px;">Recommendations engine not available.</p>';
+  }
 }
 
 // Load Deposit Trends Chart

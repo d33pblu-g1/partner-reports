@@ -6,33 +6,39 @@
   <title>Home • Partner Report</title>
   <!-- Critical CSS for above-the-fold content -->
   <style>
-    :root{--deriv-blue:#0066cc;--deriv-blue-dark:#003366;--deriv-blue-light:#4d94ff;--deriv-green:#00d4aa;--deriv-orange:#ff6b35;--bg:#ffffff;--panel:#f8fafc;--text:#1a202c;--muted:#64748b;--accent:var(--deriv-blue);--accent-2:var(--deriv-green);--border:#e2e8f0;--shadow:0 1px 3px rgba(0,0,0,0.1)}*{box-sizing:border-box}html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}.layout{display:flex;min-height:100vh}.sidebar{width:240px;flex:0 0 240px;background:rgba(17,24,39,0.85);backdrop-filter:blur(8px);border-right:1px solid rgba(148,163,184,0.2);position:sticky;top:0;align-self:flex-start;height:100vh}.content{flex:1 1 auto;min-width:0}.brand{display:flex;align-items:center;gap:10px;padding:14px 16px}.brand .logo{width:10px;height:10px;border-radius:2px;background:linear-gradient(135deg,var(--accent),var(--accent-2))}.brand h1{font-size:16px;font-weight:600;margin:0}nav.side-nav{display:flex;flex-direction:column;padding:8px}.side-nav a{display:flex;align-items:center;gap:10px;color:var(--muted);text-decoration:none;padding:10px 12px;margin:2px 0;border-radius:8px;font-size:14px;transition:background 0.15s ease,color 0.15s ease}.side-nav a:hover{color:var(--text);background:rgba(148,163,184,0.08)}.side-nav a.active{color:var(--accent);background:rgba(56,189,248,0.12);font-weight:600}.side-nav .icon{width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center}.side-nav .label{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.container{max-width:1100px;margin:0 auto;padding:16px 16px 32px}main.panel{background:var(--panel);border:1px solid rgba(148,163,184,0.2);border-radius:10px;margin-top:16px;padding:16px}.page-title{font-size:22px;margin:0 0 12px}.page-subtitle{color:var(--muted);margin:0 0 24px}.card{background:#0b1220;border:1px solid rgba(148,163,184,0.15);border-radius:8px;padding:16px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}.muted{color:var(--muted)}.skeleton{background:linear-gradient(90deg,rgba(148,163,184,0.1) 25%,rgba(148,163,184,0.2) 50%,rgba(148,163,184,0.1) 75%);background-size:200% 100%;animation:skeleton-loading 1.5s infinite;border-radius:4px}@keyframes skeleton-loading{0%{background-position:200% 0}100%{background-position:-200% 0}}.skeleton-chart{height:200px;border-radius:8px}@media (max-width:900px){.sidebar{width:72px;flex-basis:72px}.side-nav .label{display:none}}@media (max-width:640px){.container{padding:16px 12px 32px}}
+    :root{--deriv-blue:#0066cc;--deriv-blue-dark:#003366;--deriv-blue-light:#4d94ff;--deriv-green:#00d4aa;--deriv-orange:#ff6b35;--bg:#ffffff;--panel:#f8fafc;--text:#1a202c;--muted:#64748b;--accent:#ff444f;--accent-2:var(--deriv-green);--border:#e2e8f0;--shadow:0 1px 3px rgba(0,0,0,0.1)}*{box-sizing:border-box}html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}.layout{display:flex;min-height:100vh}.sidebar{width:240px;flex:0 0 240px;background:rgba(17,24,39,0.85);backdrop-filter:blur(8px);border-right:1px solid rgba(148,163,184,0.2);position:sticky;top:0;align-self:flex-start;height:100vh}.content{flex:1 1 auto;min-width:0}.brand{display:flex;align-items:center;gap:10px;padding:14px 16px}.brand .logo{width:10px;height:10px;border-radius:2px;background:linear-gradient(135deg,var(--accent),var(--accent-2))}.brand h1{font-size:16px;font-weight:600;margin:0}nav.side-nav{display:flex;flex-direction:column;padding:8px}.side-nav a{display:flex;align-items:center;gap:10px;color:var(--muted);text-decoration:none;padding:10px 12px;margin:2px 0;border-radius:8px;font-size:14px;transition:background 0.15s ease,color 0.15s ease}.side-nav a:hover{color:var(--text);background:rgba(148,163,184,0.08)}.side-nav a.active{color:var(--accent);background:rgba(56,189,248,0.12);font-weight:600}.side-nav .icon{width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center}.side-nav .label{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.container{max-width:1100px;margin:0 auto;padding:16px 16px 32px}main.panel{background:var(--panel);border:1px solid rgba(148,163,184,0.2);border-radius:10px;margin-top:16px;padding:16px}.page-title{font-size:22px;margin:0 0 12px}.page-subtitle{color:var(--muted);margin:0 0 24px}.card{background:#0b1220;border:1px solid rgba(148,163,184,0.15);border-radius:8px;padding:16px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}.muted{color:var(--muted)}.skeleton{background:linear-gradient(90deg,rgba(148,163,184,0.1) 25%,rgba(148,163,184,0.2) 50%,rgba(148,163,184,0.1) 75%);background-size:200% 100%;animation:skeleton-loading 1.5s infinite;border-radius:4px}@keyframes skeleton-loading{0%{background-position:200% 0}100%{background-position:-200% 0}}.skeleton-chart{height:200px;border-radius:8px}@media (max-width:900px){.sidebar{width:72px;flex-basis:72px}.side-nav .label{display:none}}@media (max-width:640px){.container{padding:16px 12px 32px}}
   </style>
   <!-- Load Inter font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <!-- Load full CSS asynchronously -->
-  <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="styles.css"></noscript>
+  <link rel="preload" href="styles.css?v=20250120" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="styles.css?v=20250120"></noscript>
   <link rel="icon" href="data:,">
   <meta name="color-scheme" content="dark light">
   <meta name="description" content="Home dashboard for partner report">
   
   <!-- Theme toggle (load first to prevent flash) -->
   <script src="theme-toggle.js"></script>
+  <!-- Cache refresh functionality -->
+  <script src="cache-refresh.js"></script>
+  <!-- Burger menu with all controls -->
+  <script src="burger-menu.js"></script>
+  
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.min.js"></script>
   
   <!-- Performance optimized scripts -->
   <script src="api-manager.js"></script>
   <script src="data-processor.js"></script>
   <script src="lazy-loader.js"></script>
   <script src="virtual-scroll.js"></script>
-  <script src="canvas-charts.js"></script>
+  <script src="chartjs-adapter.js"></script>
+  <script src="partner-recommendations.js"></script>
   <script src="performance-monitor.js"></script>
   <script src="forecasting.js"></script>
-  <script src="advanced-charts.js"></script>
   <script src="enhanced-ux.js"></script>
-  <script src="export-manager.js"></script>
   <script defer src="script.js"></script>
   
   <!-- Service Worker Registration -->
@@ -45,7 +51,7 @@
       });
     }
   </script>
-  <style>body{opacity:0}html{background:#0f172a}</style>
+  <style>body{opacity:0}html{background:#181c25}</style>
   <script>window.addEventListener('load',function(){document.body.style.opacity=1});</script>
   
   <!-- Home page specific styles: remove borders -->
@@ -87,6 +93,7 @@
         <a href="tiers-badges.html"><span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3l3 6 6 1-4.5 4.4L17 21l-5-2.6L7 21l1.5-6.6L4 10l6-1 2-6z" stroke="currentColor" stroke-width="2"/></svg></span><span class="label">Tiers &amp; Badges</span></a>
         <a href="client-funnel.html"><span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 5h18l-7 8v5l-4 2v-7L3 5z" stroke="currentColor" stroke-width="2"/></svg></span><span class="label">Client Funnel</span></a>
         <a href="country-analysis.html"><span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18" stroke="currentColor" stroke-width="2"/></svg></span><span class="label">Country Analysis</span></a>
+        <a href="partner-links.html"><span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" stroke="currentColor" stroke-width="2"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" stroke="currentColor" stroke-width="2"/></svg></span><span class="label">Partner Links</span></a>
         <a href="sitemap.html"><span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M10 3h4v4h-4V3zM4 17h4v4H4v-4zm12 0h4v4h-4v-4zM12 7v4m0 0H7v6m5-6h5v6" stroke="currentColor" stroke-width="2"/></svg></span><span class="label">Sitemap</span></a>
         <a href="database.html"><span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="5" rx="8" ry="3" stroke="currentColor" stroke-width="2"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6" stroke="currentColor" stroke-width="2"/></svg></span><span class="label">Database</span></a>
       </nav>
@@ -105,25 +112,6 @@
       </div>
     </aside>
     <div class="content">
-      <!-- Theme Toggle -->
-      <div class="theme-toggle-container">
-        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
-          <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="5"/>
-            <line x1="12" y1="1" x2="12" y2="3"/>
-            <line x1="12" y1="21" x2="12" y2="23"/>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-            <line x1="1" y1="12" x2="3" y2="12"/>
-            <line x1="21" y1="12" x2="23" y2="12"/>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-          </svg>
-          <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-          </svg>
-        </button>
-      </div>
       <!-- Top Filter Section -->
       <div class="top-filter-section" style="background: var(--panel); border-bottom: 1px solid rgba(148,163,184,0.1); padding: 16px 0;">
         <div class="container">
@@ -225,6 +213,14 @@
           <div class="card" style="margin-top: 24px;">
             <h3 style="margin-top:0; text-align: center;">Quick Insights</h3>
             <div id="quick-insights" style="min-height: 150px;"></div>
+          </div>
+
+          <!-- Top 3 Recommendations Section -->
+          <div class="card" style="margin-top: 24px;">
+            <h3 style="margin-top:0; text-align: center;">🎯 Top 3 Recommendations</h3>
+            <div id="recommendations-container" style="min-height: 200px;">
+              <p class="muted" style="text-align: center; padding: 40px;">Select a partner to see personalized recommendations</p>
+            </div>
           </div>
 
           <!-- Additional Charts Section -->

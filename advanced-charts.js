@@ -16,10 +16,10 @@
      * Render KPI Scorecard with trend indicators
      */
     renderKPIScorecard: function(containerId, partnerId) {
-      fetch(`api/index.php?endpoint=cubes&cube=cube_partner_dashboard&partner_id=${partnerId}`)
+      fetch(`api/index.php?endpoint=cubes&cube=partner_scorecard&partner_id=${partnerId}`)
         .then(r => r.json())
         .then(response => {
-          if (!response.success || !response.data || response.data.length === 0) {
+          if (!response.success || !response.data) {
             // Fallback to metrics API
             return fetch(`api/index.php?endpoint=metrics&partner_id=${partnerId}`)
               .then(r => r.json())

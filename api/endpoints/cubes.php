@@ -27,6 +27,57 @@ try {
                     echo json_encode(ApiResponse::success($data));
                     break;
                     
+                case 'partner_scorecard':
+                    // Partner performance scorecard data
+                    if ($partnerId) {
+                        $stmt = $db->prepare("SELECT * FROM cube_partner_scorecard WHERE partner_id = ?");
+                        $stmt->execute([$partnerId]);
+                        $data = $stmt->fetch();
+                    } else {
+                        $stmt = $db->prepare("SELECT * FROM cube_partner_scorecard ORDER BY performance_score DESC");
+                        $stmt->execute();
+                        $data = $stmt->fetchAll();
+                    }
+                    echo json_encode(ApiResponse::success($data));
+                    break;
+                    
+                case 'monthly_deposits':
+                    // Monthly deposits data for charts
+                    if ($partnerId) {
+                        $stmt = $db->prepare("
+                            SELECT 
+                                year_month_str as month,
+                                total_deposits,
+                                deposit_count,
+                                avg_deposit_size,
+                                unique_depositors,
+                                net_deposits
+                            FROM cube_monthly_deposits 
+                            WHERE partner_id = ?
+                            ORDER BY year_month_str DESC
+                            LIMIT 12
+                        ");
+                        $stmt->execute([$partnerId]);
+                    } else {
+                        $stmt = $db->prepare("
+                            SELECT 
+                                year_month_str as month,
+                                SUM(total_deposits) as total_deposits,
+                                SUM(deposit_count) as deposit_count,
+                                AVG(avg_deposit_size) as avg_deposit_size,
+                                SUM(unique_depositors) as unique_depositors,
+                                SUM(net_deposits) as net_deposits
+                            FROM cube_monthly_deposits 
+                            GROUP BY year_month_str
+                            ORDER BY year_month_str DESC
+                            LIMIT 12
+                        ");
+                        $stmt->execute();
+                    }
+                    $data = $stmt->fetchAll();
+                    echo json_encode(ApiResponse::success($data));
+                    break;
+                    
                 case 'client_tiers':
                     // Client tier distribution
                     if (!$partnerId) {
